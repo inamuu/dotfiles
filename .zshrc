@@ -146,7 +146,7 @@ function peco-ssh () {
   zle clear-screen
 }
 zle -N peco-ssh
-bindkey 'SS' peco-ssh
+bindkey '^S' peco-ssh
 
 
 ### history
@@ -173,10 +173,10 @@ iterm2_print_user_vars() {
 eval "$(direnv hook zsh)"
 
 ### shell command
-alias ls='ls -lG'
-alias rm='rm -i'
-alias mv='mv -i'
-alias cp='cp -i'
+alias ls='ls -laG'
+alias rm='rm -vi'
+alias mv='mv -vi'
+alias cp='cp -vi'
 alias ..='cd ..'
 alias vi='vim'
 alias c='clear'
@@ -195,8 +195,9 @@ alias gcm='git commit'
 alias gd='git diff'
 alias gl='git log'
 alias ga='git add .'
-alias gp='git push -u origin'
-alias gpf='git push -f -u origin'
+alias gpl='git pull'
+alias gps='git push -u origin'
+alias gpsf='git push -f -u origin'
 
 ### Start tmux
 [[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
@@ -229,7 +230,9 @@ alias vags='vagrant ssh'
 
 ### docker
 alias do='docker'
+alias doc='docker-compose'
 
 ### ESC Timeout
 # http://lazy-dog.hatenablog.com/entry/2015/12/24/001648
 KEYTIMEOUT=0
+
