@@ -18,6 +18,9 @@ NeoBundle 'kmnk/vim-unite-giti'
 " indent
 NeoBundle 'nathanaelkane/vim-indent-guides'
 
+" vim-terraform
+NeoBundle 'hashivim/vim-terraform.git'
+
 " check syntax for puppet
 NeoBundleLazy 'puppetlabs/puppet-syntax-vim', {
   \ 'autoload': {'filetypes': ['puppet']}}
@@ -100,3 +103,7 @@ let g:lightline = {
 set nocompatible
 set whichwrap=b,s,h,l,<,>,[,]
 set backspace=indent,eol,start
+
+"vim-terraform
+let g:terraform_align=1
+let g:terraform_fmt_on_save = 1

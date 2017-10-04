@@ -236,3 +236,5 @@ alias doc='docker-compose'
 # http://lazy-dog.hatenablog.com/entry/2015/12/24/001648
 KEYTIMEOUT=0
 
+### Others
+alias evc='envchain'
