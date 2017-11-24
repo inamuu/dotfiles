@@ -140,7 +140,7 @@ function peco-ssh () {
   }
   ' ~/.ssh/config | sort | peco --query "$LBUFFER")
   if [ -n "$selected_host" ]; then
-    BUFFER="ssh ${selected_host}"
+    BUFFER="ssh -A ${selected_host}"
     zle accept-line
   fi
   zle clear-screen
@@ -194,7 +194,7 @@ alias gc='git checkout'
 alias gcm='git commit'
 alias gd='git diff'
 alias gl='git log'
-alias ga='git add .'
+alias ga='git add'
 alias gpl='git pull'
 alias gps='git push -u origin'
 alias gpsf='git push -f -u origin'
@@ -231,6 +231,10 @@ alias vags='vagrant ssh'
 ### docker
 alias do='docker'
 alias doc='docker-compose'
+
+### gcloud
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/usr0600421/google-cloud-sdk/completion.zsh.inc' ]; then source '/home/usr0600421/google-cloud-sdk/completion.zsh.inc'; fi
 
 ### ESC Timeout
 # http://lazy-dog.hatenablog.com/entry/2015/12/24/001648

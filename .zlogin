@@ -18,7 +18,7 @@
 if (( $+commands[fortune] )); then
   if [[ -t 0 || -t 1 ]]; then
     #fortune -s
-    cowsay -f tux -b "$(date +%Y/%m/%d/%H:%M\(%A\)) : LOGIN"
-    print
+    #cowsay -f tux -b "$(date +%Y/%m/%d/%H:%M\(%A\)) : LOGIN"
+    #print
   fi
 fi

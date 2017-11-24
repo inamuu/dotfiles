@@ -669,7 +669,7 @@
 	<key>NSFontPanelSizeSliderParams</key>
 	<string>2 0 100</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Pictures</string>
+	<string>~/Documents/iterm/log</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 459}</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -715,11 +715,11 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 139 606 456 0 0 3008 1669 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>430 1119 918 512 0 0 3008 1669 </string>
+	<string>430 1124 937 512 0 0 3008 1669 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>1510 0 1498 1669 0 0 3008 1669 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>179 86 650 523 0 0 1680 1027 </string>
+	<string>179 67 650 525 0 0 1680 1027 </string>
 	<key>NeverWarnAboutShortLivedSessions_F673C9F4-0AD0-4C60-A5F5-A33B72976C5D</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_F673C9F4-0AD0-4C60-A5F5-A33B72976C5D_selection</key>
@@ -1309,7 +1309,7 @@
 				<real>0.023</real>
 			</dict>
 			<key>Log Directory</key>
-			<string>/Users/usr0600421/Documents/iterm/log</string>
+			<string>/Users/usr0600421/Documents/iterm</string>
 			<key>Minimum Contrast</key>
 			<real>0.0</real>
 			<key>Mouse Reporting</key>
@@ -1669,7 +1669,7 @@
 				<real>0.95683503150939941</real>
 			</dict>
 			<key>Automatically Log</key>
-			<false/>
+			<true/>
 			<key>BM Growl</key>
 			<false/>
 			<key>Background Color</key>
@@ -2101,7 +2101,7 @@
 				<real>0.023</real>
 			</dict>
 			<key>Log Directory</key>
-			<string></string>
+			<string>/Users/usr0600421/Documents/iterm/log</string>
 			<key>Minimum Contrast</key>
 			<real>0.041114517405063292</real>
 			<key>Mouse Reporting</key>
@@ -2127,7 +2127,7 @@
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
-			<integer>0</integer>
+			<integer>50000</integer>
 			<key>Scrollback With Status Bar</key>
 			<false/>
 			<key>Scrollback in Alternate Screen</key>
@@ -2413,7 +2413,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-09-28T05:09:22Z</date>
+	<date>2017-10-10T05:31:37Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
