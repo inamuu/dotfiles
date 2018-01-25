@@ -21,6 +21,10 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 " vim-terraform
 NeoBundle 'hashivim/vim-terraform.git'
 
+" vim preview
+NeoBundle 'kannokanno/previm'
+NeoBundle 'tyru/open-browser.vim'
+
 " check syntax for puppet
 NeoBundleLazy 'puppetlabs/puppet-syntax-vim', {
   \ 'autoload': {'filetypes': ['puppet']}}
@@ -32,7 +36,12 @@ filetype plugin indent on
 NeoBundleCheck
 
 syntax on
+" 以下のコマンドは :colorscheme の前に設定します
+" コメントを濃い緑にする
+autocmd ColorScheme * highlight Comment ctermfg=31 guifg=#008800
+" ...
 colorscheme molokai
+
 set t_Co=256
 set laststatus=2
 set number
