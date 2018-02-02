@@ -56,7 +56,7 @@ autocmd FileType * setlocal formatoptions-=r
 autocmd FileType * setlocal formatoptions-=o
 set nobackup
 set noswapfile
-set browsedir=~/Document
+set browsedir=~/Documents
 
 "VimFiler
 let g:vimfiler_as_default_explorer = 1
