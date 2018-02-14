@@ -195,6 +195,7 @@ eval "$(direnv hook zsh)"
 
 ### shell command
 alias ls='ls -laG'
+alias ll='ls -laG'
 alias rm='rm -vi'
 alias mv='mv -vi'
 alias cp='cp -vi'
