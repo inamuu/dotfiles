@@ -148,6 +148,8 @@ setopt hist_ignore_dups
 #POWERLINE_HIDE_USER_NAME="true"
 #POWERLINE_HIDE_GIT_PROMPT_STATUS="true"
 
+### brew 
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 ### peco&ssh
 function peco-ssh () {
