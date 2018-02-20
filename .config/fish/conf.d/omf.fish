@@ -3,11 +3,25 @@ set -q XDG_DATA_HOME
   and set -gx OMF_PATH "$XDG_DATA_HOME/omf"
   or set -gx OMF_PATH "$HOME/.local/share/omf"
 
+set -g theme_display_date no
+
 # Load Oh My Fish configuration.
 source $OMF_PATH/init.fish
 
+# Load .envrc
+source $HOME/.envrc
+
 # Theme
-set fish_theme agnoster
+# set fish_theme agnoster
+
+# history
+#function fish_user_key_bindings
+#    bind \cr peco_select_history
+#end
+
+#function fish_user_key_bindings
+#    bind \cs 
+#end
 
 ### shell command
 alias ls='ls -laG'
