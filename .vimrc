@@ -29,6 +29,9 @@ NeoBundle 'tyru/open-browser.vim'
 NeoBundleLazy 'puppetlabs/puppet-syntax-vim', {
   \ 'autoload': {'filetypes': ['puppet']}}
 
+" memo
+NeoBundle 'glidenote/memolist.vim'
+
 call neobundle#end()
 
 filetype plugin indent on
@@ -121,3 +124,9 @@ let g:terraform_fmt_on_save = 1
 "Previm
 au BufRead,BufNewFile *.md set filetype=markdown
 nnoremap <silent> <C-p> :PrevimOpen<CR> " Ctrl-pでプレビュー
+
+"memolist
+map <Leader>mn  :MemoNew<CR>
+map <Leader>ml  :MemoList<CR>
+map <Leader>mg  :MemoGrep<CR>
+let g:memolist_path = "~/memo"
