@@ -117,3 +117,7 @@ set backspace=indent,eol,start
 "vim-terraform
 let g:terraform_align=1
 let g:terraform_fmt_on_save = 1
+
+"Previm
+au BufRead,BufNewFile *.md set filetype=markdown
+nnoremap <silent> <C-p> :PrevimOpen<CR> " Ctrl-pでプレビュー
