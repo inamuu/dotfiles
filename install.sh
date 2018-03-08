@@ -4,6 +4,12 @@ set -u
 DOT_DIRECTORY="${HOME}/dotfiles"
 DOT_CONFIG_DIRECTORY=".config"
 
+echo "Install brew"
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+echo "Install brew files"
+brew bundle
+
 echo "link home directory dotfiles"
 cd ${DOT_DIRECTORY}
 for f in .??*
