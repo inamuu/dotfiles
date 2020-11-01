@@ -4,11 +4,35 @@ set -u
 DOT_DIRECTORY="${HOME}/dotfiles"
 DOT_CONFIG_DIRECTORY=".config"
 
-echo "Install brew"
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+OSTYPE=$(uname -s)
 
-echo "Install brew files"
-brew bundle
+ubuntu () {
+sudo apt update
+sudo apt install -y \
+  git \
+  vim \
+  zsh \
+  tmux
+
+chsh -s /usr/bin/zsh && exec $SHELL
+}
+
+if [ "${OSTYPE}" = "Linux" ];then
+  ubuntu
+fi
+
+exit
+
+if [ "${OSTYPE}" = "Darwin" ];then
+  echo "Install brew"
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  
+  echo "Install brew files"
+  brew bundle
+fi
+
+
+
 
 echo "link home directory dotfiles"
 cd ${DOT_DIRECTORY}
@@ -28,3 +52,4 @@ for file in `\find . -maxdepth 8 -type f`; do
 done
 
 echo "linked dotfiles complete!"
+
