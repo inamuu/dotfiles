@@ -14,14 +14,12 @@ sudo apt install -y \
   zsh \
   tmux
 
-chsh -s /usr/bin/zsh && exec $SHELL
+chsh -s /usr/bin/zsh
 }
 
 if [ "${OSTYPE}" = "Linux" ];then
   ubuntu
 fi
-
-exit
 
 if [ "${OSTYPE}" = "Darwin" ];then
   echo "Install brew"
@@ -31,8 +29,8 @@ if [ "${OSTYPE}" = "Darwin" ];then
   brew bundle
 fi
 
-
-
+## Install zprezto
+git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
 echo "link home directory dotfiles"
 cd ${DOT_DIRECTORY}

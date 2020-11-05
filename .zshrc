@@ -152,30 +152,30 @@ setopt hist_ignore_dups
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 ### peco&ssh
-function peco-ssh () {
-  local selected_host=$(awk '
-  tolower($1)=="host" {
-    for (i=2; i<=NF; i++) {
-      if ($i !~ "[*?]") {
-        print $i
-      }
-    }
-  }
-  ' ~/.ssh/config | sort | peco --query "$LBUFFER")
-  if [ -n "$selected_host" ]; then
-    BUFFER="ssh -A ${selected_host}"
-    zle accept-line
-  fi
-  zle clear-screen
-}
-zle -N peco-ssh
-bindkey '^S' peco-ssh
+#function peco-ssh () {
+#  local selected_host=$(awk '
+#  tolower($1)=="host" {
+#    for (i=2; i<=NF; i++) {
+#      if ($i !~ "[*?]") {
+#        print $i
+#      }
+#    }
+#  }
+#  ' ~/.ssh/config | sort | peco --query "$LBUFFER")
+#  if [ -n "$selected_host" ]; then
+#    BUFFER="ssh -A ${selected_host}"
+#    zle accept-line
+#  fi
+#  zle clear-screen
+#}
+#zle -N peco-ssh
+#bindkey '^S' peco-ssh
 
 
 ### history
 function peco-history-selection() {
     #BUFFER=`history | tail -r | awk '{$1="";print $0}' | peco`
-    BUFFER=`history | tail -r | awk '{$1="";print $0}' | egrep -v "ls" | uniq -u | sed 's/^ //g' | peco`
+    BUFFER=`history | awk '{$1="";print $0}' | egrep -v "ls" | uniq -u | sed 's/^ //g' | peco`
     CURSOR=$#BUFFER
     zle reset-prompt
 }
@@ -183,9 +183,10 @@ function peco-history-selection() {
 zle -N peco-history-selection
 bindkey '^R' peco-history-selection
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-source ~/.iterm2_shell_integration.`basename $SHELL`
+if [ -f "${HOME}/.iterm2_shell_integration.zsh" ]; then
+ source "${HOME}/.iterm2_shell_integration.zsh"
+ source ~/.iterm2_shell_integration.`basename $SHELL`
+fi
 
 iterm2_print_user_vars() {
     iterm2_set_user_var gitBranch $((git branch 2> /dev/null) | grep \* | cut -c3-)
@@ -193,11 +194,11 @@ iterm2_print_user_vars() {
 
 
 ### direnv
-eval "$(direnv hook zsh)"
+[ $commands[direnv] ] && eval "$(direnv hook zsh)"
 
 ### shell command
-alias ls='ls -laG'
-alias ll='ls -laG'
+alias ls='ls -laG --color=auto'
+alias ll='ls -laG --color=auto'
 alias rm='rm -vi'
 alias mv='mv -vi'
 alias cp='cp -vi'
@@ -208,7 +209,7 @@ alias c='clear'
 function chpwd() { ls -GAF }
 
 ### tmux bug fix
-alias ssh='TERM=xterm ssh'
+#alias ssh='TERM=xterm ssh'
 
 ### git
 alias g='git'
@@ -233,28 +234,28 @@ alias ber='bundle exec rake'
 ### hub
 alias gh='cd $(ghq root)/$(ghq list | peco)'
 
+
+### anyenv
+eval "$(anyenv init -)"
+export ANYENV_ROOT="$HOME/.anyenv"
+export PATH="$ANYENV_ROOT/bin:$PATH"
+
 ### Python
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+[ $commands[pyenv] ] && eval "$(pyenv init -)"
 
 ### Ruby
-PATH=~/.rbenv/shims:"$PATH"
+[ $commands[rbenv] ] && PATH=~/.rbenv/shims:"$PATH"
 
 ### Go
 export GOPATH=$HOME
 export PATH=$PATH:$GOPATH/bin
-
-### vagrant
-alias vag='vagrant'
-alias vagg='vagrant global-status'
-alias vagu='vagrant up'
-alias vagh='vagrant halt'
-alias vags='vagrant ssh'
+export PATH=$PATH:$HOME/go/bin
 
 ### docker
-alias do='docker'
-alias doc='docker-compose'
+alias doc='docker'
+alias docc='docker-compose'
 
 ### gcloud
 # The next line enables shell command completion for gcloud.
