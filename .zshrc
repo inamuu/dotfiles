@@ -224,8 +224,10 @@ alias gpl='git pull'
 alias gps='git push -u origin'
 alias gpsf='git push -f -u origin'
 
-### Start tmux
+### tmux
 [[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
+
+alias tmk='tmux kill-server'
 
 ### bundle
 alias be='bundle exec'
