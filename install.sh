@@ -9,9 +9,11 @@ OSTYPE=$(uname -s)
 ubuntu () {
 sudo apt update
 sudo apt install -y \
+  make \
   gcc \
   git \
   vim \
+  zlib1g-dev \
   zsh \
   tmux
 
