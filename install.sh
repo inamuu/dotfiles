@@ -12,6 +12,7 @@ sudo apt install -y \
   make \
   gcc \
   git \
+  unzip \
   vim \
   zlib1g-dev \
   zsh \
