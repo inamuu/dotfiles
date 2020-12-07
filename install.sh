@@ -9,6 +9,7 @@ OSTYPE=$(uname -s)
 ubuntu () {
 sudo apt update
 sudo apt install -y \
+  gcc \
   git \
   vim \
   zsh \
