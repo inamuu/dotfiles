@@ -217,14 +217,17 @@ PS1="${CUSTOM_PS1:-default PS1}: "
 alias doc='sudo docker'
 alias docc='sudo docker-compose'
 alias evc='envchain'
-alias ls='ls -laG --color=auto'
-alias ll='ls -laG --color=auto'
+alias ls='exa -la'
+alias ll='exa -la'
 alias rm='rm -vi'
 alias mv='mv -vi'
 alias cp='cp -vi'
 alias ..='cd ..'
 alias vi='vim'
 alias c='clear'
+alias ddd='cd ~/Downloads'
+
+export LESS='-i -M -R'
 
 function chpwd() { ls -GAF }
 
