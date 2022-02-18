@@ -112,6 +112,8 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 ## Common
 export EDITOR=vim
 
+### not like emacs keybind in terminal
+bindkey -e
 
 export LANG=ja_JP.UTF-8
 setopt print_eight_bit

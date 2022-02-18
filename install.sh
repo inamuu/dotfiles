@@ -9,10 +9,30 @@ OSTYPE=$(uname -s)
 ubuntu () {
 sudo apt update
 sudo apt install -y \
+  make \
+  gcc \
   git \
+  unzip \
   vim \
+  zlib1g-dev \
   zsh \
   tmux
+
+## To install Python using pyenv
+sudo apt install -y \
+  curl \
+  llvm \
+  sqlite3 \
+  libssl-dev \
+  libbz2-dev \
+  libreadline-dev \
+  libsqlite3-dev \
+  libncurses5-dev \
+  libncursesw5-dev \
+  python-tk \
+  python3-tk \
+  tk-dev \
+  aria2
 
 chsh -s /usr/bin/zsh
 }
