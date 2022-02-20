@@ -214,18 +214,19 @@ iterm2_print_user_vars() {
 PS1="${CUSTOM_PS1:-default PS1}: "
 
 ### shell command
+alias ..='cd ..'
+alias c='clear'
+alias cat='batcat'
+alias cp='cp -vi'
+alias ddd='cd ~/Downloads'
 alias doc='sudo docker'
 alias docc='sudo docker-compose'
 alias evc='envchain'
-alias ls='exa -la'
 alias ll='exa -la'
-alias rm='rm -vi'
+alias ls='exa -la'
 alias mv='mv -vi'
-alias cp='cp -vi'
-alias ..='cd ..'
+alias rm='rm -vi'
 alias vi='vim'
-alias c='clear'
-alias ddd='cd ~/Downloads'
 
 export LESS='-i -M -R'
 
