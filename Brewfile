@@ -26,16 +26,18 @@ brew "hub"
 brew "jq"
 brew "peco"
 brew "pkg-config"
-brew "pyenv"
-brew "rbenv"
+brew "pwgen"
 brew "s3cmd"
-brew "sanemat/font/ricty"
 brew "tig"
 brew "tmux"
 brew "tree"
 brew "wget"
 brew "zsh"
 brew "zsh-completions"
+
+### Install fonts
+cask "font-ricty-diminished"
+brew "sanemat/font/ricty"
 
 ### Install desktop applications
 cask "xquartz"
