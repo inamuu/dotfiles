@@ -47,3 +47,4 @@ msh () {
   ssh $host
 }
 
+. "$HOME/.cargo/env"

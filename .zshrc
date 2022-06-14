@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 #
 # Executes commands at the start of an interactive session.
 #
@@ -102,6 +109,9 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+## Common
+export EDITOR=vim
+
 ### not like emacs keybind in terminal
 bindkey -e
 
@@ -133,7 +143,9 @@ zshaddhistory() {
     ]]
 }
 
- 
+
+fpath=(/usr/local/share/zsh-completions/src $fpath)
+rm -f ~/.zcompdump; compinit
 autoload -Uz compinit
 compinit -u
 
@@ -155,24 +167,24 @@ setopt hist_ignore_dups
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 ### peco&ssh
-#function peco-ssh () {
-#  local selected_host=$(awk '
-#  tolower($1)=="host" {
-#    for (i=2; i<=NF; i++) {
-#      if ($i !~ "[*?]") {
-#        print $i
-#      }
-#    }
-#  }
-#  ' ~/.ssh/config | sort | peco --query "$LBUFFER")
-#  if [ -n "$selected_host" ]; then
-#    BUFFER="ssh -A ${selected_host}"
-#    zle accept-line
-#  fi
-#  zle clear-screen
-#}
-#zle -N peco-ssh
-#bindkey '^S' peco-ssh
+function peco-ssh () {
+  local selected_host=$(awk '
+  tolower($1)=="host" {
+    for (i=2; i<=NF; i++) {
+      if ($i !~ "[*?]") {
+        print $i
+      }
+    }
+  }
+  ' ~/.ssh/config ~/.ssh/**/config | sort | peco --query "$LBUFFER")
+  if [ -n "$selected_host" ]; then
+    BUFFER="ssh -A ${selected_host}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N peco-ssh
+bindkey '^S' peco-ssh
 
 
 ### history
@@ -199,15 +211,25 @@ iterm2_print_user_vars() {
 ### direnv
 [ $commands[direnv] ] && eval "$(direnv hook zsh)"
 
+PS1="${CUSTOM_PS1:-default PS1}: "
+
 ### shell command
-alias ls='ls -laG --color=auto'
-alias ll='ls -laG --color=auto'
-alias rm='rm -vi'
-alias mv='mv -vi'
-alias cp='cp -vi'
 alias ..='cd ..'
-alias vi='vim'
 alias c='clear'
+alias cat='batcat'
+alias cp='cp -vi'
+alias ddd='cd ~/Downloads'
+alias doc='sudo docker'
+alias docc='sudo docker-compose'
+alias evc='envchain'
+alias g='git'
+alias ll='exa -la'
+alias ls='exa -la'
+alias mv='mv -vi'
+alias rm='rm -vi'
+alias vi='vim'
+
+export LESS='-i -M -R'
 
 function chpwd() { ls -GAF }
 
@@ -215,17 +237,6 @@ function chpwd() { ls -GAF }
 #alias ssh='TERM=xterm ssh'
 
 ### git
-alias g='git'
-alias gs='git status'
-alias gb='git branch'
-alias gc='git checkout'
-alias gcm='git commit'
-alias gd='git diff'
-alias gl='git log'
-alias ga='git add'
-alias gpl='git pull'
-alias gps='git push -u origin'
-alias gpsf='git push -f -u origin'
 
 ### tmux
 [[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
@@ -241,13 +252,14 @@ alias gh='cd $(ghq root)/$(ghq list | peco)'
 
 
 ### anyenv
-eval "$(anyenv init -)"
 export ANYENV_ROOT="$HOME/.anyenv"
 export PATH="$ANYENV_ROOT/bin:$PATH"
+eval "$(anyenv init -)"
 
 ### Python
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+alias py='python'
+export PYENV_ROOT="$HOME/anyenv/envs/pyenv/versions/version"
+export PATH="$PYENV_ROOT/shims:$PATH"
 [ $commands[pyenv] ] && eval "$(pyenv init -)"
 
 ### Ruby
@@ -258,18 +270,13 @@ export GOPATH=$HOME
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$HOME/go/bin
 
-### docker
-alias doc='docker'
-alias docc='docker-compose'
-
 ### gcloud
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/usr0600421/google-cloud-sdk/completion.zsh.inc' ]; then source '/home/usr0600421/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/home//google-cloud-sdk/completion.zsh.inc' ]; then source '/home/usr0600421/google-cloud-sdk/completion.zsh.inc'; fi
 
 ### ESC Timeout
 # http://lazy-dog.hatenablog.com/entry/2015/12/24/001648
 KEYTIMEOUT=0
 
-### Others
-alias evc='envchain'
-
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

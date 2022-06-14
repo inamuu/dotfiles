@@ -1,0 +1,20 @@
+[user]
+	email = 8310973+inamuu@users.noreply.github.com
+	name = inamuu
+[pull]
+	rebase = merges
+[core]
+	whitespace = cr-at-eol
+[alias]
+  ad = add
+  df = diff
+  st = status
+  ss = status -s
+  cm = commit
+  co = checkout
+  pl = pull
+  ps = push
+  psf = push -f -u origin
+  lg  = log
+  rl  = reflog
+
