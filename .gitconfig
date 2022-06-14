@@ -1,10 +1,18 @@
 [user]
-	email = 8310973+inamuu@users.noreply.github.com
 	name = inamuu
+	email = 8310973+inamuu@users.noreply.github.com
+[core]
+  editor = vim -c \"set fenc=utf-8\"
+  quotepath = false
 [pull]
 	rebase = merges
 [core]
 	whitespace = cr-at-eol
+[init]
+  defaultBranch = main
+[ghq]
+  root = ~/go/src
+  root = ~/.ghq
 [alias]
   ad = add
   df = diff
