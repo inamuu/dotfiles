@@ -46,16 +46,19 @@ cask "font-ricty-diminished"
 brew "sanemat/font/ricty"
 
 ### Install desktop applications
-cask "alfred"
 cask "google-japanese-ime"
 cask "google-chrome"
-cask "iterm2"
-cask "karabiner-elements"
 cask "notion"
-cask "postman"
-cask "rectangle"
-cask "skitch"
 cask "slack"
 cask "visual-studio-code"
-cask "xquartz"
+
+if OS.mac?
+  cask "alfred"
+  cask "karabiner-elements"
+  cask "iterm2"
+  cask "postman"
+  cask "rectangle"
+  cask "skitch"
+  cask "xquartz"
+end
 

@@ -2,19 +2,19 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "c89f5da7caa8f5f0c4552fb9468dca1268493c76"
+        "revision": "f7bf5a9f6134bfc3741cfd5dee51fb8d26f70fac"
       },
       "homebrew/bundle": {
-        "revision": "e3d548d327e050a96c9f8b5a0b40f8a017905128"
+        "revision": "c79b3ae417c18423be825cdfd5e97614dedfb62a"
       },
       "homebrew/core": {
-        "revision": "fa8afed1db0c85612a2f5cfd404b662e769e3cc6"
+        "revision": "9d023d682841543306234281a042242899518675"
       },
       "sanemat/font": {
         "revision": "b9c208d3a58c305764e8b311b45b65855629804c"
       },
       "aws/tap": {
-        "revision": "fbf153fde3da5781b453ecde7dc08a3dcceb9555"
+        "revision": "16938e0e6a25b996c2f36f49e3178925df413a07"
       }
     },
     "brew": {
@@ -1189,7 +1189,7 @@
         }
       },
       "postman": {
-        "version": "9.20.3",
+        "version": "9.19.0",
         "options": {
           "full_name": "postman",
           "args": {
@@ -1198,7 +1198,7 @@
         }
       },
       "visual-studio-code": {
-        "version": "1.68.0",
+        "version": "1.68.1",
         "options": {
           "full_name": "visual-studio-code",
           "args": {
@@ -1216,7 +1216,7 @@
         }
       },
       "slack": {
-        "version": "4.26.1",
+        "version": "4.27.154",
         "options": {
           "full_name": "slack",
           "args": {
@@ -1285,7 +1285,7 @@
       "monterey": {
         "HOMEBREW_VERSION": "3.5.2",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "3e9e30a1ddcac3d7abb87bd81c676eaf10c91ddf",
+        "Homebrew/homebrew-core": "9d023d682841543306234281a042242899518675",
         "CLT": "13.0.0.0.1.1627064638",
         "Xcode": "13.2.1",
         "macOS": "12.3.1"
