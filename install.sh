@@ -35,12 +35,17 @@ chsh -s /usr/bin/zsh
 }
 
 if [ "${OSTYPE}" = "Linux" ];then
+  BREWCMDSTATUS=$(which brew)
+  if [ "${BREWCMDSTATUS}" -ne 0 ];then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+  fi 
+  echo "Install packages" 
   ubuntu
 fi
 
 if [ "${OSTYPE}" = "Darwin" ];then
-  echo "Install brew"
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  #echo "Install brew"
+  #/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   
   echo "Install brew files"
   brew bundle
