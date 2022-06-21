@@ -143,7 +143,6 @@ zshaddhistory() {
     ]]
 }
 
- 
 fpath=(/usr/local/share/zsh-completions/src $fpath)
 rm -f ~/.zcompdump; compinit
 autoload -Uz compinit
@@ -216,12 +215,13 @@ PS1="${CUSTOM_PS1:-default PS1}: "
 ### shell command
 alias ..='cd ..'
 alias c='clear'
-alias cat='batcat'
+alias cat='bat'
 alias cp='cp -vi'
 alias ddd='cd ~/Downloads'
 alias doc='sudo docker'
 alias docc='sudo docker-compose'
 alias evc='envchain'
+alias g='git'
 alias ll='exa -la'
 alias ls='exa -la'
 alias mv='mv -vi'
@@ -236,17 +236,6 @@ function chpwd() { ls -GAF }
 #alias ssh='TERM=xterm ssh'
 
 ### git
-alias g='git'
-alias gs='git status'
-alias gb='git branch'
-alias gc='git checkout'
-alias gcm='git commit'
-alias gd='git diff'
-alias gl='git log'
-alias ga='git add'
-alias gpl='git pull'
-alias gps='git push -u origin'
-alias gpsf='git push -f -u origin'
 
 ### tmux
 [[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
@@ -268,7 +257,6 @@ eval "$(anyenv init -)"
 
 ### Python
 alias py='python'
-#export PYENV_ROOT="$HOME/.pyenv"
 export PYENV_ROOT="$HOME/anyenv/envs/pyenv/versions/version"
 export PATH="$PYENV_ROOT/shims:$PATH"
 [ $commands[pyenv] ] && eval "$(pyenv init -)"
@@ -283,16 +271,12 @@ export PATH=$PATH:$HOME/go/bin
 
 ### gcloud
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/usr0600421/google-cloud-sdk/completion.zsh.inc' ]; then source '/home/usr0600421/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/home//google-cloud-sdk/completion.zsh.inc' ]; then source '/home/usr0600421/google-cloud-sdk/completion.zsh.inc'; fi
 
 ### ESC Timeout
 # http://lazy-dog.hatenablog.com/entry/2015/12/24/001648
 KEYTIMEOUT=0
 
-test_func() {
- tmp=$(ps aux | grep slack | head -1 | awk '{print $(NF-0)}')
- echo $tmp
-}
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+

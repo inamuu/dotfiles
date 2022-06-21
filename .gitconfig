@@ -1,0 +1,28 @@
+[user]
+	name = inamuu
+	email = 8310973+inamuu@users.noreply.github.com
+[core]
+  editor = vim -c \"set fenc=utf-8\"
+  quotepath = false
+[pull]
+	rebase = merges
+[core]
+	whitespace = cr-at-eol
+[init]
+  defaultBranch = main
+[ghq]
+  root = ~/go/src
+  root = ~/.ghq
+[alias]
+  ad = add
+  df = diff
+  st = status
+  ss = status -s
+  cm = commit
+  co = checkout
+  pl = pull
+  ps = push
+  psf = push -f -u origin
+  lg  = log
+  rl  = reflog
+

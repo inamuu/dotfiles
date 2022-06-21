@@ -3,7 +3,7 @@ set noswapfile
 
 syntax on
 colorscheme morning
-set guifont=Ricty-RegularForPowerline:h16
+set guifont=Ricty-RegularForPowerline\ 16
 
 
 set t_Co=256

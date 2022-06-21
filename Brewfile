@@ -1,29 +1,66 @@
 ### ref: https://qiita.com/vochicong/items/f20afc89a6847cd58f0f
-# brew tap homebrew/bundle
 
+### Install directory that using installer file
 cask_args appdir: "/Applications"
-tap "caskroom/cask"
+
+### Main
+tap "homebrew/cask"
 tap "homebrew/bundle"
 tap "homebrew/core"
 tap "sanemat/font"
+tap "aws/tap"
 
-cask "xquartz"
-brew "automake"
+### Install command line tools
+#brew "automake"
+brew "anyenv"
+brew "awscli"
+brew "aws-sam-cli"
+brew "aws-sam-cli-beta-cdk"
+brew "bat"
+brew "bzip2"
+brew "coreutils"
 brew "direnv"
+brew "docker"
 brew "envchain"
-brew "fish"
-brew "pkg-config"
+brew "exa"
 brew "fontforge"
 brew "ghq"
+brew "gnutls"
+brew "gron"
 brew "hub"
+brew "jq"
 brew "peco"
-brew "pyenv"
-brew "rbenv"
+brew "pkg-config"
+brew "pwgen"
 brew "s3cmd"
 brew "tig"
+brew "tmux"
 brew "tree"
 brew "wget"
-brew "tmux"
 brew "zsh"
 brew "zsh-completions"
+
+### Install fonts
+cask "font-ricty-diminished"
 brew "sanemat/font/ricty"
+
+### Install desktop applications
+cask "google-japanese-ime"
+cask "google-chrome"
+cask "notion"
+cask "slack"
+cask "visual-studio-code"
+
+### Only macOS
+if OS.mac?
+  cask "alfred"
+  cask "karabiner-elements"
+  cask "iterm2"
+  cask "macvim"
+  cask "postman"
+  cask "rectangle"
+  cask "skitch"
+  cask "xquartz"
+#elseif OS.linux?
+end
+
