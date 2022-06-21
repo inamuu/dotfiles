@@ -216,7 +216,7 @@ PS1="${CUSTOM_PS1:-default PS1}: "
 ### shell command
 alias ..='cd ..'
 alias c='clear'
-alias cat='batcat'
+alias cat='bat'
 alias cp='cp -vi'
 alias ddd='cd ~/Downloads'
 alias doc='sudo docker'
