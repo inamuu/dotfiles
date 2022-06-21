@@ -13,10 +13,7 @@ sudo apt install -y \
   gcc \
   git \
   unzip \
-  vim \
-  zlib1g-dev \
-  zsh \
-  tmux
+  zlib1g-dev
 
 ## To install Python using pyenv
 sudo apt install -y \

@@ -1277,6 +1277,15 @@
             "appdir": "/Applications"
           }
         }
+      },
+      "macvim": {
+        "version": "172",
+        "options": {
+          "full_name": "macvim",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
       }
     }
   },
@@ -1285,7 +1294,7 @@
       "monterey": {
         "HOMEBREW_VERSION": "3.5.2",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "9d023d682841543306234281a042242899518675",
+        "Homebrew/homebrew-core": "89295c4bf2ba494f6152eba1a6c9944825aab13f",
         "CLT": "13.0.0.0.1.1627064638",
         "Xcode": "13.2.1",
         "macOS": "12.3.1"

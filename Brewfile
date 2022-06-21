@@ -51,13 +51,16 @@ cask "notion"
 cask "slack"
 cask "visual-studio-code"
 
+### Only macOS
 if OS.mac?
   cask "alfred"
   cask "karabiner-elements"
   cask "iterm2"
+  cask "macvim"
   cask "postman"
   cask "rectangle"
   cask "skitch"
   cask "xquartz"
+#elseif OS.linux?
 end
 
