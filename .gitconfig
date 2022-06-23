@@ -22,7 +22,7 @@
   cm = commit
   co = checkout
   pl = pull
-  ps = push
+  ps = push -u origin
   psf = push -f -u origin
   lg  = log
   rl  = reflog
