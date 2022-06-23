@@ -15,6 +15,7 @@
   root = ~/.ghq
 [alias]
   ad = add
+  br = branch
   df = diff
   st = status
   ss = status -s
