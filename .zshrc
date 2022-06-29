@@ -269,10 +269,6 @@ export GOPATH=$HOME
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$HOME/go/bin
 
-### gcloud
-# The next line enables shell command completion for gcloud.
-if [ -f '/home//google-cloud-sdk/completion.zsh.inc' ]; then source '/home/usr0600421/google-cloud-sdk/completion.zsh.inc'; fi
-
 ### ESC Timeout
 # http://lazy-dog.hatenablog.com/entry/2015/12/24/001648
 KEYTIMEOUT=0
