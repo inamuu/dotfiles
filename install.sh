@@ -9,7 +9,7 @@ OSTYPE=$(uname -s)
 ubuntu () {
 sudo apt update
 sudo apt install -y \
-  aria2
+  aria2 \
   curl \
   gcc \
   git \
