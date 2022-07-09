@@ -6,6 +6,10 @@ DOT_CONFIG_DIRECTORY=".config"
 
 OSTYPE=$(uname -s)
 
+color () {
+  echo "\e[32m### $1 \e[0m"
+}
+
 ubuntu () {
 sudo apt update
 sudo apt install -y \
@@ -36,7 +40,7 @@ if [ "${OSTYPE}" = "Linux" ];then
   if [ $? -ne 0 ];then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
   fi 
-  echo "Install packages" 
+  color "Install Packages"
   ubuntu
 fi
 
@@ -44,14 +48,14 @@ if [ "${OSTYPE}" = "Darwin" ];then
   #echo "Install brew"
   #/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   
-  echo "Install brew files"
+  color "Install brew files"
   brew bundle
 fi
 
 ## Install zprezto
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
-echo "link home directory dotfiles"
+color "link home directory dotfiles \e[0m"
 cd ${DOT_DIRECTORY}
 for f in .??*
 do
@@ -61,7 +65,7 @@ do
     ln -snfv ${DOT_DIRECTORY}/${f} ${HOME}/${f}
 done
 
-echo "link .config directory dotfiles"
+color "link .config directory dotfiles"
 cd ${DOT_DIRECTORY}/${DOT_CONFIG_DIRECTORY}
 for file in `\find . -maxdepth 8 -type f`; do
 #./の2文字を削除するためにfile:2としている
@@ -69,5 +73,5 @@ for file in `\find . -maxdepth 8 -type f`; do
     echo $file
 done
 
-echo "linked dotfiles complete!"
+color "linked dotfiles complete!"
 
