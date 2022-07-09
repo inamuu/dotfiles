@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -u
-DOT_DIRECTORY="${HOME}/dotfiles"
+DOT_DIRECTORY="${PWD}"
 DOT_CONFIG_DIRECTORY=".config"
 
 OSTYPE=$(uname -s)
@@ -9,34 +9,31 @@ OSTYPE=$(uname -s)
 ubuntu () {
 sudo apt update
 sudo apt install -y \
-  make \
+  aria2
+  curl \
   gcc \
   git \
-  unzip \
-  zlib1g-dev
-
-## To install Python using pyenv
-sudo apt install -y \
-  curl \
-  llvm \
-  sqlite3 \
-  libssl-dev \
   libbz2-dev \
-  libreadline-dev \
-  libsqlite3-dev \
   libncurses5-dev \
   libncursesw5-dev \
+  libreadline-dev \
+  libsqlite3-dev \
+  libssl-dev \
+  llvm \
+  make \
   python-tk \
   python3-tk \
+  sqlite3 \
   tk-dev \
-  aria2
+  unzip \
+  zlib1g-dev
 
 chsh -s /usr/bin/zsh
 }
 
 if [ "${OSTYPE}" = "Linux" ];then
   BREWCMDSTATUS=$(which brew)
-  if [ "${BREWCMDSTATUS}" -ne 0 ];then
+  if [ $? -ne 0 ];then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
   fi 
   echo "Install packages" 
@@ -68,7 +65,8 @@ echo "link .config directory dotfiles"
 cd ${DOT_DIRECTORY}/${DOT_CONFIG_DIRECTORY}
 for file in `\find . -maxdepth 8 -type f`; do
 #./の2文字を削除するためにfile:2としている
-    ln -snfv ${DOT_DIRECTORY}/${DOT_CONFIG_DIRECTORY}/${file:2} ${HOME}/${DOT_CONFIG_DIRECTORY}/${file:2}
+    #ln -snfv ${DOT_DIRECTORY}/${DOT_CONFIG_DIRECTORY}/${file:2} ${HOME}/${DOT_CONFIG_DIRECTORY}/${file:2}
+    echo $file
 done
 
 echo "linked dotfiles complete!"
