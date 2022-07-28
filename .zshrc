@@ -157,14 +157,12 @@ alias docc='sudo docker-compose'
 alias evc='envchain'
 alias g='git'
 alias ll='exa -la'
-alias ls='exa -la'
+alias ls='exa'
 alias mv='mv -vi'
 alias rm='rm -vi'
 alias vi='vim'
 
 export LESS='-i -M -R'
-
-function chpwd() { ls -GAF }
 
 ### tmux bug fix
 #alias ssh='TERM=xterm ssh'
