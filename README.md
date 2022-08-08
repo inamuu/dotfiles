@@ -11,3 +11,10 @@ $ sh install.sh
 ```sh
 $ ln -s ~/dotfiles/.bashrc ~/.bashrc
 ```
+
+## brew files
+
+```sh
+$ brew bundle
+```
+
