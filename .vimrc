@@ -1,42 +1,3 @@
-"if has('vim_starting')
-"   set runtimepath+=~/.vim/bundle/neobundle.vim/
-"endif
-"
-"call neobundle#begin(expand('~/.vim/bundle/'))
-"
-"" Filer
-"NeoBundle 'Shougo/vimfiler'
-"
-"" Modify status line
-"NeoBundle 'itchyny/lightline.vim'
-"
-"" git
-"NeoBundle 'tpope/vim-fugitive'
-"NeoBundle 'Shougo/unite.vim'
-"NeoBundle 'kmnk/vim-unite-giti'
-"
-"" indent
-"NeoBundle 'nathanaelkane/vim-indent-guides'
-"
-"" vim-terraform
-"NeoBundle 'hashivim/vim-terraform.git'
-"
-"" vim preview
-"NeoBundle 'kannokanno/previm'
-"NeoBundle 'tyru/open-browser.vim'
-"
-"" check syntax for puppet
-"NeoBundleLazy 'puppetlabs/puppet-syntax-vim', {
-"  \ 'autoload': {'filetypes': ['puppet']}}
-"
-"" memo
-"NeoBundle 'glidenote/memolist.vim'
-"
-"call neobundle#end()
-"
-"filetype plugin indent on
-"
-"NeoBundleCheck
 
 syntax on
 " 以下のコマンドは :colorscheme の前に設定します
@@ -60,7 +21,6 @@ autocmd FileType * setlocal formatoptions-=o
 set nobackup
 set noswapfile
 set noundofile
-set browsedir=~/Documents
 
 "VimFiler
 let g:vimfiler_as_default_explorer = 1
