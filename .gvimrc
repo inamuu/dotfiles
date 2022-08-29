@@ -15,7 +15,6 @@ set tabstop=2
 set fileencodings=iso-2022-jp,euc-jp,utf-8,sjis
 set fileformats=unix,dos,mac
 set noautoindent
-set browsedir=~/Document/
 
 set lines=60
 set columns=150
