@@ -58,6 +58,7 @@ if OS.mac?
   cask "iterm2"
   cask "macvim"
   cask "postman"
+  cask "rambox"
   cask "rectangle"
   cask "skitch"
   cask "xquartz"
