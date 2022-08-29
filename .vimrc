@@ -3,7 +3,6 @@ syntax on
 " 以下のコマンドは :colorscheme の前に設定します
 " コメントを濃い緑にする
 autocmd ColorScheme * highlight Comment ctermfg=31 guifg=#008800
-" ...
 colorscheme molokai
 
 set t_Co=256
@@ -22,21 +21,12 @@ set nobackup
 set noswapfile
 set noundofile
 
-"VimFiler
-let g:vimfiler_as_default_explorer = 1
-
-autocmd FileType vimfiler nmap <buffer> <CR> <Plug>(vimfiler_expand_or_edit)
-"autocmd VimEnter * VimFiler -split -simple -winwidth=30 -no-quit
-command Vf VimFiler -split -simple -winwidth=30 -no-quit
-
-let g:vimfiler_safe_mode_by_default=0
-
 let g:netrw_liststyle = 3
 let g:netrw_altv = 1
 let g:netrw_alto = 1
 let g:netrw_winsize = 80
 
-"Indent
+" Indent
 let g:indent_guides_enable_on_vim_startup=0
 let g:indent_guides_start_level=2
 let g:indent_guides_auto_colors=0
@@ -45,10 +35,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3c3c3c ctermbg=darkgr
 let g:indent_guides_color_change_percent = 30
 let g:indent_guides_guide_size = 0
 
-"puppet syntax check
-let g:puppet_align_hashes = 1
-
-"ruby syntax check
+" ruby syntax check
 autocmd BufNewFile,BufRead Gemfile set filetype=ruby
 autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
 autocmd BufNewFile,BufRead Berksfile set filetype=ruby
@@ -77,16 +64,3 @@ set nocompatible
 set whichwrap=b,s,h,l,<,>,[,]
 set backspace=indent,eol,start
 
-"vim-terraform
-let g:terraform_align=1
-let g:terraform_fmt_on_save = 1
-
-"Previm
-au BufRead,BufNewFile *.md set filetype=markdown
-nnoremap <silent> <C-p> :PrevimOpen<CR> " Ctrl-pでプレビュー
-
-"memolist
-map <Leader>mn  :MemoNew<CR>
-map <Leader>ml  :MemoList<CR>
-map <Leader>mg  :MemoGrep<CR>
-let g:memolist_path = "~/memo"
