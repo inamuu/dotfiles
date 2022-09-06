@@ -14,4 +14,7 @@ defaults write -g com.apple.trackpad.scaling 5
 defaults write -g InitialKeyRepeat -int 12
 defaults write -g KeyRepeat -int 1
 
+## Screenshot save location
+defaults write com.apple.screencapture location ~/Downloads
+
 echo "Please Reboot"
