@@ -205,8 +205,3 @@ export PATH=$PATH:$HOME/go/bin
 ### ESC Timeout
 # http://lazy-dog.hatenablog.com/entry/2015/12/24/001648
 KEYTIMEOUT=0
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-source ~/powerlevel10k/powerlevel10k.zsh-theme
-
