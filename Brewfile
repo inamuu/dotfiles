@@ -30,6 +30,7 @@ brew "gron"
 brew "hub"
 brew "jq"
 brew "peco"
+brew "php"  # for Alfred plugins
 brew "pkg-config"
 brew "pwgen"
 brew "s3cmd"
