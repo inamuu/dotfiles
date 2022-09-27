@@ -12,7 +12,7 @@
   defaultBranch = main
 [ghq]
   root = ~/go/src
-  root = ~/.ghq
+  root = ~/ghq
 [alias]
   ad = add
   br = branch
