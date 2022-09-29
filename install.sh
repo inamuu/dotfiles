@@ -7,7 +7,10 @@ DOT_CONFIG_DIRECTORY=".config"
 OSTYPE=$(uname -s)
 
 msg () {
-  echo "### $1"
+  echo "\n########################"
+  echo "# $1"
+  echo "########################\n"
+  sleep 1
 }
 
 ubuntu () {
