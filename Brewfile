@@ -5,6 +5,7 @@ cask_args appdir: "/Applications"
 
 ### Main
 tap "homebrew/cask"
+tap "homebrew/cask-fonts"
 tap "homebrew/bundle"
 tap "homebrew/core"
 tap "sanemat/font"
@@ -55,6 +56,7 @@ cask "visual-studio-code"
 ### Only macOS
 if OS.mac?
   cask "alfred"
+  cask "font-hack-nerd-font"
   cask "karabiner-elements"
   cask "iterm2"
   cask "macvim"
