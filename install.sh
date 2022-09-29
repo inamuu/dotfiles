@@ -64,8 +64,6 @@ if [ ! -d "${HOME}/.zprezto" ];then
   git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 fi
 
-exit
-
 msg "link home directory dotfiles"
 cd ${DOT_DIRECTORY}
 for f in .??*
