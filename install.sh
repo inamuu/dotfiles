@@ -41,6 +41,7 @@ chsh -s /usr/bin/zsh
 if [ "${OSTYPE}" = "Linux" ];then
   BREWCMDSTATUS=$(which brew)
   if [ $? -ne 0 ];then
+    msg "Install linuxbrew"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
   fi 
   msg "Install Packages"
@@ -50,6 +51,7 @@ fi
 if [ "${OSTYPE}" = "Darwin" ];then
   BREWCMDSTATUS=$(which brew)
   if [ $? -ne 0 ];then
+    msg "Install homebrew"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
 
@@ -57,11 +59,14 @@ if [ "${OSTYPE}" = "Darwin" ];then
   brew bundle
 fi
 
-exit
-## Install zprezto
-git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+if [ ! -d "${HOME}/.zprezto" ];then
+  msg "Install zprezto"
+  git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+fi
 
-msg "link home directory dotfiles \e[0m"
+exit
+
+msg "link home directory dotfiles"
 cd ${DOT_DIRECTORY}
 for f in .??*
 do
@@ -80,4 +85,3 @@ for file in `\find . -maxdepth 8 -type f`; do
 done
 
 msg "linked dotfiles complete!"
-
