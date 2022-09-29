@@ -1,18 +1,27 @@
 [user]
 	name = inamuu
 	email = 8310973+inamuu@users.noreply.github.com
+
 [core]
   editor = vim -c \"set fenc=utf-8\"
   quotepath = false
+
 [pull]
 	rebase = merges
+
 [core]
 	whitespace = cr-at-eol
+
 [init]
   defaultBranch = main
+
 [ghq]
   root = ~/go/src
   root = ~/ghq
+
+[commit]
+	template = /Users/kazuma/.commit_template
+
 [alias]
   ad = add
   br = branch
@@ -26,4 +35,3 @@
   psf = push -f -u origin
   lg  = log
   rl  = reflog
-
