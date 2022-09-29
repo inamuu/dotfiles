@@ -1,20 +1,17 @@
-# my dotfiles
-
-全部配置
+# Setup
 
 ```sh
 $ sh install.sh
 ```
 
-個別
-
-```sh
-$ ln -s ~/dotfiles/.bashrc ~/.bashrc
-```
-
-## brew files
+## Install pkgs via homebrew(linuxbrew)
 
 ```sh
 $ brew bundle
 ```
 
+## Set only file
+
+```sh
+$ ln -s ~/dotfiles/.bashrc ~/.bashrc
+```
