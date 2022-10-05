@@ -50,7 +50,7 @@ brew "sanemat/font/ricty"
 
 ### Install desktop applications
 cask "google-japanese-ime"
-# cask "google-chrome"
+cask "google-chrome"
 cask "notion"
 cask "slack"
 cask "visual-studio-code"
