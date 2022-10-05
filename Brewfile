@@ -36,6 +36,7 @@ brew "peco"
 brew "php"  # for Alfred plugins
 brew "pkg-config"
 brew "pwgen"
+brew "saml2aws"
 brew "s3cmd"
 brew "tig"
 brew "tmux"
