@@ -66,6 +66,7 @@ if OS.mac?
   cask "postman"
   cask "rambox"
   cask "rectangle"
+  cask "session-manager-plugin"
   cask "skitch"
   cask "xquartz"
 #elseif OS.linux?
