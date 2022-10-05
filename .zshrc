@@ -101,7 +101,7 @@ setopt hist_ignore_dups
 #POWERLINE_HIDE_GIT_PROMPT_STATUS="true"
 
 ### homebrew
-export PATH=/opt/homebrew/bin:$PATH
+export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 ### peco&ssh
