@@ -8,7 +8,7 @@
         "revision": "b70b51d90e5c4f478796f3df374841b9ac442789"
       },
       "homebrew/core": {
-        "revision": "3ced8323b66ac3863be2d395bb22f7002fbf5052"
+        "revision": "4c93224c8b3f9f90ae5e123e78be0765df509862"
       },
       "sanemat/font": {
         "revision": "b9c208d3a58c305764e8b311b45b65855629804c"
@@ -1452,6 +1452,15 @@
             "appdir": "/Applications"
           }
         }
+      },
+      "docker": {
+        "version": "4.12.0,85629",
+        "options": {
+          "full_name": "docker",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
       }
     }
   },
@@ -1460,7 +1469,7 @@
       "monterey": {
         "HOMEBREW_VERSION": "3.6.4",
         "HOMEBREW_PREFIX": "/opt/homebrew",
-        "Homebrew/homebrew-core": "3ced8323b66ac3863be2d395bb22f7002fbf5052",
+        "Homebrew/homebrew-core": "4c93224c8b3f9f90ae5e123e78be0765df509862",
         "CLT": "14.0.0.0.1.1661618636",
         "Xcode": "14.0",
         "macOS": "12.6"
