@@ -14,7 +14,6 @@ tap "aws/tap"
 ### Install command line tools
 #brew "automake"
 brew "anyenv"
-brew "authy"
 brew "awscli"
 brew "aws-sam-cli"
 brew "aws-sam-cli-beta-cdk"
@@ -51,6 +50,7 @@ cask "font-ricty-diminished"
 brew "sanemat/font/ricty"
 
 ### Install desktop applications
+cask "authy"
 cask "google-japanese-ime"
 cask "google-chrome"
 cask "notion"

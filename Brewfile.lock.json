@@ -1502,6 +1502,15 @@
             "appdir": "/Applications"
           }
         }
+      },
+      "authy": {
+        "version": "2.2.1",
+        "options": {
+          "full_name": "authy",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
       }
     }
   },
