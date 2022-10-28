@@ -1,5 +1,6 @@
-### local
+### link
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+[ -f ~/.zshrc.functions ] && source ~/.zshrc.functions
 
 ### powerlevel10k
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then

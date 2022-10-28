@@ -1,0 +1,57 @@
+### AWS
+function logincheck () {
+  which saml2aws
+  if [ $? -eq 0  ]; then
+    saml2aws login
+  fi
+}
+
+
+function ssm_redis () {
+  logincheck
+  if [ $? -eq 0  ]; then
+    REDIS_ENDPOINT=$(aws elasticache describe-replication-groups --output=text --query='ReplicationGroups[].NodeGroups[].[[`PrimaryEndpoint`,PrimaryEndpoint.Address],[`ReaderEndpoint`,ReaderEndpoint.Address]][]' \
+      | peco --prompt "Select Redis Cluster Endpoint:" | cut -f 2)
+    
+    BASTION=$(aws ec2 describe-instances --output=text \
+      --query 'Reservations[].Instances[].{id:InstanceId,ip:PrivateIpAddress,name:Tags[?Key==`Name`].Value|[0]}' \
+      | peco --prompt "Select Bastion:" | cut -f -1)
+
+    if [ -n "${BASTION}" ];then
+      aws ssm start-session --target ${BASTION} \
+        --document-name AWS-StartPortForwardingSessionToRemoteHost \
+        --parameters "{\"host\":[\"${REDIS_ENDPOINT}\"],\"portNumber\":[\"6379\"], \"localPortNumber\":[\"6379\"]}"
+    fi
+  fi
+}
+
+function ssm_aurora () {
+  logincheck
+  if [ $? -eq 0  ]; then
+    AURORA_ENDPOINT=$(aws rds describe-db-cluster-endpoints --output=text \
+      --query='DBClusterEndpoints[].[DBClusterIdentifier,Endpoint,EndpointType]' \
+      | peco --prompt "Select Aurora Endpoint:" | cut -f 2)
+
+    BASTION=$(aws ec2 describe-instances --output=text \
+      --query 'Reservations[].Instances[].{id:InstanceId,ip:PrivateIpAddress,name:Tags[?Key==`Name`].Value|[0]}' \
+      | peco --prompt "Select Bastion:" | cut -f -1)
+  fi
+
+  if [ -n "${BASTION}" ];then
+    aws ssm start-session --target ${BASTION} \
+     --document-name AWS-StartPortForwardingSessionToRemoteHost \
+     --parameters "{\"host\":[\"${AURORA_ENDPOINT}\"],\"portNumber\":[\"3306\"], \"localPortNumber\":[\"3306\"]}"
+  fi
+
+}
+
+### Makefile
+
+function makero () {
+  CHECK_FILE=$(find . -maxdepth 1 -type f -name "Makefile")
+  if [ -n "${CHECK_FILE}" ]; then
+     make help | peco --prompt "make command:" | cut 1
+  fi
+
+}
+

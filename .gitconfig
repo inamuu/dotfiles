@@ -19,8 +19,8 @@
   root = ~/go/src
   root = ~/ghq
 
-[commit]
-	template = /Users/kazuma/.commit_template
+#[commit]
+#	template = /Users/kazuma/.commit_template
 
 [alias]
   ad = add
