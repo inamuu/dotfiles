@@ -8,7 +8,7 @@ defaults write com.apple.finder AppleShowAllFiles true
 killall Dock
 
 ## Mouse & TrackPad
-defaults write -g com.apple.mouse.scaling
+defaults write -g com.apple.mouse.scaling 2
 defaults write -g com.apple.trackpad.scaling 5
 
 ## Key Repeat
