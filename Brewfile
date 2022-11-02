@@ -19,6 +19,7 @@ brew "aws-sam-cli"
 brew "aws-sam-cli-beta-cdk"
 brew "aws-vault"
 brew "bat"
+brew "bitwarden-cli"
 brew "bzip2"
 brew "circleci"
 brew "coreutils"
@@ -62,7 +63,10 @@ cask "visual-studio-code"
 
 ### Only macOS
 if OS.mac?
+  cask "1password"
+  cask "1password-cli"
   cask "alfred"
+  cask "bitwarden"
   cask "docker"
   cask "font-hack-nerd-font"
   cask "karabiner-elements"
