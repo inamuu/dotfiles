@@ -63,8 +63,6 @@ cask "visual-studio-code"
 
 ### Only macOS
 if OS.mac?
-  cask "1password"
-  cask "1password-cli"
   cask "alfred"
   cask "bitwarden"
   cask "docker"
