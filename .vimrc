@@ -21,12 +21,8 @@ set nobackup
 set noswapfile
 set noundofile
 
-set clipboard+=unnamed "Clipboard連携
-
-let g:netrw_liststyle = 3
-let g:netrw_altv = 1
-let g:netrw_alto = 1
-let g:netrw_winsize = 80
+""" Clipboard連携
+set clipboard+=unnamed
 
 """ Indent
 let g:indent_guides_enable_on_vim_startup=0
@@ -41,4 +37,3 @@ let g:indent_guides_guide_size = 0
 set nocompatible
 set whichwrap=b,s,h,l,<,>,[,]
 set backspace=indent,eol,start
-
