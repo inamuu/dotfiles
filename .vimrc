@@ -21,6 +21,10 @@ set nobackup
 set noswapfile
 set noundofile
 
+""" Visual Mode
+highlight Visual ctermbg=81 guibg=#272c11
+
+
 """ Clipboard連携
 set clipboard+=unnamed
 
