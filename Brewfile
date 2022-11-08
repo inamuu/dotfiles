@@ -75,6 +75,7 @@ if OS.mac?
   cask "rectangle"
   cask "session-manager-plugin"
   cask "skitch"
+  cask "the-unarchiver"
   cask "xquartz"
 #elseif OS.linux?
 end
