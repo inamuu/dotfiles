@@ -8,7 +8,7 @@
         "revision": "48c4831a4edd0b81f369f9710e470794c637d667"
       },
       "homebrew/core": {
-        "revision": "df5f30177eaff43d88330b0f871951bfb7263b7d"
+        "revision": "1e3acd1a15478a4d8b815d4480c61937ea6bbf78"
       },
       "sanemat/font": {
         "revision": "b9c208d3a58c305764e8b311b45b65855629804c"
@@ -1939,7 +1939,7 @@
       "monterey": {
         "HOMEBREW_VERSION": "3.6.9",
         "HOMEBREW_PREFIX": "/opt/homebrew",
-        "Homebrew/homebrew-core": "df5f30177eaff43d88330b0f871951bfb7263b7d",
+        "Homebrew/homebrew-core": "1e3acd1a15478a4d8b815d4480c61937ea6bbf78",
         "CLT": "14.0.0.0.1.1661618636",
         "Xcode": "14.1",
         "macOS": "12.6"

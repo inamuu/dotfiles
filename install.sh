@@ -83,3 +83,10 @@ for file in `\find . -maxdepth 8 -type f`; do
 done
 
 msg "linked dotfiles complete!"
+
+if which blueutil;then
+  if which sleepwatcher;then
+    brew services start sleepwatcher
+  fi
+fi
+
