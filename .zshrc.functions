@@ -8,8 +8,7 @@ function logincheck () {
 
 
 function ssm_redis () {
-  logincheck
-  if [ $? -eq 0  ]; then
+  if logincheck; then
     REDIS_ENDPOINT=$(aws elasticache describe-replication-groups --output=text --query='ReplicationGroups[].NodeGroups[].[[`PrimaryEndpoint`,PrimaryEndpoint.Address],[`ReaderEndpoint`,ReaderEndpoint.Address]][]' \
       | peco --prompt "Select Redis Cluster Endpoint:" | cut -f 2)
     
@@ -26,8 +25,7 @@ function ssm_redis () {
 }
 
 function ssm_aurora () {
-  logincheck
-  if [ $? -eq 0  ]; then
+  if logincheck; then
     AURORA_ENDPOINT=$(aws rds describe-db-cluster-endpoints --output=text \
       --query='DBClusterEndpoints[].[DBClusterIdentifier,Endpoint,EndpointType]' \
       | peco --prompt "Select Aurora Endpoint:" | cut -f 2)
