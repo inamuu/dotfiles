@@ -1,7 +1,6 @@
 ### AWS
 function logincheck () {
-  which saml2aws
-  if [ $? -eq 0  ]; then
+  if which saml2aws; then
     saml2aws login
   fi
 }
