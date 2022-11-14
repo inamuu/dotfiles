@@ -87,6 +87,7 @@ rm -f ~/.zcompdump; compinit
 autoload -Uz compinit
 compinit -u
 
+
 ### History
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
@@ -105,6 +106,11 @@ setopt hist_ignore_dups
 export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
+
+### peco
+function pecor { peco --query "$LBUFFER" --layout bottom-up }
+
+
 ### peco&ssh
 function peco-ssh () {
   local selected_host=$(awk '
@@ -115,7 +121,7 @@ function peco-ssh () {
       }
     }
   }
-  ' ~/.ssh/config ~/.ssh/**/config | sort | peco --query "$LBUFFER")
+  ' ~/.ssh/config ~/.ssh/**/config | sort | pecor)
   if [ -n "$selected_host" ]; then
     BUFFER="ssh -A ${selected_host}"
     zle accept-line
@@ -129,33 +135,22 @@ bindkey '^S' peco-ssh
 ### history
 function peco-history-selection() {
     #BUFFER=`history | tail -r | awk '{$1="";print $0}' | peco`
-    BUFFER=`history | awk '{$1="";print $0}' | egrep -v "ls" | uniq -u | sed 's/^ //g' | peco`
+    BUFFER=$(history | awk '{$1="";print $0}' | egrep -v "ls" | uniq -u | sed 's/^ //g' | pecor)
     CURSOR=$#BUFFER
     zle reset-prompt
 }
-
 zle -N peco-history-selection
 bindkey '^R' peco-history-selection
-
-if [ -f "${HOME}/.iterm2_shell_integration.zsh" ]; then
- source "${HOME}/.iterm2_shell_integration.zsh"
- source ~/.iterm2_shell_integration.`basename $SHELL`
-fi
-
-iterm2_print_user_vars() {
-    iterm2_set_user_var gitBranch $((git branch 2> /dev/null) | grep \* | cut -c3-)
-}
 
 
 ### direnv
 [ $commands[direnv] ] && eval "$(direnv hook zsh)"
-
 PS1="${CUSTOM_PS1:-default PS1}: "
+
 
 ### shell command
 alias ..='cd ..'
 alias c='clear'
-#alias cat='bat'
 alias bincat='/bin/cat'
 alias binls='/bin/ls'
 alias cp='cp -vi'
@@ -172,10 +167,6 @@ alias vi='vim'
 
 export LESS='-i -M -R'
 
-### tmux bug fix
-#alias ssh='TERM=xterm ssh'
-
-### git
 
 ### tmux
 [[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
@@ -215,10 +206,16 @@ KEYTIMEOUT=0
 
 ### google cloud
 export PATH="$HOME/google-cloud-sdk/bin:$PATH"
-
-# The next line updates PATH for the Google Cloud SDK.
 if [ -f "${HOME}/google-cloud-sdk/path.zsh.inc" ]; then . "${HOME}/google-cloud-sdk/path.zsh.inc" ; fi
-
-# The next line enables shell command completion for gcloud.
 if [ -f "${HOME}/google-cloud-sdk/completion.zsh.inc" ]; then . "${HOME}/google-cloud-sdk/completion.zsh.inc" ; fi
+
+### iTerm2
+if [ -f "${HOME}/.iterm2_shell_integration.zsh" ]; then
+ source "${HOME}/.iterm2_shell_integration.zsh"
+ source ~/.iterm2_shell_integration.`basename $SHELL`
+fi
+
+function iterm2_print_user_vars() {
+    iterm2_set_user_var gitBranch $((git branch 2> /dev/null) | grep \* | cut -c3-)
+}
 
