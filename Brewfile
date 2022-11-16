@@ -69,6 +69,7 @@ if OS.mac?
   cask "bitwarden"
   cask "docker"
   cask "font-hack-nerd-font"
+  cask "gather"
   cask "karabiner-elements"
   cask "iterm2"
   cask "macvim"
