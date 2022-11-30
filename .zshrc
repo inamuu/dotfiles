@@ -150,13 +150,13 @@ PS1="${CUSTOM_PS1:-default PS1}: "
 
 ### shell command
 alias ..='cd ..'
-alias c='clear'
 alias bincat='/bin/cat'
 alias binls='/bin/ls'
+alias c='clear'
 alias cp='cp -vi'
 alias ddd='cd ~/Downloads'
-alias doc='sudo docker'
-alias docc='sudo docker-compose'
+alias doc='docker'
+alias docc='docker compose'
 alias evc='envchain'
 alias g='git'
 alias ll='exa -la --git --icons'
