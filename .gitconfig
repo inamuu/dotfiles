@@ -11,6 +11,7 @@
 
 [core]
 	whitespace = cr-at-eol
+	excludesfile = ~/.gitignore
 
 [init]
   defaultBranch = main
@@ -20,7 +21,7 @@
   root = ~/ghq
 
 #[commit]
-#	template = /Users/kazuma/.commit_template
+#	template = .commit_template
 
 [alias]
   ad = add
@@ -35,3 +36,4 @@
   psf = push -f -u origin
   lg  = log
   rl  = reflog
+
