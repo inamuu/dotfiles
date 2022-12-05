@@ -5,6 +5,19 @@ function logincheck () {
   fi
 }
 
+function ssm_bastion () {
+  if logincheck; then
+    BASTION=$(aws ec2 describe-instances --output=text \
+      --query 'Reservations[].Instances[].{id:InstanceId,ip:PrivateIpAddress,name:Tags[?Key==`Name`].Value|[0]}' \
+      | peco --prompt "Select Bastion:" | cut -f -1)
+  fi
+
+  if [ -n "${BASTION}" ];then
+    aws ssm start-session --target ${BASTION}
+  fi
+
+}
+
 
 function ssm_redis () {
   if logincheck; then
