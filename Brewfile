@@ -68,6 +68,7 @@ if OS.mac?
   cask "alfred"
   cask "bitwarden"
   cask "docker"
+  cask "firefox"
   cask "font-hack-nerd-font"
   cask "gather"
   cask "karabiner-elements"
