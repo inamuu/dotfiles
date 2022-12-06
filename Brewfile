@@ -14,6 +14,7 @@ tap "aws/tap"
 ### Install command line tools
 #brew "automake"
 brew "anyenv"
+brew "ansible"
 brew "awscli"
 brew "aws-sam-cli"
 brew "aws-sam-cli-beta-cdk"
