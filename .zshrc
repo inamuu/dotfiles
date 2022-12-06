@@ -178,7 +178,7 @@ alias be='bundle exec'
 alias ber='bundle exec rake'
 
 ### hub
-alias gh='cd $(ghq root)/$(ghq list | peco)'
+alias ghub='cd $(ghq root)/$(ghq list | peco)'
 
 
 ### anyenv

@@ -1,0 +1,3 @@
+bind status R >gh pr create
+bind status V >gh pr view
+
