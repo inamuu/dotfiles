@@ -80,6 +80,7 @@ if OS.mac?
   cask "postman"
   cask "rambox"
   cask "rectangle"
+  cask "sequel-pro"
   cask "session-manager-plugin"
   cask "skitch"
   cask "the-unarchiver"
