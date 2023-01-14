@@ -3,8 +3,10 @@ set noswapfile
 
 syntax on
 colorscheme morning
-set guifont=Ricty-RegularForPowerline\ 16
+set guifont=Hack\ Nerd\ Font:h16
 
+autocmd ColorScheme * highlight Comment ctermfg=31 guifg=#008800
+colorscheme molokai
 
 set t_Co=256
 set number

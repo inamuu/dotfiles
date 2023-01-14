@@ -79,6 +79,7 @@ if OS.mac?
   cask "karabiner-elements"
   cask "iterm2"
   cask "macvim"
+  cask "microsoft-remote-desktop"
   cask "postman"
   cask "rambox"
   cask "rectangle"
@@ -87,6 +88,7 @@ if OS.mac?
   cask "skitch"
   cask "the-unarchiver"
   cask "xquartz"
+  cask "vnc-viewer"
 #elseif OS.linux?
 end
 
