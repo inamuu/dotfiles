@@ -39,11 +39,11 @@ function ssm_redis () {
 function ssm_aurora () {
   if logincheck; then
     AURORA_ENDPOINT=$(aws rds describe-db-cluster-endpoints --output=text \
-      --query='DBClusterEndpoints[].[DBClusterIdentifier,Endpoint,EndpointType]' \
+      --query='DBClusterEndpoints[].[EndpointType,Endpoint]' \
       | peco --prompt "Select Aurora Endpoint:" | cut -f 2)
 
     BASTION=$(aws ec2 describe-instances --output=text \
-      --query 'Reservations[].Instances[].{id:InstanceId,ip:PrivateIpAddress,name:Tags[?Key==`Name`].Value|[0]}' \
+      --query 'Reservations[].Instances[].{name:Tags[?Key==`Name`].Value|[0],id:InstanceId,ip:PrivateIpAddress}' \
       | peco --prompt "Select Bastion:" | cut -f -1)
   fi
 
