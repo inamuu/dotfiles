@@ -10,6 +10,7 @@ tap "homebrew/bundle"
 tap "homebrew/core"
 tap "sanemat/font"
 tap "aws/tap"
+tap "fujiwara/tap"
 
 ### Install command line tools
 #brew "automake"
@@ -39,6 +40,7 @@ brew "gron"
 brew "htop"
 brew "hub"
 brew "jq"
+brew "lambroll"
 brew "mysql"
 brew "peco"
 brew "php"  # for Alfred plugins
