@@ -108,7 +108,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 
 ### peco
-function pecor { peco --query "$LBUFFER" --layout bottom-up }
+function pecor { peco --query "$LBUFFER" }
 
 
 ### peco&ssh

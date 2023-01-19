@@ -9,7 +9,7 @@ function ssm_bastion () {
   if logincheck; then
     BASTION=$(aws ec2 describe-instances --output=text \
       --query 'Reservations[].Instances[].{id:InstanceId,ip:PrivateIpAddress,name:Tags[?Key==`Name`].Value|[0]}' \
-      | peco --prompt "Select Bastion:" | cut -f -1)
+      | pecor --prompt "Select Bastion:" | cut -f -1)
   fi
 
   if [ -n "${BASTION}" ];then
@@ -26,7 +26,7 @@ function ssm_redis () {
     
     BASTION=$(aws ec2 describe-instances --output=text \
       --query 'Reservations[].Instances[].{id:InstanceId,ip:PrivateIpAddress,name:Tags[?Key==`Name`].Value|[0]}' \
-      | peco --prompt "Select Bastion:" | cut -f -1)
+      | pecor --prompt "Select Bastion:" | cut -f -1)
 
     if [ -n "${BASTION}" ];then
       aws ssm start-session --target ${BASTION} \
@@ -44,7 +44,7 @@ function ssm_aurora () {
 
     BASTION=$(aws ec2 describe-instances --output=text \
       --query 'Reservations[].Instances[].{name:Tags[?Key==`Name`].Value|[0],id:InstanceId,ip:PrivateIpAddress}' \
-      | peco --prompt "Select Bastion:" | cut -f -1)
+      | pecor --prompt "Select Bastion:" | cut -f -1)
   fi
 
   if [ -n "${BASTION}" ];then
