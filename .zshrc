@@ -44,7 +44,9 @@ COMPLETION_WAITING_DOTS="true"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="yyyy/mm/dd"
 
+### Binary Paths
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/ghq/github.com/inamuu/tools:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 ### Common
