@@ -50,7 +50,7 @@ function ssm_aurora () {
   if [ -n "${BASTION}" ];then
     SESSION_COUNT=$(ps aux | grep "aws ssm start-session" | grep -v grep | wc -l | sed 's/ //g')
     DB_LOCAL_PORT=$(expr 3306 + ${SESSION_COUNT})
-    echo "\n---\nConnect to ${AURORA_ENDPOINT}.\nPlease run 'mysql -h 127.0.0.1 -p -P ${DB_LOCAL_PORT} -u USER'"
+    echo "\n---\nConnect to ${AURORA_ENDPOINT}.\nPlease run 'mysql -h 127.0.0.1 -p -P ${DB_LOCAL_PORT} -u'"
     aws ssm start-session --target ${BASTION} \
      --document-name AWS-StartPortForwardingSessionToRemoteHost \
      --parameters "{\"host\":[\"${AURORA_ENDPOINT}\"],\"portNumber\":[\"3306\"], \"localPortNumber\":[\"${DB_LOCAL_PORT}\"]}"
