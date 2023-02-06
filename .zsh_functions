@@ -5,7 +5,7 @@ function logincheck () {
   fi
 }
 
-function ssm_bastion () {
+function ssm_ec2 () {
   if logincheck; then
     BASTION=$(aws ec2 describe-instances --output=text \
       --query 'Reservations[].Instances[].{id:InstanceId,ip:PrivateIpAddress,name:Tags[?Key==`Name`].Value|[0]}' \
@@ -25,7 +25,7 @@ function ssm_redis () {
       | peco --prompt "Select Redis Cluster Endpoint:" | cut -f 2)
     
     BASTION=$(aws ec2 describe-instances --output=text \
-      --query 'Reservations[].Instances[].{id:InstanceId,ip:PrivateIpAddress,name:Tags[?Key==`Name`].Value|[0]}' \
+      --query 'Reservations[].Instances[].{id:InstanceId,ip:PrivateIpAddress,name:Tags[?Key==`Name`].Value|[0]}' | grep bastion \
       | pecor --prompt "Select Bastion:" | cut -f -1)
 
     if [ -n "${BASTION}" ];then
@@ -43,7 +43,7 @@ function ssm_aurora () {
       | peco --prompt "Select Aurora Endpoint:" | cut -f 2)
 
     BASTION=$(aws ec2 describe-instances --output=text \
-      --query 'Reservations[].Instances[].{name:Tags[?Key==`Name`].Value|[0],id:InstanceId,ip:PrivateIpAddress}' \
+      --query 'Reservations[].Instances[].{name:Tags[?Key==`Name`].Value|[0],id:InstanceId,ip:PrivateIpAddress}' | grep bastion \
       | pecor --prompt "Select Bastion:" | cut -f -1)
   fi
 
