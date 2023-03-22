@@ -72,7 +72,7 @@ cask "visual-studio-code"
 
 ### Only macOS
 if OS.mac?
-  cask "alfred"
+  #cask "alfred"
   cask "bitwarden"
   cask "docker"
   cask "dbeaver-community"

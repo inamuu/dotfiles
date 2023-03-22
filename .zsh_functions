@@ -58,13 +58,3 @@ function ssm_aurora () {
 
 }
 
-### Makefile
-
-function makero () {
-  CHECK_FILE=$(find . -maxdepth 1 -type f -name "Makefile")
-  if [ -n "${CHECK_FILE}" ]; then
-     make help | peco --prompt "make command:" | cut 1
-  fi
-
-}
-
