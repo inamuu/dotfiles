@@ -41,6 +41,7 @@ brew "htop"
 brew "hub"
 brew "jq"
 brew "lambroll"
+brew "nmap"
 brew "mysql"
 brew "peco"
 brew "php"  # for Alfred plugins
