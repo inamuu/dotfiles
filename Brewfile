@@ -69,6 +69,7 @@ cask "google-japanese-ime"
 cask "google-chrome"
 cask "notion"
 cask "slack"
+cask "rambox"
 cask "visual-studio-code"
 
 ### Only macOS
@@ -85,7 +86,6 @@ if OS.mac?
   cask "macvim"
   cask "microsoft-remote-desktop"
   cask "postman"
-  cask "rambox"
   cask "rectangle"
   cask "sequel-ace"
   cask "session-manager-plugin"
