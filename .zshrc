@@ -171,7 +171,7 @@ export LESS='-i -M -R'
 
 
 ### tmux
-[[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
+#[[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
 
 alias tmk='tmux kill-server'
 
