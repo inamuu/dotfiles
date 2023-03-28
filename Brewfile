@@ -63,36 +63,50 @@ brew "zsh-completions"
 cask "font-ricty-diminished"
 brew "sanemat/font/ricty"
 
-### Install desktop applications
+
+### Install desktop applications for macOS and Linux
 cask "authy"
-cask "google-japanese-ime"
 cask "google-chrome"
+cask "google-japanese-ime"
 cask "notion"
 cask "slack"
-cask "rambox"
 cask "visual-studio-code"
 
-### Only macOS
+### Install desktop apps only private for macOS and Linux
+if ENV['PCENV'] == 'private'
+  cask "rambox"
+end
+
+### Install desktop apps only private and macOS
+if ENV['PCENV'] == 'private' and OS.mac?
+  cask "microsoft-remote-desktop"
+  cask "vnc-viewer"
+end
+
+### Install desktop apps only work and macOS
+if ENV['PCENV'] == 'work' and OS.mac?
+  cask "gather"
+end
+
+### Install desktop apps only macOS for private and work
 if OS.mac?
   #cask "alfred"
   cask "bitwarden"
-  cask "docker"
   cask "dbeaver-community"
+  cask "docker"
   cask "firefox"
   cask "font-hack-nerd-font"
-  cask "gather"
-  cask "karabiner-elements"
   cask "iterm2"
+  cask "karabiner-elements"
   cask "macvim"
-  cask "microsoft-remote-desktop"
   cask "postman"
   cask "rectangle"
   cask "sequel-ace"
   cask "session-manager-plugin"
   cask "skitch"
   cask "the-unarchiver"
+  cask "warp"
   cask "xquartz"
-  cask "vnc-viewer"
-#elseif OS.linux?
+  cask "zoom"
 end
 

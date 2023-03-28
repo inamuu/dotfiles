@@ -2374,6 +2374,24 @@
             "appdir": "/Applications"
           }
         }
+      },
+      "warp": {
+        "version": "0.2023.03.21.08.02.stable_02",
+        "options": {
+          "full_name": "warp",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
+      },
+      "zoom": {
+        "version": "5.14.0.16775",
+        "options": {
+          "full_name": "zoom",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
       }
     }
   },
