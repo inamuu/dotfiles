@@ -110,7 +110,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 
 ### peco
-function pecor { peco --query "$LBUFFER" }
+function pecor { peco --query "$LBUFFER" --layout=bottom-up }
 
 
 ### peco&ssh
@@ -180,7 +180,7 @@ alias be='bundle exec'
 alias ber='bundle exec rake'
 
 ### hub
-alias ghl='cd $(ghq root)/$(ghq list | peco)'
+alias ghl='cd $(ghq root)/$(ghq list | pecor)'
 
 
 ### anyenv
