@@ -67,7 +67,7 @@ brew "sanemat/font/ricty"
 ### Install desktop applications for macOS and Linux
 cask "authy"
 cask "google-chrome"
-cask "google-japanese-ime"
+#cask "google-japanese-ime"
 cask "notion"
 cask "slack"
 cask "visual-studio-code"
@@ -91,6 +91,7 @@ end
 ### Install desktop apps only macOS for private and work
 if OS.mac?
   #cask "alfred"
+  cask "alacritty"
   cask "bitwarden"
   cask "dbeaver-community"
   cask "docker"
