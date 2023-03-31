@@ -67,7 +67,7 @@ brew "sanemat/font/ricty"
 ### Install desktop applications for macOS and Linux
 cask "authy"
 cask "google-chrome"
-#cask "google-japanese-ime"
+cask "google-japanese-ime"
 cask "notion"
 cask "slack"
 cask "visual-studio-code"
