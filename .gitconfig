@@ -36,7 +36,7 @@
   co = checkout
   pl = pull
   ps = push -u origin
-  psf = push -f -u origin
+  psf = push --force-with-lease origin
   lg  = log
   rl  = reflog
 
