@@ -1,6 +1,7 @@
 
 import:
   - ~/alacritty.yml
+  - ~/.config/alacritty/themes/themes/dracula.yaml
 
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
@@ -15,17 +16,17 @@ import:
   #TERM: alacritty
 
 window:
-  #dimensions:
-  #  columns: 0
-  #  lines: 0
+  dimensions:
+    columns: 220
+    lines: 60
 
-  #position:
-  #  x: 0
-  #  y: 0
+  position:
+    x: 2
+    y: 2
 
   padding:
-    x: 4
-    y: 4
+    x: 2
+    y: 2
 
   # Spread additional padding evenly around the terminal content.
   #dynamic_padding: false
@@ -45,7 +46,7 @@ window:
   #
   # Window opacity as a floating point number from `0.0` to `1.0`.
   # The value `0.0` is completely transparent and `1.0` is opaque.
-  #opacity: 1.0
+  opacity: 0.98
 
   # Startup Mode (changes require restart)
   #
@@ -90,64 +91,33 @@ window:
   #   - None (default)
   #option_as_alt: None
 
-#scrolling:
+scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
-  #history: 10000
+  history: 10000
 
   # Scrolling distance multiplier.
   #multiplier: 3
 
 # Font configuration
-#font:
-  # Normal (roman) font face
-  #normal:
-    # Font family
-    #
-    # Default:
-    #   - (macOS) Menlo
-    #   - (Linux/BSD) monospace
-    #   - (Windows) Consolas
-    #family: monospace
+font:
+  normal:
+    family: Hack Nerd Font Mono
 
-    # The `style` can be specified to pick a specific face.
-    #style: Regular
+  bold:
+    family: Hack Nerd Font Mono
+    style: Bold
 
-  # Bold font face
-  #bold:
-    # Font family
-    #
-    # If the bold family is not specified, it will fall back to the
-    # value specified for the normal font.
-    #family: monospace
+  italic:
+    family: Hack Nerd Font Mono
+    style: Italic
 
-    # The `style` can be specified to pick a specific face.
-    #style: Bold
-
-  # Italic font face
-  #italic:
-    # Font family
-    #
-    # If the italic family is not specified, it will fall back to the
-    # value specified for the normal font.
-    #family: monospace
-
-    # The `style` can be specified to pick a specific face.
-    #style: Italic
-
-  # Bold italic font face
-  #bold_italic:
-    # Font family
-    #
-    # If the bold italic family is not specified, it will fall back to the
-    # value specified for the normal font.
-    #family: monospace
-
-    # The `style` can be specified to pick a specific face.
-    #style: Bold Italic
+  bold_italic:
+    family: Hack Nerd Font Mono
+    style: Bold Italic
 
   # Point size
-  #size: 11.0
+  size: 14.0
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -428,9 +398,9 @@ window:
 #   - (Linux/BSD/macOS) `$SHELL` or the user's login shell, if `$SHELL` is unset
 #   - (Windows) powershell
 shell:
-  program: /usr/local/bin/zsh
-  args:
-    - "/opt/homebrew/bin/tmux a -t 0"
+  program: /opt/homebrew/bin/zsh
+  #args:
+  #  - "/opt/homebrew/bin/tmux a -t 0"
 
 # Startup directory
 #
