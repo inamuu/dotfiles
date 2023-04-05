@@ -1,8 +1,7 @@
-### ref: https://qiita.com/vochicong/items/f20afc89a6847cd58f0f
-
+### require
 require 'fileutils'
 
-### Install directory that using installer file
+### Install directory that using installer files
 cask_args appdir: "/Applications"
 
 ### Main
