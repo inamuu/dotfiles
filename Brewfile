@@ -1,5 +1,7 @@
 ### ref: https://qiita.com/vochicong/items/f20afc89a6847cd58f0f
 
+require 'fileutils'
+
 ### Install directory that using installer file
 cask_args appdir: "/Applications"
 
@@ -26,6 +28,7 @@ brew "bitwarden-cli"
 brew "bzip2"
 brew "circleci"
 brew "cli53"
+brew "colordiff"
 brew "coreutils"
 brew "direnv"
 brew "envchain"
@@ -109,5 +112,13 @@ if OS.mac?
   cask "warp"
   cask "xquartz"
   cask "zoom"
+end
+
+### Alacritty theme
+repository_url = "https://github.com/eendroroy/alacritty-theme.git"
+clone_dir = File.expand_path("~/.alacritty-colorshme")
+
+unless File.directory?(clone_dir)
+  system("git clone #{repository_url} #{clone_dir}")
 end
 
