@@ -1,7 +1,7 @@
 
 import:
   - ~/alacritty.yml
-  - ~/.config/alacritty/themes/themes/dracula.yaml
+  - ~/.alacritty-colorshme/themes/dracula.yaml
 
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
