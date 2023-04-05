@@ -6,61 +6,74 @@ require 'fileutils'
 cask_args appdir: "/Applications"
 
 ### Main
-tap "homebrew/cask"
-tap "homebrew/cask-fonts"
-tap "homebrew/bundle"
-tap "homebrew/core"
-tap "sanemat/font"
-tap "aws/tap"
-tap "fujiwara/tap"
+tap_list = [
+  "homebrew/cask",
+  "homebrew/cask-fonts",
+  "homebrew/bundle",
+  "homebrew/core",
+  "sanemat/font",
+  "aws/tap",
+  "fujiwara/tap"
+]
+
+for i in tap_list
+  tap i
+end
 
 ### Install command line tools
-#brew "automake"
-brew "anyenv"
-brew "ansible"
-brew "awscli"
-brew "aws-sam-cli"
-brew "aws-sam-cli-beta-cdk"
-brew "aws-vault"
-brew "bat"
-brew "blueutil"
-brew "bitwarden-cli"
-brew "bzip2"
-brew "circleci"
-brew "cli53"
-brew "colordiff"
-brew "coreutils"
-brew "direnv"
-brew "envchain"
-brew "exa"
-brew "fcgi"
-brew "fontforge"
-brew "gh"
-brew "ghq"
-brew "gnutls"
-brew "grep"
-brew "gron"
-brew "htop"
-brew "hub"
-brew "jq"
-brew "lambroll"
-brew "nmap"
-brew "mysql"
-brew "peco"
-brew "php"  # for Alfred plugins
-brew "pkg-config"
-brew "pwgen"
-brew "redis"
-brew "s3cmd"
-brew "saml2aws"
-brew "shellcheck"
-brew "sleepwatcher"
-brew "tig"
-brew "tmux"
-brew "tree"
-brew "wget"
-brew "zsh"
-brew "zsh-completions"
+#"automake"
+
+brew_list = [
+  "ansible",
+  "anyenv",
+  "aws-sam-cli",
+  "aws-sam-cli-beta-cdk",
+  "aws-vault",
+  "awscli",
+  "bat",
+  "bitwarden-cli",
+  "blueutil",
+  "bzip2",
+  "circleci",
+  "cli53",
+  "colordiff",
+  "coreutils",
+  "direnv",
+  "envchain",
+  "exa",
+  "fcgi",
+  "fontforge",
+  "gh",
+  "ghq",
+  "gnutls",
+  "grep",
+  "gron",
+  "htop",
+  "hub",
+  "jq",
+  "lambroll",
+  "mysql",
+  "nmap",
+  "peco",
+  "php",  # for Alfred plugins
+  "pkg-config",
+  "pwgen",
+  "redis",
+  "s3cmd",
+  "saml2aws",
+  "shellcheck",
+  "sleepwatcher",
+  "tig",
+  "tmux",
+  "tree",
+  "wget",
+  "zsh",
+  "zsh-completions"
+]
+
+for i in brew_list
+  brew i
+end
 
 ### Install fonts
 cask "font-ricty-diminished"
@@ -93,25 +106,30 @@ end
 
 ### Install desktop apps only macOS for private and work
 if OS.mac?
-  #cask "alfred"
-  cask "alacritty"
-  cask "bitwarden"
-  cask "dbeaver-community"
-  cask "docker"
-  cask "firefox"
-  cask "font-hack-nerd-font"
-  cask "iterm2"
-  cask "karabiner-elements"
-  cask "macvim"
-  cask "postman"
-  cask "rectangle"
-  cask "sequel-ace"
-  cask "session-manager-plugin"
-  cask "skitch"
-  cask "the-unarchiver"
-  cask "warp"
-  cask "xquartz"
-  cask "zoom"
+  #"alfred"
+  cask_list = [
+    "alacritty",
+    "bitwarden",
+    "dbeaver-community",
+    "docker",
+    "firefox",
+    "font-hack-nerd-font",
+    "iterm2",
+    "karabiner-elements",
+    "macvim",
+    "postman",
+    "rectangle",
+    "sequel-ace",
+    "session-manager-plugin",
+    "skitch",
+    "the-unarchiver",
+    "warp",
+    "xquartz",
+    "zoom"
+  ]
+  for i in cask_list
+    cask i
+  end
 end
 
 ### Alacritty theme
