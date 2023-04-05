@@ -19,3 +19,4 @@ defaults write -g KeyRepeat -int 1
 defaults write com.apple.screencapture location ~/Downloads
 
 echo "Please Reboot"
+
