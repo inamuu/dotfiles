@@ -7,9 +7,9 @@ DOT_CONFIG_DIRECTORY=".config"
 OSTYPE=$(uname -s)
 
 msg () {
-  echo "\n########################"
-  echo "# $1"
-  echo "########################\n"
+  printf "\n######################## "
+  printf "$1"
+  printf " ########################\n"
   sleep 1
 }
 
