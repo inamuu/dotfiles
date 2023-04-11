@@ -58,3 +58,14 @@ function ssm_aurora () {
 
 }
 
+function brew_update () {
+    cd ${HOME}/ghq/github.com/inamuu/dotfiles
+    brew bundle
+    git diff --quiet
+    if [ $? -ne 0 ];then
+        git add .
+        git commit -m "brew update"
+        git push -u origin master
+    fi
+}
+

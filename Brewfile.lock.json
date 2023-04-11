@@ -2,13 +2,13 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "cc58401c0905753619a9fc12dc733518beb75b05"
+        "revision": "2ae4c0cc5f84f4f1987d11ca7650c34f9771b334"
       },
       "homebrew/bundle": {
         "revision": "20ac256630f057789be7f4dcadff9307d866e4fb"
       },
       "homebrew/core": {
-        "revision": "9827c70dc93eaaa4fd79e59b824accdbdaf3855c"
+        "revision": "43c39073420de6975f20ac96e98dc822338a3df3"
       },
       "sanemat/font": {
         "revision": "b9c208d3a58c305764e8b311b45b65855629804c"
@@ -17,7 +17,7 @@
         "revision": "263d252584ff4ebdb404bbef4bdeeffc4fc23742"
       },
       "homebrew/cask-fonts": {
-        "revision": "f40e0edb5aa42357e605205271c805a0e5e62068"
+        "revision": "bf836e57fc2627e3ac2244d16a76fa3dcf1f026c"
       },
       "fujiwara/tap": {
         "revision": "0b508398b5037a53156cbb923780938ed602c9b3"
@@ -2138,7 +2138,7 @@
         }
       },
       "postman": {
-        "version": "10.12.0",
+        "version": "10.12.13",
         "options": {
           "full_name": "postman",
           "args": {
@@ -2327,7 +2327,7 @@
         }
       },
       "firefox": {
-        "version": "111.0.1",
+        "version": "112.0",
         "options": {
           "full_name": "firefox",
           "args": {
