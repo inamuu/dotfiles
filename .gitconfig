@@ -1,30 +1,3 @@
-[user]
-  name = inamuu
-  email = 8310973+inamuu@users.noreply.github.com
-
-[core]
-  editor = vim -c \"set fenc=utf-8\"
-  quotepath = false
-
-[pull]
-  rebase = merges
-
-[push]
-  default = current
-
-[core]
-  whitespace = cr-at-eol
-  excludesfile = ~/.gitignore
-
-[init]
-  defaultBranch = main
-
-[ghq]
-  root = ~/go/src
-  root = ~/ghq
-
-#[commit]
-#	template = .commit_template
 
 [alias]
   ad = add
@@ -39,4 +12,40 @@
   psf = push --force-with-lease origin
   lg  = log
   rl  = reflog
+
+[color]
+  ui = auto
+
+#[commit]
+#	template = .commit_template
+
+[core]
+  editor = vim -c \"set fenc=utf-8\"
+  quotepath = false
+  whitespace = cr-at-eol
+  excludesfile = ~/.gitignore
+
+[fetch]
+  prune = true # 追跡ブランチを自動削除
+
+[ghq]
+  root = ~/go/src
+  root = ~/ghq
+
+[init]
+  defaultBranch = main
+
+[pull]
+  rebase = merges
+  ff = only # pullを行った際fast-forward でマージできる状況の場合は merge を、そうでなければ fetch のみ行う
+
+[push]
+  default = current
+
+[rebase]
+  autostash = true # rebaseの際に自動でstashしてrebase後に戻す
+
+[user]
+  name = inamuu
+  email = 8310973+inamuu@users.noreply.github.com
 
