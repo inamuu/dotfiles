@@ -64,7 +64,7 @@ function brew_update () {
     git diff --quiet
     if [ $? -ne 0 ];then
         git add .
-        git commit -m "brew update"
+        git commit -m "brew update $(date +%Y%m%d)"
         git push -u origin master
     fi
 }
