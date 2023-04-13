@@ -58,6 +58,7 @@ function ssm_aurora () {
 
 }
 
+### Update
 function brew_update () {
     cd ${HOME}/ghq/github.com/inamuu/dotfiles
     brew bundle
@@ -67,5 +68,10 @@ function brew_update () {
         git commit -m "brew update $(date +%Y%m%d)"
         git push -u origin master
     fi
+}
+
+function tfenv_latest_install () {
+    latest_terraform=$(tfenv list-remote | egrep "^[0-9]\.[0-9]\.[0-9]$" | head -1)
+    tfenv install ${latest_terraform}
 }
 
