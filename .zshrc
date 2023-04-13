@@ -154,6 +154,7 @@ PS1="${CUSTOM_PS1:-default PS1}: "
 alias ..='cd ..'
 alias bincat='/bin/cat'
 alias binls='/bin/ls'
+alias gbrd='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 alias c='clear'
 alias cp='cp -vi'
 alias ddd='cd ~/Downloads'
