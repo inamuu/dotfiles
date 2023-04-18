@@ -91,8 +91,7 @@ cask_list = [
 ]
 
 for i in cask_list
-  #brew install --cask i
-  puts i
+  cask i
 end
 
 ### Install desktop apps only private for macOS and Linux
