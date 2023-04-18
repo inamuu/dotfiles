@@ -71,7 +71,7 @@ brew_list = [
 ]
 
 for i in brew_list
-  brew install i
+  brew i
 end
 
 ### Install fonts
