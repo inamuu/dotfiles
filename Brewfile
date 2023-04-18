@@ -71,7 +71,7 @@ brew_list = [
 ]
 
 for i in brew_list
-  brew i
+  brew install i
 end
 
 ### Install fonts
@@ -80,12 +80,19 @@ brew "sanemat/font/ricty"
 
 
 ### Install desktop applications for macOS and Linux
-cask "authy"
-cask "google-chrome"
-cask "google-japanese-ime"
-cask "notion"
-cask "slack"
-cask "visual-studio-code"
+
+cask_list = [
+  "authy"
+  "google-chrome"
+  "google-japanese-ime"
+  "notion"
+  "slack"
+  "visual-studio-code"
+]
+
+for i in cask_list
+  brew install --cask i
+end
 
 ### Install desktop apps only private for macOS and Linux
 if ENV['PCENV'] == 'private'
