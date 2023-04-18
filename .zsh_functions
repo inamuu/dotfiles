@@ -61,6 +61,7 @@ function ssm_aurora () {
 ### Update
 function brew_update () {
     cd ${HOME}/ghq/github.com/inamuu/dotfiles
+    git pull
     brew bundle
     git diff --quiet
     if [ $? -ne 0 ];then
