@@ -2,13 +2,13 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "cc58401c0905753619a9fc12dc733518beb75b05"
+        "revision": "2ae4c0cc5f84f4f1987d11ca7650c34f9771b334"
       },
       "homebrew/bundle": {
         "revision": "55302883b7a175f1e778196fa398649499885bea"
       },
       "homebrew/core": {
-        "revision": "9827c70dc93eaaa4fd79e59b824accdbdaf3855c"
+        "revision": "43c39073420de6975f20ac96e98dc822338a3df3"
       },
       "sanemat/font": {
         "revision": "b9c208d3a58c305764e8b311b45b65855629804c"
@@ -2421,11 +2421,11 @@
   "system": {
     "macos": {
       "monterey": {
-        "HOMEBREW_VERSION": "4.0.12",
+        "HOMEBREW_VERSION": "4.0.14",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "14.2.0.0.1.1668646533",
-        "Xcode": "14.1",
+        "Xcode": "14.2",
         "macOS": "12.6.3"
       },
       "ventura": {
