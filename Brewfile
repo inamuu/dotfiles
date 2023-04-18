@@ -71,7 +71,7 @@ brew_list = [
 ]
 
 for i in brew_list
-  brew i
+  brew install i
 end
 
 ### Install fonts
@@ -91,7 +91,7 @@ cask_list = [
 ]
 
 for i in cask_list
-  brew --cask i
+  brew install --cask i
 end
 
 ### Install desktop apps only private for macOS and Linux
