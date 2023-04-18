@@ -82,11 +82,11 @@ brew "sanemat/font/ricty"
 ### Install desktop applications for macOS and Linux
 
 cask_list = [
-  "authy"
-  "google-chrome"
-  "google-japanese-ime"
-  "notion"
-  "slack"
+  "authy",
+  "google-chrome",
+  "google-japanese-ime",
+  "notion",
+  "slack",
   "visual-studio-code"
 ]
 
