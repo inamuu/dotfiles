@@ -2415,6 +2415,15 @@
             "appdir": "/Applications"
           }
         }
+      },
+      "cyberduck": {
+        "version": "8.5.9,39636",
+        "options": {
+          "full_name": "cyberduck",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
       }
     }
   },
