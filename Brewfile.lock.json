@@ -2183,7 +2183,7 @@
         }
       },
       "notion": {
-        "version": "2.1.13",
+        "version": "2.1.14",
         "options": {
           "full_name": "notion",
           "args": {
