@@ -2,13 +2,13 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "2ae4c0cc5f84f4f1987d11ca7650c34f9771b334"
+        "revision": "cc58401c0905753619a9fc12dc733518beb75b05"
       },
       "homebrew/bundle": {
         "revision": "fc244e942f0aaa49843b9bf538e22da53ff59b79"
       },
       "homebrew/core": {
-        "revision": "43c39073420de6975f20ac96e98dc822338a3df3"
+        "revision": "9827c70dc93eaaa4fd79e59b824accdbdaf3855c"
       },
       "sanemat/font": {
         "revision": "b9c208d3a58c305764e8b311b45b65855629804c"
@@ -17,7 +17,7 @@
         "revision": "50c71a6b3b572dd4237ffd33f664dd7c772bbf2e"
       },
       "homebrew/cask-fonts": {
-        "revision": "74dd198ffaeadef00ba29a91f7b3a64e705e990d"
+        "revision": "834afcc92079c275bf254a5682da3c079a1780c5"
       },
       "fujiwara/tap": {
         "revision": "0b508398b5037a53156cbb923780938ed602c9b3"
@@ -2381,7 +2381,7 @@
         }
       },
       "dbeaver-community": {
-        "version": "23.0.2",
+        "version": "23.0.3",
         "options": {
           "full_name": "dbeaver-community",
           "args": {
@@ -2443,7 +2443,7 @@
         "Homebrew/homebrew-core": "api",
         "CLT": "14.3.0.0.1.1679647830",
         "Xcode": "14.3",
-        "macOS": "13.3.1"
+        "macOS": "13.3"
       }
     },
     "linux": {
