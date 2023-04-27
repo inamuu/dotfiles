@@ -67,7 +67,8 @@ brew_list = [
   "tree",
   "wget",
   "zsh",
-  "zsh-completions"
+  "zsh-completions",
+  "zsh-autosuggestions"
 ]
 
 for i in brew_list
