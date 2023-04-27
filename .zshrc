@@ -84,10 +84,14 @@ zshaddhistory() {
     ]]
 }
 
-fpath=(/usr/local/share/zsh-completions/src $fpath)
-rm -f ~/.zcompdump; compinit
-autoload -Uz compinit
-compinit -u
+### zsh completions
+if type brew &>/dev/null; then
+  fpath=(/usr/local/share/zsh-completions/src $fpath)
+  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  rm -f ~/.zcompdump; compinit
+  autoload -Uz compinit
+  compinit -u
+fi
 
 
 ### History
