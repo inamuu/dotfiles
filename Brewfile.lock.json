@@ -2,19 +2,19 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "2ae4c0cc5f84f4f1987d11ca7650c34f9771b334"
+        "revision": "cc58401c0905753619a9fc12dc733518beb75b05"
       },
       "homebrew/bundle": {
         "revision": "6e051e032881029eb134cb5a00ada5a574c6817a"
       },
       "homebrew/core": {
-        "revision": "43c39073420de6975f20ac96e98dc822338a3df3"
+        "revision": "9827c70dc93eaaa4fd79e59b824accdbdaf3855c"
       },
       "sanemat/font": {
         "revision": "b9c208d3a58c305764e8b311b45b65855629804c"
       },
       "aws/tap": {
-        "revision": "fe4c0e0a07a3be8adf950e4b999a5c9c48aa1c81"
+        "revision": "3d23b260edf23fc9599842f2f5b7a2674a639810"
       },
       "homebrew/cask-fonts": {
         "revision": "ddb3f3e306c9d733c1367b8277b26948c28c9f0e"
@@ -2278,7 +2278,7 @@
         }
       },
       "docker": {
-        "version": "4.18.0,104112",
+        "version": "4.19.0,106363",
         "options": {
           "full_name": "docker",
           "args": {
@@ -2404,7 +2404,7 @@
         }
       },
       "warp": {
-        "version": "0.2023.04.11.08.03.stable_00",
+        "version": "0.2023.04.25.08.05.stable_00",
         "options": {
           "full_name": "warp",
           "args": {
@@ -2457,7 +2457,7 @@
         "Homebrew/homebrew-core": "api",
         "CLT": "14.3.0.0.1.1679647830",
         "Xcode": "14.3",
-        "macOS": "13.3.1"
+        "macOS": "13.3"
       }
     },
     "linux": {
