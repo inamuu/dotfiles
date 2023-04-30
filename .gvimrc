@@ -6,7 +6,7 @@ colorscheme morning
 set guifont=Hack\ Nerd\ Font:h16
 
 autocmd ColorScheme * highlight Comment ctermfg=31 guifg=#008800
-colorscheme molokai
+colorscheme solarized
 
 set t_Co=256
 set number
