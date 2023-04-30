@@ -5,7 +5,7 @@
         "revision": "2ae4c0cc5f84f4f1987d11ca7650c34f9771b334"
       },
       "homebrew/bundle": {
-        "revision": "6e051e032881029eb134cb5a00ada5a574c6817a"
+        "revision": "6b01bd338af95db59f1d6db87ebf6416d7518297"
       },
       "homebrew/core": {
         "revision": "43c39073420de6975f20ac96e98dc822338a3df3"
@@ -14,10 +14,10 @@
         "revision": "b9c208d3a58c305764e8b311b45b65855629804c"
       },
       "aws/tap": {
-        "revision": "b85bb4e7550f07248ac7bfeeb25b87e1fb65c741"
+        "revision": "d7b188085a7fc5645d25fa849b69ecb2f711a4fe"
       },
       "homebrew/cask-fonts": {
-        "revision": "ddb3f3e306c9d733c1367b8277b26948c28c9f0e"
+        "revision": "65afbc122c7e45c8a9bb16200ac7d97543ec24fa"
       },
       "fujiwara/tap": {
         "revision": "0b508398b5037a53156cbb923780938ed602c9b3"

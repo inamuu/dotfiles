@@ -42,3 +42,4 @@ let g:indent_guides_guide_size = 0
 set nocompatible
 set whichwrap=b,s,h,l,<,>,[,]
 set backspace=indent,eol,start
+
