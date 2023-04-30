@@ -1,3 +1,10 @@
-.vim/bundle/
+### Mac
 .DS_Store
+
+### Vim
+.vim/bundle/
+.vim/.netrwhist
+
+### Docker
 docker-compose.override.yml
+
