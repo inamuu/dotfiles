@@ -2,22 +2,22 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "2ae4c0cc5f84f4f1987d11ca7650c34f9771b334"
+        "revision": "cc58401c0905753619a9fc12dc733518beb75b05"
       },
       "homebrew/bundle": {
         "revision": "6b01bd338af95db59f1d6db87ebf6416d7518297"
       },
       "homebrew/core": {
-        "revision": "43c39073420de6975f20ac96e98dc822338a3df3"
+        "revision": "9827c70dc93eaaa4fd79e59b824accdbdaf3855c"
       },
       "sanemat/font": {
         "revision": "b9c208d3a58c305764e8b311b45b65855629804c"
       },
       "aws/tap": {
-        "revision": "1646f46b6713933edffd1e237512530774ff5cac"
+        "revision": "abd5b2bfd43faa2362acbe3daf970de5239065c4"
       },
       "homebrew/cask-fonts": {
-        "revision": "516018032c03e9ae1f8c3e57604c5592fe2a6104"
+        "revision": "bb29d7cf8a50b7a1003651bc5bb200d5dae29012"
       },
       "fujiwara/tap": {
         "revision": "0b508398b5037a53156cbb923780938ed602c9b3"
@@ -2179,7 +2179,7 @@
         }
       },
       "slack": {
-        "version": "4.31.156",
+        "version": "4.32.122",
         "options": {
           "full_name": "slack",
           "args": {
@@ -2260,7 +2260,7 @@
         }
       },
       "font-hack-nerd-font": {
-        "version": "3.0.0",
+        "version": "2.3.3",
         "options": {
           "full_name": "font-hack-nerd-font",
           "args": {
@@ -2452,12 +2452,12 @@
         "macOS": "12.6.3"
       },
       "ventura": {
-        "HOMEBREW_VERSION": "4.0.16",
+        "HOMEBREW_VERSION": "4.0.15",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "14.3.0.0.1.1679647830",
         "Xcode": "14.3",
-        "macOS": "13.3.1"
+        "macOS": "13.3"
       }
     },
     "linux": {
