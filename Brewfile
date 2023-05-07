@@ -62,6 +62,7 @@ brew_list = [
   "saml2aws",
   "shellcheck",
   "sleepwatcher",
+  "telnet",
   "tig",
   "tmux",
   "tree",
