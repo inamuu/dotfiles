@@ -2434,7 +2434,7 @@
         }
       },
       "dbeaver-community": {
-        "version": "23.0.3",
+        "version": "23.0.4",
         "options": {
           "full_name": "dbeaver-community",
           "args": {
