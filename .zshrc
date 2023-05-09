@@ -156,6 +156,7 @@ PS1="${CUSTOM_PS1:-default PS1}: "
 
 ### shell command
 alias ..='cd ..'
+alias bat='bat -p --theme=Dracula'
 alias bincat='/bin/cat'
 alias binls='/bin/ls'
 alias gbrd='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
