@@ -2,22 +2,22 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "cc58401c0905753619a9fc12dc733518beb75b05"
+        "revision": "2ae4c0cc5f84f4f1987d11ca7650c34f9771b334"
       },
       "homebrew/bundle": {
         "revision": "6b01bd338af95db59f1d6db87ebf6416d7518297"
       },
       "homebrew/core": {
-        "revision": "9827c70dc93eaaa4fd79e59b824accdbdaf3855c"
+        "revision": "43c39073420de6975f20ac96e98dc822338a3df3"
       },
       "sanemat/font": {
         "revision": "b9c208d3a58c305764e8b311b45b65855629804c"
       },
       "aws/tap": {
-        "revision": "440500e1ed35595b24b17567162856db8e607c1a"
+        "revision": "7a2587a3e2fc26d76fdf233ec9358b31f9c2175a"
       },
       "homebrew/cask-fonts": {
-        "revision": "80944562a0b19456cd47768c62d107fee522cc3a"
+        "revision": "d1ac34c2e2b0a8120497fc832e78a0dd0fae623c"
       },
       "fujiwara/tap": {
         "revision": "0b508398b5037a53156cbb923780938ed602c9b3"
@@ -2500,7 +2500,7 @@
         "macOS": "12.6.3"
       },
       "ventura": {
-        "HOMEBREW_VERSION": "4.0.16",
+        "HOMEBREW_VERSION": "4.0.17",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "14.3.0.0.1.1679647830",
