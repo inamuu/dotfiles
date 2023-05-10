@@ -2,13 +2,13 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "2ae4c0cc5f84f4f1987d11ca7650c34f9771b334"
+        "revision": "cc58401c0905753619a9fc12dc733518beb75b05"
       },
       "homebrew/bundle": {
         "revision": "6b01bd338af95db59f1d6db87ebf6416d7518297"
       },
       "homebrew/core": {
-        "revision": "43c39073420de6975f20ac96e98dc822338a3df3"
+        "revision": "9827c70dc93eaaa4fd79e59b824accdbdaf3855c"
       },
       "sanemat/font": {
         "revision": "b9c208d3a58c305764e8b311b45b65855629804c"
@@ -17,7 +17,7 @@
         "revision": "7a2587a3e2fc26d76fdf233ec9358b31f9c2175a"
       },
       "homebrew/cask-fonts": {
-        "revision": "d1ac34c2e2b0a8120497fc832e78a0dd0fae623c"
+        "revision": "410cf27e6c541022e46194e2b7c69668afaacf58"
       },
       "fujiwara/tap": {
         "revision": "0b508398b5037a53156cbb923780938ed602c9b3"
@@ -2200,7 +2200,7 @@
         }
       },
       "visual-studio-code": {
-        "version": "1.78.0",
+        "version": "1.78.1",
         "options": {
           "full_name": "visual-studio-code",
           "args": {
@@ -2380,7 +2380,7 @@
         }
       },
       "firefox": {
-        "version": "112.0.2",
+        "version": "113.0",
         "options": {
           "full_name": "firefox",
           "args": {
