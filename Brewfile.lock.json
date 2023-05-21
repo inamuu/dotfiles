@@ -17,7 +17,7 @@
         "revision": "a750eebb02d6ce6787bb85615a5e23dde3b8d956"
       },
       "homebrew/cask-fonts": {
-        "revision": "ce5add25077395554eebd833cc2527cbf196ce1d"
+        "revision": "c722bbddd22c59c372e182145f00a17019a0b3e3"
       },
       "fujiwara/tap": {
         "revision": "f51ca970288347b3718774cc040816c33ced42b5"
@@ -2249,7 +2249,7 @@
         }
       },
       "google-japanese-ime": {
-        "version": "2.25.4030",
+        "version": "2.28.5050",
         "options": {
           "full_name": "google-japanese-ime",
           "args": {
