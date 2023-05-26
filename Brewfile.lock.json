@@ -2,19 +2,19 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "2ae4c0cc5f84f4f1987d11ca7650c34f9771b334"
+        "revision": "cc58401c0905753619a9fc12dc733518beb75b05"
       },
       "homebrew/bundle": {
         "revision": "ab014794c2dc14b1179de68f960479d898c5bc22"
       },
       "homebrew/core": {
-        "revision": "43c39073420de6975f20ac96e98dc822338a3df3"
+        "revision": "9827c70dc93eaaa4fd79e59b824accdbdaf3855c"
       },
       "sanemat/font": {
         "revision": "b9c208d3a58c305764e8b311b45b65855629804c"
       },
       "aws/tap": {
-        "revision": "150d6da26a4d7dade2f130618d7c7a5def629bdf"
+        "revision": "ca23b0d04583fc3765b968a37cd538fe77bbd7de"
       },
       "homebrew/cask-fonts": {
         "revision": "32600bb67a8c78b82be0f95d5de3f8ec4b801ae0"
