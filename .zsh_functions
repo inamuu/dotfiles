@@ -79,3 +79,14 @@ function tfenv_latest_install () {
     fi
 }
 
+### Terraform
+function terraform_tfdel () {
+  if [ -f ".terraform.lock.hcl" ];then
+      rm -f .terraform.lock.hcl
+  fi
+  if [ -d ".terraform" ];then
+      rm -rf  .terraform
+  fi
+}
+
+
