@@ -156,6 +156,7 @@ PS1="${CUSTOM_PS1:-default PS1}: "
 
 ### shell command
 alias ..='cd ..'
+alias cdd='cd ~/Downloads'
 alias bat='bat -p --theme=Dracula'
 alias bincat='/bin/cat'
 alias binls='/bin/ls'
