@@ -50,3 +50,7 @@
   name = inamuu
   email = 8310973+inamuu@users.noreply.github.com
 
+[pager]
+  branch = false
+  diff = false
+
