@@ -29,6 +29,7 @@ brew_list = [
   "aws-sam-cli-beta-cdk",
   "aws-vault",
   "awscli",
+  "awslogs",
   "bat",
   "bitwarden-cli",
   "blueutil",
