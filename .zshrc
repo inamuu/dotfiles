@@ -47,10 +47,7 @@ HIST_STAMPS="yyyy/mm/dd"
 ### Binary Paths
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/ghq/github.com/inamuu/tools:$PATH
-# export MANPATH="/usr/local/man:$MANPATH"
-
-### Common
-export EDITOR=vim
+# export MANPATH="/usr/local/man:$MANPATH" ### Common export EDITOR=vim
 
 ### not like emacs keybind in terminal
 bindkey -e

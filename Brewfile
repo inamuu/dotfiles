@@ -55,6 +55,7 @@ brew_list = [
   "mysql",
   "nmap",
   "peco",
+  "percona-toolkit",
   "php",  # for Alfred plugins
   "pkg-config",
   "pwgen",
