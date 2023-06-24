@@ -203,7 +203,7 @@ export PATH="$PYENV_ROOT/shims:$PATH"
 [ $commands[rbenv] ] && PATH=~/.rbenv/shims:"$PATH"
 
 ### Go
-export GOPATH=$HOME/go/(goenv versions --bare)
+export GOPATH=$HOME/go/$(goenv versions --bare)
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$HOME/go/bin
 
