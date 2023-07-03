@@ -2,13 +2,13 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "2ae4c0cc5f84f4f1987d11ca7650c34f9771b334"
+        "revision": "cc58401c0905753619a9fc12dc733518beb75b05"
       },
       "homebrew/bundle": {
         "revision": "c02dfff991181c3ad1721138e2ac8bdce3c6ee5d"
       },
       "homebrew/core": {
-        "revision": "43c39073420de6975f20ac96e98dc822338a3df3"
+        "revision": "9827c70dc93eaaa4fd79e59b824accdbdaf3855c"
       },
       "sanemat/font": {
         "revision": "b9c208d3a58c305764e8b311b45b65855629804c"
@@ -17,7 +17,7 @@
         "revision": "960e3d7fc8befdb8400e09124a9c5d94bba708ae"
       },
       "homebrew/cask-fonts": {
-        "revision": "7e11d66a90a12fc547f7373b0350492a007afa60"
+        "revision": "7913f2a48e99ffd73e167f7223db67f9cd77ec42"
       },
       "fujiwara/tap": {
         "revision": "6c0d376aece818c18bba75b6fd261e8a8cc5833d"
@@ -2539,7 +2539,7 @@
         }
       },
       "alacritty": {
-        "version": "0.12.1",
+        "version": "0.12.2",
         "options": {
           "full_name": "alacritty",
           "args": {
