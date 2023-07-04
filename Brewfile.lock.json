@@ -2395,7 +2395,7 @@
         }
       },
       "docker": {
-        "version": "4.21.0,113844",
+        "version": "4.21.1,114176",
         "options": {
           "full_name": "docker",
           "args": {
