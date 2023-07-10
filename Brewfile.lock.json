@@ -2,13 +2,13 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "2ae4c0cc5f84f4f1987d11ca7650c34f9771b334"
+        "revision": "cc58401c0905753619a9fc12dc733518beb75b05"
       },
       "homebrew/bundle": {
-        "revision": "c02dfff991181c3ad1721138e2ac8bdce3c6ee5d"
+        "revision": "5264d22973740ffcfa456be537930e431c19f4c7"
       },
       "homebrew/core": {
-        "revision": "43c39073420de6975f20ac96e98dc822338a3df3"
+        "revision": "9827c70dc93eaaa4fd79e59b824accdbdaf3855c"
       },
       "sanemat/font": {
         "revision": "b9c208d3a58c305764e8b311b45b65855629804c"
@@ -17,7 +17,7 @@
         "revision": "a9a56be137a0a02c2aa2cd967b62439f002e6469"
       },
       "homebrew/cask-fonts": {
-        "revision": "1313353d95deba6a14a089aae230ab17863c696a"
+        "revision": "2164f2233a7ab92e983278c175a19fe79300cad5"
       },
       "fujiwara/tap": {
         "revision": "b83929900cff80c1eff04488df157f7fa53a249f"
@@ -2512,7 +2512,7 @@
         }
       },
       "dbeaver-community": {
-        "version": "23.1.1",
+        "version": "23.1.2",
         "options": {
           "full_name": "dbeaver-community",
           "args": {
