@@ -14,7 +14,7 @@
         "revision": "b9c208d3a58c305764e8b311b45b65855629804c"
       },
       "aws/tap": {
-        "revision": "8e7a50e3684d5b9ac3da2b587db509882436983e"
+        "revision": "77b2c54de899d6ae9542a02bacc7fa4797e1bc81"
       },
       "homebrew/cask-fonts": {
         "revision": "ab8647b238b73b8e512c08280a07511fa53a567b"
@@ -2494,7 +2494,7 @@
         }
       },
       "sequel-ace": {
-        "version": "4.0.5,20046",
+        "version": "4.0.6,20048",
         "options": {
           "full_name": "sequel-ace",
           "args": {
@@ -2521,7 +2521,7 @@
         }
       },
       "warp": {
-        "version": "0.2023.07.04.08.03.stable_02",
+        "version": "0.2023.07.11.08.03.stable_00",
         "options": {
           "full_name": "warp",
           "args": {
