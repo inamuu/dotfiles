@@ -58,6 +58,7 @@ brew_list = [
   "percona-toolkit",
   "php",  # for Alfred plugins
   "pkg-config",
+  "putty",
   "pwgen",
   "redis",
   "s3cmd",
