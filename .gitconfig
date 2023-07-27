@@ -11,6 +11,7 @@
   ps = push -u origin
   psf = push --force-with-lease origin
   lg  = log
+  lgo = log --oneline
   rl  = reflog
 
 [color]
