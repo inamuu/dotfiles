@@ -5,15 +5,31 @@ function logincheck () {
   fi
 }
 
-function ssm_ec2 () {
+### bastion
+function ssm_bastion () {
   if logincheck; then
     BASTION=$(aws ec2 describe-instances --output=text \
       --query 'Reservations[].Instances[].{id:InstanceId,ip:PrivateIpAddress,name:Tags[?Key==`Name`].Value|[0]}' \
-      | pecor --prompt "Select Bastion:" | cut -f -1)
+      | grep "bastion" \
+      |  pecor --prompt "Select Bastion:" | cut -f -1)
   fi
 
   if [ -n "${BASTION}" ];then
     aws ssm start-session --target ${BASTION}
+  fi
+
+}
+
+### ec2
+function ssm_ec2 () {
+  if logincheck; then
+    BASTION=$(aws ec2 describe-instances --output=text \
+      --query 'Reservations[].Instances[].{id:InstanceId,ip:PrivateIpAddress,name:Tags[?Key==`Name`].Value|[0]}' \
+      | pecor --prompt "Select EC2:" | cut -f -1)
+  fi
+
+  if [ -n "${EC2}" ];then
+    aws ssm start-session --target ${EC2}
   fi
 
 }
