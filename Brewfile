@@ -6,12 +6,9 @@ cask_args appdir: "/Applications"
 
 ### Main
 tap_list = [
-  "homebrew/cask",
   "homebrew/cask-fonts",
   "homebrew/bundle",
-  "homebrew/core",
   "sanemat/font",
-  "aws/tap",
   "fujiwara/tap"
 ]
 
@@ -26,7 +23,6 @@ brew_list = [
   "ansible",
   "anyenv",
   "aws-sam-cli",
-  "aws-sam-cli-beta-cdk",
   "aws-vault",
   "awscli",
   "awslogs",
