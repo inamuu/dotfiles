@@ -17,7 +17,7 @@
         "revision": "818eb1bcb28989031553c250940ef7dffe1cb5da"
       },
       "homebrew/cask-fonts": {
-        "revision": "af21856f6d11cbf0833adda6d62d742f76154e36"
+        "revision": "586f18ac7e5bcef7595ad52d1b976487896a7135"
       },
       "fujiwara/tap": {
         "revision": "d7c9859a980b9b2f864fd56657ca08ef251fe8db"
@@ -2345,7 +2345,7 @@
         }
       },
       "slack": {
-        "version": "4.33.84",
+        "version": "4.33.90",
         "options": {
           "full_name": "slack",
           "args": {
@@ -2627,7 +2627,7 @@
         "macOS": "12.6.3"
       },
       "ventura": {
-        "HOMEBREW_VERSION": "4.1.4",
+        "HOMEBREW_VERSION": "4.1.5",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "14.3.1.0.1.1683849156",
