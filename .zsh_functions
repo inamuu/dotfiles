@@ -23,7 +23,7 @@ function ssm_bastion () {
 ### ec2
 function ssm_ec2 () {
   if logincheck; then
-    BASTION=$(aws ec2 describe-instances --output=text \
+    EC2=$(aws ec2 describe-instances --output=text \
       --query 'Reservations[].Instances[].{id:InstanceId,ip:PrivateIpAddress,name:Tags[?Key==`Name`].Value|[0]}' \
       | pecor --prompt "Select EC2:" | cut -f -1)
   fi
