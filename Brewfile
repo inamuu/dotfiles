@@ -88,17 +88,13 @@ cask_list = [
   "google-chrome",
   "google-japanese-ime",
   "notion",
+  "rambox",
   "slack",
   "visual-studio-code"
 ]
 
 for i in cask_list
   cask i
-end
-
-### Install desktop apps only private for macOS and Linux
-if ENV['PCENV'] == 'private'
-  cask "rambox"
 end
 
 ### Install desktop apps only private and macOS
