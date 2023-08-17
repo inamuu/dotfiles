@@ -1,4 +1,4 @@
-a## require
+## require
 require 'fileutils'
 
 ### Install directory that using installer files
