@@ -1,4 +1,4 @@
-### require
+a## require
 require 'fileutils'
 
 ### Install directory that using installer files
@@ -88,7 +88,6 @@ cask_list = [
   "google-chrome",
   "google-japanese-ime",
   "notion",
-  "rambox",
   "slack",
   "visual-studio-code"
 ]
@@ -101,6 +100,7 @@ end
 if ENV['PCENV'] == 'private' and OS.mac?
   cask "microsoft-remote-desktop"
   cask "vnc-viewer"
+  cask "rambox"
 end
 
 ### Install desktop apps only work and macOS
