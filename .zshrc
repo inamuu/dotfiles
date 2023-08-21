@@ -207,6 +207,10 @@ export GOPATH=$HOME/go/$(goenv versions --bare)
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$HOME/go/bin
 
+### Node
+export NODENV_ROOT=$HOME/.anyenv/envs/nodenv
+export NODENV_SHELL=zsh
+
 ### ESC Timeout
 # http://lazy-dog.hatenablog.com/entry/2015/12/24/001648
 KEYTIMEOUT=0
