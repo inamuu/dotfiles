@@ -105,7 +105,6 @@ end
 
 ### Install desktop apps only work and macOS
 if ENV['PCENV'] == 'work' and OS.mac?
-  cask "gather"
   cask "around"
 end
 
