@@ -2613,6 +2613,24 @@
             "appdir": "/Applications"
           }
         }
+      },
+      "around": {
+        "version": "0.65.16",
+        "options": {
+          "full_name": "around",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
+      },
+      "todoist": {
+        "version": "8.6.0",
+        "options": {
+          "full_name": "todoist",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
       }
     }
   },

@@ -106,6 +106,7 @@ end
 ### Install desktop apps only work and macOS
 if ENV['PCENV'] == 'work' and OS.mac?
   cask "around"
+  cask "todoist"
 end
 
 ### Install desktop apps only macOS for private and work
