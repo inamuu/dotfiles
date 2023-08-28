@@ -17,7 +17,7 @@
         "revision": "818eb1bcb28989031553c250940ef7dffe1cb5da"
       },
       "homebrew/cask-fonts": {
-        "revision": "37b802bd8d5d8356ba3f8011ff5e289dd9edf6c7"
+        "revision": "9d1500ea92b84906d3ebdab6060f2649fa7202fa"
       },
       "fujiwara/tap": {
         "revision": "3e1baf35e76ed5f3771021b4baeb072604e07211"
@@ -2640,12 +2640,12 @@
         "macOS": "12.6.3"
       },
       "ventura": {
-        "HOMEBREW_VERSION": "4.1.6",
+        "HOMEBREW_VERSION": "4.1.7",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "14.3.1.0.1.1683849156",
         "Xcode": "14.3",
-        "macOS": "13.4.1"
+        "macOS": "13.5"
       }
     },
     "linux": {
