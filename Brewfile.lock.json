@@ -2615,7 +2615,7 @@
         }
       },
       "slack": {
-        "version": "4.34.121",
+        "version": "4.35.121",
         "options": {
           "full_name": "slack",
           "args": {
@@ -2660,7 +2660,7 @@
         }
       },
       "google-chrome": {
-        "version": "118.0.5993.96",
+        "version": "118.0.5993.117",
         "options": {
           "full_name": "google-chrome",
           "args": {
@@ -2759,7 +2759,7 @@
         }
       },
       "the-unarchiver": {
-        "version": "4.3.5,139,1652457131",
+        "version": "4.3.6,143,1697809946",
         "options": {
           "full_name": "the-unarchiver",
           "args": {
@@ -2777,7 +2777,7 @@
         }
       },
       "firefox": {
-        "version": "118.0.2",
+        "version": "119.0",
         "options": {
           "full_name": "firefox",
           "args": {
@@ -2849,7 +2849,7 @@
         }
       },
       "zoom": {
-        "version": "5.16.2.23409",
+        "version": "5.16.5.24419",
         "options": {
           "full_name": "zoom",
           "args": {
