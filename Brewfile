@@ -65,6 +65,7 @@ brew_list = [
   "tig",
   "tmux",
   "tree",
+  "watch",
   "wget",
   "zsh",
   "zsh-completions",
