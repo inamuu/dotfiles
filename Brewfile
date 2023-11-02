@@ -62,6 +62,7 @@ brew_list = [
   "shellcheck",
   "sleepwatcher",
   "telnet",
+  "terraformer",
   "tig",
   "tmux",
   "tree",
