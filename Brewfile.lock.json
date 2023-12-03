@@ -17,7 +17,7 @@
         "revision": "818eb1bcb28989031553c250940ef7dffe1cb5da"
       },
       "homebrew/cask-fonts": {
-        "revision": "c2bc6e514a65319891e4970d4a5f29bb3004906c"
+        "revision": "49c1586e5e5bdc9b0f0d1e847d3c655826a60ae2"
       },
       "fujiwara/tap": {
         "revision": "0c2882e0c505cc217dda78509900cc4e6041ad8f"
@@ -2874,7 +2874,7 @@
         }
       },
       "dbeaver-community": {
-        "version": "23.2.5",
+        "version": "23.3.0",
         "options": {
           "full_name": "dbeaver-community",
           "args": {
@@ -2883,7 +2883,7 @@
         }
       },
       "warp": {
-        "version": "0.2023.11.14.08.02.stable_02",
+        "version": "0.2023.11.28.08.02.stable_00",
         "options": {
           "full_name": "warp",
           "args": {
@@ -2958,12 +2958,12 @@
         "macOS": "12.6.3"
       },
       "ventura": {
-        "HOMEBREW_VERSION": "4.1.18",
+        "HOMEBREW_VERSION": "4.1.22",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "14.3.1.0.1.1683849156",
         "Xcode": "14.3",
-        "macOS": "13.4.1"
+        "macOS": "13.6.1"
       },
       "sonoma": {
         "HOMEBREW_VERSION": "4.1.22",
