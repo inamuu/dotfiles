@@ -91,7 +91,8 @@ cask_list = [
   "google-japanese-ime",
   "notion",
   "slack",
-  "visual-studio-code"
+  "visual-studio-code",
+  "vivaldi"
 ]
 
 for i in cask_list
