@@ -4,6 +4,8 @@
 ### Vim
 .vim/bundle/
 .vim/.netrwhist
+.vscode/settings.json
+
 
 ### Docker
 docker-compose.override.yml
