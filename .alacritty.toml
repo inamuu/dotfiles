@@ -1,0 +1,40 @@
+import = ["/Users/kazuma/.alacritty-colorshme/themes/dracula.toml"]
+
+[font]
+size = 16.0
+
+[font.bold]
+family = "Hack Nerd Font Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "Hack Nerd Font Mono"
+style = "Bold Italic"
+
+[font.italic]
+family = "Hack Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "Hack Nerd Font Mono"
+
+[scrolling]
+history = 10000
+
+[shell]
+program = "/opt/homebrew/bin/zsh"
+
+[window]
+opacity = 0.98
+
+[window.dimensions]
+columns = 220
+lines = 60
+
+[window.padding]
+x = 2
+y = 2
+
+[window.position]
+x = 2
+y = 2
