@@ -86,6 +86,7 @@ brew "sanemat/font/ricty"
 
 cask_list = [
   "authy",
+  "arc",
   "cyberduck",
   "google-chrome",
   "google-japanese-ime",
