@@ -17,10 +17,10 @@
         "revision": "818eb1bcb28989031553c250940ef7dffe1cb5da"
       },
       "homebrew/cask-fonts": {
-        "revision": "e76f53e1101768fadfcdc1ed865c52a2d52c46b4"
+        "revision": "3074f5af3123ed481151a1e2be58aad45b280acf"
       },
       "fujiwara/tap": {
-        "revision": "c5af1fd43fe099145837ad5cbc107dfa60022752"
+        "revision": "1fb19b626dd3a8bd2001e6bf3cf5a566ced53d6f"
       }
     },
     "brew": {
@@ -2934,7 +2934,7 @@
         "macOS": "13.6.1"
       },
       "sonoma": {
-        "HOMEBREW_VERSION": "4.2.1",
+        "HOMEBREW_VERSION": "4.2.2",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "14.3.1.0.1.1683849156",
