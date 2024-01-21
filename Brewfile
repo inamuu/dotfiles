@@ -20,6 +20,7 @@ end
 #"automake"
 
 brew_list = [
+  "act",
   "ansible",
   "anyenv",
   "aws-sam-cli",
