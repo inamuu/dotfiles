@@ -36,6 +36,7 @@ brew_list = [
   "colordiff",
   "coreutils",
   "direnv",
+  "easy-rsa",
   "envchain",
   "exa",
   "fcgi",
