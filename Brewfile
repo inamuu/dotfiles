@@ -94,6 +94,7 @@ cask_list = [
   "google-japanese-ime",
   "notion",
   "slack",
+  "tunnelblick",
   "visual-studio-code",
   "vivaldi"
 ]

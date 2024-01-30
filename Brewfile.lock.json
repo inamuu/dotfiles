@@ -2686,7 +2686,7 @@
         }
       },
       "slack": {
-        "version": "4.36.138",
+        "version": "4.36.140",
         "options": {
           "full_name": "slack",
           "args": {
@@ -2990,6 +2990,15 @@
             "appdir": "/Applications"
           }
         }
+      },
+      "tunnelblick": {
+        "version": "3.8.8g,5779.3",
+        "options": {
+          "full_name": "tunnelblick",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
       }
     }
   },
@@ -3015,8 +3024,8 @@
         "HOMEBREW_VERSION": "4.2.6",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
-        "CLT": "15.1.0.0.1.1700200546",
-        "Xcode": "15.1",
+        "CLT": "14.3.1.0.1.1683849156",
+        "Xcode": "14.3",
         "macOS": "14.2.1"
       }
     },
