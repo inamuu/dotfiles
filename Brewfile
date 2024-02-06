@@ -58,6 +58,7 @@ brew_list = [
   "pkg-config",
   "putty",
   "pwgen",
+  "rclone",
   "redis",
   "s3cmd",
   "saml2aws",
