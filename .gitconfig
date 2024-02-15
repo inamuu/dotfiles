@@ -5,6 +5,8 @@
   df = diff
   st = status
   ss = status -s
+  sw = switch
+  swc = switch -c
   cm = commit
   co = checkout
   pl = pull --prune
