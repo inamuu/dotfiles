@@ -49,6 +49,7 @@ brew_list = [
   "htop",
   "hub",
   "jq",
+  "k9s",
   "lambroll",
   "mysql",
   "nmap",
