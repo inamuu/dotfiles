@@ -38,7 +38,7 @@ brew_list = [
   "direnv",
   "easy-rsa",
   "envchain",
-  "exa",
+  "eza",
   "fcgi",
   "fontforge",
   "gh",
