@@ -92,6 +92,7 @@ cask_list = [
   "authy",
   "arc",
   "cyberduck",
+  "commander-one",
   "google-chrome",
   "google-japanese-ime",
   "notion",
