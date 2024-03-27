@@ -44,6 +44,7 @@ brew_list = [
   "gh",
   "ghq",
   "gnutls",
+  "graphviz",
   "grep",
   "gron",
   "htop",
