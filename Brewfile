@@ -101,7 +101,7 @@ cask_list = [
   "slack",
   "tunnelblick",
   "visual-studio-code",
-  "vivaldi"
+  "wezterm"
 ]
 
 for i in cask_list
