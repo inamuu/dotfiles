@@ -2740,7 +2740,7 @@
         }
       },
       "firefox": {
-        "version": "125.0.2",
+        "version": "125.0.3",
         "options": {
           "full_name": "firefox",
           "args": {
@@ -2882,6 +2882,15 @@
             "appdir": "/Applications"
           }
         }
+      },
+      "wezterm": {
+        "version": "20240203-110809,5046fc22",
+        "options": {
+          "full_name": "wezterm",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
       }
     }
   },
@@ -2891,9 +2900,9 @@
         "HOMEBREW_VERSION": "4.2.20",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
-        "CLT": "15.1.0.0.1.1700200546",
+        "CLT": "15.3.0.0.1.1708646388",
         "Xcode": "15.1",
-        "macOS": "14.2.1"
+        "macOS": "14.4"
       }
     }
   }
