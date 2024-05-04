@@ -197,7 +197,7 @@ eval "$(anyenv init -)"
 
 ### Python
 alias py='python'
-export PYENV_ROOT="$HOME/anyenv/envs/pyenv/versions/version"
+export PYENV_ROOT="$HOME/.anyenv/envs/pyenv/versions/version"
 export PATH="$PYENV_ROOT/shims:$PATH"
 [ $commands[pyenv] ] && eval "$(pyenv init -)"
 
@@ -205,8 +205,9 @@ export PATH="$PYENV_ROOT/shims:$PATH"
 [ $commands[rbenv] ] && PATH=~/.rbenv/shims:"$PATH"
 
 ### Go
-export GOPATH=$HOME/go/$(goenv versions --bare)
-export PATH=$PATH:$GOPATH/bin
+export GOPATH=$HOME/.anyenv/envs/goenv/shims/
+#export GOPATH=$HOME/go/
+export PATH=$PATH:$GOPATH
 export PATH=$PATH:$HOME/go/bin
 
 ### Node
