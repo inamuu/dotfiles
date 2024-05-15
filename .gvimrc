@@ -23,3 +23,12 @@ set columns=150
 
 NeoBundle 'nathanaelkane/vim-indent-guides'
 
+" Get current date in yyyymmdd format
+let s:current_date = strftime("%Y%m%d")
+let s:file_path = "~/Downloads/" . s:current_date . ".txt"
+
+" Open the file if no other files are specified
+if argc() == 0
+    execute 'edit ' . s:file_path
+endif
+
