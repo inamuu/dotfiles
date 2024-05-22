@@ -1,5 +1,3 @@
 let g:netrw_dirhistmax  =10
 let g:netrw_dirhistcnt =3
-let g:netrw_dirhist_3='/Users/t17070/.circleci'
-let g:netrw_dirhist_2='/Users/kazuma/Documents/Projects/idasan/s_埼玉_サーバー構築案件'
-let g:netrw_dirhist_1='/Users/t17070/ghq/github.com/ca-crowdfunding/makuake-ansible/terraform/admin/.terraform'
+
