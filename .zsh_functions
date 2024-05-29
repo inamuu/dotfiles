@@ -34,22 +34,19 @@ function ssm_ec2 () {
 }
 
 
-#function ssm_redis () {
-#  if login_check; then
-#    REDIS_ENDPOINT=$(aws elasticache describe-replication-groups --output=text --query='ReplicationGroups[].NodeGroups[].[[`PrimaryEndpoint`,PrimaryEndpoint.Address],[`ReaderEndpoint`,ReaderEndpoint.Address]][]' \
-#      | peco --prompt "Select Redis Cluster Endpoint:" | cut -f 2)
-#    
-#    BASTION=$(aws ec2 describe-instances --output=text \
-#      --query 'Reservations[].Instances[].{id:InstanceId,ip:PrivateIpAddress,name:Tags[?Key==`Name`].Value|[0]}' | grep bastion \
-#      | peco --prompt "Select Bastion:" | cut -f -1)
-#
-#    if [ -n "${BASTION}" ];then
-#      aws ssm start-session --target ${BASTION} \
-#        --document-name AWS-StartPortForwardingSessionToRemoteHost \
-#        --parameters "{\"host\":[\"${REDIS_ENDPOINT}\"],\"portNumber\":[\"6379\"], \"localPortNumber\":[\"6379\"]}"
-#    fi
-#  fi
-#}
+function ssm_redis () {
+  if login_check; then
+    REDIS_ENDPOINT=$(aws elasticache describe-replication-groups --output=text --query='ReplicationGroups[].NodeGroups[].[[`PrimaryEndpoint`,PrimaryEndpoint.Address],[`ReaderEndpoint`,ReaderEndpoint.Address]][]' \
+      | peco --prompt "Select Redis Cluster Endpoint:" | cut -f 2)
+    
+
+    if set_bastion_id;then
+      aws ssm start-session --target ecs:devops_${TASK_ID}_${CONTAINER_ID} \
+        --document-name AWS-StartPortForwardingSessionToRemoteHost \
+        --parameters "{\"host\":[\"${REDIS_ENDPOINT}\"],\"portNumber\":[\"6379\"], \"localPortNumber\":[\"6379\"]}"
+    fi
+  fi
+}
 
 ### Aurora
 function ssm_aurora () {
