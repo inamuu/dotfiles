@@ -20,7 +20,7 @@ local config = {
   -- color_scheme = 'darkmoss (base16)',
   -- color_scheme = 'SeaShells',
 
-  -- Window
+  -- SplitPane
   keys = {
     {
       key = '|',
@@ -38,7 +38,10 @@ local config = {
         size = { Percent = 50 },
       },
     }
-  }
+  },
+
+  -- Window
+  window_background_opacity = 0.90
 }
 
 -- and finally, return the configuration to wezterm
