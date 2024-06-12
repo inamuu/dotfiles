@@ -178,7 +178,7 @@ export LESS='-i -M -R'
 
 
 ### tmux
-[[ -z "$TMUX" ]] && tmux || tmux a -t 0
+#[[ -z "$TMUX" ]] && tmux || tmux a -t 0
 
 alias tmk='tmux kill-server'
 
