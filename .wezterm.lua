@@ -5,6 +5,8 @@ local wezterm = require 'wezterm'
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
+
+
 local config = {
 
   -- Font
@@ -20,24 +22,30 @@ local config = {
   -- color_scheme = 'darkmoss (base16)',
   -- color_scheme = 'SeaShells',
 
-  -- SplitPane
+  -- KeyBindings
+  leader = { key = 'o', mods = 'CTRL', timeout_milliseconds = 2000 },
   keys = {
     {
       key = '|',
-      mods = 'CTRL|SHIFT',
+      mods = 'LEADER|SHIFT',
       action = wezterm.action.SplitPane {
         direction = 'Right',
         size = { Percent = 50 },
       },
     },
-  {
-      key = '%',
-      mods = 'CTRL|SHIFT',
+    {
+      key = '-',
+      mods = 'LEADER',
       action = wezterm.action.SplitPane {
         direction = 'Down',
         size = { Percent = 50 },
       },
-    }
+    },
+    {
+      key = 'v',
+      mods = 'LEADER',
+      action = wezterm.action.ActivateCopyMode
+    },
   },
 
   -- Window
