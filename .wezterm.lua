@@ -41,31 +41,11 @@ local config = {
         size = { Percent = 50 },
       },
     },
-    {
-      key = 'v',
-      mods = 'LEADER',
-      action = wezterm.action.ActivateCopyMode
-    },
-    {
-      key = 'h',
-      mods = 'LEADER',
-      action = wezterm.action.ActivatePaneDirection 'Left',
-    },
-    {
-      key = 'l',
-      mods = 'LEADER',
-      action = wezterm.action.ActivatePaneDirection 'Right',
-    },
-    {
-      key = 'k',
-      mods = 'LEADER',
-      action = wezterm.action.ActivatePaneDirection 'Up',
-    },
-    {
-      key = 'j',
-      mods = 'LEADER',
-      action = wezterm.action.ActivatePaneDirection 'Down',
-    },
+    { key = 'v', mods = 'LEADER', action = wezterm.action.ActivateCopyMode },
+    { key = 'h', mods = 'LEADER', action = wezterm.action.ActivatePaneDirection 'Left' },
+    { key = 'j', mods = 'LEADER', action = wezterm.action.ActivatePaneDirection 'Down' },
+    { key = 'k', mods = 'LEADER', action = wezterm.action.ActivatePaneDirection 'Up' },
+    { key = 'l', mods = 'LEADER', action = wezterm.action.ActivatePaneDirection 'Right' },
   },
 
   -- Window
