@@ -15,7 +15,7 @@ local config = {
   },
   font_size = 16.0,
 
-  -- Color Scheme
+  -- Color Scheme: https://wezfurlong.org/wezterm/colorschemes/index.html
   -- color_scheme = 'Dracula (Official)',
   -- color_scheme = 'Dracula+',
   color_scheme = 'Dracula (Gogh)',
