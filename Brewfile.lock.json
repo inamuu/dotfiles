@@ -5,7 +5,7 @@
         "revision": "0ed20f35d21ebc3f4f829689b101078718ad5ce1"
       },
       "homebrew/bundle": {
-        "revision": "2ccc766f7228444844aa61991b3250345018c2fa"
+        "revision": "450cf7f8dc759556dc25424cb369a0e732067755"
       },
       "sanemat/font": {
         "revision": "b9c208d3a58c305764e8b311b45b65855629804c"
@@ -2635,7 +2635,7 @@
         }
       },
       "google-chrome": {
-        "version": "126.0.6478.62",
+        "version": "126.0.6478.115",
         "options": {
           "full_name": "google-chrome",
           "args": {
@@ -2680,7 +2680,7 @@
         }
       },
       "visual-studio-code": {
-        "version": "1.90.1",
+        "version": "1.90.2",
         "options": {
           "full_name": "visual-studio-code",
           "args": {
@@ -2734,7 +2734,7 @@
         }
       },
       "firefox": {
-        "version": "127.0",
+        "version": "127.0.1",
         "options": {
           "full_name": "firefox",
           "args": {
@@ -2788,7 +2788,7 @@
         }
       },
       "powershell": {
-        "version": "7.4.2",
+        "version": "7.4.3",
         "options": {
           "full_name": "powershell",
           "args": {
@@ -2842,7 +2842,7 @@
         }
       },
       "warp": {
-        "version": "0.2024.06.11.08.02.stable_03",
+        "version": "0.2024.06.18.08.02.stable_03",
         "options": {
           "full_name": "warp",
           "args": {
@@ -2891,7 +2891,7 @@
   "system": {
     "macos": {
       "sonoma": {
-        "HOMEBREW_VERSION": "4.3.6-26-g907f54a",
+        "HOMEBREW_VERSION": "4.3.6-36-g14d452f",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "15.3.0.0.1.1708646388",
