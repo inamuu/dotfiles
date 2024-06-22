@@ -2617,7 +2617,7 @@
         }
       },
       "arc": {
-        "version": "1.47.1,50893",
+        "version": "1.48.2,51225",
         "options": {
           "full_name": "arc",
           "args": {
@@ -2891,12 +2891,12 @@
   "system": {
     "macos": {
       "sonoma": {
-        "HOMEBREW_VERSION": "4.3.6-36-g14d452f",
+        "HOMEBREW_VERSION": "4.3.6",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "15.3.0.0.1.1708646388",
         "Xcode": "15.4",
-        "macOS": "14.5"
+        "macOS": "14.2.1"
       }
     }
   }
