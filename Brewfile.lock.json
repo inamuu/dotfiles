@@ -5,13 +5,13 @@
         "revision": "0ed20f35d21ebc3f4f829689b101078718ad5ce1"
       },
       "homebrew/bundle": {
-        "revision": "3ec4565e3785efcbf6bd767560b1d767bfa43b72"
+        "revision": "c40173f53f56c1bf8d7b6d22d542c54fa985682d"
       },
       "sanemat/font": {
         "revision": "b9c208d3a58c305764e8b311b45b65855629804c"
       },
       "fujiwara/tap": {
-        "revision": "c805ed4ff356be7c2f8a627f01540dcd6f137c3e"
+        "revision": "1633aba6114a52bfd524d9d025bbc0169f552ec8"
       }
     },
     "brew": {
@@ -2617,7 +2617,7 @@
         }
       },
       "arc": {
-        "version": "1.49.0,51346",
+        "version": "1.49.1,51495",
         "options": {
           "full_name": "arc",
           "args": {
@@ -2680,7 +2680,7 @@
         }
       },
       "visual-studio-code": {
-        "version": "1.90.2",
+        "version": "1.91.0",
         "options": {
           "full_name": "visual-studio-code",
           "args": {
@@ -2815,7 +2815,7 @@
         }
       },
       "session-manager-plugin": {
-        "version": "1.2.633.0",
+        "version": "1.2.650.0",
         "options": {
           "full_name": "session-manager-plugin",
           "args": {
@@ -2891,7 +2891,7 @@
   "system": {
     "macos": {
       "sonoma": {
-        "HOMEBREW_VERSION": "4.3.8-25-gb7efc64",
+        "HOMEBREW_VERSION": "4.3.8-35-gf25e667",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "15.3.0.0.1.1708646388",
