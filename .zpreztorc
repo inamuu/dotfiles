@@ -34,14 +34,15 @@ zstyle ':prezto:load' pmodule \
   'utility' \
   'completion' \
   'prompt' \
-  'git'
+  'git' \
+  'syntax-highlighting'
 
 #
 # Autosuggestions
 #
 
 # Set the query found color.
-zstyle ':prezto:module:autosuggestions:color' found 'fg=green'
+zstyle ':prezto:module:autosuggestions:color' found 'fg=blue'
 
 #
 # Editor
