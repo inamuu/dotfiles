@@ -76,8 +76,9 @@ brew_list = [
   "watch",
   "wget",
   "zsh",
+  "zsh-autosuggestions",
   "zsh-completions",
-  "zsh-autosuggestions"
+  "zsh-syntax-highlighting"
 ]
 
 for i in brew_list
