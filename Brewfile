@@ -48,6 +48,7 @@ brew_list = [
   "graphviz",
   "grep",
   "gron",
+  "helix",
   "htop",
   "hub",
   "jnv",
