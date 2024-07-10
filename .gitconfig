@@ -58,3 +58,5 @@
   branch = false
   diff = false
 
+[commit]
+	gpgsign = true
