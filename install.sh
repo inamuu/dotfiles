@@ -70,6 +70,7 @@ for f in .??*
 do
     #無視したいファイルやディレクトリ
     [ "$f" = ".git" ] && continue
+    [ "$f" = ".gitconfig" ] && continue
     [ "$f" = ".config" ] && continue
     ln -snfv ${DOT_DIRECTORY}/${f} ${HOME}/${f}
 done
