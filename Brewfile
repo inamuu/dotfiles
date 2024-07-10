@@ -61,6 +61,7 @@ brew_list = [
   "peco",
   "percona-toolkit",
   "php",  # for Alfred plugins
+  "pinentry-mac",
   "pkg-config",
   "putty",
   "pwgen",
