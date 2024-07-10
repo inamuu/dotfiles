@@ -45,6 +45,7 @@ brew_list = [
   "ghq",
   "gnutls",
   "goreleaser/tap/goreleaser",
+  "gpg",
   "graphviz",
   "grep",
   "gron",
