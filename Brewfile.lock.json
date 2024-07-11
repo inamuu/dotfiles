@@ -5,7 +5,7 @@
         "revision": "0ed20f35d21ebc3f4f829689b101078718ad5ce1"
       },
       "homebrew/bundle": {
-        "revision": "caf49a996d9ee2a8eacddaaf4d57c5c3d9faff08"
+        "revision": "0e8e000753e19b5422efb94a688abfd62c908fcb"
       },
       "sanemat/font": {
         "revision": "b9c208d3a58c305764e8b311b45b65855629804c"
@@ -2844,7 +2844,7 @@
         }
       },
       "notion": {
-        "version": "3.9.6",
+        "version": "3.10.0",
         "options": {
           "full_name": "notion",
           "args": {
@@ -3082,12 +3082,12 @@
   "system": {
     "macos": {
       "sonoma": {
-        "HOMEBREW_VERSION": "4.3.9",
+        "HOMEBREW_VERSION": "4.3.9-28-g302a2b3",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "15.3.0.0.1.1708646388",
         "Xcode": "15.4",
-        "macOS": "14.2.1"
+        "macOS": "14.5"
       }
     }
   }
