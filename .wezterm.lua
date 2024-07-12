@@ -18,12 +18,14 @@ local config = {
   -- Color Scheme: https://wezfurlong.org/wezterm/colorschemes/index.html
   -- color_scheme = 'Dracula (Official)',
   -- color_scheme = 'Dracula+',
-  color_scheme = 'Dracula (Gogh)',
   -- color_scheme = 'darkmoss (base16)',
   -- color_scheme = 'SeaShells',
+  color_scheme = 'Dracula (Gogh)',
 
   -- KeyBindings
   leader = { key = 'o', mods = 'CTRL', timeout_milliseconds = 2000 },
+
+  -- Split pane
   keys = {
     {
       key = '|',
@@ -41,7 +43,11 @@ local config = {
         size = { Percent = 50 },
       },
     },
+
+    -- Enable copy mode
     { key = 'v', mods = 'LEADER', action = wezterm.action.ActivateCopyMode },
+
+    -- Move pane
     { key = 'h', mods = 'LEADER', action = wezterm.action.ActivatePaneDirection 'Left' },
     { key = 'j', mods = 'LEADER', action = wezterm.action.ActivatePaneDirection 'Down' },
     { key = 'k', mods = 'LEADER', action = wezterm.action.ActivatePaneDirection 'Up' },
