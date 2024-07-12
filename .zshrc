@@ -209,8 +209,7 @@ export PATH="$PYENV_ROOT/shims:$PATH"
 ### Go
 export GOPATH=$HOME/.anyenv/envs/goenv/shims/
 #export GOPATH=$HOME/go/
-export PATH=$PATH:$GOPATH
-export PATH=$PATH:$HOME/go/bin
+export PATH=$GOROOT/bin:$PATH
 
 ### Node
 export NODENV_ROOT=$HOME/.anyenv/envs/nodenv
