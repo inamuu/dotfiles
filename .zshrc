@@ -173,6 +173,7 @@ alias ls='eza'
 alias mv='mv -vi'
 alias rm='rm -vi'
 alias tf='terraform'
+alias tfcheck='terraform fmt && terraform validate && tflint'
 alias vi='vim'
 
 export LESS='-i -M -R'
