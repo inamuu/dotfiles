@@ -35,6 +35,7 @@ brew_list = [
   "cli53",
   "colordiff",
   "coreutils",
+  "git-delta",
   "direnv",
   "easy-rsa",
   "envchain",
