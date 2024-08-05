@@ -90,14 +90,12 @@ if type brew &>/dev/null; then
   compinit -u
 fi
 
-
 ### History
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 function history-all { history -E 1 }
 setopt hist_ignore_dups
-
 
 ### powerline theme
 #POWERLINE_HIDE_HOST_NAME="true"
@@ -109,10 +107,8 @@ setopt hist_ignore_dups
 export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
-
 ### peco
 function pecor { peco --query "$LBUFFER" --layout=bottom-up }
-
 
 ### peco&ssh
 function peco-ssh () {
@@ -134,7 +130,6 @@ function peco-ssh () {
 zle -N peco-ssh
 bindkey '^S' peco-ssh
 
-
 ### history
 function peco-history-selection() {
     #BUFFER=`history | tail -r | awk '{$1="";print $0}' | peco`
@@ -145,28 +140,24 @@ function peco-history-selection() {
 zle -N peco-history-selection
 bindkey '^R' peco-history-selection
 
-
 ### direnv
 [ $commands[direnv] ] && eval "$(direnv hook zsh)"
 PS1="${CUSTOM_PS1:-default PS1}: "
 
-
-### shell command
+### Alias(Main)
 alias ..='cd ..'
-alias cddownloads='cd ~/Downloads'
-alias cdworks='cd ~/Works'
 alias bat='bat -p --theme=Dracula'
 alias bincat='/bin/cat'
 alias binls='/bin/ls'
-alias gbrd='git branch | grep -v "*" | awk "{print $1}" | peco | xargs git branch -d'
 alias c='clear'
+alias cddownloads='cd ~/Downloads'
+alias cdworks='cd ~/Works'
 alias cp='cp -vi'
 alias date='gdate'
 alias ddd='cd ~/Downloads'
 alias doc='docker'
 alias docc='docker compose'
 alias evc='envchain'
-alias g='git'
 alias ll='eza -la --git --icons'
 alias llr='eza -lra --git --icons'
 alias ls='eza'
@@ -175,13 +166,15 @@ alias rm='rm -vi'
 alias tf='terraform'
 alias tfcheck='terraform fmt && terraform validate && tflint'
 alias vi='vim'
-
 export LESS='-i -M -R'
 
+### Alias(Git)
+alias g='git'
+alias gbrd='git branch | grep -v -e "main" -e "*" | awk "{print $1}" | peco | xargs git branch -d'
+alias gsw='git branch | grep -v -e "*" | awk "{print $1}" | peco | xargs git switch'
 
 ### tmux
 #[[ -z "$TMUX" ]] && tmux || tmux a -t 0
-
 alias tmk='tmux kill-server'
 
 ### bundle
@@ -190,7 +183,6 @@ alias ber='bundle exec rake'
 
 ### hub
 alias ghl='cd $(ghq root)/$(ghq list | pecor)'
-
 
 ### anyenv
 export ANYENV_ROOT="$HOME/.anyenv"
