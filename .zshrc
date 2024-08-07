@@ -170,8 +170,8 @@ export LESS='-i -M -R'
 
 ### Alias(Git)
 alias g='git'
-alias gbrd='git branch | grep -v -e "main" -e "*" | awk "{print $1}" | peco | xargs git branch -d'
-alias gsw='git branch | grep -v -e "*" | awk "{print $1}" | peco | xargs git switch'
+alias gbrd='git branch | grep -v -e "main" -e "*" | awk "{print $1}" | pecor | xargs git branch -d'
+alias gsw='git branch | grep -v -e "*" | awk "{print $1}" | pecor | xargs git switch'
 
 ### tmux
 #[[ -z "$TMUX" ]] && tmux || tmux a -t 0
