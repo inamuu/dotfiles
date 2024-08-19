@@ -15,11 +15,12 @@ local config = {
   },
   font_size = 16.0,
 
+  -- ime
+  use_ime = true,
+
   -- Color Scheme: https://wezfurlong.org/wezterm/colorschemes/index.html
   -- color_scheme = 'Dracula (Official)',
-  -- color_scheme = 'Dracula+',
   -- color_scheme = 'darkmoss (base16)',
-  -- color_scheme = 'SeaShells',
   color_scheme = 'Dracula (Gogh)',
 
   -- KeyBindings
