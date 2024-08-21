@@ -96,6 +96,8 @@ end
 ### Install fonts
 cask "font-ricty-diminished"
 brew "sanemat/font/ricty"
+cask "font-udev-gothic"
+cask "font-udev-gothic-nf"
 
 
 ### Install desktop applications for macOS and Linux
