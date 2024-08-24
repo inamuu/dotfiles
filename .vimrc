@@ -5,7 +5,7 @@ syntax on
 autocmd ColorScheme * highlight Comment ctermfg=31 guifg=#008800
 colorscheme molokai
 
-set guifont=Hack\ Nerd\ Font:h14
+set guifont=UDEV\ Gothic\ 35:h14
 set t_Co=256
 set laststatus=2
 set number
