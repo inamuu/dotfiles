@@ -1,9 +1,14 @@
 
-syntax on
+syntax enable
 """ 以下のコマンドは :colorscheme の前に設定します
 """ コメントを濃い緑にする
 autocmd ColorScheme * highlight Comment ctermfg=31 guifg=#008800
-colorscheme molokai
+
+""" インストール手順: https://draculatheme.com/vim
+if v:version < 802
+    packadd! dracula
+endif
+colorscheme dracula
 
 set guifont=UDEV\ Gothic\ 35:h14
 set t_Co=256

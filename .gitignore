@@ -4,6 +4,8 @@
 ### Vim
 .vim/bundle/
 .vim/.netrwhist
+.vim/colors
+.vim/pack
 .vscode/settings.json
 
 
