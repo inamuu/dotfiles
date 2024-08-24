@@ -3,7 +3,7 @@ set noswapfile
 
 syntax on
 colorscheme morning
-set guifont=Hack\ Nerd\ Font:h16
+set guifont=UDEV\ Gothic\ 35:h16
 
 autocmd ColorScheme * highlight Comment ctermfg=31 guifg=#008800
 colorscheme solarized
