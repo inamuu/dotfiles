@@ -139,6 +139,7 @@ if OS.mac?
   cask_list = [
     "alacritty",
     "bitwarden",
+    "chatgpt",
     "dbeaver-community",
     "docker",
     "firefox",
