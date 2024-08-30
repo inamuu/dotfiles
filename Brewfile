@@ -59,6 +59,7 @@ brew_list = [
   "jq",
   "k9s",
   "lambroll",
+  "minikube",
   "mysql",
   "nmap",
   "peco",
