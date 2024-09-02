@@ -11,7 +11,7 @@
         "revision": "b9c208d3a58c305764e8b311b45b65855629804c"
       },
       "fujiwara/tap": {
-        "revision": "657f9eb9f940bc291bbfcd940939242662410fe9"
+        "revision": "9bd4220587db41e80d2a69af78ba0cf811c72bd1"
       }
     },
     "brew": {
@@ -1351,7 +1351,7 @@
         }
       },
       "lambroll": {
-        "version": "1.0.6",
+        "version": "1.1.0",
         "bottle": false
       },
       "mysql": {
@@ -3332,12 +3332,12 @@
   "system": {
     "macos": {
       "sonoma": {
-        "HOMEBREW_VERSION": "4.3.18-73-g85c9c17",
+        "HOMEBREW_VERSION": "4.3.18",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "15.3.0.0.1.1708646388",
         "Xcode": "15.4",
-        "macOS": "14.6.1"
+        "macOS": "14.2.1"
       }
     }
   }
