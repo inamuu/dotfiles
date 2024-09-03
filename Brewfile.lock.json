@@ -5,7 +5,7 @@
         "revision": "0ed20f35d21ebc3f4f829689b101078718ad5ce1"
       },
       "homebrew/bundle": {
-        "revision": "88ecf2f0f8fe496c2f8994df4d820dd791aea69a"
+        "revision": "5b019a719bfc87e0b80c4abd72ada660204ada13"
       },
       "sanemat/font": {
         "revision": "b9c208d3a58c305764e8b311b45b65855629804c"
@@ -3049,7 +3049,7 @@
         }
       },
       "google-chrome": {
-        "version": "128.0.6613.114",
+        "version": "128.0.6613.120",
         "options": {
           "full_name": "google-chrome",
           "args": {
@@ -3332,12 +3332,12 @@
   "system": {
     "macos": {
       "sonoma": {
-        "HOMEBREW_VERSION": "4.3.18",
+        "HOMEBREW_VERSION": "4.3.18-96-g33f53dd",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "15.3.0.0.1.1708646388",
         "Xcode": "15.4",
-        "macOS": "14.2.1"
+        "macOS": "14.6.1"
       }
     }
   }
