@@ -116,6 +116,7 @@ cask_list = [
   "google-chrome",
   "google-japanese-ime",
   "notion",
+  "rar",
   "slack",
   "tunnelblick",
   "visual-studio-code",

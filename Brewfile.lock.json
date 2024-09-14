@@ -3817,6 +3817,15 @@
             "appdir": "/Applications"
           }
         }
+      },
+      "rar": {
+        "version": "7.01",
+        "options": {
+          "full_name": "rar",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
       }
     }
   },
