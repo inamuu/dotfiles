@@ -55,6 +55,7 @@ brew_list = [
   "gsed",
   "hadolint",
   "helix",
+  "helm",
   "htop",
   "hub",
   "jnv",
