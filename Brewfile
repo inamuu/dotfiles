@@ -89,6 +89,7 @@ brew_list = [
   "tree",
   "watch",
   "wget",
+  "yq",
   "zsh",
   "zsh-autosuggestions",
   "zsh-completions",
