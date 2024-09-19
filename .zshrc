@@ -176,7 +176,6 @@ alias gsw='git branch | grep -v -e "*" | awk "{print $1}" | pecor | xargs git sw
 ### Alias(kubectl)
 source <(kubectl completion zsh)
 alias kc=kubectl
-complete -o default -F __start_kubectl kc
 
 ### tmux
 #[[ -z "$TMUX" ]] && tmux || tmux a -t 0
