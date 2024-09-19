@@ -62,6 +62,7 @@ brew_list = [
   "jq",
   "k9s",
   "kind",
+  "kube-linter",
   "kubectl",
   "lambroll",
   "minikube",
