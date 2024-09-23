@@ -3674,7 +3674,7 @@
         }
       },
       "dbeaver-community": {
-        "version": "24.2.0",
+        "version": "24.2.1",
         "options": {
           "full_name": "dbeaver-community",
           "args": {
