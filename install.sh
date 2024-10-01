@@ -7,9 +7,8 @@ DOT_CONFIG_DIRECTORY=".config"
 OSTYPE=$(uname -s)
 
 msg () {
-  printf "\n######################## "
-  printf "$1"
-  printf " ########################\n"
+  time=$(date "+%Y/%m/%d/%H:%M:%S")
+  echo "$time $1"
   sleep 1
 }
 
@@ -64,30 +63,41 @@ if [ ! -d "${HOME}/.zprezto" ];then
   git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 fi
 
-msg "link home directory dotfiles"
-cd ${DOT_DIRECTORY}
-for f in .??*
-do
-    #無視したいファイルやディレクトリ
-    [ "$f" = ".git" ] && continue
-    [ "$f" = ".gitconfig" ] && continue
-    [ "$f" = ".config" ] && continue
-    ln -snfv ${DOT_DIRECTORY}/${f} ${HOME}/${f}
-done
+### Link files
+msg "Run link files, Is it ok?(y or another)"
+read linkfiles
 
-msg "link .config directory dotfiles"
-cd ${DOT_DIRECTORY}/${DOT_CONFIG_DIRECTORY}
-for file in `\find . -maxdepth 8 -type f`; do
-#./の2文字を削除するためにfile:2としている
-    ln -snfv ${DOT_DIRECTORY}/${DOT_CONFIG_DIRECTORY}/${file:2} ${HOME}/${DOT_CONFIG_DIRECTORY}/${file:2}
-    echo $file
-done
+if [ "$linkfiles" == "y" ];then
 
-msg "linked dotfiles complete!"
-
-if which blueutil;then
-  if which sleepwatcher;then
-    brew services start sleepwatcher
+  msg "link home directory dotfiles"
+  cd ${DOT_DIRECTORY}
+  for f in .??*
+  do
+      #無視したいファイルやディレクトリ
+      [ "$f" = ".git" ] && continue
+      [ "$f" = ".gitconfig" ] && continue
+      [ "$f" = ".config" ] && continue
+      ln -snfv ${DOT_DIRECTORY}/${f} ${HOME}/${f}
+  done
+  
+  msg "link .config directory dotfiles, Is it ok?(y or another)"
+  
+  cd ${DOT_DIRECTORY}/${DOT_CONFIG_DIRECTORY}
+  for file in `\find . -maxdepth 8 -type f`; do
+  #./の2文字を削除するためにfile:2としている
+      ln -snfv ${DOT_DIRECTORY}/${DOT_CONFIG_DIRECTORY}/${file:2} ${HOME}/${DOT_CONFIG_DIRECTORY}/${file:2}
+      echo $file
+  done
+  
+  msg "linked dotfiles complete!"
+  
+  if which blueutil;then
+    if which sleepwatcher;then
+      brew services start sleepwatcher
+    fi
   fi
+else
+  msg "skip link files"
 fi
 
+msg "Finished!!"
