@@ -64,6 +64,7 @@ brew_list = [
   "kind",
   "kube-linter",
   "kubectl",
+  "kubectx",
   "lambroll",
   "minikube",
   "mysql",
