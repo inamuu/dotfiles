@@ -76,6 +76,7 @@ brew_list = [
   "pkg-config",
   "putty",
   "pwgen",
+  "pygments",
   "rclone",
   "redis",
   "ripgrep",
