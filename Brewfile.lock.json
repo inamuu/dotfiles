@@ -3612,7 +3612,7 @@
         }
       },
       "dbeaver-community": {
-        "version": "24.2.1",
+        "version": "24.2.2",
         "options": {
           "full_name": "dbeaver-community",
           "args": {
@@ -3657,7 +3657,7 @@
         }
       },
       "karabiner-elements": {
-        "version": "15.0.0",
+        "version": "15.1.0",
         "options": {
           "full_name": "karabiner-elements",
           "args": {
