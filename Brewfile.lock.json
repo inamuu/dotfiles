@@ -3803,7 +3803,7 @@
   "system": {
     "macos": {
       "sonoma": {
-        "HOMEBREW_VERSION": "4.4.0-58-g4671af4",
+        "HOMEBREW_VERSION": "4.4.0-113-g9fd572f",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "15.3.0.0.1.1708646388",
