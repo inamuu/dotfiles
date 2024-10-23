@@ -56,6 +56,7 @@ brew_list = [
   "hadolint",
   "helix",
   "helm",
+  "helmfile",
   "htop",
   "hub",
   "jnv",
