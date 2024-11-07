@@ -60,6 +60,7 @@ brew_list = [
   "helmfile",
   "htop",
   "hub",
+  "jless",
   "jnv",
   "jq",
   "k9s",
