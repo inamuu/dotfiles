@@ -36,6 +36,7 @@ brew_list = [
   "colordiff",
   "coreutils",
   "direnv",
+  "duckdb",
   "easy-rsa",
   "eksctl",
   "envchain",
