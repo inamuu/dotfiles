@@ -177,6 +177,9 @@ alias gsw='git branch | grep -v -e "*" | awk "{print $1}" | pecor | xargs git sw
 source <(kubectl completion zsh)
 alias kc=kubectl
 
+# colorize kubectl diff
+export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
+
 ### tmux
 #[[ -z "$TMUX" ]] && tmux || tmux a -t 0
 alias tmk='tmux kill-server'
