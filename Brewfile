@@ -23,6 +23,7 @@ brew_list = [
   "act",
   "ansible",
   "anyenv",
+  "argo",
   "aws-sam-cli",
   "aws-vault",
   "awscli",
