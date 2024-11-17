@@ -88,6 +88,7 @@ brew_list = [
   "saml2aws",
   "shellcheck",
   "sleepwatcher",
+  "stern",
   "telnet",
   "terraformer",
   "tflint",
