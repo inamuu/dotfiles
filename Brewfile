@@ -47,6 +47,7 @@ brew_list = [
   "gawk",
   "gh",
   "ghq",
+  "gitui",
   "git-delta",
   "gnutls",
   "goreleaser/tap/goreleaser",
