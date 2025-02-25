@@ -6,7 +6,6 @@ cask_args appdir: "/Applications"
 
 ### Main
 tap_list = [
-  "homebrew/cask-fonts",
   "homebrew/bundle",
   "sanemat/font",
   "fujiwara/tap"
