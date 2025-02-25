@@ -164,13 +164,11 @@ if OS.mac?
     "karabiner-elements",
     "macvim",
     "postman",
-    "powershell",
     "rectangle",
     "sequel-ace",
     "session-manager-plugin",
     "skitch",
     "the-unarchiver",
-    "warp",
     "xquartz",
     "zoom"
   ]
