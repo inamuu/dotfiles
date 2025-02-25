@@ -119,7 +119,6 @@ cask "font-udev-gothic-nf"
 ### Install desktop applications for macOS and Linux
 
 cask_list = [
-  "authy",
   "arc",
   "cyberduck",
   "commander-one",
@@ -139,14 +138,12 @@ end
 
 ### Install desktop apps only private and macOS
 if ENV['PCENV'] == 'private' and OS.mac?
-  cask "microsoft-remote-desktop"
   cask "vnc-viewer"
   cask "rambox"
 end
 
 ### Install desktop apps only work and macOS
 if ENV['PCENV'] == 'work' and OS.mac?
-  cask "around"
   cask "todoist"
 end
 
@@ -167,7 +164,6 @@ if OS.mac?
     "rectangle",
     "sequel-ace",
     "session-manager-plugin",
-    "skitch",
     "the-unarchiver",
     "xquartz",
     "zoom"
