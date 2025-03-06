@@ -75,7 +75,6 @@ brew_list = [
   "nmap",
   "peco",
   "percona-toolkit",
-  "php",  # for Alfred plugins
   "pinentry-mac",
   "pkg-config",
   "putty",
@@ -120,7 +119,6 @@ cask "font-udev-gothic-nf"
 cask_list = [
   "arc",
   "cyberduck",
-  "commander-one",
   "google-chrome",
   "google-japanese-ime",
   "notion",
