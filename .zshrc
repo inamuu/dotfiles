@@ -1,3 +1,5 @@
+# Amazon Q pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 ### link
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 [ -f ~/.zsh_functions ] && source ~/.zsh_functions
@@ -82,13 +84,16 @@ zshaddhistory() {
 }
 
 ### zsh completions
-if type brew &>/dev/null; then
-  fpath=(/usr/local/share/zsh-completions/src $fpath)
-  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-  rm -f ~/.zcompdump; compinit
-  autoload -Uz compinit
-  compinit -u
-fi
+# Enable AmazonQ CLI & Disable zsh-autosuggestions by "q doctor" results
+# q doctor said "Inline: Using zsh-autosuggestions is not supported at the same time as Inline"
+#
+#if type brew &>/dev/null; then
+#  fpath=(/usr/local/share/zsh-completions/src $fpath)
+#  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#  rm -f ~/.zcompdump; compinit
+#  autoload -Uz compinit
+#  compinit -u
+#fi
 
 ### History
 HISTFILE=~/.zsh_history
@@ -237,3 +242,5 @@ function iterm2_print_user_vars() {
     iterm2_set_user_var gitBranch $((git branch 2> /dev/null) | grep \* | cut -c3-)
 }
 
+# Amazon Q post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
