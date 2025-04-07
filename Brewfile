@@ -94,6 +94,7 @@ brew_list = [
   "tig",
   "tmux",
   "tree",
+  "uv",
   "watch",
   "wget",
   "yq",
