@@ -119,7 +119,6 @@ cask "font-udev-gothic-nf"
 
 cask_list = [
   "arc",
-  "cyberduck",
   "google-chrome",
   "google-japanese-ime",
   "notion",
