@@ -158,7 +158,6 @@ if OS.mac?
     "macvim",
     "postman",
     "rectangle",
-    "sequel-ace",
     "session-manager-plugin",
     "the-unarchiver",
     "xquartz",
