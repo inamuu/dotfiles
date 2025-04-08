@@ -118,7 +118,6 @@ cask "font-udev-gothic-nf"
 ### Install desktop applications for macOS and Linux
 
 cask_list = [
-  "arc",
   "google-chrome",
   "google-japanese-ime",
   "notion",
