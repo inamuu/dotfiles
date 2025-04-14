@@ -6,7 +6,6 @@ cask_args appdir: "/Applications"
 
 ### Main
 tap_list = [
-  "homebrew/bundle",
   "sanemat/font",
   "fujiwara/tap"
 ]
@@ -47,6 +46,7 @@ brew_list = [
   "gawk",
   "gh",
   "ghq",
+  "ghostscript",
   "gitui",
   "git-delta",
   "gnutls",
