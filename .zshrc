@@ -1,5 +1,6 @@
 # Amazon Q pre block. Keep at the top of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
+
 ### link
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 [ -f ~/.zsh_functions ] && source ~/.zsh_functions
@@ -226,6 +227,9 @@ export NODENV_SHELL=zsh
 ### ESC Timeout
 # http://lazy-dog.hatenablog.com/entry/2015/12/24/001648
 KEYTIMEOUT=0
+
+### Terraform
+export TF_CLI_ARGS_plan="--parallelism=30"
 
 ### google cloud
 export PATH="$HOME/google-cloud-sdk/bin:$PATH"
