@@ -233,14 +233,15 @@ if [ -f "${HOME}/google-cloud-sdk/path.zsh.inc" ]; then . "${HOME}/google-cloud-
 if [ -f "${HOME}/google-cloud-sdk/completion.zsh.inc" ]; then . "${HOME}/google-cloud-sdk/completion.zsh.inc" ; fi
 
 ### iTerm2
-if [ -f "${HOME}/.iterm2_shell_integration.zsh" ]; then
- source "${HOME}/.iterm2_shell_integration.zsh"
- source ~/.iterm2_shell_integration.`basename $SHELL`
-fi
-
-function iterm2_print_user_vars() {
-    iterm2_set_user_var gitBranch $((git branch 2> /dev/null) | grep \* | cut -c3-)
-}
+# comment out 20250430
+#if [ -f "${HOME}/.iterm2_shell_integration.zsh" ]; then
+# source "${HOME}/.iterm2_shell_integration.zsh"
+# source ~/.iterm2_shell_integration.`basename $SHELL`
+#fi
+#
+#function iterm2_print_user_vars() {
+#    iterm2_set_user_var gitBranch $((git branch 2> /dev/null) | grep \* | cut -c3-)
+#}
 
 # Amazon Q post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
