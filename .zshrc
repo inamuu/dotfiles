@@ -247,5 +247,8 @@ if [ -f "${HOME}/google-cloud-sdk/completion.zsh.inc" ]; then . "${HOME}/google-
 #    iterm2_set_user_var gitBranch $((git branch 2> /dev/null) | grep \* | cut -c3-)
 #}
 
+### GitHub
+export GPG_TTY=$(tty)
+
 # Amazon Q post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
