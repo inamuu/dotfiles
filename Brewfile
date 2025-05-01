@@ -111,20 +111,21 @@ end
 
 ### Install fonts
 cask "font-ricty-diminished"
-brew "sanemat/font/ricty"
+#brew "sanemat/font/ricty"
 cask "font-udev-gothic"
 cask "font-udev-gothic-nf"
 
 
 ### Install desktop applications for macOS and Linux
 
+#   "google-chrome",
+#   "google-japanese-ime",
+#   "tunnelblick",
 cask_list = [
-  "google-chrome",
-  "google-japanese-ime",
   "notion",
   "rar",
+  "raycast",
   "slack",
-  "tunnelblick",
   "visual-studio-code",
   "wezterm"
 ]
