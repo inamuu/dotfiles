@@ -72,6 +72,7 @@ brew_list = [
   "kubectx",
   "lambroll",
   "minikube",
+  "mise",
   "mysql",
   "nmap",
   "peco",
