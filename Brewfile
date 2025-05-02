@@ -149,6 +149,7 @@ end
 ### Install desktop apps only macOS for private and work
 if OS.mac?
   #"alfred"
+  #"zoom" インストール時にエラーになるため
   cask_list = [
     "alacritty",
     "bitwarden",
