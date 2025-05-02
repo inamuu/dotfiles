@@ -124,6 +124,7 @@ cask "font-udev-gothic-nf"
 #   "tunnelblick",
 cask_list = [
   "notion",
+  "obsidian",
   "rar",
   "raycast",
   "slack",
@@ -164,8 +165,7 @@ if OS.mac?
     "rectangle",
     "session-manager-plugin",
     "the-unarchiver",
-    "xquartz",
-    "zoom"
+    "xquartz"
   ]
   for i in cask_list
     cask i
