@@ -42,7 +42,7 @@ brew_list = [
   "envchain",
   "eza",
   "fcgi",
-  "flux",
+  "fluxcd/tap/flux",
   "fontforge",
   "gawk",
   "gh",
