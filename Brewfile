@@ -104,7 +104,8 @@ brew_list = [
   "zsh",
   "zsh-autosuggestions",
   "zsh-completions",
-  "zsh-syntax-highlighting"
+  "zsh-syntax-highlighting",
+  "zx"
 ]
 
 for i in brew_list
