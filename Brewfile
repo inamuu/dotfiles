@@ -57,6 +57,7 @@ brew_list = [
   "grep",
   "gron",
   "gsed",
+  "hashicorp/tap/packer",
   "hadolint",
   "helix",
   "helm",
