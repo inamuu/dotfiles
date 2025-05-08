@@ -84,18 +84,6 @@ zshaddhistory() {
     ]]
 }
 
-### zsh completions
-# Enable AmazonQ CLI & Disable zsh-autosuggestions by "q doctor" results
-# q doctor said "Inline: Using zsh-autosuggestions is not supported at the same time as Inline"
-#
-#if type brew &>/dev/null; then
-#  fpath=(/usr/local/share/zsh-completions/src $fpath)
-#  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-#  rm -f ~/.zcompdump; compinit
-#  autoload -Uz compinit
-#  compinit -u
-#fi
-
 ### History
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
@@ -253,6 +241,8 @@ export GPG_TTY=$(tty)
 ### mise
 eval "$(mise activate zsh)"
 
+### Terraform
+export TF_CLI_ARGS_plan="--parallelism=30"
 
 # Amazon Q post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
