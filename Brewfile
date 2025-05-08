@@ -24,6 +24,7 @@ brew_list = [
   "argo",
   "aws-sam-cli",
   "aws-vault",
+  "aws2-wrap",
   "awscli",
   "awslogs",
   "bat",
