@@ -1,22 +1,29 @@
+
+### Variables
+CLUSTER_NAME=example
+
 ### saml2aws
+# please set SAML2AWS_LOGIN_CHECK true or false to .zshrc.local
 function login_check () {
- if which saml2aws; then
-   saml2aws login
+ if "${SAML2AWS_LOGIN_CHECK}";then
+   if which saml2aws; then
+     saml2aws login
+   fi
  fi
 }
 
 ### bastion
 function set_bastion_id () {
   if login_check; then
-    ENV_SERVICE=$(aws ecs list-services --cluster devops | jq -r '.serviceArns[]' | awk -F'/' '{print $(NF-0)}' | peco --prompt "踏み台コンテナを選択しようず🍣 ")
-    TASK_ID=$(aws ecs list-tasks --cluster devops --service-name ${ENV_SERVICE} --query "taskArns[0]" --output text --region ap-northeast-1 | awk -F '/' '{print $3}')
-    CONTAINER_ID=$(aws ecs describe-tasks --cluster devops --task ${TASK_ID} --region ap-northeast-1 | jq -r --arg CONTAINER_NAME bastion '.tasks[0].containers[].runtimeId')
+    ENV_SERVICE=$(aws ecs list-services --cluster ${CLUSTER_NAME} | jq -r '.serviceArns[]' | awk -F'/' '{print $(NF-0)}' | peco --prompt "踏み台コンテナを選択しようず🍣 ")
+    TASK_ID=$(aws ecs list-tasks --cluster ${CLUSTER_NAME} --service-name ${ENV_SERVICE} --query "taskArns[0]" --output text --region ap-northeast-1 | awk -F '/' '{print $3}')
+    CONTAINER_ID=$(aws ecs describe-tasks --cluster ${CLUSTER_NAME} --task ${TASK_ID} --region ap-northeast-1 | jq -r --arg CONTAINER_NAME bastion '.tasks[0].containers[].runtimeId')
 
   fi
 }
 
 function ssm_bastion () {
-  set_bastion_id && aws ssm start-session --target ecs:devops_${TASK_ID}_${CONTAINER_ID}
+  set_bastion_id && aws ssm start-session --target ecs:${CLUSTER_NAME}_${TASK_ID}_${CONTAINER_ID}
 }
 
 ### ec2
@@ -41,7 +48,7 @@ function ssm_redis () {
     
 
     if set_bastion_id;then
-      aws ssm start-session --target ecs:devops_${TASK_ID}_${CONTAINER_ID} \
+      aws ssm start-session --target ecs:${CLUSTER_NAME}_${TASK_ID}_${CONTAINER_ID} \
         --document-name AWS-StartPortForwardingSessionToRemoteHost \
         --parameters "{\"host\":[\"${REDIS_ENDPOINT}\"],\"portNumber\":[\"6379\"], \"localPortNumber\":[\"6379\"]}"
     fi
@@ -58,7 +65,7 @@ function ssm_aurora () {
     SESSION_COUNT=$(ps aux | grep "aws ssm start-session" | grep -v grep | wc -l | sed 's/ //g')
     DB_LOCAL_PORT=$(expr 3306 + ${SESSION_COUNT})
     echo "\n---\nConnect to ${AURORA_ENDPOINT}.\nPlease run 'mysql -h 127.0.0.1 -p -P ${DB_LOCAL_PORT} -u'"
-    aws ssm start-session --target ecs:devops_${TASK_ID}_${CONTAINER_ID} \
+    aws ssm start-session --target ecs:${CLUSTER_NAME}_${TASK_ID}_${CONTAINER_ID} \
      --document-name AWS-StartPortForwardingSessionToRemoteHost \
      --parameters "{\"host\":[\"${AURORA_ENDPOINT}\"],\"portNumber\":[\"3306\"], \"localPortNumber\":[\"${DB_LOCAL_PORT}\"]}"
   fi
