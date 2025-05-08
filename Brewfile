@@ -50,6 +50,7 @@ brew_list = [
   "gitui",
   "git-delta",
   "gnutls",
+  "go-task/tap/go-task",
   "goreleaser/tap/goreleaser",
   "gpg",
   "graphviz",
