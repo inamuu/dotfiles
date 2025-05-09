@@ -1,0 +1,19 @@
+[alias]
+  ad = add
+  sw = switch
+  br = branch
+  cm = commit
+  co = checkout
+  pl = pull
+  ps = push -u origin
+  df = diff
+  st = status
+  lg = log
+  ft = fetch
+[core]
+  pager = ""
+[user]
+	name = Kazuma Inamura
+	email = 8310973+inamuu@users.noreply.github.com
+[ghq]
+	root = ~/ghq/
