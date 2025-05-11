@@ -19,6 +19,7 @@ end
 
 brew_list = [
   "act",
+  "actionlint",
   "ansible",
   "anyenv",
   "argo",
