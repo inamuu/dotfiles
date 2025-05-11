@@ -1,0 +1,66 @@
+[alias]
+  ad = add
+  br = branch
+  df = diff
+  st = status
+  ss = status -s
+  sw = switch
+  swc = switch -c
+  cm = commit
+  co = checkout
+  pl = pull --prune
+  ps = push -u origin
+  psf = push --force-with-lease origin
+  lg  = log
+  lgo = log --oneline
+  rl  = reflog
+
+[color]
+  ui = auto
+
+#[commit]
+#       template = .commit_template
+
+[core]
+  editor = vim -c \"set fenc=utf-8\"
+  quotepath = false
+  whitespace = cr-at-eol
+  excludesfile = ~/.gitignore
+
+[fetch]
+  prune = true # 追跡ブランチを自動削除
+
+[ghq]
+  root = ~/go/src
+  root = ~/ghq
+
+[init]
+  defaultBranch = main
+
+[pull]
+  rebase = merges
+  ff = only # pullを行った際fast-forward でマージできる状況の場合は merge を、そうでなければ fetch のみ行う
+  prune = true # 追跡ブランチを自動削除
+
+[push]
+  default = current
+
+[rebase]
+  autostash = true # rebaseの際に自動でstashしてrebase後に戻す
+
+[user]
+  name = inamuu
+  email = 8310973+inamuu@users.noreply.github.com
+        signingkey = B1C66D38D53683705B03BF8299E00E758F36A8AD
+
+[pager]
+  branch = false
+  diff = false
+
+[commit]
+        gpgsign = true
+[credential]
+        helper = osxkeychain
+[gpg]
+        program = /opt/homebrew/bin/gpg
+
