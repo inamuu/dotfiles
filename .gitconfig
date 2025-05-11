@@ -1,19 +1,46 @@
 [alias]
-  ad = add
-  sw = switch
-  br = branch
-  cm = commit
-  co = checkout
-  pl = pull
-  ps = push -u origin
-  df = diff
-  st = status
-  lg = log
-  ft = fetch
+  ad  = add
+  br  = branch
+  cm  = commit
+  co  = checkout
+  df  = diff
+  ft  = fetch
+  lg  = log
+  lgo = log --oneline
+  pl  = pull --prune
+  ps  = push -u origin
+  psf = push --force-with-lease origin
+  rl  = reflog
+  ss  = status -s
+  st  = status
+  sw  = switch
+  swc = switch -c
+
 [core]
-  pager = ""
+  pager        = ""
+  editor       = vim -c \"set fenc=utf-8\"
+  quotepath    = false
+  whitespace   = cr-at-eol
+  excludesfile = ~/.gitignore
+
+[credential]
+  helper = osxkeychain
+
+[fetch]
+  prune = true # 追跡ブランチを自動削除
+
 [user]
-	name = Kazuma Inamura
-	email = 8310973+inamuu@users.noreply.github.com
+  name  = Kazuma Inamura
+  email = 8310973+inamuu@users.noreply.github.com
+
 [ghq]
-	root = ~/ghq/
+  root = ~/go/src
+  root = ~/ghq
+
+[init]
+  defaultBranch = main
+
+[pull]
+  rebase = merges
+  ff     = only # pullを行った際fast-forward でマージできる状況の場合は merge を、そうでなければ fetch のみ行う
+  prune  = true # 追跡ブランチを自動削除
