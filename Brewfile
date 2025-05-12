@@ -6,6 +6,7 @@ cask_args appdir: "/Applications"
 
 ### Main
 tap_list = [
+  "fluxcd/tap",
   "sanemat/font",
   "fujiwara/tap"
 ]
