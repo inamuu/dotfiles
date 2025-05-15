@@ -129,6 +129,7 @@ cask "font-udev-gothic-nf"
 #   "google-japanese-ime",
 #   "tunnelblick",
 cask_list = [
+  "amazon-q",
   "notion",
   "obsidian",
   "rar",
