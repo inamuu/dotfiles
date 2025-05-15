@@ -1,7 +1,7 @@
 # Setup
 
 ```sh
-$ sh install.sh
+$ sh setup_init.sh
 ```
 
 ## Install pkgs via homebrew(linuxbrew)
