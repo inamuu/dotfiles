@@ -130,6 +130,7 @@ cask "font-udev-gothic-nf"
 #   "tunnelblick",
 cask_list = [
   "amazon-q",
+  "cursor",
   "notion",
   "obsidian",
   "rar",
