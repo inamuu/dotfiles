@@ -5,8 +5,8 @@
   co  = checkout
   df  = diff
   ft  = fetch
-  lg  = log
-  lgo = log --oneline
+  lg  = log --reverse
+  lgo = log --reverse --oneline
   pl  = pull --prune
   ps  = push -u origin
   psf = push --force-with-lease origin
