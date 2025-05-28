@@ -49,6 +49,7 @@ brew_list = [
   "gawk",
   "gh",
   "ghq",
+  "ghr",
   "ghostscript",
   "gitui",
   "git-delta",
