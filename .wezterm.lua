@@ -57,7 +57,13 @@ local config = {
   },
 
   -- Window
-  window_background_opacity = 0.90
+  window_background_opacity = 0.90,
+
+  -- Scroll
+  enable_scroll_bar = true,
+
+  -- Copy
+  scrollback_lines = 10000,
 }
 
 -- and finally, return the configuration to wezterm
