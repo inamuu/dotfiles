@@ -21,7 +21,7 @@ set noautoindent
 set lines=60
 set columns=150
 
-NeoBundle 'nathanaelkane/vim-indent-guides'
+" NeoBundle 'nathanaelkane/vim-indent-guides'
 
 " Get current date in yyyymmdd format
 let s:current_date = strftime("%Y%m%d")
