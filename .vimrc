@@ -32,7 +32,7 @@ highlight Visual ctermbg=81 guibg=#272c11
 
 
 """ Clipboard連携
-set clipboard+=unnamed
+set clipboard=unnamed
 
 """ Indent
 let g:indent_guides_enable_on_vim_startup=0
