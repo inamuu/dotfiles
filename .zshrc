@@ -165,6 +165,11 @@ alias tfcheck='terraform fmt && terraform validate && tflint'
 alias vi='vim'
 export LESS='-i -M -R'
 
+### Notification
+noti() {
+  osascript -e "display notification \"${1:-なにか終わったよ}\" with title \"通知\""
+}
+
 ### Alias(Git)
 alias g='git'
 alias gbrd='git branch | grep -v -e "main" -e "*" | awk "{print $1}" | pecor | xargs git branch -d'
