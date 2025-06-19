@@ -1,20 +1,22 @@
 [alias]
-  ad  = add
-  br  = branch
-  cm  = commit
-  co  = checkout
-  df  = diff
-  ft  = fetch
-  lg  = log --reverse
-  lgo = log --reverse --oneline
-  pl  = pull --prune
-  ps  = push -u origin
-  psf = push --force-with-lease origin
-  rl  = reflog
-  ss  = status -s
-  st  = status
-  sw  = switch
-  swc = switch -c
+  ad   = add
+  br   = branch
+  cm   = commit
+  co   = checkout
+  df   = diff
+  ft   = fetch
+  lg   = log --reverse
+  lgo  = log --reverse --oneline
+  lg-m = log --reverse --oneline master..HEAD
+  lg-d = log --reverse --oneline develop..HEAD
+  pl   = pull --prune
+  ps   = push -u origin
+  psf  = push --force-with-lease origin
+  rl   = reflog
+  ss   = status -s
+  st   = status
+  sw   = switch
+  swc  = switch -c
 
 [core]
   pager        = ""
