@@ -130,6 +130,7 @@ cask "font-udev-gothic-nf"
 #   "google-japanese-ime",
 #   "tunnelblick",
 cask_list = [
+  "alt-tab",
   "amazon-q",
   "cursor",
   "notion",
