@@ -11,7 +11,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 ### Terminal theme
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+  ZSH_THEME=""  # Disable Powerlevel10k for Cursor
+else
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+fi
 
 ### Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -167,7 +171,8 @@ export LESS='-i -M -R'
 
 ### Notification
 noti() {
-  osascript -e "display notification \"${1:-なにか終わったよ}\" with title \"通知\""
+  #osascript -e "display dialog \"${1:-なにか終わったよ}\" buttons {'OK'} default button \"OK\""
+  osascript -e "display dialog \"${1:-処理が完了しました!}\" buttons {\"OK\"} default button \"OK\""
 }
 
 ### Alias(Git)
@@ -252,4 +257,9 @@ export TF_CLI_ARGS_plan="-compact-warnings"
 export TF_CLI_ARGS_apply="-compact-warnings"
 
 # Amazon Q post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
+# CursorでShellが止まってしまうので分岐
+# https://zenn.dev/kikagaku/articles/cursor-agent-mode-hangs
+if [[ "$AGENT_MODE" != "true" ]]; then
+  [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
+fi
+
