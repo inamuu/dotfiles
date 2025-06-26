@@ -249,7 +249,9 @@ if [ -f "${HOME}/google-cloud-sdk/completion.zsh.inc" ]; then . "${HOME}/google-
 export GPG_TTY=$(tty)
 
 ### mise
-eval "$(mise activate zsh)"
+if [ "${PCENV}" != "private" ]; then
+  eval "$(mise activate zsh)"
+fi
 
 ### Terraform
 export TF_CLI_ARGS_plan="--parallelism=30"
