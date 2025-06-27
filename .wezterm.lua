@@ -33,7 +33,7 @@ local config = {
       key = '|',
       mods = 'LEADER|SHIFT',
       action = wezterm.action.SplitPane {
-        direction = 'Right',
+        direction = 'Left',
         size = { Percent = 50 },
       },
     },
@@ -41,19 +41,33 @@ local config = {
       key = '-',
       mods = 'LEADER',
       action = wezterm.action.SplitPane {
-        direction = 'Down',
+        direction = 'Up',
         size = { Percent = 50 },
       },
     },
-
+    {
+      key = 'q',
+      mods = 'LEADER',
+      action = wezterm.action.Multiple {
+        wezterm.action.SplitPane { direction = 'Up', size = { Percent = 50 } },
+        wezterm.action.SplitPane { direction = 'Down', size = { Percent = 50 } },
+      },
+    },
     -- Enable copy mode
     { key = 'v', mods = 'LEADER', action = wezterm.action.ActivateCopyMode },
-
     -- Move pane
     { key = 'h', mods = 'LEADER', action = wezterm.action.ActivatePaneDirection 'Left' },
     { key = 'j', mods = 'LEADER', action = wezterm.action.ActivatePaneDirection 'Down' },
     { key = 'k', mods = 'LEADER', action = wezterm.action.ActivatePaneDirection 'Up' },
     { key = 'l', mods = 'LEADER', action = wezterm.action.ActivatePaneDirection 'Right' },
+    { key = '1', mods = 'LEADER', action = wezterm.action.ActivatePaneByIndex(0) },
+    { key = '2', mods = 'LEADER', action = wezterm.action.ActivatePaneByIndex(1) },
+    { key = '3', mods = 'LEADER', action = wezterm.action.ActivatePaneByIndex(2) },
+    { key = '4', mods = 'LEADER', action = wezterm.action.ActivatePaneByIndex(3) },
+    { key = '5', mods = 'LEADER', action = wezterm.action.ActivatePaneByIndex(4) },
+    { key = '6', mods = 'LEADER', action = wezterm.action.ActivatePaneByIndex(5) },
+    { key = '7', mods = 'LEADER', action = wezterm.action.ActivatePaneByIndex(6) },
+    { key = '8', mods = 'LEADER', action = wezterm.action.ActivatePaneByIndex(7) },
   },
 
   -- Window
