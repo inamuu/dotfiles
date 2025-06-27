@@ -29,30 +29,8 @@ local config = {
 
   -- Split pane
   keys = {
-    {
-      key = '|',
-      mods = 'LEADER|SHIFT',
-      action = wezterm.action.SplitPane {
-        direction = 'Left',
-        size = { Percent = 50 },
-      },
-    },
-    {
-      key = '-',
-      mods = 'LEADER',
-      action = wezterm.action.SplitPane {
-        direction = 'Up',
-        size = { Percent = 50 },
-      },
-    },
-    {
-      key = 'q',
-      mods = 'LEADER',
-      action = wezterm.action.Multiple {
-        wezterm.action.SplitPane { direction = 'Up', size = { Percent = 50 } },
-        wezterm.action.SplitPane { direction = 'Down', size = { Percent = 50 } },
-      },
-    },
+    { key = '|', mods = 'LEADER|SHIFT', action = wezterm.action.SplitHorizontal },
+    { key = '-', mods = 'LEADER', action = wezterm.action.SplitVertical },
     -- Enable copy mode
     { key = 'v', mods = 'LEADER', action = wezterm.action.ActivateCopyMode },
     -- Move pane
@@ -68,6 +46,41 @@ local config = {
     { key = '6', mods = 'LEADER', action = wezterm.action.ActivatePaneByIndex(5) },
     { key = '7', mods = 'LEADER', action = wezterm.action.ActivatePaneByIndex(6) },
     { key = '8', mods = 'LEADER', action = wezterm.action.ActivatePaneByIndex(7) },
+    -- Others
+    { key = 'Enter', mods = 'SHIFT', action = wezterm.action.SendString('\n') },
+
+    -- MultiPane
+    {
+      key = 'q',
+      mods = 'LEADER',
+      action = wezterm.action.Multiple {
+        wezterm.action.SplitPane { direction = 'Up', size = { Percent = 50 } },
+        wezterm.action.SplitPane { direction = 'Down', size = { Percent = 50 } },
+      },
+    },
+  },
+
+  -- SearchMode
+  key_tables = {
+    search_mode = {
+      { key = 'Enter',     mods = 'NONE', action = wezterm.action.CopyMode 'PriorMatch' },
+      {
+        key = 'Escape',
+        mods = 'NONE',
+        action = wezterm.action.Multiple {
+          wezterm.action.CopyMode 'ClearPattern',
+          wezterm.action.CopyMode 'Close',
+        }
+      },
+      { key = 'n',         mods = 'CTRL', action = wezterm.action.CopyMode 'NextMatch' },
+      { key = 'p',         mods = 'CTRL', action = wezterm.action.CopyMode 'PriorMatch' },
+      { key = 'r',         mods = 'CTRL', action = wezterm.action.CopyMode 'CycleMatchType' },
+      { key = 'u',         mods = 'CTRL', action = wezterm.action.CopyMode 'ClearPattern' },
+      { key = 'PageUp',    mods = 'NONE', action = wezterm.action.CopyMode 'PriorMatchPage' },
+      { key = 'PageDown',  mods = 'NONE', action = wezterm.action.CopyMode 'NextMatchPage' },
+      { key = 'UpArrow',   mods = 'NONE', action = wezterm.action.CopyMode 'PriorMatch' },
+      { key = 'DownArrow', mods = 'NONE', action = wezterm.action.CopyMode 'NextMatch' },
+    }
   },
 
   -- Window
