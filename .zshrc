@@ -169,6 +169,14 @@ alias tfcheck='terraform fmt && terraform validate && tflint'
 alias vi='vim'
 export LESS='-i -M -R'
 
+### Terraform
+tfrun() {
+  TARGET=$(egrep -h "(^module\s|^resource\s)" *tf | awk '{print $1"."$2}' | sed 's/"//g' | peco)
+  CTL=$(echo "plan\napply" | peco)
+  echo "Run terraform ${CTL} -target=${TARGET}\n"
+  terraform ${CTL} -target=${TARGET}
+}
+
 ### Notification
 noti() {
   #osascript -e "display dialog \"${1:-なにか終わったよ}\" buttons {'OK'} default button \"OK\""
