@@ -48,3 +48,17 @@ set nocompatible
 set whichwrap=b,s,h,l,<,>,[,]
 set backspace=indent,eol,start
 
+""" Get current date in yyyymmdd format
+let s:current_date = strftime("%Y%m%d")
+let s:dir_path = expand("~/Documents/Notes/" . strftime("%Y/%m/"))
+let s:file_path = s:dir_path . s:current_date . ".txt"
+
+if !isdirectory(s:dir_path)
+  call mkdir(s:dir_path, "p")
+endif
+
+""" Open the file if no other files are specified
+if argc() == 0
+    execute 'edit ' . s:file_path
+endif
+
