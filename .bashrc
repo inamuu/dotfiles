@@ -29,3 +29,9 @@ alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
 
 # Amazon Q post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/bashrc.post.bash" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/bashrc.post.bash"
+
+### 通知関数
+noti () {
+  osascript -e "display dialog \"${1:-処理が完了しました!}\" buttons {\"OK\"} default button \"OK\""
+}
+
