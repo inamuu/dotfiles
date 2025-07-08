@@ -170,6 +170,9 @@ alias vi='vim'
 export LESS='-i -M -R'
 
 ### Terraform
+export TF_CLI_ARGS_plan="--parallelism=30"
+export TF_CLI_ARGS_apply="--parallelism=30"
+
 tfrun() {
   TARGET=$(egrep -h "(^module\s|^resource\s)" *tf | awk '{print $1"."$2}' | sed 's/"//g' | peco)
   CTL=$(echo "plan\napply" | peco)
@@ -234,9 +237,6 @@ export NODENV_SHELL=zsh
 # http://lazy-dog.hatenablog.com/entry/2015/12/24/001648
 KEYTIMEOUT=0
 
-### Terraform
-export TF_CLI_ARGS_plan="--parallelism=30"
-
 ### google cloud
 export PATH="$HOME/google-cloud-sdk/bin:$PATH"
 if [ -f "${HOME}/google-cloud-sdk/path.zsh.inc" ]; then . "${HOME}/google-cloud-sdk/path.zsh.inc" ; fi
@@ -260,11 +260,6 @@ export GPG_TTY=$(tty)
 if [ "${PCENV}" != "private" ]; then
   eval "$(mise activate zsh)"
 fi
-
-### Terraform
-export TF_CLI_ARGS_plan="--parallelism=30"
-export TF_CLI_ARGS_plan="-compact-warnings"
-export TF_CLI_ARGS_apply="-compact-warnings"
 
 # Amazon Q post block. Keep at the bottom of this file.
 # CursorでShellが止まってしまうので分岐
