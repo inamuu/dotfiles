@@ -55,7 +55,6 @@ brew_list = [
   "git-delta",
   "gnutls",
   "go-task/tap/go-task",
-  "goreleaser/tap/goreleaser",
   "gpg",
   "graphviz",
   "grep",
@@ -122,6 +121,7 @@ cask "font-ricty-diminished"
 #brew "sanemat/font/ricty"
 cask "font-udev-gothic"
 cask "font-udev-gothic-nf"
+cask "goreleaser/tap/goreleaser"
 
 
 ### Install desktop applications for macOS and Linux
