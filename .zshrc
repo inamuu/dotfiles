@@ -180,6 +180,19 @@ tfrun() {
   terraform ${CTL} -target=${TARGET}
 }
 
+tfmog() {
+  [ $# -eq 0 ] && exit 1
+  TARGET_LIST=$(grep -E "^module|^resource" $1 | sed 's/"//g' |  awk '{print $1"."$2" "}' | egrep -v "null_resource")
+  printf "### TARGET LIST \n${TARGET_LIST}\n"
+  PLAN_LIST=$(echo ${TARGET_LIST} | awk '{print " -target="$1}' | gsed -e ':a;N;$!ba;s/\n//g' -e 's/"//g')
+  printf "\n### Run terraform plan\nterraform plan $(echo ${PLAN_LIST})\n\n"
+  terraform plan $(echo ${PLAN_LIST})
+}
+
+[ ! -d "${HOME}/.config/terraform/logs/$(date +%Y/%m/%d/)" ] && mkdir -p ${HOME}/.config/terraform/logs/$(date +%Y/%m/%d/)
+export TF_LOG=ERROR
+export TF_LOG_PATH=${HOME}/.config/terraform/logs/$(date +%Y/%m/%d)/terraform.$(date +%Y%m%d%H%M%S).log
+
 ### Notification
 noti() {
   #osascript -e "display dialog \"${1:-なにか終わったよ}\" buttons {'OK'} default button \"OK\""
