@@ -181,7 +181,7 @@ tfrun() {
 }
 
 tfmog() {
-  [ $# -eq 0 ] && exit 1
+  [ $# -eq 0 ] && return 1
   TARGET_LIST=$(grep -E "^module|^resource" $1 | sed 's/"//g' |  awk '{print $1"."$2" "}' | egrep -v "null_resource")
   printf "### TARGET LIST \n${TARGET_LIST}\n"
   PLAN_LIST=$(echo ${TARGET_LIST} | awk '{print " -target="$1}' | gsed -e ':a;N;$!ba;s/\n//g' -e 's/"//g')
