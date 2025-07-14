@@ -3,7 +3,7 @@
   br   = branch
   cm   = commit
   co   = checkout
-  df   = diff
+  df   = diff --color=always
   ft   = fetch
   lg   = log --reverse
   lgo  = log --reverse --oneline
