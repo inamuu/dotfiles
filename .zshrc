@@ -153,6 +153,7 @@ alias cdworks='cd ~/Works'
 alias cp='cp -vi'
 alias date='gdate'
 alias ddd='cd ~/Downloads'
+alias cdr="eval cd \"\$(dirs -v | pecor | awk '{print \$2}')\""
 alias doc='docker'
 alias docc='docker compose'
 alias evc='envchain'
