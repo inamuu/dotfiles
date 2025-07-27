@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ### Dock
-defaults write com.apple.dock orientation -string "left"
-defaults write com.apple.dock autohide -bool true
-defaults write com.apple.finder AppleShowAllFiles true
+defaults write com.apple.dock orientation -string "left" # Dockの配置
+defaults write com.apple.dock autohide -bool true # 自動的にDockが隠れるように
+defaults write com.apple.finder AppleShowAllFiles true # 隠しファイルの表示
 
 
 ## Mouse & TrackPad
@@ -15,7 +15,7 @@ defaults write -g InitialKeyRepeat -int 12
 defaults write -g KeyRepeat -int 1
 
 ## Screenshot save location
-defaults write com.apple.screencapture location ~/Downloads
+defaults write com.apple.screencapture location ~/Downloads # スクリーンショットの保存先
 
 
 ### Mission Control
