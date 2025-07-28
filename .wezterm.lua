@@ -50,14 +50,13 @@ local config = {
     -- Others
     { key = 'Enter', mods = 'SHIFT', action = act.SendString('\n') },
 
-    -- MultiPane
+    -- MultiPane: #TODO
     {
       key = 'q',
       mods = 'LEADER',
       action = act.Multiple {
-        act.SplitPane { direction = 'Up', size = { Percent = 50 } },
         act.SplitPane { direction = 'Down', size = { Percent = 50 } },
-        act.ActivatePane { direction = 'Down' },
+        act.SplitPane { direction = 'Down', size = { Percent = 50 } },
       },
     },
   },
