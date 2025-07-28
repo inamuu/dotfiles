@@ -8,7 +8,9 @@ cask_args appdir: "/Applications"
 tap_list = [
   "fluxcd/tap",
   "sanemat/font",
-  "fujiwara/tap"
+  "fujiwara/tap",
+  "fluxcd/tap",
+  "hashicorp/tap"
 ]
 
 for i in tap_list
@@ -44,7 +46,6 @@ brew_list = [
   "envchain",
   "eza",
   "fcgi",
-  "fluxcd/tap/flux",
   "fontforge",
   "gawk",
   "gh",
@@ -54,13 +55,11 @@ brew_list = [
   "gitui",
   "git-delta",
   "gnutls",
-  "go-task/tap/go-task",
   "gpg",
   "graphviz",
   "grep",
   "gron",
   "gsed",
-  "hashicorp/tap/packer",
   "hadolint",
   "helix",
   "helm",
