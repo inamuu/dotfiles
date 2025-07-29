@@ -1,4 +1,3 @@
-
 syntax enable
 """ 以下のコマンドは :colorscheme の前に設定します
 """ コメントを濃い緑にする
@@ -44,7 +43,7 @@ let g:indent_guides_color_change_percent = 30
 let g:indent_guides_guide_size = 0
 
 """ bug fix
-set nocompatible
+set t_BE=
 set whichwrap=b,s,h,l,<,>,[,]
 set backspace=indent,eol,start
 
