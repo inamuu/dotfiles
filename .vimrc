@@ -9,7 +9,8 @@ if v:version < 802
 endif
 colorscheme dracula
 
-set guifont=UDEV\ Gothic\ 35:h14
+""" set guifont=UDEV\ Gothic\ 35:h14
+set guifont=Guguru\ Sans\ Code\ 35:h14
 set t_Co=256
 set laststatus=2
 set number
