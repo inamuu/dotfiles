@@ -48,7 +48,6 @@ brew_list = [
   "fcgi",
   "fontforge",
   "gawk",
-  "gcloud-cli",
   "gh",
   "ghq",
   "ghr",
@@ -117,11 +116,10 @@ for i in brew_list
 end
 
 ### Install fonts
-cask "font-ricty-diminished"
+#cask "font-ricty-diminished"
 #brew "sanemat/font/ricty"
 cask "font-udev-gothic"
 cask "font-udev-gothic-nf"
-cask "goreleaser/tap/goreleaser"
 
 
 ### Install desktop applications for macOS and Linux
@@ -133,6 +131,7 @@ cask_list = [
   "alt-tab",
   "amazon-q",
   "cursor",
+  "gcloud-cli",
   "notion",
   "obsidian",
   "rar",
