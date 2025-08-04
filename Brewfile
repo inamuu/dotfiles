@@ -48,6 +48,7 @@ brew_list = [
   "fcgi",
   "fontforge",
   "gawk",
+  "gcloud-cli",
   "gh",
   "ghq",
   "ghr",
