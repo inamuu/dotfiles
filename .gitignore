@@ -8,7 +8,14 @@
 .vim/pack
 .vscode/settings.json
 
-
 ### Docker
 docker-compose.override.yml
+
+### LLM
+
+.codex/auth.json
+.codex/history.*
+.codex/log/*
+.codex/sessions/*
+.codex/config.toml
 
