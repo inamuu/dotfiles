@@ -37,6 +37,7 @@ brew_list = [
   "bzip2",
   "circleci",
   "cli53",
+  "codex",
   "colordiff",
   "coreutils",
   "direnv",
