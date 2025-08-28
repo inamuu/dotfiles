@@ -6,17 +6,16 @@ locals {
   exclude_files = [
     ".DS_Store",
     ".gitignore",
-    ".sleep"
+    ".sleep",
+    ".wakeup",
+    ".gitignore"
   ]
 
   # 除外ファイルを除外したファイル一覧
-  dotfiles = [ for f in local.all_dotfiles : f if !contains(local.exclude_files, f)]
-
-  # デプロイ対象のdotfiles
-  dotfiles_json = jsonencode(local.dotfiles)
+  dotfiles_list = [for f in local.all_dotfiles : f if !contains(local.exclude_files, f)]
 }
 
 output "deploy_dotfiles_list" {
-  value = local.dotfiles_json
+  value = local.dotfiles_list
 }
 
