@@ -3,6 +3,6 @@ resource "terraform_data" "brew_bundle" {
     command = "brew bundle --file ../Brewfile"
   }
   triggers_replace = {
-    sig = fileexists("../Brewfile") ? filesha256("../Brewfile") : "absent"
+    filesha256 = fileexists("../Brewfile") ? filesha256("../Brewfile") : "absent"
   }
 }
