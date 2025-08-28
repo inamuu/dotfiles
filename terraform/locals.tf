@@ -14,7 +14,7 @@ locals {
   dotfiles_json = jsonencode(local.dotfiles)
 }
 
-output "deploy_files_list" {
+output "deploy_dotfiles_list" {
   value = local.dotfiles_json
 }
 
