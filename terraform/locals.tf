@@ -5,9 +5,10 @@ locals {
   # 除外ファイル一覧
   exclude_files = [
     ".DS_Store",
-    ".gitignore"
+    ".gitignore",
     ".sleep"
   ]
+
   # 除外ファイルを除外したファイル一覧
   dotfiles = [ for f in local.all_dotfiles : f if !contains(local.exclude_files, f)]
 
