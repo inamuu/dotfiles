@@ -172,7 +172,7 @@ if OS.mac?
     #"iterm2",
     "karabiner-elements",
     "macvim",
-    "postman",
+    #"postman",
     #"rectangle",
     "session-manager-plugin",
     "the-unarchiver",
