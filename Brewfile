@@ -119,8 +119,8 @@ end
 ### Install fonts
 #cask "font-ricty-diminished"
 #brew "sanemat/font/ricty"
-cask "font-udev-gothic"
-cask "font-udev-gothic-nf"
+#cask "font-udev-gothic"
+#cask "font-udev-gothic-nf"
 
 
 ### Install desktop applications for macOS and Linux
@@ -131,9 +131,11 @@ cask "font-udev-gothic-nf"
 cask_list = [
   "alt-tab",
   "amazon-q",
-  "cursor",
+  #"cursor",
+  "font-udev-gothic",
+  "font-udev-gothic-nf",
   "gcloud-cli",
-  "notion",
+  #"notion",
   "obsidian",
   "rar",
   "raycast",
@@ -162,20 +164,20 @@ if OS.mac?
   #"alfred"
   #"zoom" インストール時にエラーになるため
   cask_list = [
-    "alacritty",
+    #"alacritty",
     "bitwarden",
     "dbeaver-community",
-    "docker",
+    #"docker",
     "firefox",
-    "font-hack-nerd-font",
-    "iterm2",
+    #"font-hack-nerd-font",
+    #"iterm2",
     "karabiner-elements",
     "macvim",
     "postman",
-    "rectangle",
+    #"rectangle",
     "session-manager-plugin",
     "the-unarchiver",
-    "xquartz"
+    #"xquartz"
   ]
   for i in cask_list
     cask i
