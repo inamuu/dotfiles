@@ -6,3 +6,9 @@ resource "terraform_data" "brew_bundle" {
     filesha256 = fileexists("../Brewfile") ? filesha256("../Brewfile") : "absent"
   }
 }
+
+resource "local_file" "copy_dotfiles" {
+  content = file("${path.module}/.terraform-version")
+  filename = "/tmp/.terraform-version"
+}
+
