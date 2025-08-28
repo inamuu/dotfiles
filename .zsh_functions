@@ -31,11 +31,14 @@ function ssm_ec2 () {
   if login_check; then
     EC2=$(aws ec2 describe-instances --output=text \
       --query 'Reservations[].Instances[].{id:InstanceId,ip:PrivateIpAddress,name:Tags[?Key==`Name`].Value|[0]}' \
+      --profile $1 \
       | peco --prompt "Select EC2:" | cut -f -1)
   fi
 
   if [ -n "${EC2}" ];then
-    aws ssm start-session --target ${EC2}
+    aws ssm start-session \
+      --profile $1 \
+      --target ${EC2}
   fi
 
 }
