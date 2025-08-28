@@ -19,3 +19,7 @@ docker-compose.override.yml
 .codex/sessions/*
 .codex/config.toml
 
+### Terraform
+
+.terraform
+
