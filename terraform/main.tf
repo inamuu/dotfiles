@@ -10,5 +10,6 @@ resource "terraform_data" "brew_bundle" {
 resource "local_file" "copy_dotfiles" {
   content = file("${path.module}/.terraform-version")
   filename = "/tmp/.terraform-version"
+  file_permission = "0644"
 }
 
