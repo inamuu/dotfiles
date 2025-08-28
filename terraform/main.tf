@@ -8,8 +8,8 @@ resource "terraform_data" "brew_bundle" {
 }
 
 resource "local_file" "copy_dotfiles" {
-  content = file("${path.module}/.terraform-version")
-  filename = "/tmp/.terraform-version"
+  for_each        = toset(local.dotfiles)
+  content         = file("../${each.value}")
+  filename        = pathexpand("~/${each.value}")
   file_permission = "0644"
 }
-
