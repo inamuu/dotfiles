@@ -1,5 +1,5 @@
-variable "checkdiff" {
-  description = "Check diff dotfiles"
+variable "sync" {
+  description = "sync dotfiles"
   type        = bool
   default     = false
 }
