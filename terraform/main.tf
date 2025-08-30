@@ -43,22 +43,36 @@ resource "local_file" "copy_dotfiles" {
 #}
 #}
 
+### 毎回動かない
 data "external" "sig" {
   for_each = local.defaults_apps
   program = ["bash", "-lc", <<-EOF
-  VALUE=$(defaults read ${each.value.app} ${each.value.params} 2>/dev/null || true | jq -Rs .)
-  printf  "{ \"${each.value.app}\": \"%s\" }" $VALUE
+VALUE=$(defaults read ${each.value.app} ${each.value.params} 2>/dev/null || true)
+if [ -z "$VALUE" ]; then
+  printf "{\"${each.value.params}\": \"null\" }"
+else
+  printf '%s' "$VALUE" | jq -Rs "{ \"${each.value.params}\": .}"
+fi
 EOF
   ]
 }
 
-resource "terraform_data" "default_app" {
+resource "terraform_data" "defaults_app" {
   for_each = local.defaults_apps
   provisioner "local-exec" {
-    command = "defaults write ${each.value.app} ${each.value.params} ${each.value.type} ${each.value.value}"
+    command = "defaults write ${try(each.value.global, true) ? "-g" : ""} ${each.value.app} ${each.value.params} ${each.value.type} ${each.value.value}"
+  }
+  #triggers_replace = {
+  #  "${each.value.params}" = data.external.sig[each.key].result[each.value.value]
+  #}
+}
+
+resource "terraform_data" "killall" {
+  provisioner "local-exec" {
+    command = "killall Dock; killall Finder"
   }
 
   triggers_replace = {
-    "${each.value.params}" = data.external.sig[each.value.app].result[each.value.app]
+    "killall" = keys(resource.terraform_data.defaults_app)
   }
 }
