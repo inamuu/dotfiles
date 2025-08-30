@@ -49,17 +49,16 @@ resource "local_file" "copy_dotfiles" {
 #  program = ["bash", "-lc", <<-EOF
 #VALUE=$(defaults read ${each.value.app} ${each.value.params} 2>/dev/null || true)
 #if [ -z "$VALUE" ]; then
-#  printf "{\"${each.value.value}\": \"null\" }"
+#  printf "{ \"value\": \"${each.value.value}\" }"
 #else
 #  printf '%s' "$VALUE" | jq -Rs "{ \"${each.value.value}\": .}"
 #fi
 #EOF
 #  ]
-#  query = {
-#    timestamp = timestamp()
-#  }
+#  #query = {
+#  #  timestamp = timestamp()
+#  #}
 #}
-
 
 resource "terraform_data" "defaults_app" {
   for_each = local.defaults_apps
@@ -67,7 +66,7 @@ resource "terraform_data" "defaults_app" {
     command = "defaults write ${try(each.value.global, true) ? "-g" : ""} ${each.value.app} ${each.value.params} ${each.value.type} ${each.value.value}"
   }
   #triggers_replace = {
-  #  value = data.external.sig[each.key].result[0].key
+  #  result = data.external.sig[each.key].result
   #}
 }
 
