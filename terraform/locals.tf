@@ -113,4 +113,3 @@ locals {
 output "deploy_dotfiles_list" {
   value = local.dotfiles_list
 }
-
