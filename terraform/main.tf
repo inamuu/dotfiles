@@ -43,7 +43,6 @@ resource "local_file" "copy_dotfiles" {
 #}
 #}
 
-### 毎回動かない
 #data "external" "sig" {
 #  for_each = local.defaults_apps
 #  program = ["bash", "-lc", <<-EOF
@@ -55,9 +54,9 @@ resource "local_file" "copy_dotfiles" {
 #fi
 #EOF
 #  ]
-#  #query = {
-#  #  timestamp = timestamp()
-#  #}
+#  query = {
+#    timestamp = timestamp()
+#  }
 #}
 
 resource "terraform_data" "defaults_app" {
