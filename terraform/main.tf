@@ -44,18 +44,22 @@ resource "local_file" "copy_dotfiles" {
 #}
 
 ### 毎回動かない
-data "external" "sig" {
-  for_each = local.defaults_apps
-  program = ["bash", "-lc", <<-EOF
-VALUE=$(defaults read ${each.value.app} ${each.value.params} 2>/dev/null || true)
-if [ -z "$VALUE" ]; then
-  printf "{\"${each.value.params}\": \"null\" }"
-else
-  printf '%s' "$VALUE" | jq -Rs "{ \"${each.value.params}\": .}"
-fi
-EOF
-  ]
-}
+#data "external" "sig" {
+#  for_each = local.defaults_apps
+#  program = ["bash", "-lc", <<-EOF
+#VALUE=$(defaults read ${each.value.app} ${each.value.params} 2>/dev/null || true)
+#if [ -z "$VALUE" ]; then
+#  printf "{\"${each.value.value}\": \"null\" }"
+#else
+#  printf '%s' "$VALUE" | jq -Rs "{ \"${each.value.value}\": .}"
+#fi
+#EOF
+#  ]
+#  query = {
+#    timestamp = timestamp()
+#  }
+#}
+
 
 resource "terraform_data" "defaults_app" {
   for_each = local.defaults_apps
@@ -63,7 +67,7 @@ resource "terraform_data" "defaults_app" {
     command = "defaults write ${try(each.value.global, true) ? "-g" : ""} ${each.value.app} ${each.value.params} ${each.value.type} ${each.value.value}"
   }
   #triggers_replace = {
-  #  "${each.value.params}" = data.external.sig[each.key].result[each.value.value]
+  #  value = data.external.sig[each.key].result[0].key
   #}
 }
 
