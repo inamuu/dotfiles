@@ -101,7 +101,7 @@ locals {
       "global" = true
     },
     "com.apple.trackpad.scaling" = {
-      "app"    = "com.apple.tackpad.scaling"
+      "app"    = "com.apple.trackpad.scaling"
       "params" = ""
       "type"   = "-int"
       "value"  = "5"
