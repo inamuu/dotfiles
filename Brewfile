@@ -56,6 +56,7 @@ brew_list = [
   "git-delta",
   "gnutls",
   "gpg",
+  "go-task",
   "graphviz",
   "grep",
   "gron",
