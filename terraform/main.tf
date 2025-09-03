@@ -78,3 +78,15 @@ resource "terraform_data" "killall" {
     "killall" = keys(resource.terraform_data.defaults_app)
   }
 }
+
+resource "terraform_data" "link_dotfiles" {
+  for_each = {
+    for f in local.link_files : f => f
+    if !fileexists(pathexpand("~/${f}"))
+  }
+
+  provisioner "local-exec" {
+    command = "ln -s ${abspath("${path.module}/../${each.value}")} ${pathexpand("~/${each.value}")}"
+  }
+}
+
