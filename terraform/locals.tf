@@ -111,6 +111,14 @@ locals {
       "value"  = "5"
       "global" = true
     },
+    "ApplePressAndHoldEnabled" = {
+      # Mac標準IMEを連続入力した際に表示される特殊文字を無効化
+      "app"    = "ApplePressAndHoldEnabled"
+      "params" = ""
+      "type"   = "-bool"
+      "value"  = "true"
+      "global" = true
+     }
   }
 }
 
