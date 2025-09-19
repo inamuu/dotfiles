@@ -116,7 +116,7 @@ locals {
       "app"    = "ApplePressAndHoldEnabled"
       "params" = ""
       "type"   = "-bool"
-      "value"  = "true"
+      "value"  = "false"
       "global" = true
      }
   }

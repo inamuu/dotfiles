@@ -64,9 +64,9 @@ resource "terraform_data" "defaults_app" {
   provisioner "local-exec" {
     command = "defaults write ${try(each.value.global, true) ? "-g" : ""} ${each.value.app} ${each.value.params} ${each.value.type} ${each.value.value}"
   }
-  #triggers_replace = {
-  #  result = data.external.sig[each.key].result
-  #}
+  triggers_replace = {
+    keys = keys(local.defaults_apps)
+  }
 }
 
 resource "terraform_data" "killall" {
