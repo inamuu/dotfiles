@@ -50,13 +50,30 @@ local config = {
     -- Others
     { key = 'Enter', mods = 'SHIFT', action = act.SendString('\n') },
 
-    -- MultiPane: #TODO
+    -- Workspace: https://wezterm.org/config/lua/keyassignment/SwitchToWorkspace.html
+    { key = 's', mods = 'LEADER|SHIFT', action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' , title = "Select workspace" },},
     {
-      key = 'q',
-      mods = 'LEADER',
-      action = act.Multiple {
-        act.SplitPane { direction = 'Down', size = { Percent = 50 } },
-        act.SplitPane { direction = 'Down', size = { Percent = 50 } },
+      key = 'c',
+      mods = 'LEADER|SHIFT',
+      action = act.PromptInputLine {
+        description = wezterm.format {
+          { Attribute = { Intensity = 'Bold' } },
+          { Foreground = { AnsiColor = 'Fuchsia' } },
+          { Text = 'Enter name for new workspace' },
+        },
+        action = wezterm.action_callback(function(window, pane, line)
+          -- line will be `nil` if they hit escape without entering anything
+          -- An empty string if they just hit enter
+          -- Or the actual line of text they wrote
+          if line then
+            window:perform_action(
+              act.SwitchToWorkspace {
+                name = line,
+              },
+              pane
+            )
+          end
+        end),
       },
     },
   },
