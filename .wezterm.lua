@@ -51,10 +51,10 @@ local config = {
     { key = 'Enter', mods = 'SHIFT', action = act.SendString('\n') },
 
     -- Workspace: https://wezterm.org/config/lua/keyassignment/SwitchToWorkspace.html
-    { key = 's', mods = 'LEADER|SHIFT', action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' , title = "Select workspace" },},
+    { key = 's', mods = 'LEADER', action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' , title = "Select workspace" },},
     {
       key = 'c',
-      mods = 'LEADER|SHIFT',
+      mods = 'LEADER',
       action = act.PromptInputLine {
         description = wezterm.format {
           { Attribute = { Intensity = 'Bold' } },
