@@ -117,6 +117,35 @@ wezterm.on('format-window-title', function(tab, pane, tabs, panes, config)
   return workspace
 end)
 
+-- Change color scheme based on workspace
+wezterm.on('update-status', function(window, pane)
+  local workspace = window:active_workspace()
+  local overrides = window:get_config_overrides() or {}
+
+  -- defaultワークスペースはDraculaのまま
+  if workspace == 'default' then
+    overrides.color_scheme = 'Dracula (Gogh)'
+  else
+    -- ワークスペース名のハッシュ値で色を決定
+    local hash = 0
+    for i = 1, #workspace do
+      hash = hash + string.byte(workspace, i)
+    end
+
+    local color_schemes = {
+      'Tokyo Night',
+      'Gruvbox Dark (Gogh)',
+      'Monokai (dark) (terminal.sexy)',
+      'Night Owl (Gogh)',
+    }
+
+    local scheme_index = (hash % #color_schemes) + 1
+    overrides.color_scheme = color_schemes[scheme_index]
+  end
+
+  window:set_config_overrides(overrides)
+end)
+
 -- and finally, return the configuration to wezterm
 return config
 
