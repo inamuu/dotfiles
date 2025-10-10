@@ -84,7 +84,6 @@ resource "terraform_data" "killall" {
 resource "terraform_data" "link_dotfiles" {
   for_each = {
     for f in tolist(local.dotfiles_list) : f => f
-    if !fileexists(pathexpand("~/${f}"))
   }
 
   provisioner "local-exec" {
