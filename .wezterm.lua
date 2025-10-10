@@ -111,6 +111,12 @@ local config = {
   scrollback_lines = 30000,
 }
 
+-- Set window title to workspace name
+wezterm.on('format-window-title', function(tab, pane, tabs, panes, config)
+  local workspace = wezterm.mux.get_active_workspace()
+  return workspace
+end)
+
 -- and finally, return the configuration to wezterm
 return config
 
