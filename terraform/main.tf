@@ -13,12 +13,13 @@ resource "terraform_data" "brew_bundle" {
   }
 }
 
-resource "local_file" "copy_dotfiles" {
-  for_each        = toset(local.dotfiles_list)
-  content         = file("../${each.value}")
-  filename        = pathexpand("~/${each.value}")
-  file_permission = "0644"
-}
+# Copy dotfiles to home directory
+#resource "local_file" "copy_dotfiles" {
+#  for_each        = toset(local.dotfiles_list)
+#  content         = file("../${each.value}")
+#  filename        = pathexpand("~/${each.value}")
+#  file_permission = "0644"
+#}
 
 ### 差分取り込み
 #resource "terraform_data" "check_and_copy_dotfiles" {
@@ -79,9 +80,10 @@ resource "terraform_data" "killall" {
   }
 }
 
+# Link dotfiles to home directory if not exists
 resource "terraform_data" "link_dotfiles" {
   for_each = {
-    for f in local.link_files : f => f
+    for f in tolist(local.dotfiles_list) : f => f
     if !fileexists(pathexpand("~/${f}"))
   }
 
@@ -89,4 +91,3 @@ resource "terraform_data" "link_dotfiles" {
     command = "ln -s ${abspath("${path.module}/../${each.value}")} ${pathexpand("~/${each.value}")}"
   }
 }
-

@@ -118,7 +118,7 @@ locals {
       "type"   = "-bool"
       "value"  = "false"
       "global" = true
-     }
+    }
   }
 }
 
