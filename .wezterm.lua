@@ -47,6 +47,8 @@ local config = {
     { key = '6', mods = 'LEADER', action = act.ActivatePaneByIndex(5) },
     { key = '7', mods = 'LEADER', action = act.ActivatePaneByIndex(6) },
     { key = '8', mods = 'LEADER', action = act.ActivatePaneByIndex(7) },
+    -- Pane zoom
+    { key = 'z', mods = 'LEADER', action = act.TogglePaneZoomState },
     -- Others
     { key = 'Enter', mods = 'SHIFT', action = act.SendString('\n') },
 
