@@ -49,6 +49,8 @@ local config = {
     { key = '8', mods = 'LEADER', action = act.ActivatePaneByIndex(7) },
     -- Pane zoom
     { key = 'z', mods = 'LEADER', action = act.TogglePaneZoomState },
+    -- Quick select mode
+    { key = 'Space', mods = 'LEADER', action = act.QuickSelect },
     -- Others
     { key = 'Enter', mods = 'SHIFT', action = act.SendString('\n') },
 
