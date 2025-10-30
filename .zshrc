@@ -56,6 +56,9 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/ghq/github.com/inamuu/tools:$PATH
 # export MANPATH="/usr/local/man:$MANPATH" ### Common export EDITOR=vim
 
+### 区切り文字: default "*?_-.[]~&;!#$%^(){}<>"
+export WORDCHARS=""
+
 ### not like emacs keybind in terminal
 bindkey -e
 
