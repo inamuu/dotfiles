@@ -231,15 +231,30 @@ alias ber='bundle exec rake'
 alias ghl='cd $(ghq root)/$(ghq list | pecor)'
 
 ### anyenv
+# anyenvは重いので遅延読み込みに変更
 export ANYENV_ROOT="$HOME/.anyenv"
 export PATH="$ANYENV_ROOT/bin:$PATH"
-eval "$(anyenv init -)"
+# eval "$(anyenv init -)"
+# 必要な時だけ初期化する関数
+anyenv() {
+  unset -f anyenv
+  eval "$(command anyenv init -)"
+  anyenv "$@"
+}
 
 ### Python
 alias py='python'
 export PYENV_ROOT="$HOME/.anyenv/envs/pyenv/versions/version"
 export PATH="$PYENV_ROOT/shims:$PATH"
-[ $commands[pyenv] ] && eval "$(pyenv init -)"
+# pyenvは重いので遅延読み込みに変更
+# [ $commands[pyenv] ] && eval "$(pyenv init -)"
+if [ $commands[pyenv] ]; then
+  pyenv() {
+    unset -f pyenv
+    eval "$(command pyenv init -)"
+    pyenv "$@"
+  }
+fi
 
 ### Ruby
 [ $commands[rbenv] ] && PATH=~/.rbenv/shims:"$PATH"
