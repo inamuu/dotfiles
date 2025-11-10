@@ -242,10 +242,11 @@ export PATH="$PYENV_ROOT/shims:$PATH"
 [ $commands[rbenv] ] && PATH=~/.rbenv/shims:"$PATH"
 
 ### Go
-export GOPATH=$HOME/.anyenv/envs/goenv/shims/
+# goenvは重いので、direnvで必要なディレクトリでのみ有効化する
+# export GOPATH=$HOME/.anyenv/envs/goenv/shims/
 #export GOPATH=$HOME/go/
-export PATH=$GOROOT/bin:$PATH
-eval "$(goenv init -)"
+# export PATH=$GOROOT/bin:$PATH
+# eval "$(goenv init -)"
 
 ### Node
 export NODENV_ROOT=$HOME/.anyenv/envs/nodenv
