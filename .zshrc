@@ -210,7 +210,10 @@ alias gbrd='git branch | grep -v -e "main" -e "*" | awk "{print $1}" | pecor | x
 alias gsw='git branch | grep -v -e "*" | awk "{print $1}" | pecor | xargs git switch'
 
 ### Alias(kubectl)
-source <(kubectl completion zsh)
+# kubectl completionは重いので遅延読み込みに変更
+if [ $commands[kubectl] ]; then
+  alias kubectl='function _kubectl(){ unalias kubectl; unfunction _kubectl; source <(kubectl completion zsh); kubectl "$@"; }; _kubectl'
+fi
 alias kc=kubectl
 
 # colorize kubectl diff
