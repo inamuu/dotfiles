@@ -234,13 +234,13 @@ alias ghl='cd $(ghq root)/$(ghq list | pecor)'
 # anyenvは重いので遅延読み込みに変更
 export ANYENV_ROOT="$HOME/.anyenv"
 export PATH="$ANYENV_ROOT/bin:$PATH"
-# eval "$(anyenv init -)"
+eval "$(anyenv init -)"
 # 必要な時だけ初期化する関数
-anyenv() {
-  unset -f anyenv
-  eval "$(command anyenv init -)"
-  anyenv "$@"
-}
+#anyenv() {
+#  unset -f anyenv
+#  eval "$(command anyenv init -)"
+#  anyenv "$@"
+#}
 
 ### Python
 alias py='python'
