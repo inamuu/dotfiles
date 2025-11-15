@@ -232,9 +232,9 @@ alias ghl='cd $(ghq root)/$(ghq list | pecor)'
 
 ### anyenv
 # anyenvは重いので遅延読み込みに変更
-export ANYENV_ROOT="$HOME/.anyenv"
-export PATH="$ANYENV_ROOT/bin:$PATH"
-eval "$(anyenv init -)"
+#export ANYENV_ROOT="$HOME/.anyenv"
+#export PATH="$ANYENV_ROOT/bin:$PATH"
+#eval "$(anyenv init -)"
 # 必要な時だけ初期化する関数
 #anyenv() {
 #  unset -f anyenv
@@ -248,13 +248,13 @@ export PYENV_ROOT="$HOME/.anyenv/envs/pyenv/versions/version"
 export PATH="$PYENV_ROOT/shims:$PATH"
 # pyenvは重いので遅延読み込みに変更
 # [ $commands[pyenv] ] && eval "$(pyenv init -)"
-if [ $commands[pyenv] ]; then
-  pyenv() {
-    unset -f pyenv
-    eval "$(command pyenv init -)"
-    pyenv "$@"
-  }
-fi
+#if [ $commands[pyenv] ]; then
+#  pyenv() {
+#    unset -f pyenv
+#    eval "$(command pyenv init -)"
+#    pyenv "$@"
+#  }
+#fi
 
 ### Ruby
 [ $commands[rbenv] ] && PATH=~/.rbenv/shims:"$PATH"
@@ -267,7 +267,7 @@ fi
 # eval "$(goenv init -)"
 
 ### Node
-export NODENV_ROOT=$HOME/.anyenv/envs/nodenv
+#export NODENV_ROOT=$HOME/.anyenv/envs/nodenv
 export NODENV_SHELL=zsh
 
 ### ESC Timeout
@@ -294,9 +294,9 @@ if [ -f "${HOME}/google-cloud-sdk/completion.zsh.inc" ]; then . "${HOME}/google-
 export GPG_TTY=$(tty)
 
 ### mise
-if [ "${PCENV}" != "private" ]; then
-  eval "$(mise activate zsh)"
-fi
+#if [ "${PCENV}" != "private" ]; then
+eval "$(mise activate zsh)"
+#fi
 
 # Amazon Q post block. Keep at the bottom of this file.
 # CursorでShellが止まってしまうので分岐
