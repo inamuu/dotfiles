@@ -1,6 +1,5 @@
-# Amazon Q pre block. Keep at the top of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
-
+# Kiro CLI pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
 ### link
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 [ -f ~/.zsh_functions ] && source ~/.zsh_functions
@@ -12,7 +11,7 @@ fi
 
 ### Terminal theme
 if [[ "$TERM_PROGRAM" == "vscode" ]]; then
-  ZSH_THEME=""  # Disable Powerlevel10k for Cursor
+  ZSH_THEME="minimal"  # Disable Powerlevel10k for Cursor
 else
   [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 fi
@@ -164,7 +163,7 @@ alias ll='eza -la --git --icons'
 alias llr='eza -lra --git --icons'
 alias ls='eza'
 alias mv='mv -vi'
-alias rg='rg --hidden'
+#alias rg='rg --hidden'
 alias rm='rm -vi'
 alias tf='terraform'
 alias tfi='terraform init'
@@ -244,8 +243,8 @@ alias ghl='cd $(ghq root)/$(ghq list | pecor)'
 
 ### Python
 alias py='python'
-export PYENV_ROOT="$HOME/.anyenv/envs/pyenv/versions/version"
-export PATH="$PYENV_ROOT/shims:$PATH"
+#export PYENV_ROOT="$HOME/.anyenv/envs/pyenv/versions/version"
+#export PATH="$PYENV_ROOT/shims:$PATH"
 # pyenvは重いので遅延読み込みに変更
 # [ $commands[pyenv] ] && eval "$(pyenv init -)"
 #if [ $commands[pyenv] ]; then
@@ -257,7 +256,7 @@ export PATH="$PYENV_ROOT/shims:$PATH"
 #fi
 
 ### Ruby
-[ $commands[rbenv] ] && PATH=~/.rbenv/shims:"$PATH"
+#[ $commands[rbenv] ] && PATH=~/.rbenv/shims:"$PATH"
 
 ### Go
 # goenvは重いので、direnvで必要なディレクトリでのみ有効化する
@@ -302,8 +301,10 @@ eval "$(mise activate zsh)"
 # CursorでShellが止まってしまうので分岐
 # https://zenn.dev/kikagaku/articles/cursor-agent-mode-hangs
 if [[ "$AGENT_MODE" != "true" ]]; then
-  [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
 fi
 
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+# Kiro CLI post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
