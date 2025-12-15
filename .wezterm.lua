@@ -7,7 +7,6 @@ local config = wezterm.config_builder()
 
 local act = wezterm.action
 
-
 local config = {
 
   -- Font
@@ -108,6 +107,12 @@ local config = {
   -- Window
   window_background_opacity = 0.90,
 
+  -- Tab bar
+  window_decorations = "RESIZE",
+  use_fancy_tab_bar  = true,
+  show_new_tab_button_in_tab_bar = false,
+  show_close_tab_button_in_tabs = false,
+
   -- Scroll
   enable_scroll_bar = true,
 
@@ -148,6 +153,37 @@ wezterm.on('update-status', function(window, pane)
   end
 
   window:set_config_overrides(overrides)
+end)
+
+-- Tab style
+local SOLID_LEFT_ARROW = wezterm.nerdfonts.ple_lower_right_triangle
+local SOLID_RIGHT_ARROW = wezterm.nerdfonts.ple_upper_left_triangle
+
+wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+  local background = "02B05D"
+  local foreground = "#FFFFFF"
+  local edge_background = "none"
+
+  if tab.is_active then
+    background = "#135AC2"
+    foreground = "#FFFFFF"
+  end
+
+  local edge_foreground = background
+  local title = "   " .. wezterm.truncate_right(tab.active_pane.title, max_width - 1) .. "   "
+  return {
+    { Background = { Color = edge_background } },
+    { Foreground = { Color = edge_foreground } },
+    { Text = SOLID_LEFT_ARROW },
+
+    { Background = { Color = background } },
+    { Foreground = { Color = foreground } },
+    { Text = title },
+
+    { Background = { Color = edge_background } },
+    { Foreground = { Color = edge_foreground } },
+    { Text = SOLID_RIGHT_ARROW },
+  }
 end)
 
 -- and finally, return the configuration to wezterm
