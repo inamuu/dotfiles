@@ -111,7 +111,6 @@ local config = {
   window_decorations = "RESIZE",
   use_fancy_tab_bar  = true,
   show_new_tab_button_in_tab_bar = false,
-  show_close_tab_button_in_tabs = false,
 
   -- Scroll
   enable_scroll_bar = true,
