@@ -185,6 +185,16 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
   }
 end)
 
+-- Use the defaults as a base
+config.hyperlink_rules = wezterm.default_hyperlink_rules()
+
+-- make task numbers clickable
+-- the first matched regex group is captured in $1.
+table.insert(config.hyperlink_rules, {
+  regex = [[\b(arn:aws:[^\s]+)\b]],
+  format = 'https://console.aws.amazon.com/go/view?arn=$1',
+})
+
 -- and finally, return the configuration to wezterm
 return config
 
