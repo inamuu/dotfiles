@@ -10,7 +10,8 @@ tap_list = [
   "sanemat/font",
   "fujiwara/tap",
   "fluxcd/tap",
-  "hashicorp/tap"
+  "hashicorp/tap",
+  "dotenvx/brew"
 ]
 
 for i in tap_list
@@ -37,10 +38,10 @@ brew_list = [
   "bzip2",
   "circleci",
   "cli53",
-  "codex",
   "colordiff",
   "coreutils",
   "direnv",
+  "dotenvx/brew/dotenvx",
   "easy-rsa",
   "eksctl",
   "envchain",
@@ -132,7 +133,8 @@ end
 #   "tunnelblick",
 cask_list = [
   "alt-tab",
-  "amazon-q",
+  "codex",
+  "kiro-cli",
   #"cursor",
   "font-udev-gothic",
   "font-udev-gothic-nf",
