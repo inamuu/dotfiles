@@ -11,7 +11,8 @@ tap_list = [
   "fujiwara/tap",
   "fluxcd/tap",
   "hashicorp/tap",
-  "dotenvx/brew"
+  "dotenvx/brew",
+  "future-architect/tap"
 ]
 
 for i in tap_list
@@ -48,6 +49,7 @@ brew_list = [
   "eza",
   "fcgi",
   "fontforge",
+  "future-architect/tap/tftarget",
   "gawk",
   "gh",
   "ghostscript",
