@@ -50,6 +50,7 @@ brew_list = [
   "fcgi",
   "fontforge",
   "future-architect/tap/tftarget",
+  "fzf",
   "gawk",
   "gh",
   "ghostscript",
