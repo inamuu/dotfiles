@@ -205,8 +205,8 @@ noti() {
 
 ### Alias(Git)
 alias g='git'
-alias gbrd='git branch | grep -v -e "main" -e "*" | awk "{print $1}" | pecor | xargs git branch -d'
-alias gsw='git branch | grep -v -e "*" | awk "{print $1}" | pecor | xargs git switch'
+alias gbrd='git branch | fzf | xargs git branch -d '
+alias gsw='git branch | fzf | xargs git switch '
 
 ### Alias(kubectl)
 # kubectl completionは重いので遅延読み込みに変更
