@@ -8,13 +8,15 @@ local config = wezterm.config_builder()
 local act = wezterm.action
 
 local config = {
+  -- auto reloadd
+  automatically_reload_config = true,
 
   -- Font
   font = wezterm.font {
     family = 'UDEV Gothic 35', weight = 'Bold',
     -- family = 'Hack Nerd Font Mono', weight = 'Bold',
   },
-  font_size = 16.0,
+  font_size = 15.0,
 
   -- ime
   use_ime = true,
