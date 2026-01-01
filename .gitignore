@@ -18,6 +18,7 @@ docker-compose.override.yml
 .codex/log/*
 .codex/sessions/*
 .codex/config.toml
+.codex/skills/.system/
 
 ### Terraform
 
