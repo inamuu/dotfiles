@@ -13,7 +13,8 @@ local config = {
 
   -- Font
   font = wezterm.font {
-    family = 'UDEV Gothic 35', weight = 'Bold',
+    family = 'UDEV Gothic 35',
+    -- family = 'UDEV Gothic 35', weight = 'Bold',
     -- family = 'Hack Nerd Font Mono', weight = 'Bold',
   },
   font_size = 15.0,
