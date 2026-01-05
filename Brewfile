@@ -88,6 +88,7 @@ brew_list = [
   "peco",
   "percona-toolkit",
   "pinentry-mac",
+  "pipx",
   "pkg-config",
   "putty",
   "pwgen",
