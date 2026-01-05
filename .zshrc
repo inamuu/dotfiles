@@ -168,10 +168,11 @@ alias rm='rm -vi'
 alias tf='terraform'
 alias tfi='terraform init'
 alias tfp='terraform plan'
-alias tfinitplan='terraform init && terraform plan'
+alias tfip='terraform init && terraform plan'
 alias tfcheck='terraform fmt && terraform validate && tflint'
 alias vi='vim'
 export LESS='-i -M -R'
+alias tmpdir2='export TMPDIR2=$(mktemp -d) && cd $TMPDIR2'
 
 ### Terraform
 export TF_CLI_ARGS_plan="--parallelism=30"
@@ -193,6 +194,10 @@ tfmog() {
   terraform plan $(echo ${PLAN_LIST})
 }
 
+alias tffp='terraform state list | fzf --multi --preview "terraform state show {}" | sed "s/^/-target=/" | xargs terraform plan '
+alias tffa='terraform state list | fzf --multi --preview "terraform state show {}" | sed "s/^/-target=/" | xargs terraform apply '
+
+### terraform logs
 [ ! -d "${HOME}/.config/terraform/logs/$(date +%Y/%m/%d/)" ] && mkdir -p ${HOME}/.config/terraform/logs/$(date +%Y/%m/%d/)
 export TF_LOG=ERROR
 export TF_LOG_PATH=${HOME}/.config/terraform/logs/$(date +%Y/%m/%d)/terraform.$(date +%Y%m%d%H%M%S).log
