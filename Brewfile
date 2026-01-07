@@ -85,6 +85,7 @@ brew_list = [
   "mise",
   "mysql",
   "nmap",
+  "nvim",
   "peco",
   "percona-toolkit",
   "pinentry-mac",
