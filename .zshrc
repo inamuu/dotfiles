@@ -111,7 +111,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 function pecor { peco --query "$LBUFFER" --layout=bottom-up }
 
 ### peco&ssh
-function peco-ssh () {
+function fzf-ssh () {
   local selected_host=$(awk '
   tolower($1)=="host" {
     for (i=2; i<=NF; i++) {
@@ -120,25 +120,25 @@ function peco-ssh () {
       }
     }
   }
-  ' ~/.ssh/config ~/.ssh/**/config | sort | pecor)
+  ' ~/.ssh/config ~/.ssh/**/config | sort | fzf)
   if [ -n "$selected_host" ]; then
     BUFFER="ssh -A ${selected_host}"
     zle accept-line
   fi
   zle clear-screen
 }
-zle -N peco-ssh
-bindkey '^S' peco-ssh
+zle -N fzf-ssh
+bindkey '^S' fzf-ssh
 
 ### history
-function peco-history-selection() {
+function fzf-history-selection() {
     #BUFFER=`history | tail -r | awk '{$1="";print $0}' | peco`
-    BUFFER=$(history | awk '{$1="";print $0}' | egrep -v "ls" | uniq -u | sed 's/^ //g' | pecor)
+    BUFFER=$(history | awk '{$1="";print $0}' | egrep -v "ls" | uniq -u | sed 's/^ //g' | fzf)
     CURSOR=$#BUFFER
     zle reset-prompt
 }
-zle -N peco-history-selection
-bindkey '^R' peco-history-selection
+zle -N fzf-history-selection
+bindkey '^R' fzf-history-selection
 
 ### direnv
 [ $commands[direnv] ] && eval "$(direnv hook zsh)"
@@ -155,7 +155,7 @@ alias cdworks='cd ~/Works'
 alias cp='cp -vi'
 alias date='gdate'
 alias ddd='cd ~/Downloads'
-alias cdr="eval cd \"\$(dirs -v | pecor | awk '{print \$2}')\""
+alias cdr="eval cd \"\$(dirs -v | fzf | awk '{print \$2}')\""
 alias doc='docker'
 alias docc='docker compose'
 alias evc='envchain'
@@ -179,8 +179,8 @@ export TF_CLI_ARGS_plan="--parallelism=30"
 export TF_CLI_ARGS_apply="--parallelism=30"
 
 tfrun() {
-  TARGET=$(egrep -h "(^module\s|^resource\s)" *tf | awk '{print $1"."$2}' | sed 's/"//g' | peco)
-  CTL=$(echo "plan\napply" | peco)
+  TARGET=$(egrep -h "(^module\s|^resource\s)" *tf | awk '{print $1"."$2}' | sed 's/"//g' | fzf)
+  CTL=$(echo "plan\napply" | fzf)
   printf "Run terraform ${CTL} -target=${TARGET}\n"
   terraform ${CTL} -target=${TARGET}
 }
@@ -232,7 +232,7 @@ alias be='bundle exec'
 alias ber='bundle exec rake'
 
 ### hub
-alias ghl='cd $(ghq root)/$(ghq list | pecor)'
+alias ghl='cd $(ghq root)/$(ghq list | fzf)'
 
 ### anyenv
 # anyenvは重いので遅延読み込みに変更
