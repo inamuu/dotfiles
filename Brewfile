@@ -4,25 +4,24 @@ require 'fileutils'
 ### Install directory that using installer files
 cask_args appdir: "/Applications"
 
-### Main
+### Tap list
 tap_list = [
-  "fluxcd/tap",
-  "sanemat/font",
-  "fujiwara/tap",
-  "fluxcd/tap",
-  "hashicorp/tap",
+  "FelixKratz/formulae",
   "dotenvx/brew",
+  "fluxcd/tap",
+  "fluxcd/tap",
+  "fujiwara/tap",
   "future-architect/tap",
-  "nikitabobko/tap"
+  "hashicorp/tap",
+  "nikitabobko/tap",
+  "sanemat/font",
 ]
 
 for i in tap_list
   tap i
 end
 
-### Install command line tools
-#"automake"
-
+### Brew list
 brew_list = [
   "act",
   "actionlint",
@@ -37,6 +36,7 @@ brew_list = [
   "bat",
   "bitwarden-cli",
   "blueutil",
+  "borders",
   "bzip2",
   "circleci",
   "cli53",
@@ -158,17 +158,6 @@ for i in cask_list
   cask i
 end
 
-### Install desktop apps only private and macOS
-if ENV['PCENV'] == 'private' and OS.mac?
-  cask "vnc-viewer"
-  cask "rambox"
-end
-
-### Install desktop apps only work and macOS
-if ENV['PCENV'] == 'work' and OS.mac?
-  cask "todoist"
-end
-
 ### Install desktop apps only macOS for private and work
 if OS.mac?
   #"alfred"
@@ -180,10 +169,10 @@ if OS.mac?
     "dbeaver-community",
     #"docker",
     "firefox",
-    #"font-hack-nerd-font",
+    "font-hack-nerd-font",
     #"iterm2",
     "karabiner-elements",
-    "macvim",
+    "macvim-app",
     #"postman",
     #"rectangle",
     "session-manager-plugin",
@@ -195,11 +184,17 @@ if OS.mac?
   end
 end
 
-### Alacritty theme
-repository_url = "https://github.com/eendroroy/alacritty-theme.git"
-clone_dir = File.expand_path("~/.alacritty-colorshme")
-
-unless File.directory?(clone_dir)
-  system("git clone #{repository_url} #{clone_dir}")
+### Install desktop apps only private and macOS
+if ENV['PCENV'] == 'private' and OS.mac?
+  cask "vnc-viewer"
+  cask "rambox"
 end
+
+### Alacritty theme
+#repository_url = "https://github.com/eendroroy/alacritty-theme.git"
+#clone_dir = File.expand_path("~/.alacritty-colorshme")
+#
+#unless File.directory?(clone_dir)
+#  system("git clone #{repository_url} #{clone_dir}")
+#end
 

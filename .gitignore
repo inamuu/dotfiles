@@ -29,3 +29,6 @@ terraform.tfstate.*.backup
 .terraform.tfstate.lock
 .terraform.tfstate.lock.info
 
+### Codex
+
+.codex/rules
