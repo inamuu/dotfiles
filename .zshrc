@@ -165,18 +165,26 @@ alias ls='eza'
 alias mv='mv -vi'
 #alias rg='rg --hidden'
 alias rm='rm -vi'
-alias tf='terraform'
-alias tfi='terraform init'
-alias tfp='terraform plan'
-alias tfip='terraform init && terraform plan'
-alias tfcheck='terraform fmt && terraform validate && tflint'
 alias vi='vim'
 export LESS='-i -M -R'
 alias tmpdir2='export TMPDIR2=$(mktemp -d) && cd $TMPDIR2'
 
+
+
 ### Terraform
 export TF_CLI_ARGS_plan="--parallelism=30"
 export TF_CLI_ARGS_apply="--parallelism=30"
+
+alias tf='terraform'
+alias tfa='terraform apply'
+alias tff='terraform format'
+alias tfi='terraform init'
+alias tfp='terraform plan'
+alias tfv='terraform validate'
+alias tfc='terraform console'
+alias tfip='terraform init && terraform plan'
+alias tfifv='terraform init && terraform fmt && terraform validate'
+alias tfcheck='terraform fmt && terraform validate && tflint'
 
 tfrun() {
   TARGET=$(egrep -h "(^module\s|^resource\s)" *tf | awk '{print $1"."$2}' | sed 's/"//g' | fzf)

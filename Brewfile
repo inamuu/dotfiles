@@ -12,7 +12,8 @@ tap_list = [
   "fluxcd/tap",
   "hashicorp/tap",
   "dotenvx/brew",
-  "future-architect/tap"
+  "future-architect/tap",
+  "nikitabobko/tap"
 ]
 
 for i in tap_list
@@ -173,6 +174,7 @@ if OS.mac?
   #"alfred"
   #"zoom" インストール時にエラーになるため
   cask_list = [
+    "aerospace",
     #"alacritty",
     "bitwarden",
     "dbeaver-community",
