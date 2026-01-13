@@ -27,6 +27,10 @@ local config = {
   -- color_scheme = 'darkmoss (base16)',
   color_scheme = 'Dracula (Gogh)',
 
+  colors = {
+    split = '#af96cc',
+  },
+
   -- KeyBindings
   leader = { key = 'o', mods = 'CTRL', timeout_milliseconds = 2000 },
 
