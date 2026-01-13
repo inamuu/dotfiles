@@ -112,7 +112,13 @@ local config = {
   },
 
   -- Window
-  window_background_opacity = 0.90,
+  window_background_opacity = 1.0,
+  window_background_image = '/usr/local/pictures/wallpaper.jpg',
+  window_background_image_hsb = {
+    brightness = 0.05,
+    hue = 0.5,
+    saturation = 0.8,
+  },
 
   -- Tab bar
   window_decorations = "RESIZE",
@@ -124,6 +130,12 @@ local config = {
 
   -- Copy
   scrollback_lines = 30000,
+
+  -- Pane
+  inactive_pane_hsb = {
+    saturation = 0.8,
+    brightness = 0.8,
+  },
 }
 
 -- Set window title to workspace name
