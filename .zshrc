@@ -177,7 +177,7 @@ export TF_CLI_ARGS_apply="--parallelism=30"
 
 alias tf='terraform'
 alias tfa='terraform apply'
-alias tff='terraform format'
+alias tff='terraform fmt'
 alias tfi='terraform init'
 alias tfp='terraform plan'
 alias tfv='terraform validate'
