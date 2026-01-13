@@ -172,7 +172,7 @@ if OS.mac?
     "font-hack-nerd-font",
     #"iterm2",
     "karabiner-elements",
-    "macvim-app",
+    #"macvim-app",
     #"postman",
     #"rectangle",
     "session-manager-plugin",
