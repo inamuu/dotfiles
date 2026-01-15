@@ -146,6 +146,7 @@ PS1="${CUSTOM_PS1:-default PS1}: "
 
 ### Alias(Main)
 alias ..='cd ..'
+alias awsvl='aws-vault login'
 alias bat='bat -p --theme=Dracula'
 alias bincat='/bin/cat'
 alias binls='/bin/ls'
