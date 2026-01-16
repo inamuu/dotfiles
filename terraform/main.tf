@@ -97,3 +97,4 @@ resource "terraform_data" "link_config" {
     command = "ln -s ${abspath("${path.module}/../.config")} ${pathexpand("~/.config")}"
   }
 }
+
