@@ -32,3 +32,40 @@ terraform.tfstate.*.backup
 ### Codex
 
 .codex/rules
+
+### .config - Sensitive files
+
+# GCP credentials
+.config/gcloud/
+
+# GitHub credentials
+.config/gh/hosts.yml
+.config/gh/config.yml
+
+# Claude Code settings
+.config/claude/
+.claude/settings.local.json
+
+# Config store (auto-generated)
+.config/configstore/
+
+# Raycast (extensions and AI settings)
+.config/raycast/
+
+# Terraform logs
+.config/terraform/logs/
+
+# Neovim lock file (auto-generated)
+.config/nvim/lazy-lock.json
+
+# Karabiner automatic backups
+.config/karabiner/automatic_backups/
+
+# Packer
+.config/packer/plugins/
+.config/packer/checkpoint_cache
+.config/packer/checkpoint_signature
+
+# anyenv
+.config/anyenv/anyenv-install
+

@@ -1,25 +1,28 @@
-# Kiro CLI pre block. Keep at the top of this file.
+export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
+
+### Kiro CLI, pre block. Keep at the top of this file.
 [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
-### link
+
+### zshのローカルファイル読み込み
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 [ -f ~/.zsh_functions ] && source ~/.zsh_functions
 
-### powerlevel10k
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+### powerlevel10k 読み込み
+#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+#fi
 
 ### Terminal theme
-if [[ "$TERM_PROGRAM" == "vscode" ]]; then
-  ZSH_THEME="minimal"  # Disable Powerlevel10k for Cursor
-else
-  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-fi
+#if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+#  ZSH_THEME="minimal"  # Disable Powerlevel10k for Cursor
+#else
+#  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#fi
 
 ### Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
+#if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+#  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+#fi
 
 alias history="history 0"
 
@@ -104,7 +107,6 @@ setopt hist_ignore_dups
 #POWERLINE_HIDE_GIT_PROMPT_STATUS="true"
 
 ### homebrew
-export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 ### peco
@@ -313,14 +315,11 @@ export GPG_TTY=$(tty)
 eval "$(mise activate zsh)"
 #fi
 
-# Amazon Q post block. Keep at the bottom of this file.
-# CursorでShellが止まってしまうので分岐
-# https://zenn.dev/kikagaku/articles/cursor-agent-mode-hangs
-if [[ "$AGENT_MODE" != "true" ]]; then
-fi
-
-
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
 # Kiro CLI post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
+
+### startshipの読み込み (kiro-cliの後に実行する必要がある)
+eval "$(starship init zsh)"
+
