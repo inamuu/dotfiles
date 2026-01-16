@@ -16,7 +16,7 @@ function login_check () {
 function set_bastion_id () {
   if login_check; then
     AWS_PROFILE=${1:-default}
-    ENV_SERVICE=$(aws ecs list-services --cluster ${CLUSTER_NAME} --profile ${AWS_PROFILE} | jq -r '.serviceArns[]' | awk -F'/' '{print $(NF-0)}' | peco --prompt "踏み台コンテナを選択しようず🍣 ")
+    ENV_SERVICE=$(aws ecs list-services --cluster ${CLUSTER_NAME} --profile ${AWS_PROFILE} | jq -r '.serviceArns[]' | awk -F'/' '{print $(NF-0)}' | fzf --prompt "踏み台コンテナを選択しようず🍣 ")
     TASK_ID=$(aws ecs list-tasks --cluster ${CLUSTER_NAME} --service-name ${ENV_SERVICE} --query "taskArns[0]" --output text --region ap-northeast-1 --profile ${AWS_PROFILE} | awk -F '/' '{print $3}')
     CONTAINER_ID=$(aws ecs describe-tasks --cluster ${CLUSTER_NAME} --task ${TASK_ID} --region ap-northeast-1 --profile ${AWS_PROFILE} | jq -r --arg CONTAINER_NAME bastion '.tasks[0].containers[].runtimeId')
 
@@ -34,7 +34,7 @@ function ssm_ec2 () {
     EC2=$(aws ec2 describe-instances --output=text \
       --query 'Reservations[].Instances[].{id:InstanceId,ip:PrivateIpAddress,name:Tags[?Key==`Name`].Value|[0]}' \
       --profile ${AWS_PROFILE} \
-      | peco --prompt "Select EC2:" | cut -f -1)
+      | fzf --prompt "Select EC2:" | cut -f -1)
   fi
 
   if [ -n "${EC2}" ];then
@@ -50,7 +50,7 @@ function ssm_redis () {
   if login_check; then
     AWS_PROFILE=${1:-default}
     REDIS_ENDPOINT=$(aws elasticache describe-replication-groups --output=text --query='ReplicationGroups[].NodeGroups[].[[`PrimaryEndpoint`,PrimaryEndpoint.Address],[`ReaderEndpoint`,ReaderEndpoint.Address]][]' \
-      | peco --prompt "Select Redis Cluster Endpoint:" | cut -f 2)
+      | fzf--prompt "Select Redis Cluster Endpoint:" | cut -f 2)
     
 
     if set_bastion_id;then
@@ -67,7 +67,7 @@ function ssm_aurora () {
     AWS_PROFILE=${1:-default}
     AURORA_ENDPOINT=$(aws rds describe-db-cluster-endpoints --output=text \
       --query='DBClusterEndpoints[].[EndpointType,Endpoint]' \
-      | peco --prompt "Select Aurora Endpoint:" | cut -f 2)
+      | fzf --prompt "Select Aurora Endpoint:" | cut -f 2)
 
     SESSION_COUNT=$(ps aux | grep "aws ssm start-session" | grep -v grep | wc -l | sed 's/ //g')
     DB_LOCAL_PORT=$(expr 3306 + ${SESSION_COUNT})
