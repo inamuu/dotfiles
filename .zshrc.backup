@@ -1,0 +1,80 @@
+### powerlevel10k 読み込み
+#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+#fi
+
+### Terminal theme
+#if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+#  ZSH_THEME="minimal"  # Disable Powerlevel10k for Cursor
+#else
+#  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#fi
+
+### Source Prezto.
+#if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+#  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+#fi
+#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+#fi
+
+### Terminal theme
+#if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+#  ZSH_THEME="minimal"  # Disable Powerlevel10k for Cursor
+#else
+#  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#fi
+
+### Source Prezto.
+#if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+#  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+#fi
+
+
+### anyenv
+# anyenvは重いので遅延読み込みに変更
+#export ANYENV_ROOT="$HOME/.anyenv"
+#export PATH="$ANYENV_ROOT/bin:$PATH"
+#eval "$(anyenv init -)"
+# 必要な時だけ初期化する関数
+#anyenv() {
+#  unset -f anyenv
+#  eval "$(command anyenv init -)"
+#  anyenv "$@"
+#}
+
+### Python
+alias py='python'
+#export PYENV_ROOT="$HOME/.anyenv/envs/pyenv/versions/version"
+#export PATH="$PYENV_ROOT/shims:$PATH"
+# pyenvは重いので遅延読み込みに変更
+# [ $commands[pyenv] ] && eval "$(pyenv init -)"
+#if [ $commands[pyenv] ]; then
+#  pyenv() {
+#    unset -f pyenv
+#    eval "$(command pyenv init -)"
+#    pyenv "$@"
+#  }
+#fi
+
+### Ruby
+#[ $commands[rbenv] ] && PATH=~/.rbenv/shims:"$PATH"
+
+### Go
+# goenvは重いので、direnvで必要なディレクトリでのみ有効化する
+# export GOPATH=$HOME/.anyenv/envs/goenv/shims/
+#export GOPATH=$HOME/go/
+# export PATH=$GOROOT/bin:$PATH
+# eval "$(goenv init -)"
+
+### iTerm2
+# comment out 20250430
+#if [ -f "${HOME}/.iterm2_shell_integration.zsh" ]; then
+# source "${HOME}/.iterm2_shell_integration.zsh"
+# source ~/.iterm2_shell_integration.`basename $SHELL`
+#fi
+#
+#function iterm2_print_user_vars() {
+#    iterm2_set_user_var gitBranch $((git branch 2> /dev/null) | grep \* | cut -c3-)
+#}
+

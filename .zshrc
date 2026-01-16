@@ -21,25 +21,6 @@ source /opt/homebrew/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/z
 source /opt/homebrew/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
-### powerlevel10k 読み込み
-#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-#fi
-
-### Terminal theme
-#if [[ "$TERM_PROGRAM" == "vscode" ]]; then
-#  ZSH_THEME="minimal"  # Disable Powerlevel10k for Cursor
-#else
-#  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-#fi
-
-### Source Prezto.
-#if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-#  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-#fi
-
-alias history="history 0"
-
 #ZSH_THEME="robbyrussell"
 #ZSH_THEME="agnoster"
 #ZSH_THEME="inamuu"
@@ -171,6 +152,7 @@ alias cdr="eval cd \"\$(dirs -v | fzf | awk '{print \$2}')\""
 alias doc='docker'
 alias docc='docker compose'
 alias evc='envchain'
+alias history='history 0'
 alias ll='eza -la --git --icons'
 alias llr='eza -lra --git --icons'
 alias ls='eza'
