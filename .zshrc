@@ -8,7 +8,6 @@ export PATH=$HOME/ghq/github.com/inamuu/tools:$PATH
 
 ### zshのローカルファイル読み込み
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
-[ -f ~/.zsh_functions ] && source ~/.zsh_functions
 
 for file in ${HOME}/.config/zsh/functions/*.zsh(N);do
   source "$file"
@@ -19,13 +18,6 @@ source /opt/homebrew/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/z
 
 # サジェスト有効化
 source /opt/homebrew/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-
-#ZSH_THEME="robbyrussell"
-#ZSH_THEME="agnoster"
-#ZSH_THEME="inamuu"
-#ZSH_THEME="apple"
-#ZSH_THEME="powerline"
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="true"
@@ -42,11 +34,6 @@ ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-HIST_STAMPS="yyyy/mm/dd"
 
 ### 区切り文字: default "*?_-.[]~&;!#$%^(){}<>"
 export WORDCHARS=""
@@ -69,68 +56,8 @@ setopt HIST_IGNORE_ALL_DUPS # 履歴中の重複行をファイル記録前に�
 setopt HIST_FIND_NO_DUPS    # 履歴検索中、(連続してなくとも)重複を飛ばす
 setopt HIST_NO_STORE        # histroyコマンドは記録しない
 
-# http://mollifier.hatenablog.com/entry/20090728/p1
-zshaddhistory() {
-    local line=${1%%$'\n'} #コマンドライン全体から改行を除去したもの
-    local cmd=${line%% *}  # １つ目のコマンド
-    # 以下の条件をすべて満たすものだけをヒストリに追加する
-    [[ ${#line} -ge 5
-        && ${cmd} != (l|l[sal])
-        && ${cmd} != (cd)
-        && ${cmd} != (m|man)
-        && ${cmd} != (r[mr])
-        && ${cmd} != (terraform apply)
-    ]]
-}
-
-### History
-HISTFILE=~/.zsh_history
-HISTSIZE=100000
-SAVEHIST=100000
-function history-all { history -E 1 }
-setopt hist_ignore_dups
-
-### powerline theme
-#POWERLINE_HIDE_HOST_NAME="true"
-#POWERLINE_SHORT_HOST_NAME="true"
-#POWERLINE_HIDE_USER_NAME="true"
-#POWERLINE_HIDE_GIT_PROMPT_STATUS="true"
-
 ### homebrew
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-
-### peco
-function pecor { peco --query "$LBUFFER" --layout=bottom-up }
-
-### peco&ssh
-function fzf-ssh () {
-  local selected_host=$(awk '
-  tolower($1)=="host" {
-    for (i=2; i<=NF; i++) {
-      if ($i !~ "[*?]") {
-        print $i
-      }
-    }
-  }
-  ' ~/.ssh/config ~/.ssh/**/config | sort | fzf)
-  if [ -n "$selected_host" ]; then
-    BUFFER="ssh -A ${selected_host}"
-    zle accept-line
-  fi
-  zle clear-screen
-}
-zle -N fzf-ssh
-bindkey '^S' fzf-ssh
-
-### history
-function fzf-history-selection() {
-    #BUFFER=`history | tail -r | awk '{$1="";print $0}' | peco`
-    BUFFER=$(history | awk '{$1="";print $0}' | egrep -v "ls" | uniq -u | sed 's/^ //g' | fzf)
-    CURSOR=$#BUFFER
-    zle reset-prompt
-}
-zle -N fzf-history-selection
-bindkey '^R' fzf-history-selection
 
 ### direnv
 [ $commands[direnv] ] && eval "$(direnv hook zsh)"
@@ -160,12 +87,11 @@ alias mv='mv -vi'
 #alias rg='rg --hidden'
 alias rm='rm -vi'
 alias vi='vim'
-export LESS='-i -M -R'
 alias tmpdir2='export TMPDIR2=$(mktemp -d) && cd $TMPDIR2'
 alias cld='claude --dangerously-skip-permissions'
 alias cl='claude'
 
-
+export LESS='-i -M -R'
 
 ### Terraform
 export TF_CLI_ARGS_plan="--parallelism=30"
@@ -199,12 +125,6 @@ alias tffa='terraform state list | fzf --multi --preview "terraform state show {
 export TF_LOG=ERROR
 export TF_LOG_PATH=${HOME}/.config/terraform/logs/$(date +%Y/%m/%d)/terraform.$(date +%Y%m%d%H%M%S).log
 
-### Notification
-noti() {
-  #osascript -e "display dialog \"${1:-なにか終わったよ}\" buttons {'OK'} default button \"OK\""
-  osascript -e "display dialog \"${1:-処理が完了しました!}\" buttons {\"OK\"} default button \"OK\""
-}
-
 ### Alias(Git)
 alias g='git'
 alias gbrd='git branch | fzf | xargs git branch -d '
@@ -231,44 +151,10 @@ alias ber='bundle exec rake'
 ### hub
 alias ghl='cd $(ghq root)/$(ghq list | fzf)'
 
-### anyenv
-# anyenvは重いので遅延読み込みに変更
-#export ANYENV_ROOT="$HOME/.anyenv"
-#export PATH="$ANYENV_ROOT/bin:$PATH"
-#eval "$(anyenv init -)"
-# 必要な時だけ初期化する関数
-#anyenv() {
-#  unset -f anyenv
-#  eval "$(command anyenv init -)"
-#  anyenv "$@"
-#}
-
 ### Python
 alias py='python'
-#export PYENV_ROOT="$HOME/.anyenv/envs/pyenv/versions/version"
-#export PATH="$PYENV_ROOT/shims:$PATH"
-# pyenvは重いので遅延読み込みに変更
-# [ $commands[pyenv] ] && eval "$(pyenv init -)"
-#if [ $commands[pyenv] ]; then
-#  pyenv() {
-#    unset -f pyenv
-#    eval "$(command pyenv init -)"
-#    pyenv "$@"
-#  }
-#fi
-
-### Ruby
-#[ $commands[rbenv] ] && PATH=~/.rbenv/shims:"$PATH"
-
-### Go
-# goenvは重いので、direnvで必要なディレクトリでのみ有効化する
-# export GOPATH=$HOME/.anyenv/envs/goenv/shims/
-#export GOPATH=$HOME/go/
-# export PATH=$GOROOT/bin:$PATH
-# eval "$(goenv init -)"
 
 ### Node
-#export NODENV_ROOT=$HOME/.anyenv/envs/nodenv
 export NODENV_SHELL=zsh
 
 ### ESC Timeout
@@ -280,24 +166,11 @@ export PATH="$HOME/google-cloud-sdk/bin:$PATH"
 if [ -f "${HOME}/google-cloud-sdk/path.zsh.inc" ]; then . "${HOME}/google-cloud-sdk/path.zsh.inc" ; fi
 if [ -f "${HOME}/google-cloud-sdk/completion.zsh.inc" ]; then . "${HOME}/google-cloud-sdk/completion.zsh.inc" ; fi
 
-### iTerm2
-# comment out 20250430
-#if [ -f "${HOME}/.iterm2_shell_integration.zsh" ]; then
-# source "${HOME}/.iterm2_shell_integration.zsh"
-# source ~/.iterm2_shell_integration.`basename $SHELL`
-#fi
-#
-#function iterm2_print_user_vars() {
-#    iterm2_set_user_var gitBranch $((git branch 2> /dev/null) | grep \* | cut -c3-)
-#}
-
 ### GitHub
 export GPG_TTY=$(tty)
 
 ### mise
-#if [ "${PCENV}" != "private" ]; then
 eval "$(mise activate zsh)"
-#fi
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 

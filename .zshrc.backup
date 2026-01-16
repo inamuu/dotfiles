@@ -1,7 +1,20 @@
+
+#ZSH_THEME="robbyrussell"
+#ZSH_THEME="agnoster"
+#ZSH_THEME="inamuu"
+#ZSH_THEME="apple"
+#ZSH_THEME="powerline"
+
 ### powerlevel10k 読み込み
 #if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 #fi
+
+### powerline theme
+#POWERLINE_HIDE_HOST_NAME="true"
+#POWERLINE_SHORT_HOST_NAME="true"
+#POWERLINE_HIDE_USER_NAME="true"
+#POWERLINE_HIDE_GIT_PROMPT_STATUS="true"
 
 ### Terminal theme
 #if [[ "$TERM_PROGRAM" == "vscode" ]]; then
@@ -44,7 +57,6 @@
 #}
 
 ### Python
-alias py='python'
 #export PYENV_ROOT="$HOME/.anyenv/envs/pyenv/versions/version"
 #export PATH="$PYENV_ROOT/shims:$PATH"
 # pyenvは重いので遅延読み込みに変更
