@@ -7,6 +7,13 @@ export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 [ -f ~/.zsh_functions ] && source ~/.zsh_functions
 
+# シンタックスハイライト有効化
+source /opt/homebrew/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# サジェスト有効化
+source /opt/homebrew/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+
 ### powerlevel10k 読み込み
 #if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
