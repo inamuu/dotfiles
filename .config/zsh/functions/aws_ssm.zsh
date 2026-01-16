@@ -78,34 +78,3 @@ function ssm_aurora () {
   fi
 }
 
-### Update
-function brew_update () {
-    cd ${HOME}/ghq/github.com/inamuu/dotfiles
-    git pull
-    brew bundle
-    git diff --quiet
-    if [ $? -ne 0 ];then
-        git add .
-        git commit -m "brew update $(date +%Y%m%d)"
-        git push -u origin master
-    fi
-}
-
-function tfenv_latest_install () {
-    latest_terraform=$(tfenv list-remote | egrep "^\d{1,2}\.\d{1,2}\.\d{1,2}$" | head -1)
-    tfenv install ${latest_terraform}
-    if [ -f ".terraform-version" ];then
-        echo ${latest_terraform} >| .terraform-version
-    fi
-}
-
-### Terraform
-function terraform_tfdel () {
-  if [ -f ".terraform.lock.hcl" ];then
-      rm -f .terraform.lock.hcl
-  fi
-  if [ -d ".terraform" ];then
-      rm -rf  .terraform
-  fi
-}
-
