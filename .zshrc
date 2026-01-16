@@ -1,4 +1,7 @@
+### PATHを追加
 export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/ghq/github.com/inamuu/tools:$PATH
 
 ### Kiro CLI, pre block. Keep at the top of this file.
 [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
@@ -63,11 +66,6 @@ COMPLETION_WAITING_DOTS="true"
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="yyyy/mm/dd"
-
-### Binary Paths
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$HOME/ghq/github.com/inamuu/tools:$PATH
-# export MANPATH="/usr/local/man:$MANPATH" ### Common export EDITOR=vim
 
 ### 区切り文字: default "*?_-.[]~&;!#$%^(){}<>"
 export WORDCHARS=""
@@ -201,13 +199,6 @@ alias tfc='terraform console'
 alias tfip='terraform init && terraform plan'
 alias tfifv='terraform init && terraform fmt && terraform validate'
 alias tfcheck='terraform fmt && terraform validate && tflint'
-
-tfrun() {
-  TARGET=$(egrep -h "(^module\s|^resource\s)" *tf | awk '{print $1"."$2}' | sed 's/"//g' | fzf)
-  CTL=$(echo "plan\napply" | fzf)
-  printf "Run terraform ${CTL} -target=${TARGET}\n"
-  terraform ${CTL} -target=${TARGET}
-}
 
 tfmog() {
   [ $# -eq 0 ] && return 1
