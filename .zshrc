@@ -169,6 +169,8 @@ alias rm='rm -vi'
 alias vi='vim'
 export LESS='-i -M -R'
 alias tmpdir2='export TMPDIR2=$(mktemp -d) && cd $TMPDIR2'
+alias cld='claude --dangerously-skip-permissions'
+alias cl='claude'
 
 
 
