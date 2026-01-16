@@ -25,7 +25,6 @@ function history-all { history -E 1 }
 setopt hist_ignore_dups
 
 function fzf-history-selection() {
-    #BUFFER=`history | tail -r | awk '{$1="";print $0}' | peco`
     BUFFER=$(history | awk '{$1="";print $0}' | egrep -v "ls" | uniq -u | sed 's/^ //g' | fzf)
     CURSOR=$#BUFFER
     zle reset-prompt
