@@ -90,3 +90,10 @@ resource "terraform_data" "link_dotfiles" {
     command = "ln -s ${abspath("${path.module}/../${each.value}")} ${pathexpand("~/${each.value}")}"
   }
 }
+
+# Link .config directory to home directory
+resource "terraform_data" "link_config" {
+  provisioner "local-exec" {
+    command = "ln -s ${abspath("${path.module}/../.config")} ${pathexpand("~/.config")}"
+  }
+}
