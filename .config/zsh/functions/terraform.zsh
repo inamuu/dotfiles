@@ -66,3 +66,14 @@ EOF
     ;;
   esac
 }
+
+
+### もうtfenv使ってないけど残しておく
+function tfenv_latest_install () {
+    latest_terraform=$(tfenv list-remote | egrep "^\d{1,2}\.\d{1,2}\.\d{1,2}$" | head -1)
+    tfenv install ${latest_terraform}
+    if [ -f ".terraform-version" ];then
+        echo ${latest_terraform} >| .terraform-version
+    fi
+}
+
