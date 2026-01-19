@@ -56,6 +56,9 @@ terraform.tfstate.*.backup
 # Terraform logs
 .config/terraform/logs/
 
+# tftui
+tftui.plan
+
 # Neovim lock file (auto-generated)
 .config/nvim/lazy-lock.json
 
