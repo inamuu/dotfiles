@@ -12,9 +12,9 @@ vim.opt.number = true
 vim.keymap.set("n", "<leader>r", ":source ~/.config/nvim/init.lua<CR>", { desc = "設定ファイルをリロード" })
 
 vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    if vim.fn.argc() == 0 then
-      vim.cmd("NvimTreeToggle")
-    end
-  end,
+	callback = function()
+		if vim.fn.argc() == 0 then
+			vim.cmd("NvimTreeToggle")
+		end
+	end,
 })
