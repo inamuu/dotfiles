@@ -106,6 +106,7 @@ brew_list = [
   "starship",
   "stern",
   "telnet",
+  "terraform-ls",
   "terraformer",
   "tflint",
   "tig",
