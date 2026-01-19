@@ -41,7 +41,7 @@ tfz() {
     ;;
     p|plan)
       TARGET=$(egrep -h "(^module\s|^resource\s)" *tf | awk '{print $1"."$2}' | sed 's/"//g' | fzf)
-      echo "terraform plan -taregt=${TARGET}"
+      echo "terraform plan -target=${TARGET}"
       terraform plan -target="${TARGET}"
       ;;
     tg)
@@ -52,7 +52,7 @@ tfz() {
     ;;
     a|apply)
       TARGET=$(egrep -h "(^module\s|^resource\s)" *tf | awk '{print $1"."$2}' | sed 's/"//g' | fzf)
-      echo "terraform apply -taregt=${TARGET}"
+      echo "terraform apply -target=${TARGET}"
       terraform apply -target="${TARGET}"
       ;;
     *|help)
