@@ -186,6 +186,7 @@ style = "bg:color_bg3"
 format = '[$symbol$version ]($style)'
 
 [aws]
+disabled = true
 style = 'bold blue'
 format = '[[$symbol$profile](fg:color_fg0 bg:color_blue)]($style)'
 symbol = '🅰 '
