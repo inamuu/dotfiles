@@ -10,16 +10,15 @@ $directory\
 $git_branch\
 $git_status\
 [](fg:color_aqua bg:color_blue)\
+$aws\
 $c\
-$cpp\
 $rust\
 $golang\
 $nodejs\
 $php\
-$java\
-$kotlin\
-$haskell\
 $python\
+$ruby\
+$terraform\
 [](fg:color_blue bg:color_bg3)\
 $docker_context\
 $conda\
@@ -181,6 +180,15 @@ disabled = true
 time_format = "%R"
 style = "bg:color_bg1"
 format = '[[  $time ](fg:color_fg0 bg:color_bg1)]($style)'
+
+[terraform]
+style = "bg:color_bg3"
+format = '[$symbol$version ]($style)'
+
+[aws]
+style = 'bold blue'
+format = '[[$symbol$profile](fg:color_fg0 bg:color_blue)]($style)'
+symbol = '🅰 '
 
 [line_break]
 disabled = false
