@@ -40,16 +40,20 @@ tfz() {
       terraform init && terraform fmt && terraform validate
     ;;
     p|plan)
-      terraform plan -target="$target"
+      TARGET=$(egrep -h "(^module\s|^resource\s)" *tf | awk '{print $1"."$2}' | sed 's/"//g' | fzf)
+      echo "terraform plan -taregt=${TARGET}"
+      terraform plan -target="${TARGET}"
       ;;
     tg)
       TARGET=$(egrep -h "(^module\s|^resource\s)" *tf | awk '{print $1"."$2}' | sed 's/"//g' | fzf)
       CTL=$(echo "plan\napply" | fzf)
-      printf "Run terraform ${CTL} -target=${TARGET}\n"
+      printf "terraform ${CTL} -target=${TARGET}\n"
       terraform ${CTL} -target=${TARGET}
     ;;
     a|apply)
-      terraform apply -target="$target"
+      TARGET=$(egrep -h "(^module\s|^resource\s)" *tf | awk '{print $1"."$2}' | sed 's/"//g' | fzf)
+      echo "terraform apply -taregt=${TARGET}"
+      terraform apply -target="${TARGET}"
       ;;
     *|help)
       cat << EOF
