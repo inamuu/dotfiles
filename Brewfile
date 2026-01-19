@@ -15,6 +15,7 @@ tap_list = [
   "hashicorp/tap",
   "nikitabobko/tap",
   "sanemat/font",
+  "idoavrah/homebrew",
 ]
 
 for i in tap_list
@@ -109,6 +110,7 @@ brew_list = [
   "terraform-ls",
   "terraformer",
   "tflint",
+  "tftui",
   "tig",
   "tmux",
   "tree",
