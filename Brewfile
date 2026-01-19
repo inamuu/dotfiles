@@ -82,6 +82,7 @@ brew_list = [
   "kubectl",
   "kubectx",
   "lambroll",
+  "lazygit",
   "minikube",
   "mise",
   "mysql",
