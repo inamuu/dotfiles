@@ -13,6 +13,8 @@ for file in ${HOME}/.config/zsh/functions/*.zsh(N);do
   source "$file"
 done
 
+source ${HOME}/.config/zsh/wezterm/wezterm.sh
+
 # シンタックスハイライト有効化
 source /opt/homebrew/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
