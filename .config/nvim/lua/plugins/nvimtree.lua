@@ -1,7 +1,11 @@
 return {
   {
     "nvim-tree/nvim-tree.lua",
-    opts = {},
+    opts = {
+      filters = {
+        dotfiles = false,
+      },
+    },
     config = true,
     keys = {
 	  {mode = "n", "<C-n>", "<cmd>NvimTreeToggle<CR>", desc = "NvimTreeをトグルする"},
