@@ -27,7 +27,7 @@ local config = {
   color_scheme = 'Dracula (Gogh)',
 
   colors = {
-    split = '#af96cc',
+    split = '#bdab8f',
   },
 
   -- KeyBindings
