@@ -1,15 +1,16 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[](color_ocean)\
+[](color_purple)\
 $os\
 $username\
-[](bg:color_beige fg:color_ocean)\
+[](bg:color_yellow fg:color_purple)\
 $directory\
-[](fg:color_beige bg:color_teal)\
+[](fg:color_yellow bg:color_pink)\
 $git_branch\
+[](fg:color_pink bg:color_red)\
 $git_status\
-[](fg:color_teal bg:color_gold)\
+[](fg:color_red bg:color_green)\
 $c\
 $cpp\
 $rust\
@@ -21,7 +22,7 @@ $kotlin\
 $haskell\
 $python\
 $terraform\
-[ ](fg:color_gold)\
+[ ](fg:color_green)\
 $line_break$character"""
 
 #[](fg:color_beige bg:color_bg3)\
@@ -31,46 +32,41 @@ $line_break$character"""
 #[](fg:color_bg3 bg:color_bg1)\
 #$time\
 
-palette = 'original'
+palette = 'dracula'
 
-[palettes.gruvbox_dark]
+[palettes.dracula]
 color_fg0 = '#fbf1c7'
 color_bg1 = '#3c3836'
 color_bg3 = '#665c54'
-color_blue = '#458588'
-color_aqua = '#689d6a'
-color_green = '#98971a'
-color_orange = '#d65d0e'
-color_purple = '#b16286'
-color_red = '#cc241d'
-color_yellow = '#d79921'
+color_pink = '#ff79c6'
+color_red = '#ff5555'
+color_orange = '#ffb86c'
+color_yellow = '#f1fa8c'
+color_green = '#50fa7b'
+color_purple = '#ba55d3'
+color_lgray = '#f8f8f2'
 
-[palettes.original]
-color_fg0 = '#fbf1c7'
-color_bg1 = '#3c3836'
-color_bg3 = '#665c54'
-color_blue = '#458588'
-color_aqua = '#02a7dd'
-color_green = '#9eff00'
-color_orange = '#662FC1'
-#color_purple = '#51158C'
-color_purple = '#662FC1'
-color_red = '#ff0054'
-color_yellow = '#ffd60a'
-color_pink = '#ff277f'
-color_cream = '#eee8df'
-color_beige = '#e2d2b4'
-color_ocean = '#2c365a'
-color_burg = '#7a2038'
-color_teal = '#0a4f54'
-color_gold = '#a6824a'
-color_grey = '#30373e'
-color_terra = '#A067DA'
+#color_blue = '#458588'
+#color_aqua = '#02a7dd'
+#color_green = '#9eff00'
+#color_orange = '#662FC1'
+#color_purple = '#662FC1'
+#color_red = '#ff0054'
+#color_yellow = '#ffd60a'
+#color_pink = '#ff277f'
+#color_cream = '#eee8df'
+#color_beige = '#e2d2b4'
+#color_ocean = '#2c365a'
+#color_burg = '#7a2038'
+#color_teal = '#0a4f54'
+#color_gold = '#a6824a'
+#color_grey = '#30373e'
+#color_terra = '#A067DA'
 
 
 [os]
 disabled = false
-style = "bg:color_ocean fg:color_fg0"
+style = "bg:color_purple fg:color_fg0"
 
 [os.symbols]
 Windows = "󰍲"
@@ -98,12 +94,12 @@ Pop = ""
 
 [username]
 show_always = true
-style_user = "bg:color_ocean fg:color_fg0"
-style_root = "bg:color_ocean fg:color_fg0"
+style_user = "bg:color_purple fg:color_fg0"
+style_root = "bg:color_purple fg:color_fg0"
 format = '[ inamuu ]($style)'
 
 [directory]
-style = "fg:color_grey bg:color_beige"
+style = "fg:color_bg1 bg:color_yellow"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -118,16 +114,16 @@ truncation_symbol = "…/"
 [git_branch]
 symbol = ""
 style = "bg:color_aqua"
-format = '[[ $symbol $branch ](fg:color_fg0 bg:color_teal)]($style)'
+format = '[[ $symbol $branch ](fg:color_fg0 bg:color_pink)]($style)'
 
 [git_status]
 style = "bg:color_aqua"
-format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_teal)]($style)'
+format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_red)]($style)'
 
 [nodejs]
 symbol = ""
-style = "bg:color_gold"
-format = '[[ $symbol( $version) ](fg:color_grey bg:color_gold)]($style)'
+style = "bg:color_green"
+format = '[[ $symbol( $version) ](fg:color_bg1 bg:color_green)]($style)'
 
 [c]
 symbol = " "

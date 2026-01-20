@@ -6,10 +6,10 @@ $os\
 $username\
 [](bg:color_beige fg:color_ocean)\
 $directory\
-[](fg:color_beige bg:color_teal)\
+[](fg:color_beige bg:color_purple)\
 $git_branch\
 $git_status\
-[](fg:color_teal bg:color_gold)\
+[](fg:color_purple bg:color_gold)\
 $c\
 $cpp\
 $rust\
@@ -118,11 +118,11 @@ truncation_symbol = "…/"
 [git_branch]
 symbol = ""
 style = "bg:color_aqua"
-format = '[[ $symbol $branch ](fg:color_fg0 bg:color_teal)]($style)'
+format = '[[ $symbol $branch ](fg:color_fg0 bg:color_purple)]($style)'
 
 [git_status]
 style = "bg:color_aqua"
-format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_teal)]($style)'
+format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_purple)]($style)'
 
 [nodejs]
 symbol = ""
