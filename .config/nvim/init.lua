@@ -4,6 +4,8 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.opt.clipboard = "unnamedplus"
 
+vim.opt.guifont = "UDEV Gothic 35"
+
 require("config.lazy")
 
 vim.opt.number = true
