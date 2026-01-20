@@ -6,10 +6,10 @@ $os\
 $username\
 [](bg:color_beige fg:color_ocean)\
 $directory\
-[](fg:color_beige bg:color_grey)\
+[](fg:color_beige bg:color_ocean)\
 $git_branch\
 $git_status\
-[](fg:color_grey bg:color_gold)\
+[](fg:color_ocean bg:color_beige)\
 $c\
 $cpp\
 $rust\
@@ -20,14 +20,16 @@ $java\
 $kotlin\
 $haskell\
 $python\
-[](fg:color_gold bg:color_bg3)\
-$docker_context\
-$conda\
-$pixi\
-[](fg:color_bg3 bg:color_bg1)\
-$time\
-[ ](fg:color_bg1)\
+$terraform\
+[ ](fg:color_beige)\
 $line_break$character"""
+
+#[](fg:color_beige bg:color_bg3)\
+#$docker_context\
+#$conda\
+#$pixi\
+#[](fg:color_bg3 bg:color_bg1)\
+#$time\
 
 palette = 'original'
 
@@ -114,16 +116,16 @@ truncation_symbol = "…/"
 [git_branch]
 symbol = ""
 style = "bg:color_aqua"
-format = '[[ $symbol $branch ](fg:color_fg0 bg:color_grey)]($style)'
+format = '[[ $symbol $branch ](fg:color_fg0 bg:color_ocean)]($style)'
 
 [git_status]
 style = "bg:color_aqua"
-format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_grey)]($style)'
+format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_ocean)]($style)'
 
 [nodejs]
 symbol = ""
-style = "bg:color_gold"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_gold)]($style)'
+style = "bg:color_beige"
+format = '[[ $symbol( $version) ](fg:color_grey bg:color_beige)]($style)'
 
 [c]
 symbol = " "
@@ -140,6 +142,10 @@ symbol = ""
 style = "bg:color_blue"
 format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 
+[ruby]
+style = "bg:color_beige"
+format = '[[ $symbol( $version) ](fg:color_grey bg:color_beige)]($style)'
+
 [golang]
 symbol = ""
 style = "bg:color_blue"
@@ -147,8 +153,8 @@ format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 
 [php]
 symbol = ""
-style = "bg:color_blue"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+style = "bg:color_beige"
+format = '[[ $symbol( $version) ](fg:color_grey bg:color_beige)]($style)'
 
 [java]
 symbol = ""
@@ -167,8 +173,14 @@ format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 
 [python]
 symbol = ""
-style = "bg:color_blue"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+style = "bg:color_beige"
+format = '[[ $symbol( $version) ](fg:color_grey bg:color_beige)]($style)'
+
+[terraform]
+symbol = "🚀"
+style = "bg:color_beige"
+format = '[[ $symbol( $version) ](fg:color_grey bg:color_beige)]($style)'
+
 
 [docker_context]
 disabled = true
