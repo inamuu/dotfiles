@@ -6,10 +6,10 @@ $os\
 $username\
 [](bg:color_beige fg:color_ocean)\
 $directory\
-[](fg:color_beige bg:color_teal)\
+[](fg:color_beige bg:color_grey)\
 $git_branch\
 $git_status\
-[](fg:color_teal bg:color_blue)\
+[](fg:color_grey bg:color_gold)\
 $c\
 $cpp\
 $rust\
@@ -20,7 +20,7 @@ $java\
 $kotlin\
 $haskell\
 $python\
-[](fg:color_blue bg:color_bg3)\
+[](fg:color_gold bg:color_bg3)\
 $docker_context\
 $conda\
 $pixi\
@@ -60,7 +60,7 @@ color_beige = '#e2d2b4'
 color_ocean = '#2c365a'
 color_burg = '#7a2038'
 color_teal = '#0a4f54'
-color_gold = '#c49b4c'
+color_gold = '#a6824a'
 color_grey = '#30373e'
 
 
@@ -114,16 +114,16 @@ truncation_symbol = "…/"
 [git_branch]
 symbol = ""
 style = "bg:color_aqua"
-format = '[[ $symbol $branch ](fg:color_fg0 bg:color_teal)]($style)'
+format = '[[ $symbol $branch ](fg:color_fg0 bg:color_grey)]($style)'
 
 [git_status]
 style = "bg:color_aqua"
-format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_teal)]($style)'
+format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_grey)]($style)'
 
 [nodejs]
 symbol = ""
-style = "bg:color_blue"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+style = "bg:color_gold"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_gold)]($style)'
 
 [c]
 symbol = " "
