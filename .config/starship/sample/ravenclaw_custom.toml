@@ -28,9 +28,9 @@ $line_break$character"""
 #[](fg:color_bg3 bg:color_bg1)\
 #$time\
 
-palette = 'original'
+palette = 'ravenclaw'
 
-[palettes.original]
+[palettes.ravenclaw]
 color_fg0 = '#fbf1c7'
 color_bg1 = '#3c3836'
 color_bg3 = '#665c54'
