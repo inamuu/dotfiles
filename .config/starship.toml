@@ -122,22 +122,22 @@ format = '[[ $symbol( $version) ](fg:color_bg1 bg:color_5)]($style)'
 
 [rust]
 symbol = ""
-style = "bg:color_1"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_1)]($style)'
+style = "bg:color_5"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_5)]($style)'
 
 [ruby]
-style = "bg:color_2"
-format = '[[ $symbol( $version) ](fg:color_grey bg:color_2)]($style)'
+style = "bg:color_5"
+format = '[[ $symbol( $version) ](fg:color_grey bg:color_5)]($style)'
 
 [golang]
 symbol = ""
-style = "bg:color_1"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_1)]($style)'
+style = "bg:color_5"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_5)]($style)'
 
 [php]
 symbol = ""
-style = "bg:color_2"
-format = '[[ $symbol( $version) ](fg:color_grey bg:color_2)]($style)'
+style = "bg:color_5"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_5)]($style)'
 
 [python]
 symbol = ""
@@ -154,7 +154,7 @@ format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_5)]($style)'
 disabled = true
 symbol = ""
 style = "bg:color_bg3"
-format = '[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)'
+format = '[[ $symbol( $context) ](fg:color_fg0 bg:color_bg3)]($style)'
 
 [time]
 disabled = true
