@@ -22,13 +22,16 @@ tfatm() {
   terraform apply "${targets[@]}"
 }
 
+terraform_target() {
+  egrep -h "(^module\s|^resource\s)" *tf | awk '{print $1"."$2"."$3}' | sed -E 's/(\"|{)//g; s/\.$//' | fzf -m | xargs -I{} printf -- '-target=%s ' {}
+}
+
 tfz() {
   local subcommand="$1"
-  local target="$2"
 
   case "$subcommand" in
     i|init)
-      terraform plan -target="$target"
+      terraform init
       ;;
     f|fmt)
       terraform fmt
@@ -40,24 +43,27 @@ tfz() {
       terraform init && terraform fmt && terraform validate
     ;;
     p|plan)
-      TARGET=$(egrep -h "(^module\s|^resource\s)" *tf | awk '{print $1"."$2}' | sed 's/"//g' | fzf)
-      echo "terraform plan -target=${TARGET}"
-      terraform plan -target="${TARGET}"
+      target=$(terraform_target)
+      echo "terraform plan ${target}"
+      echo "DEBUG: [${target}]"
+
+      #NOTE:${=target}とすることで単語分割される
+      terraform plan ${=target}
       ;;
     tg)
-      TARGET=$(egrep -h "(^module\s|^resource\s)" *tf | awk '{print $1"."$2}' | sed 's/"//g' | fzf)
-      CTL=$(echo "plan\napply" | fzf)
-      printf "terraform ${CTL} -target=${TARGET}\n"
-      terraform ${CTL} -target=${TARGET}
+      target=$(terraform_target)
+      ctl=$(echo "plan\napply" | fzf)
+      printf "terraform ${ctl} ${target}\n"
+      terraform ${ctl} ${=target}
     ;;
     a|apply)
-      TARGET=$(egrep -h "(^module\s|^resource\s)" *tf | awk '{print $1"."$2}' | sed 's/"//g' | fzf)
-      echo "terraform apply -target=${TARGET}"
-      terraform apply -target="${TARGET}"
+      target=$(terraform_target)
+      echo "terraform apply ${target}"
+      terraform apply ${=target}
       ;;
     *|help)
-      cat << EOF
-Usage: tfz [subcommand] <target>
+      cat << eof
+usage: tfz [subcommand] <target>
 i   - init
 f   - fmt
 v   - validate
@@ -66,7 +72,7 @@ p   - plan -target
 tg  - plan or apply to target
 a   - apply
 
-EOF
+eof
     ;;
   esac
 }
