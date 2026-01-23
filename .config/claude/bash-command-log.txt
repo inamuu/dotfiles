@@ -1,0 +1,16 @@
+gh api notifications --jq '.[] | select(.reason == "mention") | {id: .id, title: .subject.title, type: .subject.type, url: .subject.url, updated_at: .updated_at, repository: .repository.full_name}' - GitHub通知からメンションのみを取得
+cd /Users/kazuma.inamura/ghq/github.com && find . -path "*/job-medley-env/*" -name "*.tf" -o -name "terraform.tfvars" 2>/dev/null | head -20 - job-medley-envリポジトリのTerraformファイルを探す
+cd /Users/kazuma.inamura/ghq/github.com/medley-inc/job-medley-env && rg -i "rds|database.*host|endpoint" terraform/jm-sandbox/shared/ -A 3 -B 1 - sandbox環境のRDS/DB設定を検索
+cd /Users/kazuma.inamura/ghq/github.com/medley-inc/job-medley-env && rg -i "module.*rds|aws_db_instance|cluster.*endpoint" terraform/jm-sandbox/ --type tf -A 5 -B 2 | head -100 - sandboxのRDSモジュールや設定を検索
+cd /Users/kazuma.inamura/ghq/github.com/medley-inc/job-medley-env && rg "aws_db_instance|aws_rds_cluster|module.*rds" terraform/jm-sandbox/ -A 5 -B 2 | head -150 - sandboxのRDS関連リソースを検索
+cd /Users/kazuma.inamura/ghq/github.com/medley-inc/job-medley-env && cat terraform/jm-sandbox/shared/data.tf - sandboxのdata.tfを確認
+cd /Users/kazuma.inamura/ghq/github.com/medley-inc/job-medley-env && rg "rds|database|mysql" terraform/jm-sandbox/group01/ -i -A 3 -B 1 | head -100 - group01のDB設定を検索
+cd /Users/kazuma.inamura/ghq/github.com/medley-inc/job-medley-env && cat terraform/jm-sandbox/group01/locals.tf | head -100 - group01のlocalsファイルを確認
+cd /Users/kazuma.inamura/ghq/github.com/medley-inc/job-medley-env && rg "db.*endpoint|rds.*endpoint|mysql.*host" terraform/jm-sandbox/group01/locals.tf -A 2 -B 1 - DB関連のエンドポイント設定を検索
+cd /Users/kazuma.inamura/ghq/github.com/medley-inc/job-medley-env && cat terraform/jm-sandbox/shared/locals.tf - shared localsファイルの全体を確認
+cd /Users/kazuma.inamura/ghq/github.com/medley-inc/job-medley-env && rg "mysql.*sb|sb.*mysql" terraform/jm-sandbox/ -A 5 -B 2 | head -80 - MySQLとsbに関連する設定を検索
+cd /Users/kazuma.inamura/ghq/github.com && find . -path "*/job-medley-env/terraform/jm-spot-sb*" -type d 2>/dev/null | head -10 - spot-sb関連のTerraformディレクトリを検索
+cd /Users/kazuma.inamura/ghq/github.com/medley-inc/job-medley-env && rg "nlb|network.*load.*balancer" terraform/jm-sandbox/ -i -A 5 -B 2 | grep -A 10 -B 10 mysql | head -50 - NLBとMySQLの関連を検索
+rg "spot-mysql-sb|mysql.*sb.*local" -A 3 -B 1 - プロジェクト内のMySQL接続設定を確認
+date -v-1d +%Y%m%d - 昨日の日付を取得
+ls -la /Users/kazuma.inamura/ghq/github.com/inamuu/obsidian/Vaults/Works/04.Projects/ - プロジェクト一覧を確認
