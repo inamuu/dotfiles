@@ -120,9 +120,10 @@ local config = {
 
       -- ステータスバーに一時的なステータスを表示
       window:set_right_status("📋 Copied!")
-      -- 3秒後にクリア
+      -- 3秒後に通常のステータスに戻す
       wezterm.time.call_after(3, function()
-        window:set_right_status("")
+        -- update-statusイベントを再トリガーして通常のステータスに戻す
+        window:emit('update-status', window, pane)
       end)
     end),
   },
@@ -211,28 +212,67 @@ wezterm.on('update-status', function(window, pane)
   end
 
   window:set_config_overrides(overrides)
+
+  -- アクティブなペインにステータスバーを表示
+  local status = wezterm.format({
+    { Foreground = { Color = '#8BE9FD' } },
+    { Text = ' ' .. workspace .. ' ' },
+  })
+  window:set_right_status(status)
 end)
 
 -- Tab style
-local SOLID_LEFT_ARROW = wezterm.nerdfonts.ple_lower_right_triangle
-local SOLID_RIGHT_ARROW = wezterm.nerdfonts.ple_upper_left_triangle
+local LEFT_DIVIDER = wezterm.nerdfonts.ple_upper_left_triangle
+local RIGHT_DIVIDER = wezterm.nerdfonts.ple_lower_right_triangle
+
+-- リポジトリ名を取得する関数
+local function get_repo_name(cwd_path)
+  if not cwd_path then
+    return ''
+  end
+
+  -- .gitディレクトリを探してリポジトリルートを見つける
+  local path = cwd_path
+  while path ~= '/' and path ~= '' do
+    local git_dir = path .. '/.git'
+    local f = io.open(git_dir, 'r')
+    if f then
+      f:close()
+      -- リポジトリルートのディレクトリ名を返す
+      return path:match("([^/]+)/?$") or path
+    end
+    -- 親ディレクトリに移動
+    path = path:match("(.*)/[^/]+/?$") or ''
+  end
+
+  -- .gitが見つからなかったらカレントディレクトリ名を返す
+  return cwd_path:match("([^/]+)/?$") or cwd_path
+end
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-  local background = "02B05D"
+  local background = "#7e7e7e"
   local foreground = "#FFFFFF"
   local edge_background = "none"
 
   if tab.is_active then
-    background = "#135AC2"
+    background = "#0e1a40"
     foreground = "#FFFFFF"
   end
 
   local edge_foreground = background
-  local title = "   " .. wezterm.truncate_right(tab.active_pane.title, max_width - 1) .. "   "
+
+  -- リポジトリ名またはカレントディレクトリ名を取得
+  local cwd_uri = tab.active_pane.current_working_dir
+  local name = ''
+  if cwd_uri then
+    name = get_repo_name(cwd_uri.file_path)
+  end
+
+  local title = "   " .. wezterm.truncate_right(name, max_width - 1) .. "   "
   return {
     { Background = { Color = edge_background } },
     { Foreground = { Color = edge_foreground } },
-    { Text = SOLID_LEFT_ARROW },
+    { Text = RIGHT_DIVIDER },
 
     { Background = { Color = background } },
     { Foreground = { Color = foreground } },
@@ -240,7 +280,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 
     { Background = { Color = edge_background } },
     { Foreground = { Color = edge_foreground } },
-    { Text = SOLID_RIGHT_ARROW },
+    { Text = LEFT_DIVIDER },
   }
 end)
 
