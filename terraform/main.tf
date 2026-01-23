@@ -6,10 +6,10 @@ resource "local_file" "test_copy_dotfiles" {
 
 resource "terraform_data" "brew_bundle" {
   provisioner "local-exec" {
-    command = "brew bundle --file ../Brewfile"
+    command = "brew bundle --file ../.config/homebrew/Brewfile"
   }
   triggers_replace = {
-    filesha256 = fileexists("../Brewfile") ? filesha256("../Brewfile") : "absent"
+    filesha256 = fileexists("../.config/homebrew/Brewfile") ? filesha256("../.config/homebrew/Brewfile") : "absent"
   }
 }
 

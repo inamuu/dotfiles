@@ -60,6 +60,7 @@ setopt HIST_NO_STORE        # histroyコマンドは記録しない
 
 ### homebrew
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+export HOMEBREW_BUNDLE_FILE="${HOME}/.config/homebrew/Brewfile"
 
 ### direnv
 [ $commands[direnv] ] && eval "$(direnv hook zsh)"
