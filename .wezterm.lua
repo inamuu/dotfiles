@@ -37,6 +37,7 @@ local config = {
   keys = {
     { key = '|', mods = 'LEADER|SHIFT', action = act.SplitHorizontal },
     { key = '-', mods = 'LEADER', action = act.SplitVertical },
+
     -- Enable copy mode
     { key = 'v', mods = 'LEADER', action = act.ActivateCopyMode },
     -- Move pane
@@ -54,6 +55,8 @@ local config = {
     { key = '8', mods = 'LEADER', action = act.ActivatePaneByIndex(7) },
     -- Pane zoom
     { key = 'z', mods = 'LEADER', action = act.TogglePaneZoomState },
+    -- Current pane close
+    { key = 'w', mods = 'LEADER', action = wezterm.action.CloseCurrentPane { confirm = true }, },
     -- Quick select mode
     { key = 'Space', mods = 'LEADER', action = act.QuickSelect },
     -- Others
