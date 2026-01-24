@@ -6,8 +6,12 @@ vim.opt.clipboard = "unnamedplus"
 
 vim.opt.guifont = "UDEV Gothic 35"
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 require("config.options")
 require("config.lazy")
+require("config.keymaps").setup()
 
 vim.opt.number = true
 
