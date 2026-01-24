@@ -33,6 +33,7 @@ terraform.tfstate.*.backup
 
 .codex/rules
 .codex/tmp/
+.codex/models_cache.json
 
 ### .config - Sensitive files
 
