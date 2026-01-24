@@ -44,8 +44,7 @@ tfz() {
     ;;
     p|plan)
       target=$(terraform_target)
-      echo "terraform plan ${target}"
-      echo "DEBUG: [${target}]"
+      printf "🚀 terraform plan ${target}\n"
 
       #NOTE:${=target}とすることで単語分割される
       terraform plan ${=target}
@@ -53,12 +52,12 @@ tfz() {
     tg)
       target=$(terraform_target)
       ctl=$(echo "plan\napply" | fzf)
-      printf "terraform ${ctl} ${target}\n"
+      printf "🚀 terraform ${ctl} ${target}\n"
       terraform ${ctl} ${=target}
     ;;
     a|apply)
       target=$(terraform_target)
-      echo "terraform apply ${target}"
+      printf "🚀 terraform apply ${target}"
       terraform apply ${=target}
       ;;
     *|help)
