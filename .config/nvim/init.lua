@@ -6,6 +6,7 @@ vim.opt.clipboard = "unnamedplus"
 
 vim.opt.guifont = "UDEV Gothic 35"
 
+require("config.options")
 require("config.lazy")
 
 vim.opt.number = true
