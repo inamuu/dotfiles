@@ -26,7 +26,7 @@ terraform_target() {
   egrep -h "(^module\s|^resource\s)" *tf | awk '{print $1"."$2"."$3}' | sed -E 's/(\"|{)//g; s/\.$//' | fzf -m | xargs -I{} printf -- '-target=%s ' {}
 }
 
-tfz() {
+_tfz() {
   local subcommand="$1"
 
   case "$subcommand" in
