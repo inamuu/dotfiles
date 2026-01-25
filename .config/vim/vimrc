@@ -1,12 +1,19 @@
+if empty($XDG_CONFIG_HOME)
+      let $XDG_CONFIG_HOME = expand('~/.config')
+endif
+set runtimepath^=$XDG_CONFIG_HOME/vim
+set runtimepath+=$XDG_CONFIG_HOME/vim/after
+set packpath^=$XDG_CONFIG_HOME/vim
+set packpath+=$XDG_CONFIG_HOME/vim/after
+set runtimepath+=$XDG_CONFIG_HOME/vim/colors/dracula
+
+
 syntax enable
 """ 以下のコマンドは :colorscheme の前に設定します
 """ コメントを濃い緑にする
 autocmd ColorScheme * highlight Comment ctermfg=31 guifg=#008800
 
 """ インストール手順: https://draculatheme.com/vim
-if v:version < 802
-    packadd! dracula
-endif
 colorscheme dracula
 
 set guifont=UDEV\ Gothic\ 35:h14
