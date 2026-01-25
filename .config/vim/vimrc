@@ -7,6 +7,14 @@ set packpath^=$XDG_CONFIG_HOME/vim
 set packpath+=$XDG_CONFIG_HOME/vim/after
 set runtimepath+=$XDG_CONFIG_HOME/vim/colors/dracula
 
+if empty($XDG_STATE_HOME)
+  let $XDG_STATE_HOME = expand('~/.local/state')
+endif
+if !isdirectory($XDG_STATE_HOME . '/vim')
+  call mkdir($XDG_STATE_HOME . '/vim', 'p')
+endif
+set viminfofile=$XDG_STATE_HOME/vim/viminfo
+
 
 syntax enable
 """ 以下のコマンドは :colorscheme の前に設定します

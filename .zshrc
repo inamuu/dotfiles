@@ -1,12 +1,17 @@
-### XDG
-export XDG_CONFIG_HOME=${HOME}/.config
-export XDG_DATA_HOME=${HOME}/.local/share
-export XDG_CACHE_HOME=${HOME}/.cache
-
 ### PATHを追加
 export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/ghq/github.com/inamuu/tools:$PATH
+
+### XDG history/cache
+export HISTFILE="$XDG_STATE_HOME/zsh/history"
+export LESSHISTFILE="$XDG_STATE_HOME/less/history"
+export MYSQL_HISTFILE="$XDG_DATA_HOME/mysql_history"
+export ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
+
+[[ -d "$XDG_STATE_HOME/zsh" ]] || mkdir -p "$XDG_STATE_HOME/zsh"
+[[ -d "$XDG_STATE_HOME/less" ]] || mkdir -p "$XDG_STATE_HOME/less"
+[[ -d "$XDG_CACHE_HOME/zsh" ]] || mkdir -p "$XDG_CACHE_HOME/zsh"
 
 ### Kiro CLI, pre block. Keep at the top of this file.
 [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
@@ -102,6 +107,7 @@ alias cl='claude'
 export LESS='-i -M -R'
 
 ### Terraform
+export TF_CLI_CONFIG_FILE="$XDG_CONFIG_HOME/terraform/terraformrc"
 export TF_CLI_ARGS_plan="--parallelism=30"
 export TF_CLI_ARGS_apply="--parallelism=30"
 
@@ -129,9 +135,9 @@ alias tffp='terraform state list | fzf --multi --preview "terraform state show {
 alias tffa='terraform state list | fzf --multi --preview "terraform state show {}" | sed "s/^/-target=/" | xargs terraform apply '
 
 ### terraform logs
-[ ! -d "${HOME}/.config/terraform/logs/$(date +%Y/%m/%d/)" ] && mkdir -p ${HOME}/.config/terraform/logs/$(date +%Y/%m/%d/)
+[ ! -d "$XDG_CONFIG_HOME/terraform/logs/$(date +%Y/%m/%d/)" ] && mkdir -p $XDG_CONFIG_HOME/terraform/logs/$(date +%Y/%m/%d/)
 export TF_LOG=ERROR
-export TF_LOG_PATH=${HOME}/.config/terraform/logs/$(date +%Y/%m/%d)/terraform.$(date +%Y%m%d%H%M%S).log
+export TF_LOG_PATH=$XDG_CONFIG_HOME/terraform/logs/$(date +%Y/%m/%d)/terraform.$(date +%Y%m%d%H%M%S).log
 
 ### Alias(Git)
 alias g='git'
