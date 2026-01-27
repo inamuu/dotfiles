@@ -21,6 +21,10 @@ local config = {
   -- ime
   use_ime = true,
 
+  -- Cursor
+  default_cursor_style = 'BlinkingBlock',
+  cursor_blink_rate = 700,
+
   -- Color Scheme: https://wezfurlong.org/wezterm/colorschemes/index.html
   -- color_scheme = 'Dracula (Official)',
   -- color_scheme = 'darkmoss (base16)',
