@@ -76,3 +76,5 @@ if argc() == 0
     execute 'edit ' . s:file_path
 endif
 
+""" .txt files as markdown for syntax highlighting
+autocmd BufNewFile,BufRead *.txt setfiletype markdown
