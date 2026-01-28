@@ -83,3 +83,6 @@ tftui.plan
 # anyenv
 .config/anyenv/anyenv-install
 
+# k9s
+.config/k9s/*
+
