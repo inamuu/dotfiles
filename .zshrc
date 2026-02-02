@@ -157,6 +157,14 @@ if [ $commands[kubectl] ]; then
 fi
 alias kc=kubectl
 
+### AWS CLI
+# aws-cli補完を有効化
+if [ $commands[aws] ]; then
+  autoload bashcompinit && bashcompinit
+  autoload -Uz compinit && compinit
+  complete -C aws_completer aws
+fi
+
 # colorize kubectl diff
 export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
 
