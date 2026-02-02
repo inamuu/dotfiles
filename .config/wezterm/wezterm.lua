@@ -16,7 +16,7 @@ local config = {
 		-- family = 'UDEV Gothic 35', weight = 'Bold',
 		-- family = 'Hack Nerd Font Mono', weight = 'Bold',
 	}),
-	font_size = 15.0,
+	font_size = 17.0,
 
 	-- ime
 	use_ime = true,
