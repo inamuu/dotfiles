@@ -31,5 +31,5 @@ function fzf-history-selection() {
 }
 
 zle -N fzf-history-selection
-bindkey '^R' fzf-history-selection
+bindkey '^Rr' fzf-history-selection
 
