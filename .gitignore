@@ -86,3 +86,5 @@ tftui.plan
 # k9s
 .config/k9s/*
 
+# Amazon
+.config/Amazon/KPR.ini
