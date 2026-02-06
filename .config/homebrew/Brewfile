@@ -176,6 +176,7 @@ if OS.mac?
     #"docker",
     "firefox",
     "font-hack-nerd-font",
+    "hammerspoon",
     #"iterm2",
     "karabiner-elements",
     #"macvim-app",
@@ -203,4 +204,3 @@ end
 #unless File.directory?(clone_dir)
 #  system("git clone #{repository_url} #{clone_dir}")
 #end
-
