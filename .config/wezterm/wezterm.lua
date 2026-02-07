@@ -42,6 +42,20 @@ local config = {
 		{ key = "|", mods = "LEADER|SHIFT", action = act.SplitHorizontal },
 		{ key = "-", mods = "LEADER", action = act.SplitVertical },
 
+		-- Show pane labels overlay (press Leader then "o")
+		-- Note: WezTerm cannot trigger an action on "leader press only"; it always needs the next key.
+		-- PaneSelect exits automatically when you type the label; expanding the alphabet reduces cases
+		-- where you need to type 2 characters (and the overlay appears to "stick").
+		{
+			key = "o",
+			mods = "LEADER",
+			action = act.PaneSelect({
+				alphabet = "1234567890abcdefghijklmnopqrstuvwxyz",
+				mode = "Activate",
+				show_pane_ids = true,
+			}),
+		},
+
 		-- Enable copy mode
 		{ key = "v", mods = "LEADER", action = act.ActivateCopyMode },
 		-- Move pane
@@ -187,51 +201,40 @@ local config = {
 	},
 }
 
--- Set window title to workspace name
-wezterm.on("format-window-title", function(tab, pane, tabs, panes, config)
-	local workspace = wezterm.mux.get_active_workspace()
-	return workspace
-end)
-
--- Change color scheme based on workspace
-wezterm.on("update-status", function(window, pane)
-	local workspace = window:active_workspace()
-	local overrides = window:get_config_overrides() or {}
-
-	-- defaultワークスペースはDraculaのまま
-	if workspace == "default" then
-		overrides.color_scheme = "Dracula (Gogh)"
-	else
-		-- ワークスペース名のハッシュ値で色を決定
-		local hash = 0
-		for i = 1, #workspace do
-			hash = hash + string.byte(workspace, i)
-		end
-
-		local color_schemes = {
-			"Tokyo Night",
-			"Gruvbox Dark (Gogh)",
-			"Monokai (dark) (terminal.sexy)",
-			"Night Owl (Gogh)",
-		}
-
-		local scheme_index = (hash % #color_schemes) + 1
-		overrides.color_scheme = color_schemes[scheme_index]
+-- macOS: leader待機に入った瞬間にIMEをOFF(英数/ABCへ)に寄せる。
+-- 事前条件:
+-- - メニューバーに「入力メニュー」を表示している
+-- - WezTerm にアクセシビリティ権限がある（System Events操作のため）
+local function macos_ime_off()
+	if not wezterm.target_triple or not wezterm.target_triple:find("apple") then
+		return
 	end
 
-	window:set_config_overrides(overrides)
-
-	-- アクティブなペインにステータスバーを表示
-	local status = wezterm.format({
-		{ Foreground = { Color = "#8BE9FD" } },
-		{ Text = " " .. workspace .. " " },
-	})
-	window:set_right_status(status)
-end)
-
--- Tab style
-local LEFT_DIVIDER = wezterm.nerdfonts.ple_upper_left_triangle
-local RIGHT_DIVIDER = wezterm.nerdfonts.ple_lower_right_triangle
+	local script = [[
+tell application "System Events"
+  tell process "SystemUIServer"
+    try
+      set theItem to (first menu bar item of menu bar 1 whose description is "text input")
+      click theItem
+      tell menu 1 of theItem
+        if exists menu item "ABC" then
+          click menu item "ABC"
+        else if exists menu item "英数" then
+          click menu item "英数"
+        else if exists menu item "U.S." then
+          click menu item "U.S."
+        else if exists menu item "Alphanumeric" then
+          click menu item "Alphanumeric"
+        end if
+      end tell
+    end try
+  end tell
+  key code 53
+end tell
+]]
+	-- 失敗してもWezTerm側の動作は継続させたいので、結果は捨てる
+	wezterm.run_child_process({ "/usr/bin/osascript", "-e", script })
+end
 
 -- リポジトリ名を取得する関数
 local function get_repo_name(cwd_path)
@@ -256,6 +259,78 @@ local function get_repo_name(cwd_path)
 	-- .gitが見つからなかったらカレントディレクトリ名を返す
 	return cwd_path:match("([^/]+)/?$") or cwd_path
 end
+
+-- Set window title to workspace name
+wezterm.on("format-window-title", function(tab, pane, tabs, panes, config)
+	local workspace = wezterm.mux.get_active_workspace()
+	return workspace
+end)
+
+-- Change color scheme based on workspace
+wezterm.on("update-status", function(window, pane)
+	local workspace = window:active_workspace()
+	local overrides = window:get_config_overrides() or {}
+
+	-- leaderがアクティブになった瞬間だけIMEをOFFに寄せる
+	local leader_active = false
+	if window.leader_is_active then
+		leader_active = window:leader_is_active()
+	end
+	wezterm.GLOBAL.__leader_active_by_window = wezterm.GLOBAL.__leader_active_by_window or {}
+	local win_id = window:window_id()
+	local prev_leader_active = wezterm.GLOBAL.__leader_active_by_window[win_id] or false
+	if leader_active and not prev_leader_active then
+		wezterm.GLOBAL.__leader_active_by_window[win_id] = true
+		macos_ime_off()
+	elseif (not leader_active) and prev_leader_active then
+		wezterm.GLOBAL.__leader_active_by_window[win_id] = false
+	end
+
+	-- defaultワークスペースはDraculaのまま
+	if workspace == "default" then
+		overrides.color_scheme = "Dracula (Gogh)"
+	else
+		-- ワークスペース名のハッシュ値で色を決定
+		local hash = 0
+		for i = 1, #workspace do
+			hash = hash + string.byte(workspace, i)
+		end
+
+		local color_schemes = {
+			"Tokyo Night",
+			"Gruvbox Dark (Gogh)",
+			"Monokai (dark) (terminal.sexy)",
+			"Night Owl (Gogh)",
+		}
+
+		local scheme_index = (hash % #color_schemes) + 1
+		overrides.color_scheme = color_schemes[scheme_index]
+	end
+
+	window:set_config_overrides(overrides)
+
+	-- アクティブpaneの「今どこ？」が分かるように、workspace + cwd + pane id を出す
+	local cwd_uri = pane:get_current_working_dir()
+	local cwd_path = cwd_uri and cwd_uri.file_path or nil
+	local where = ""
+	if cwd_path then
+		where = get_repo_name(cwd_path)
+	end
+
+	local status = wezterm.format({
+		{ Foreground = { Color = "#8BE9FD" } },
+		{ Text = " " .. (leader_active and "LDR " or "") .. workspace .. " " },
+		{ Foreground = { Color = "#F1FA8C" } },
+		{ Text = (where ~= "" and (" " .. where .. " ") or "") },
+		{ Foreground = { Color = "#50FA7B" } },
+		{ Text = " pane:" .. tostring(pane:pane_id()) .. " " },
+	})
+	window:set_right_status(status)
+end)
+
+-- Tab style
+local LEFT_DIVIDER = wezterm.nerdfonts.ple_upper_left_triangle
+local RIGHT_DIVIDER = wezterm.nerdfonts.ple_lower_right_triangle
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
 	local background = "#7e7e7e"
