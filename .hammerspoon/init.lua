@@ -34,15 +34,10 @@ local APPS = {
 }
 
 -- User config: edit these hotkeys freely.
--- Example: Ctrl+Cmd+Option+1 => pattern1
+-- Example: Ctrl+Cmd+; => layout modal
 local HOTKEY_SPECS = {
-  { mods = { "ctrl", "cmd", }, key = "1", pattern = "pattern1" },
-  { mods = { "ctrl", "cmd", }, key = "2", pattern = "pattern2" },
-  { mods = { "ctrl", "cmd", }, key = "3", pattern = "pattern3" },
-  { mods = { "ctrl", "cmd", }, key = "4", pattern = "pattern4" },
-  { mods = { "ctrl", "cmd", }, key = "5", pattern = "pattern5" },
-  { mods = { "ctrl", "cmd", }, key = "6", pattern = "pattern6" },
-  { mods = { "ctrl", "cmd", }, key = "7", pattern = "pattern7" },
+  -- Layout modal (prefix key)
+  { mods = { "ctrl", "cmd", }, key = ";", pattern = "__layout_modal__" },
   -- Utilities
   { mods = { "ctrl", "cmd", }, key = "r", pattern = "__reload__" },
 }
@@ -77,15 +72,100 @@ local QUIT_ALL = {
 -- Pattern definitions:
 -- weights: column weights (e.g. {2,1} => 66%/34%)
 -- apps: ordered list mapped to columns left->right
-local PATTERNS = {
-  pattern1 = { title = "2:1 Chrome + WezTerm", weights = { 2, 1 }, apps = { APPS.chrome, APPS.wezterm } },
-  pattern2 = { title = "2:1 Chrome + Slack",   weights = { 2, 1 }, apps = { APPS.chrome, APPS.slack } },
-  pattern3 = { title = "2:1 Chrome + WezTerm", weights = { 2, 1 }, apps = { APPS.chrome, APPS.wezterm } },
-  pattern4 = { title = "1:1 Chrome + WezTerm", weights = { 1, 1 }, apps = { APPS.chrome, APPS.wezterm } },
-  pattern5 = { title = "1:2 Chrome + WezTerm", weights = { 1, 2 }, apps = { APPS.chrome, APPS.wezterm } },
-  pattern6 = { title = "1:1 WezTerm + Finder", weights = { 1, 1 }, apps = { APPS.wezterm, APPS.finder } },
-  pattern7 = { title = "1:1:1 Chrome + WezTerm + Slack", weights = { 1, 1, 1 }, apps = { APPS.chrome, APPS.wezterm, APPS.slack } },
+local RATIO_VARIANTS_2 = {
+  { id = "11", title = "1:1", weights = { 1, 1 } },
+  { id = "21", title = "2:1", weights = { 2, 1 } },
+  { id = "12", title = "1:2", weights = { 1, 2 } },
 }
+
+local APP_CODEBOOK = {
+  c = { title = "Chrome", app = APPS.chrome },
+  w = { title = "WezTerm", app = APPS.wezterm },
+  s = { title = "Slack", app = APPS.slack },
+  o = { title = "Obsidian", app = APPS.obsidian },
+  f = { title = "Finder", app = APPS.finder },
+}
+
+-- Code order used to generate sets/patterns.
+local APP_CODE_ORDER = { "c", "w", "s", "o", "f" }
+
+local function appSetTitle(codes)
+  local parts = {}
+  for _, code in ipairs(codes) do
+    local e = APP_CODEBOOK[code]
+    table.insert(parts, e and e.title or "?")
+  end
+  return table.concat(parts, " + ")
+end
+
+local APP_SETS = {}
+do
+  local codes = APP_CODE_ORDER
+
+  -- 2-app permutations (order matters: left->right)
+  for _, a in ipairs(codes) do
+    for _, b in ipairs(codes) do
+      if a ~= b then
+        local key = a .. b
+        APP_SETS[key] = {
+          title = appSetTitle({ a, b }),
+          apps = { APP_CODEBOOK[a].app, APP_CODEBOOK[b].app },
+          codes = { a, b },
+        }
+      end
+    end
+  end
+
+  -- 3-app permutations (order matters: left->right)
+  for _, a in ipairs(codes) do
+    for _, b in ipairs(codes) do
+      if a ~= b then
+        for _, c in ipairs(codes) do
+          if c ~= a and c ~= b then
+            local key = a .. b .. c
+            APP_SETS[key] = {
+              title = appSetTitle({ a, b, c }),
+              apps = { APP_CODEBOOK[a].app, APP_CODEBOOK[b].app, APP_CODEBOOK[c].app },
+              codes = { a, b, c },
+            }
+          end
+        end
+      end
+    end
+  end
+end
+
+local function patternKey(setKey, ratioID)
+  return ("%s_%s"):format(setKey, ratioID)
+end
+
+local PATTERNS = {}
+do
+  -- 2-app sets: 1:1 / 2:1 / 1:2
+  for setKey, set in pairs(APP_SETS) do
+    if #set.apps == 2 then
+      for _, v in ipairs(RATIO_VARIANTS_2) do
+        local key = patternKey(setKey, v.id)
+        PATTERNS[key] = {
+          title = ("%s %s"):format(v.title, set.title),
+          weights = v.weights,
+          apps = set.apps,
+        }
+      end
+    end
+  end
+
+  -- 3-app sets: 1:1:1
+  for setKey, set in pairs(APP_SETS) do
+    if #set.apps == 3 then
+      PATTERNS[patternKey(setKey, "111")] = {
+        title = ("1:1:1 %s"):format(set.title),
+        weights = { 1, 1, 1 },
+        apps = set.apps,
+      }
+    end
+  end
+end
 
 local function sum(tbl)
   local s = 0
@@ -235,6 +315,131 @@ local function applyPattern(patternKey)
   log("applied pattern=%s title=%s", patternKey, p.title)
 end
 
+-- Layout modal
+--
+-- Rationale: patterns quickly exceed what Ctrl+Cmd+1..9 can cover.
+-- Use a 3-stroke flow: Prefix -> choose apps (2-3 keys) -> choose ratio.
+local function buildLayoutModal()
+  local modal = hs.hotkey.modal.new()
+  local state = { setKey = nil, picked = {} }
+  local helpAlertSeconds = 12
+  local statusAlertSeconds = 2.0
+  local lastAlertID = nil
+
+  local function closeModalAlert()
+    if lastAlertID then
+      hs.alert.closeSpecific(lastAlertID)
+      lastAlertID = nil
+    end
+  end
+
+  local function showModalAlert(text, seconds)
+    -- Avoid stale overlays hanging around after selections.
+    closeModalAlert()
+    lastAlertID = hs.alert.show(text, hs.alert.defaultStyle, targetScreen(), seconds)
+  end
+
+  local function helpText()
+    return table.concat({
+      "Tile:",
+      "Apps: c=Chrome w=WezTerm s=Slack o=Obsidian f=Finder",
+      "Pick: 2 apps (e.g. cw) or 3 apps (e.g. cws), order matters (left->right)",
+      "Ratio: 1=1:1 2=2:1 3=1:2 (3 appsは 1 のみ)",
+      "Del=clear Esc=cancel",
+    }, "\n")
+  end
+
+  function modal:entered()
+    state.setKey = nil
+    state.picked = {}
+    showModalAlert(helpText(), helpAlertSeconds)
+  end
+
+  function modal:exited()
+    closeModalAlert()
+  end
+
+  modal:bind({}, "escape", function() modal:exit() end)
+
+  modal:bind({}, "delete", function()
+    state.setKey = nil
+    state.picked = {}
+    showModalAlert(helpText(), helpAlertSeconds)
+  end)
+  modal:bind({}, "forwarddelete", function()
+    state.setKey = nil
+    state.picked = {}
+    showModalAlert(helpText(), helpAlertSeconds)
+  end)
+
+  local function pickApp(code)
+    return function()
+      if not APP_CODEBOOK[code] then return end
+
+      for _, c in ipairs(state.picked) do
+        if c == code then
+          showModalAlert("Tile: 同じアプリは複数選べません", statusAlertSeconds)
+          return
+        end
+      end
+
+      table.insert(state.picked, code)
+      if #state.picked > 3 then
+        state.picked = { code }
+      end
+
+      local key = table.concat(state.picked, "")
+      local set = APP_SETS[key]
+      if set and (#state.picked == 2 or #state.picked == 3) then
+        state.setKey = key
+        showModalAlert(("Tile: set=%s  ratio(1/2/3)"):format(set.title), statusAlertSeconds)
+        return
+      end
+
+      state.setKey = nil
+      showModalAlert(("Tile: pick=%s"):format(appSetTitle(state.picked)), statusAlertSeconds)
+    end
+  end
+
+  for code, _ in pairs(APP_CODEBOOK) do
+    modal:bind({}, code, pickApp(code))
+  end
+
+  local function applyRatio(ratioID)
+    return function()
+      if not state.setKey then
+        showModalAlert("Tile: まずアプリを2つ(または3つ)選択してください (c/w/s/o/f)", statusAlertSeconds)
+        return
+      end
+
+      local set = APP_SETS[state.setKey]
+      if set and #set.apps == 3 and ratioID ~= "111" then
+        showModalAlert("Tile: 3アプリは 1 のみ対応です", statusAlertSeconds)
+        return
+      end
+
+      closeModalAlert()
+      applyPattern(patternKey(state.setKey, ratioID))
+      modal:exit()
+    end
+  end
+
+  modal:bind({}, "1", function()
+    local set = state.setKey and APP_SETS[state.setKey] or nil
+    if set and #set.apps == 3 then
+      applyRatio("111")()
+      return
+    end
+    applyRatio("11")()
+  end)
+  modal:bind({}, "2", applyRatio("21"))
+  modal:bind({}, "3", applyRatio("12"))
+
+  return modal
+end
+
+local LAYOUT_MODAL = buildLayoutModal()
+
 -- Menu bar (resident)
 local menubar = hs.menubar.new()
 if menubar then
@@ -244,7 +449,11 @@ if menubar then
     table.insert(items, { title = "Reload Config", fn = hs.reload })
     table.insert(items, { title = "Open Console", fn = hs.openConsole })
     table.insert(items, { title = "-" })
-    for key, p in pairs(PATTERNS) do
+    local keys = {}
+    for key, _ in pairs(PATTERNS) do table.insert(keys, key) end
+    table.sort(keys)
+    for _, key in ipairs(keys) do
+      local p = PATTERNS[key]
       table.insert(items, { title = key .. ": " .. p.title, fn = function() applyPattern(key) end })
     end
     return items
@@ -257,6 +466,10 @@ for _, spec in ipairs(HOTKEY_SPECS) do
   if spec.pattern == "__reload__" then
     hs.hotkey.bind(spec.mods, spec.key, function()
       hs.reload()
+    end)
+  elseif spec.pattern == "__layout_modal__" then
+    hs.hotkey.bind(spec.mods, spec.key, function()
+      LAYOUT_MODAL:enter()
     end)
   else
     hs.hotkey.bind(spec.mods, spec.key, function()
