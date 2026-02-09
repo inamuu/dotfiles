@@ -1,8 +1,4 @@
 locals {
-  link_files = [
-    ".test.txt",
-    ".vimrc"
-  ]
   # ファイル一覧を生成
   all_dotfiles = fileset("${abspath(path.module)}/..", ".*")
 
