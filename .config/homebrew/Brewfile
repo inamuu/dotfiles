@@ -6,6 +6,7 @@ cask_args appdir: "/Applications"
 
 ### Tap list
 tap_list = [
+  "inamuu/tap",
   "FelixKratz/formulae",
   "dotenvx/brew",
   "fluxcd/tap",
@@ -113,6 +114,7 @@ brew_list = [
   "terraformer",
   "tflint",
   "tftui",
+  "tfz",
   "tig",
   "tmux",
   "tree",
