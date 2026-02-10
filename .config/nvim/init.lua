@@ -16,7 +16,11 @@ require("config.keymaps").setup()
 vim.opt.number = true
 
 -- 設定ファイルリロードのショートカット
-vim.keymap.set("n", "<leader>r", ":source ~/.config/nvim/init.lua<CR>", { desc = "設定ファイルをリロード" })
+vim.keymap.set("n", "<leader>r", function()
+  vim.cmd("source ~/.config/nvim/init.lua")
+  vim.cmd("LspRestart")
+  print("設定とLSPを再起動しました")
+end, { desc = "設定ファイルをリロードしてLSPを再起動" })
 
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()
