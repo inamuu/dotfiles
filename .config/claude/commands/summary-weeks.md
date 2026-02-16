@@ -13,7 +13,7 @@ description: "一週間なにをやったかのサマリーを作成します。
 
 ## 検索対象ディレクトリ
 
-${HOME}/ghq/github.com/inamuu/obsidian/Vaults/Works/02.Daily
+${HOME}/ghq/github.com/inamuu/data/Acta/
 
 ## 出力形式
 
@@ -27,7 +27,6 @@ markdown
 ## ここに大タスク2
  - ここに子タスク1
  - ここに子タスク2
-```
 
 ### 全体を通してなにをやったか
 
