@@ -168,8 +168,8 @@ disabled = false
 
 [character]
 disabled = false
-success_symbol = '[](bold fg:color_5)'
-error_symbol = '[](bold fg:color_4)'
+success_symbol = '[\$](bold fg:color_5)'
+error_symbol = '[\$](bold fg:color_4)'
 vimcmd_symbol = '[](bold fg:color_5)'
 vimcmd_replace_one_symbol = '[](bold fg:color_1)'
 vimcmd_replace_symbol = '[](bold fg:color_1)'

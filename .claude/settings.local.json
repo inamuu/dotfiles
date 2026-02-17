@@ -1,0 +1,6 @@
+{
+  "enabledMcpjsonServers": [
+    "aws-mcp"
+  ],
+  "enableAllProjectMcpServers": true
+}
