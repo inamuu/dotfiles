@@ -80,35 +80,135 @@ local config = {
 		-- Others
 		{ key = "Enter", mods = "SHIFT", action = act.SendString("\n") },
 
-		-- Workspace: https://wezterm.org/config/lua/keyassignment/SwitchToWorkspace.html
+		-- Workspace: 選択と作成を統合（モダンデザイン）
 		{
 			key = "s",
 			mods = "LEADER",
-			action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES", title = "Select workspace" }),
-		},
-		{
-			key = "c",
-			mods = "LEADER",
-			action = act.PromptInputLine({
-				description = wezterm.format({
-					{ Attribute = { Intensity = "Bold" } },
-					{ Foreground = { AnsiColor = "Fuchsia" } },
-					{ Text = "Enter name for new workspace" },
-				}),
-				action = wezterm.action_callback(function(window, pane, line)
-					-- line will be `nil` if they hit escape without entering anything
-					-- An empty string if they just hit enter
-					-- Or the actual line of text they wrote
-					if line then
-						window:perform_action(
-							act.SwitchToWorkspace({
-								name = line,
+			action = wezterm.action_callback(function(window, pane)
+				local mux = wezterm.mux
+				local workspaces = mux.get_workspace_names()
+				local current_workspace = window:active_workspace()
+
+				if #workspaces > 0 then
+					-- 既存のworkspaceがある場合：fuzzy選択 + 新規作成オプション
+					local choices = {}
+
+					-- Workspace一覧を作成
+					for idx, name in ipairs(workspaces) do
+						local is_current = (name == current_workspace)
+						local icon = is_current and "●" or "○"
+						local status = is_current and " (current)" or ""
+
+						table.insert(choices, {
+							id = name,
+							label = wezterm.format({
+								{ Foreground = { Color = "#8BE9FD" } },  -- Cyan
+								{ Text = icon .. " " },
+								{ Foreground = { Color = "#F8F8F2" } },  -- White
+								{ Attribute = { Intensity = is_current and "Bold" or "Normal" } },
+								{ Text = name },
+								{ Foreground = { Color = "#6272A4" } },  -- Comment gray
+								{ Attribute = { Intensity = "Normal" } },
+								{ Text = status },
 							}),
-							pane
-						)
+						})
 					end
-				end),
-			}),
+
+					-- セパレーター
+					table.insert(choices, {
+						id = "__separator__",
+						label = wezterm.format({
+							{ Foreground = { Color = "#44475A" } },
+							{ Text = "─────────────────────────────────" },
+						}),
+					})
+
+					-- 新規作成オプション
+					table.insert(choices, {
+						id = "__new__",
+						label = wezterm.format({
+							{ Foreground = { Color = "#50FA7B" } },  -- Green
+							{ Text = "✨ " },
+							{ Foreground = { Color = "#F8F8F2" } },
+							{ Attribute = { Intensity = "Bold" } },
+							{ Text = "Create New Workspace" },
+						}),
+					})
+
+					window:perform_action(
+						act.InputSelector({
+							title = wezterm.format({
+								{ Foreground = { Color = "#BD93F9" } },  -- Purple
+								{ Attribute = { Intensity = "Bold" } },
+								{ Text = "  Workspaces " },
+								{ Foreground = { Color = "#6272A4" } },
+								{ Attribute = { Intensity = "Normal" } },
+								{ Text = " (" .. #workspaces .. " active)" },
+							}),
+							choices = choices,
+							fuzzy = true,
+							fuzzy_description = wezterm.format({
+								{ Foreground = { Color = "#6272A4" } },
+								{ Text = "Type to filter • ↑↓ Navigate • Enter Select • Esc Cancel" },
+							}),
+							action = wezterm.action_callback(function(win, p, id, label)
+								if not id then
+									return
+								end
+								if id == "__new__" then
+									-- 新規作成モード
+									win:perform_action(
+										act.PromptInputLine({
+											description = wezterm.format({
+												{ Foreground = { Color = "#50FA7B" } },
+												{ Text = "✨ " },
+												{ Foreground = { Color = "#BD93F9" } },
+												{ Attribute = { Intensity = "Bold" } },
+												{ Text = "New Workspace Name" },
+												{ Foreground = { Color = "#6272A4" } },
+												{ Attribute = { Intensity = "Normal" } },
+												{ Text = "  │  Enter a unique name" },
+											}),
+											action = wezterm.action_callback(function(w, pa, line)
+												if line and line ~= "" then
+													w:perform_action(act.SwitchToWorkspace({ name = line }), pa)
+												end
+											end),
+										}),
+										p
+									)
+								elseif id ~= "__separator__" then
+									-- 既存workspaceを選択
+									win:perform_action(act.SwitchToWorkspace({ name = id }), p)
+								end
+							end),
+						}),
+						pane
+					)
+				else
+					-- 既存workspaceがない場合：直接作成
+					window:perform_action(
+						act.PromptInputLine({
+							description = wezterm.format({
+								{ Foreground = { Color = "#50FA7B" } },
+								{ Text = "✨ " },
+								{ Foreground = { Color = "#BD93F9" } },
+								{ Attribute = { Intensity = "Bold" } },
+								{ Text = "New Workspace Name" },
+								{ Foreground = { Color = "#6272A4" } },
+								{ Attribute = { Intensity = "Normal" } },
+								{ Text = "  │  Enter a unique name" },
+							}),
+							action = wezterm.action_callback(function(win, p, line)
+								if line and line ~= "" then
+									win:perform_action(act.SwitchToWorkspace({ name = line }), p)
+								end
+							end),
+						}),
+						pane
+					)
+				end
+			end),
 		},
 		-- 直前のコマンドと出力をコピー
 		{
