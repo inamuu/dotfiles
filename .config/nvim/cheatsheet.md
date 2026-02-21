@@ -14,6 +14,8 @@
 ## ファイル操作・検索
 - `<leader><leader>` ファイル検索
 - `<leader>sg` Grep
+- `<leader>w` 現在ファイルを保存
+- `<leader>W` 開いているファイルをすべて保存
 
 ## バッファ移動
 - `<S-h>` (Shift + h) 前のバッファへ移動
