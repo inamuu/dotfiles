@@ -7,6 +7,7 @@
 .vim/colors
 .vim/pack
 .vscode/settings.json
+.config/vim/.netrwhist
 
 ### Docker
 docker-compose.override.yml
@@ -19,6 +20,8 @@ docker-compose.override.yml
 .codex/sessions/*
 .codex/config.toml
 .codex/skills/.system/
+.codex/.codex-global-state.json
+.codex/shell_snapshots/
 
 ### Terraform
 
@@ -35,6 +38,8 @@ terraform.tfstate.*.backup
 .codex/tmp/
 .codex/models_cache.json
 .codex/version.json
+.codex/sqlite/
+.codex/vendor_imports/
 
 ### .config - Sensitive files
 
@@ -70,8 +75,9 @@ terraform.tfstate.*.backup
 # tftui
 tftui.plan
 
-# Neovim lock file (auto-generated)
+# Neovim
 .config/nvim/lazy-lock.json
+.nvimlog
 
 # Karabiner automatic backups
 .config/karabiner/automatic_backups/
