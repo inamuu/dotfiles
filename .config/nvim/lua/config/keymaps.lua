@@ -38,6 +38,10 @@ function M.setup()
 	vim.keymap.set("n", "<C-w>-", "<cmd>split<cr>", { desc = "水平分割" })
 	vim.keymap.set("n", "<C-w>|", "<cmd>vsplit<cr>", { desc = "垂直分割" })
 	vim.keymap.set("n", "<C-w>?", M.open_cheatsheet, { desc = "チートシート" })
+	vim.keymap.set({ "n", "v" }, "<leader>w", "<cmd>update<cr>", { desc = "ファイル保存" })
+	vim.keymap.set("n", "<leader>W", "<cmd>wall<cr>", { desc = "全ファイル保存" })
+	vim.keymap.set({ "n", "v" }, "<D-s>", "<cmd>update<cr>", { desc = "ファイル保存 (Command+S)" })
+	vim.keymap.set("i", "<D-s>", "<C-o><cmd>update<cr>", { desc = "ファイル保存 (Command+S)" })
 end
 
 return M
