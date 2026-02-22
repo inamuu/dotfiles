@@ -8,6 +8,12 @@ return {
           dotfiles = false,
           git_ignored = false,
         },
+        actions = {
+          change_dir = {
+            enable = true,
+            global = true,
+          },
+        },
         view = {
           width = 30,
         },
@@ -18,4 +24,3 @@ return {
     }
   },
 }
-
