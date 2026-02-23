@@ -102,12 +102,12 @@ local config = {
 						table.insert(choices, {
 							id = name,
 							label = wezterm.format({
-								{ Foreground = { Color = "#8BE9FD" } },  -- Cyan
+								{ Foreground = { Color = "#8BE9FD" } }, -- Cyan
 								{ Text = icon .. " " },
-								{ Foreground = { Color = "#F8F8F2" } },  -- White
+								{ Foreground = { Color = "#F8F8F2" } }, -- White
 								{ Attribute = { Intensity = is_current and "Bold" or "Normal" } },
 								{ Text = name },
-								{ Foreground = { Color = "#6272A4" } },  -- Comment gray
+								{ Foreground = { Color = "#6272A4" } }, -- Comment gray
 								{ Attribute = { Intensity = "Normal" } },
 								{ Text = status },
 							}),
@@ -119,7 +119,9 @@ local config = {
 						id = "__separator__",
 						label = wezterm.format({
 							{ Foreground = { Color = "#44475A" } },
-							{ Text = "─────────────────────────────────" },
+							{
+								Text = "─────────────────────────────────",
+							},
 						}),
 					})
 
@@ -127,7 +129,7 @@ local config = {
 					table.insert(choices, {
 						id = "__new__",
 						label = wezterm.format({
-							{ Foreground = { Color = "#50FA7B" } },  -- Green
+							{ Foreground = { Color = "#50FA7B" } }, -- Green
 							{ Text = "✨ " },
 							{ Foreground = { Color = "#F8F8F2" } },
 							{ Attribute = { Intensity = "Bold" } },
@@ -138,7 +140,7 @@ local config = {
 					window:perform_action(
 						act.InputSelector({
 							title = wezterm.format({
-								{ Foreground = { Color = "#BD93F9" } },  -- Purple
+								{ Foreground = { Color = "#BD93F9" } }, -- Purple
 								{ Attribute = { Intensity = "Bold" } },
 								{ Text = "  Workspaces " },
 								{ Foreground = { Color = "#6272A4" } },
