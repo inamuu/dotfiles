@@ -151,7 +151,7 @@ cask_list = [
   "kiro-cli",
   #"cursor",
   "font-udev-gothic",
-  "font-udev-gothic-nf",
+  #"font-udev-gothic-nf",
   "gcloud-cli",
   #"notion",
   "obsidian",
