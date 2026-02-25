@@ -173,6 +173,7 @@ if OS.mac?
   cask_list = [
     "aerospace",
     #"alacritty",
+    "betterdisplay",
     "bitwarden",
     "dbeaver-community",
     #"docker",
