@@ -11,7 +11,7 @@ return {
 		opts = {
 			colorscheme = "dracula",
 			show_end_of_buffer = true,
-			lualine_bg_color = "#44475a",
+			lualine_bg_color = "#3b3052",
 			transparent_bg = true,
 		},
 	},

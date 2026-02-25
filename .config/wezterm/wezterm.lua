@@ -278,6 +278,8 @@ local config = {
 
 	-- Window
 	window_background_opacity = 1.0,
+	-- TUI が塗る背景（lazytree など）にも透過を効かせる
+	text_background_opacity = 0.5,
 	window_background_image = "/usr/local/pictures/wallpaper4.png",
 	window_background_image_hsb = {
 		brightness = 0.05,
