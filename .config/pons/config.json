@@ -15,19 +15,6 @@
         { "label": "HDMI 1", "value": 144, "command": "input-alt" },
         { "label": "HDMI 2", "value": 145, "command": "input-alt" }
       ]
-    },
-    {
-      "name": "Dell U2720Q (m1ddc)",
-      "backend": {
-        "kind": "m1ddc",
-        "path": "/opt/homebrew/bin/m1ddc",
-        "display": "1"
-      },
-      "inputs": [
-        { "label": "USB-C", "value": 27, "command": "input" },
-        { "label": "HDMI 1", "value": 17, "command": "input" },
-        { "label": "HDMI 2", "value": 18, "command": "input" }
-      ]
     }
   ]
 }
