@@ -95,3 +95,7 @@ tftui.plan
 
 # Amazon
 .config/Amazon/KPR.ini
+
+# Swift
+.config/swiftpm/
+
