@@ -1,0 +1,9 @@
+{
+  "name": "save-acta",
+  "description": "会話のまとめをActaファイルに保存する",
+  "version": "1.0.0",
+  "command": {
+    "type": "prompt",
+    "path": "prompt.md"
+  }
+}
