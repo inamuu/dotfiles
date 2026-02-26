@@ -1,0 +1,33 @@
+{
+  "configVersion": 1,
+  "menuTitle": "",
+  "iconSystemName": "display.2",
+  "monitors": [
+    {
+      "name": "LG (native / Apple Silicon)",
+      "backend": {
+        "kind": "native",
+        "displayIndex": 1,
+        "transport": "ioavservice"
+      },
+      "inputs": [
+        { "label": "USB-C", "value": 210, "command": "input-alt" },
+        { "label": "HDMI 1", "value": 144, "command": "input-alt" },
+        { "label": "HDMI 2", "value": 145, "command": "input-alt" }
+      ]
+    },
+    {
+      "name": "Dell U2720Q (m1ddc)",
+      "backend": {
+        "kind": "m1ddc",
+        "path": "/opt/homebrew/bin/m1ddc",
+        "display": "1"
+      },
+      "inputs": [
+        { "label": "USB-C", "value": 27, "command": "input" },
+        { "label": "HDMI 1", "value": 17, "command": "input" },
+        { "label": "HDMI 2", "value": 18, "command": "input" }
+      ]
+    }
+  ]
+}
