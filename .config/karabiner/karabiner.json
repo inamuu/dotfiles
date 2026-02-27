@@ -70,31 +70,6 @@
                         ]
                     },
                     {
-                        "description": "［ JIS ］英数・かな キーを、他のキーと組み合わせて押したときは コマンドキー（⌘）として扱う",
-                        "manipulators": [
-                            {
-                                "description": " EISUU → LEFT COMMAND ",
-                                "from": {
-                                    "key_code": "japanese_eisuu",
-                                    "modifiers": { "optional": ["any"] }
-                                },
-                                "to": [{ "key_code": "left_command" }],
-                                "to_if_alone": [{ "key_code": "japanese_eisuu" }],
-                                "type": "basic"
-                            },
-                            {
-                                "description": " KANA → RIGHT COMMAND ",
-                                "from": {
-                                    "key_code": "japanese_kana",
-                                    "modifiers": { "optional": ["any"] }
-                                },
-                                "to": [{ "key_code": "right_command" }],
-                                "to_if_alone": [{ "key_code": "japanese_kana" }],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "［ US ］左右のコマンドキー（⌘）を、単独で押したときは 英数・かな キー として扱う（左⌘は 英数、右⌘は かな）",
                         "manipulators": [
                             {
