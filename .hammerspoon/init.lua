@@ -27,10 +27,11 @@ end
 local APPS = {
   chrome  = { name = "Google Chrome", bundleIDs = { "com.google.Chrome" } },
   -- WezTerm bundleID may differ by build/channel; try common candidates.
-  wezterm = { name = "WezTerm",       bundleIDs = { "com.github.wez.wezterm", "com.github.wez.wezterm-gui" } },
-  slack   = { name = "Slack",         bundleIDs = { "com.tinyspeck.slackmacgap" } },
-  obsidian = { name = "Obsidian",     bundleIDs = { "md.obsidian" } },
-  finder  = { name = "Finder",        bundleIDs = { "com.apple.finder" } },
+  wezterm  = { name = "WezTerm",  bundleIDs = { "com.github.wez.wezterm", "com.github.wez.wezterm-gui" } },
+  slack    = { name = "Slack",    bundleIDs = { "com.tinyspeck.slackmacgap" } },
+  obsidian = { name = "Obsidian", bundleIDs = { "md.obsidian" } },
+  finder   = { name = "Finder",   bundleIDs = { "com.apple.finder" } },
+  acta     = { name = "Acta",     bundleIDs = { "com.inamuu.acta" } },
 }
 
 -- User config: edit these hotkeys freely.
@@ -84,10 +85,11 @@ local APP_CODEBOOK = {
   s = { title = "Slack", app = APPS.slack },
   o = { title = "Obsidian", app = APPS.obsidian },
   f = { title = "Finder", app = APPS.finder },
+  a = { title = "Acta", app = APPS.acta },
 }
 
 -- Code order used to generate sets/patterns.
-local APP_CODE_ORDER = { "c", "w", "s", "o", "f" }
+local APP_CODE_ORDER = { "c", "w", "s", "o", "f", "a" }
 
 local function appSetTitle(codes)
   local parts = {}
@@ -341,11 +343,11 @@ local function buildLayoutModal()
 
   local function helpText()
     return table.concat({
-      "Tile:",
-      "Apps: c=Chrome w=WezTerm s=Slack o=Obsidian f=Finder",
-      "Pick: 2 apps (e.g. cw) or 3 apps (e.g. cws), order matters (left->right)",
-      "Ratio: 1=1:1 2=2:1 3=1:2 (3 appsは 1 のみ)",
-      "Del=clear Esc=cancel",
+      "HammerSpoon",
+      "----------------------",
+      "Apps: Chrome=c WezTerm=w Slack=s Acta=a o=Obsidian f=Finder",
+      "Ratio: 1:1=1   2:1=2   1:2=3 (3 apps is only 1)",
+      "Cancel: Esc",
     }, "\n")
   end
 

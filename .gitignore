@@ -39,6 +39,7 @@ terraform.tfstate.*.backup
 .codex/models_cache.json
 .codex/version.json
 .codex/sqlite/
+.codex/*.sqlite
 .codex/vendor_imports/
 .codex/skills/.system
 
