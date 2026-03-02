@@ -156,7 +156,7 @@ export TF_LOG_PATH=$XDG_CONFIG_HOME/terraform/logs/$(date +%Y/%m/%d)/terraform.$
 alias g='git'
 alias gbrd='git branch | fzf | xargs git branch -d '
 alias gsw='git branch | fzf | xargs git switch '
-alias gcmb='git commit -m "backup at $(date +%Y%m%d%H%M)"'
+alias gcmb='git add . && git commit -m "backup at $(date +%Y%m%d%H%M)" && git push -u origin main'
 
 ### Alias(kubectl)
 # kubectl completionは重いので遅延読み込みに変更
