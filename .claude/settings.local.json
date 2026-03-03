@@ -1,6 +1,16 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(brew search:*)",
+      "WebFetch(domain:www.cmux.dev)",
+      "WebFetch(domain:ghostty.org)",
+      "Bash(/Applications/cmux.app/Contents/MacOS/cmux +list-themes)",
+      "Bash(mkdir:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "aws-mcp"
-  ],
-  "enableAllProjectMcpServers": true
+  ]
 }

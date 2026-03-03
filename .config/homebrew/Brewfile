@@ -149,6 +149,7 @@ end
 # "notion",
 cask_list = [
   "alt-tab",
+  "manaflow-ai/cmux/cmux",
   "codex",
   "font-udev-gothic",
   "gcloud-cli",
