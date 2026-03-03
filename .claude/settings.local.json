@@ -6,7 +6,8 @@
       "WebFetch(domain:www.cmux.dev)",
       "WebFetch(domain:ghostty.org)",
       "Bash(/Applications/cmux.app/Contents/MacOS/cmux +list-themes)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(ghostty:*)"
     ]
   },
   "enableAllProjectMcpServers": true,

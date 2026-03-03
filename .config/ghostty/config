@@ -4,6 +4,8 @@ font-size = 17
 
 # Theme
 theme = Dracula
+#theme = lucario-default
+
 
 # Cursor
 cursor-style = block
@@ -14,3 +16,22 @@ macos-option-as-alt = false
 
 # Scrollback
 scrollback-limit = 30000
+
+# cmux keybindings (Leader: Ctrl+o)
+
+# Split
+keybind = ctrl+o>shift+backslash=new_split:right
+keybind = ctrl+o>minus=new_split:down
+
+# Pane navigation (hjkl)
+keybind = ctrl+o>h=goto_split:left
+keybind = ctrl+o>j=goto_split:down
+keybind = ctrl+o>k=goto_split:up
+keybind = ctrl+o>l=goto_split:right
+
+# Copy / Paste
+keybind = ctrl+o>y=copy_to_clipboard
+keybind = ctrl+o>p=paste_from_clipboard
+
+# Visual mode (select all - ghostty does not support modal copy mode)
+keybind = ctrl+o>v=select_all
