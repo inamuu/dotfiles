@@ -35,11 +35,8 @@ done
 
 source ${HOME}/.config/zsh/wezterm/wezterm.sh
 
-# zsh-syntax-highlightingの設定（エラー回避）
-typeset -g ZSH_HIGHLIGHT_MAXLENGTH=512
-
 # シンタックスハイライト有効化
-source /opt/homebrew/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /opt/homebrew/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 # サジェスト有効化
 source /opt/homebrew/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh

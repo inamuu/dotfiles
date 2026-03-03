@@ -125,7 +125,7 @@ brew_list = [
   "zsh",
   "zsh-autosuggestions",
   "zsh-completions",
-  "zsh-syntax-highlighting",
+  "zsh-fast-syntax-highlighting",
   "zx"
 ]
 
