@@ -42,6 +42,7 @@ terraform.tfstate.*.backup
 .codex/*.sqlite
 .codex/vendor_imports/
 .codex/skills/.system
+.codex/state_*
 
 ### .config - Sensitive files
 
