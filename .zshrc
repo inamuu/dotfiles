@@ -30,6 +30,7 @@ export ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 for file in ${HOME}/.config/zsh/functions/*.zsh(N);do
+  [[ ${file:t} == abbr.zsh ]] && continue
   source "$file"
 done
 
@@ -40,6 +41,10 @@ source /opt/homebrew/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-high
 
 # サジェスト有効化
 source /opt/homebrew/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# zsh-abbr
+source /opt/homebrew/opt/zsh-abbr@6/share/zsh-abbr@6/zsh-abbr.zsh
+source ${HOME}/.config/zsh/functions/abbr.zsh
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="true"
@@ -86,51 +91,12 @@ export HOMEBREW_BUNDLE_FILE="${HOME}/.config/homebrew/Brewfile"
 [ $commands[direnv] ] && eval "$(direnv hook zsh)"
 PS1="${CUSTOM_PS1:-default PS1}: "
 
-### Alias(Main)
-alias ..='cd ..'
-alias awsvl='aws-vault login'
-alias bat='bat -p --theme=Dracula'
-alias bincat='/bin/cat'
-alias binls='/bin/ls'
-alias c='clear'
-alias cddownloads='cd ~/Downloads'
-alias cdworks='cd ~/Works'
-alias cp='cp -vi'
-alias date='gdate'
-alias ddd='cd ~/Downloads'
-alias cdr="eval cd \"\$(dirs -v | fzf | awk '{print \$2}')\""
-alias doc='docker'
-alias docc='docker compose'
-alias evc='envchain'
-alias history='history 0'
-alias ll='eza -la --git --icons'
-alias llr='eza -lra --git --icons'
-alias ls='eza'
-alias mv='mv -vi'
-#alias rg='rg --hidden'
-alias rm='rm -vi'
-alias vi='vim'
-alias tmpdir2='export TMPDIR2=$(mktemp -d) && cd $TMPDIR2'
-alias cld='claude --dangerously-skip-permissions'
-alias cl='claude'
-
 export LESS='-i -M -R'
 
 ### Terraform
 export TF_CLI_CONFIG_FILE="$XDG_CONFIG_HOME/terraform/terraformrc"
 export TF_CLI_ARGS_plan="--parallelism=30"
 export TF_CLI_ARGS_apply="--parallelism=30"
-
-alias tf='terraform'
-alias tfa='terraform apply'
-alias tff='terraform fmt'
-alias tfi='terraform init'
-alias tfp='terraform plan'
-alias tfv='terraform validate'
-alias tfc='terraform console'
-alias tfip='terraform init && terraform plan'
-alias tfifv='terraform init && terraform fmt && terraform validate'
-alias tfcheck='terraform fmt && terraform validate && tflint'
 
 tfmog() {
   [ $# -eq 0 ] && return 1
@@ -141,26 +107,10 @@ tfmog() {
   terraform plan $(echo ${PLAN_LIST})
 }
 
-alias tffp='terraform state list | fzf --multi --preview "terraform state show {}" | sed "s/^/-target=/" | xargs terraform plan '
-alias tffa='terraform state list | fzf --multi --preview "terraform state show {}" | sed "s/^/-target=/" | xargs terraform apply '
-
 ### terraform logs
 [ ! -d "$XDG_CONFIG_HOME/terraform/logs/$(date +%Y/%m/%d/)" ] && mkdir -p $XDG_CONFIG_HOME/terraform/logs/$(date +%Y/%m/%d/)
 export TF_LOG=ERROR
 export TF_LOG_PATH=$XDG_CONFIG_HOME/terraform/logs/$(date +%Y/%m/%d)/terraform.$(date +%Y%m%d%H%M%S).log
-
-### Alias(Git)
-alias g='git'
-alias gbrd='git branch | fzf | xargs git branch -d '
-alias gsw='git branch | fzf | xargs git switch '
-alias gcmb='git add . && git commit -m "backup at $(date +%Y%m%d%H%M)" && git push'
-
-### Alias(kubectl)
-# kubectl completionは重いので遅延読み込みに変更
-if [ $commands[kubectl] ]; then
-  alias kubectl='function _kubectl(){ unalias kubectl; unfunction _kubectl; source <(kubectl completion zsh); kubectl "$@"; }; _kubectl'
-fi
-alias kc=kubectl
 
 ### AWS CLI
 # aws-cli補完を有効化
@@ -172,20 +122,6 @@ fi
 
 # colorize kubectl diff
 export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
-
-### tmux
-#[[ -z "$TMUX" ]] && tmux || tmux a -t 0
-alias tmk='tmux kill-server'
-
-### bundle
-alias be='bundle exec'
-alias ber='bundle exec rake'
-
-### hub
-alias ghl='cd $(ghq root)/$(ghq list | fzf)'
-
-### Python
-alias py='python'
 
 ### Node
 export NODENV_SHELL=zsh

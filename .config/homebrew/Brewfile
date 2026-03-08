@@ -91,6 +91,7 @@ brew_list = [
   "mysql@8.0",
   "nmap",
   "nvim",
+  "olets/tap/zsh-abbr@6",
   "peco",
   "percona-toolkit",
   "pinentry-mac",
