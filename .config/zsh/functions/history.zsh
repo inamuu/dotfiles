@@ -10,6 +10,7 @@ zshaddhistory() {
     # 以下の条件をすべて満たすものだけをヒストリに追加する
     [[ ${#line} -ge 5
         && ${cmd} != (l|l[sal])
+        && ${cmd} != (eza)
         && ${cmd} != (cd)
         && ${cmd} != (m|man)
         && ${cmd} != (r[mr])
@@ -18,7 +19,7 @@ zshaddhistory() {
 }
 
 ### History
-HISTFILE=~/.zsh_history
+#HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 function history-all { history -E 1 }
@@ -31,5 +32,5 @@ function fzf-history-selection() {
 }
 
 zle -N fzf-history-selection
-bindkey '^Rr' fzf-history-selection
+bindkey '^X^R' fzf-history-selection
 
