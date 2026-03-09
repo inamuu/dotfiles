@@ -43,6 +43,8 @@ source /opt/homebrew/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-high
 source /opt/homebrew/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # zsh-abbr
+typeset -gi ABBR_SET_EXPANSION_CURSOR=1
+typeset -g ABBR_EXPANSION_CURSOR_MARKER='%ABBR_CURSOR%'
 source /opt/homebrew/opt/zsh-abbr@6/share/zsh-abbr@6/zsh-abbr.zsh
 source ${HOME}/.config/zsh/functions/abbr.zsh
 
