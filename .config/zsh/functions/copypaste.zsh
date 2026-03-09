@@ -4,5 +4,5 @@ copypaste () {
 }
 
 zle -N copypaste
-bindkey '^Rc' copypaste
+bindkey '^X^C' copypaste
 

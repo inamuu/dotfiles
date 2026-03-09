@@ -154,6 +154,7 @@ cask_list = [
   "codex",
   "font-udev-gothic",
   "gcloud-cli",
+  "gitify",
   "kiro-cli",
   "obsidian",
   "rar",

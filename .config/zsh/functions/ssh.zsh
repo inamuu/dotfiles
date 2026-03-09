@@ -16,5 +16,5 @@ function fzf-ssh () {
 }
 
 zle -N fzf-ssh
-bindkey '^S' fzf-ssh
+bindkey '^X^S' fzf-ssh
 
