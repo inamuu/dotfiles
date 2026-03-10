@@ -25,7 +25,7 @@ abbr -qq -S -f 'tmpdir2=export TMPDIR2=$(mktemp -d) && cd $TMPDIR2'
 abbr -qq -S -f 'cld=claude --dangerously-skip-permissions'
 abbr -qq -S -f 'cl=claude'
 abbr -qq -S -f 'cxf=codex --full-auto'
-abbr -qq -S -f 'cxn=codex -n never'
+abbr -qq -S -f 'cxn=codex -a never'
 
 ### Terraform
 abbr -qq -S -f 'tf=terraform'
