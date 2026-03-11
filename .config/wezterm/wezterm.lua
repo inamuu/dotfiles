@@ -6,6 +6,106 @@ local config = wezterm.config_builder()
 
 local act = wezterm.action
 
+local function active_tab_if_single_pane(window, message)
+	local mux_window = window:mux_window()
+	if not mux_window then
+		return nil
+	end
+
+	local tab = mux_window:active_tab()
+	if not tab then
+		return nil
+	end
+
+	local panes = tab:panes_with_info()
+	if #panes ~= 1 then
+		window:toast_notification(
+			"WezTerm",
+			message,
+			nil,
+			3000
+		)
+		return nil
+	end
+
+	return tab
+end
+
+local function apply_single_pane_layout(window, pane, message, layout)
+	if not active_tab_if_single_pane(window, message) then
+		return
+	end
+
+	layout(pane)
+end
+
+local function split_left_main(window, pane)
+	apply_single_pane_layout(window, pane, "Leader+1 は単一ペインのタブでのみ左右 70:30 分割します", function(target)
+		target:split({ direction = "Right", size = 0.3 })
+	end)
+end
+
+local function split_right_main(window, pane)
+	apply_single_pane_layout(window, pane, "Leader+2 は単一ペインのタブでのみ左右 30:70 分割します", function(target)
+		target:split({ direction = "Right", size = 0.7 })
+	end)
+end
+
+local function split_into_three(window, pane)
+	apply_single_pane_layout(window, pane, "Leader+3 は単一ペインのタブでのみ左 1 + 右上下 2 の 3 分割をします", function(target)
+		local right = target:split({ direction = "Right", size = 0.5 })
+		right:split({ direction = "Bottom", size = 0.5 })
+	end)
+end
+
+local function split_into_four(window, pane)
+	apply_single_pane_layout(window, pane, "Leader+4 は単一ペインのタブでのみ 2x2 分割します", function(target)
+		local right = target:split({ direction = "Right", size = 0.5 })
+		target:split({ direction = "Bottom", size = 0.5 })
+		right:split({ direction = "Bottom", size = 0.5 })
+	end)
+end
+
+local function split_top_main(window, pane)
+	apply_single_pane_layout(window, pane, "Leader+5 は単一ペインのタブでのみ上下 70:30 分割します", function(target)
+		target:split({ direction = "Bottom", size = 0.3 })
+	end)
+end
+
+local function split_bottom_main(window, pane)
+	apply_single_pane_layout(window, pane, "Leader+6 は単一ペインのタブでのみ上下 30:70 分割します", function(target)
+		target:split({ direction = "Bottom", size = 0.7 })
+	end)
+end
+
+local function split_into_three_columns(window, pane)
+	apply_single_pane_layout(window, pane, "Leader+7 は単一ペインのタブでのみ縦 3 分割します", function(target)
+		target:split({ direction = "Right", size = 1 / 3 })
+		target:split({ direction = "Right", size = 0.5 })
+	end)
+end
+
+local function split_into_three_rows(window, pane)
+	apply_single_pane_layout(window, pane, "Leader+8 は単一ペインのタブでのみ横 3 分割します", function(target)
+		target:split({ direction = "Bottom", size = 1 / 3 })
+		target:split({ direction = "Bottom", size = 0.5 })
+	end)
+end
+
+local function split_left_main_with_right_stack(window, pane)
+	apply_single_pane_layout(window, pane, "Leader+9 は単一ペインのタブでのみ左大 + 右上下の 3 分割をします", function(target)
+		local right = target:split({ direction = "Right", size = 1 / 3 })
+		right:split({ direction = "Bottom", size = 0.5 })
+	end)
+end
+
+local function split_top_main_with_bottom_columns(window, pane)
+	apply_single_pane_layout(window, pane, "Leader+0 は単一ペインのタブでのみ上大 + 下左右の 3 分割をします", function(target)
+		local bottom = target:split({ direction = "Bottom", size = 1 / 3 })
+		bottom:split({ direction = "Right", size = 0.5 })
+	end)
+end
+
 local config = {
 	-- auto reloadd
 	automatically_reload_config = true,
@@ -63,14 +163,17 @@ local config = {
 		{ key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
 		{ key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
 		{ key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
-		{ key = "1", mods = "LEADER", action = act.ActivatePaneByIndex(0) },
-		{ key = "2", mods = "LEADER", action = act.ActivatePaneByIndex(1) },
-		{ key = "3", mods = "LEADER", action = act.ActivatePaneByIndex(2) },
-		{ key = "4", mods = "LEADER", action = act.ActivatePaneByIndex(3) },
-		{ key = "5", mods = "LEADER", action = act.ActivatePaneByIndex(4) },
-		{ key = "6", mods = "LEADER", action = act.ActivatePaneByIndex(5) },
-		{ key = "7", mods = "LEADER", action = act.ActivatePaneByIndex(6) },
-		{ key = "8", mods = "LEADER", action = act.ActivatePaneByIndex(7) },
+		-- Layout presets
+		{ key = "1", mods = "LEADER", action = wezterm.action_callback(split_left_main) },
+		{ key = "2", mods = "LEADER", action = wezterm.action_callback(split_right_main) },
+		{ key = "3", mods = "LEADER", action = wezterm.action_callback(split_into_three) },
+		{ key = "4", mods = "LEADER", action = wezterm.action_callback(split_into_four) },
+		{ key = "5", mods = "LEADER", action = wezterm.action_callback(split_top_main) },
+		{ key = "6", mods = "LEADER", action = wezterm.action_callback(split_bottom_main) },
+		{ key = "7", mods = "LEADER", action = wezterm.action_callback(split_into_three_columns) },
+		{ key = "8", mods = "LEADER", action = wezterm.action_callback(split_into_three_rows) },
+		{ key = "9", mods = "LEADER", action = wezterm.action_callback(split_left_main_with_right_stack) },
+		{ key = "0", mods = "LEADER", action = wezterm.action_callback(split_top_main_with_bottom_columns) },
 		-- Pane zoom
 		{ key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
 		-- Current pane close
