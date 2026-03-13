@@ -115,6 +115,7 @@ brew_list = [
   "tflint",
   "tftui",
   "inamuu/tap/tfz",
+  "inamuu/tap/vigilo",
   "tig",
   "tmux",
   "tree",
