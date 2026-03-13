@@ -26,11 +26,16 @@ function history-all { history -E 1 }
 setopt hist_ignore_dups
 
 function fzf-history-selection() {
-    BUFFER=$(history | awk '{$1="";print $0}' | egrep -v "ls" | uniq -u | sed 's/^ //g' | fzf)
+    BUFFER=$(
+        fc -rl 1 \
+        | awk '{$1=""; sub(/^ /, ""); print}' \
+        | egrep -v "^(ls|eza)( |$)" \
+        | awk '!seen[$0]++' \
+        | fzf
+    )
     CURSOR=$#BUFFER
     zle reset-prompt
 }
 
 zle -N fzf-history-selection
 bindkey '^X^R' fzf-history-selection
-
