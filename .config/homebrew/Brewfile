@@ -16,6 +16,7 @@ tap_list = [
   "nikitabobko/tap",
   "sanemat/font",
   "idoavrah/homebrew",
+  "inamuu/tap"
 ]
 
 for i in tap_list
