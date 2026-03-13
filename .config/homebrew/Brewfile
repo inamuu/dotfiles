@@ -114,6 +114,7 @@ brew_list = [
   "terraformer",
   "tflint",
   "tftui",
+  "inamuu/tap/ssm-local-script",
   "inamuu/tap/tfz",
   "inamuu/tap/vigilo",
   "tig",
