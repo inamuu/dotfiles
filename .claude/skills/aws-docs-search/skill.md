@@ -1,3 +1,8 @@
+---
+name: aws-docs-search
+description: AWS公式ドキュメントを検索し、内容を取得するスキル
+---
+
 # AWS Documentation Search Skill
 
 AWS公式ドキュメントを検索し、内容を取得するためのスキルです。

@@ -1,3 +1,8 @@
+---
+name: sh-review
+description: シェルスクリプトのコードレビューを行うスキル
+---
+
 # Shell Script Reviewer
 
 シェルスクリプトのコードレビューを行うスキルです。

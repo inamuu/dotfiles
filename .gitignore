@@ -66,6 +66,15 @@ terraform.tfstate.*.backup
 .claude/plans/
 .claude/session-env/
 .claude/hooks/
+.claude/backups/
+.claude/cache/
+.claude/sessions/
+.claude/file-history/
+.claude/paste-cache/
+.claude/mcp-needs-auth-cache.json
+.claude/remote-settings.json
+.claude/plugins/installed_plugins.json
+.claude/plugins/blocklist.json
 
 # Config store (auto-generated)
 .config/configstore/

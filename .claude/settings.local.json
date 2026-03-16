@@ -35,10 +35,6 @@
       }
     ]
   },
-  "statusLine": {
-    "type": "command",
-    "command": "bash /Users/kazuma.inamura/.config/claude/statusline-command.sh"
-  },
   "permissions": {
     "defaultMode": "acceptEdits",
     "allow": [
