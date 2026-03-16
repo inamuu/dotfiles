@@ -1,6 +1,25 @@
 {
   "permissions": {
-    "defaultMode": "acceptEdits"
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(cd:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(fd:*)",
+      "Bash(ls:*)",
+      "Bash(brew search:*)",
+      "WebFetch(domain:www.cmux.dev)",
+      "WebFetch(domain:ghostty.org)",
+      "Bash(/Applications/cmux.app/Contents/MacOS/cmux +list-themes)",
+      "Bash(mkdir:*)",
+      "Bash(ghostty:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(swift run:*)",
+      "Bash(npm run dist:*)",
+      "Bash(osascript -e:*)"
+    ]
   },
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [

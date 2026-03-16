@@ -1,11 +1,61 @@
 {
-  "permissions": {
-    "allow": [
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "model": "sonnet",
+  "language": "Japanese",
+  "voiceEnabled": true,
+  "skipDangerousModePermissionPrompt": true,
+  "alwaysThinkingEnabled": true,
+  "enableAllProjectMcpServers": true,
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "hooks": {
+    "PermissionRequest": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Blow.aiff"
+          }
+        ]
+      }
     ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Blow.aiff"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|MultiEdit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path // empty' | { read -r file_path; if [ -n \"$file_path\" ] && printf '%s' \"$file_path\" | grep -Eq '\\.tf$'; then dir=$(dirname \"$file_path\"); (cd \"$dir\" && terraform init && terraform fmt && terraform validate); fi; }",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash /Users/kazuma.inamura/.config/claude/statusline-command.sh"
+  },
+  "permissions": {
+    "allow": [],
     "deny": [
       "Bash(sudo:*)",
       "Bash(rm:*)",
       "Bash(rm -rf:*)",
+      "Bash(dd:*)",
       "Bash(git push:*)",
       "Bash(git commit:*)",
       "Bash(git reset:*)",
@@ -22,6 +72,7 @@
       "Bash(nc:*)",
       "Bash(npm uninstall:*)",
       "Bash(npm remove:*)",
+      "Bash(tf:*)",
       "Bash(tf apply:*)",
       "Bash(terraform apply:*)",
       "Bash(tf destroy:*)",
@@ -64,30 +115,6 @@
       "Bash(mysql:*)",
       "Bash(mongod:*)",
       "mcp__supabase__execute_sql"
-    ]
-  },
-  "hooks": {
-    "PermissionRequest": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "afplay /System/Library/Sounds/Blow.aiff"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "afplay /System/Library/Sounds/Blow.aiff"
-          }
-        ]
-      }
     ]
   }
 }

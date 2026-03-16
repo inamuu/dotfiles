@@ -14,6 +14,11 @@ locals {
   # 除外ファイルを除外したファイル一覧
   dotfiles_list = [for f in local.all_dotfiles : f if !contains(local.exclude_files, f)]
 
+  # ホームディレクトリにシンボリックリンクを作成するディレクトリ一覧
+  link_dirs = [
+    ".config",
+  ]
+
   defaults_apps = {
     "com.apple.dock" = {
       # Dockの配置は左
