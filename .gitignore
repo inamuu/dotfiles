@@ -54,6 +54,7 @@ terraform.tfstate.*.backup
 
 # Claude Code settings
 #.config/claude/
+.config/claude/settings.json
 .config/claude/projects/
 .config/claude/debug/
 .config/claude/todos/

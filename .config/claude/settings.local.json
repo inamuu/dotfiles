@@ -1,4 +1,44 @@
 {
+  "hooks": {
+    "PermissionRequest": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Blow.aiff"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Blow.aiff"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|MultiEdit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path // empty' | { read -r file_path; if [ -n \"$file_path\" ] && printf '%s' \"$file_path\" | grep -Eq '\\.tf$'; then dir=$(dirname \"$file_path\"); (cd \"$dir\" && terraform init && terraform fmt && terraform validate); fi; }",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash /Users/kazuma.inamura/.config/claude/statusline-command.sh"
+  },
   "permissions": {
     "defaultMode": "acceptEdits",
     "allow": [
