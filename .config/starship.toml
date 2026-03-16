@@ -4,21 +4,13 @@ format = """
 [](color_1)\
 $os\
 $username\
-[](bg:color_2 fg:color_1)\
+[](fg:color_1 bg:color_2)\
 $directory\
 [](fg:color_2 bg:color_3)\
 $git_branch\
-[](fg:color_3 bg:color_4)\
+[](fg:color_3 bg:color_3)\
 $git_status\
-[](fg:color_4 bg:color_5)\
-$rust\
-$golang\
-$nodejs\
-$php\
-$python\
-$ruby\
-$terraform\
-[ ](fg:color_5)\
+[ ](fg:color_3)\
 $line_break$character"""
 
 #[](fg:color_2 bg:color_bg3)\
@@ -113,7 +105,7 @@ format = '[[ $symbol $branch ](fg:color_fg0 bg:color_3)]($style)'
 
 [git_status]
 style = "bg:color_aqua"
-format = '[[($all_status$ahead_behind )](fg:color_bg1 bg:color_4)]($style)'
+format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_4)]($style)'
 
 [nodejs]
 symbol = "✳️"
@@ -174,4 +166,3 @@ vimcmd_symbol = '[](bold fg:color_5)'
 vimcmd_replace_one_symbol = '[](bold fg:color_1)'
 vimcmd_replace_symbol = '[](bold fg:color_1)'
 vimcmd_visual_symbol = '[](bold fg:color_2)'
-

@@ -34,6 +34,7 @@ terraform.tfstate.*.backup
 .codex/models_cache.json
 .codex/rules
 .codex/sessions/*
+.codex/session*
 .codex/shell_snapshots/
 .codex/skills/.system
 .codex/skills/.system/
@@ -42,6 +43,8 @@ terraform.tfstate.*.backup
 .codex/tmp/
 .codex/vendor_imports/
 .codex/version.json
+.codex/logs*
+
 
 ### .config - Sensitive files
 
