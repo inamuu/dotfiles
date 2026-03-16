@@ -17,6 +17,7 @@ locals {
   # ホームディレクトリにシンボリックリンクを作成するディレクトリ一覧
   link_dirs = [
     ".config",
+    ".claude",
   ]
 
   defaults_apps = {

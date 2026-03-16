@@ -53,18 +53,19 @@ terraform.tfstate.*.backup
 .config/gh/config.yml
 
 # Claude Code settings
-#.config/claude/
-.config/claude/settings.json
-.config/claude/projects/
-.config/claude/debug/
-.config/claude/todos/
-.config/claude/shell-snapshots/
-.config/claude/statsig/
-.config/claude/ide/
-.config/claude/history.jsonl
-.config/claude/commands/jm-*
-.config/.claude/settings.local.json
-.config/claude/bash-command-log.txt
+.claude/settings.json
+.claude/projects/
+.claude/debug/
+.claude/todos/
+.claude/shell-snapshots/
+.claude/statsig/
+.claude/ide/
+.claude/history.jsonl
+.claude/commands/jm-*
+.claude/bash-command-log.txt
+.claude/plans/
+.claude/session-env/
+.claude/hooks/
 
 # Config store (auto-generated)
 .config/configstore/
