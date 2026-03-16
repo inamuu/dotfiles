@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "afplay /System/Library/Sounds/Blow.aiff"
+            "command": "osascript -e 'display notification \"確認が必要です\" with title \"Claude Code\" sound name \"Blow\"'"
           }
         ]
       }
@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "afplay /System/Library/Sounds/Blow.aiff"
+            "command": "osascript -e 'display notification \"処理が完了しました\" with title \"Claude Code\" sound name \"Glass\"'"
           }
         ]
       }
