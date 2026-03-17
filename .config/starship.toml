@@ -8,9 +8,7 @@ $username\
 $directory\
 [](fg:color_2 bg:color_3)\
 $git_branch\
-[](fg:color_3 bg:color_3)\
 $git_status\
-[ ](fg:color_3)\
 $line_break$character"""
 
 #[](fg:color_2 bg:color_bg3)\
@@ -100,12 +98,12 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:color_aqua"
-format = '[[ $symbol $branch ](fg:color_fg0 bg:color_3)]($style)'
+style = "bg:color_3"
+format = '[[ $symbol $branch](fg:color_fg0 bg:color_3)]($style)'
 
 [git_status]
-style = "bg:color_aqua"
-format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_4)]($style)'
+style = "bg:color_3"
+format = '[[ $all_status$ahead_behind ](fg:color_fg0 bg:color_3)[ ](fg:color_3 bg:none)]($style)'
 
 [nodejs]
 symbol = "✳️"
