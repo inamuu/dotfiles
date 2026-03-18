@@ -19,12 +19,7 @@ local function active_tab_if_single_pane(window, message)
 
 	local panes = tab:panes_with_info()
 	if #panes ~= 1 then
-		window:toast_notification(
-			"WezTerm",
-			message,
-			nil,
-			3000
-		)
+		window:toast_notification("WezTerm", message, nil, 3000)
 		return nil
 	end
 
@@ -40,70 +35,120 @@ local function apply_single_pane_layout(window, pane, message, layout)
 end
 
 local function split_left_main(window, pane)
-	apply_single_pane_layout(window, pane, "Leader+1 は単一ペインのタブでのみ左右 70:30 分割します", function(target)
-		target:split({ direction = "Right", size = 0.3 })
-	end)
+	apply_single_pane_layout(
+		window,
+		pane,
+		"Leader+1 は単一ペインのタブでのみ左右 70:30 分割します",
+		function(target)
+			target:split({ direction = "Right", size = 0.3 })
+		end
+	)
 end
 
 local function split_right_main(window, pane)
-	apply_single_pane_layout(window, pane, "Leader+2 は単一ペインのタブでのみ左右 30:70 分割します", function(target)
-		target:split({ direction = "Right", size = 0.7 })
-	end)
+	apply_single_pane_layout(
+		window,
+		pane,
+		"Leader+2 は単一ペインのタブでのみ左右 30:70 分割します",
+		function(target)
+			target:split({ direction = "Right", size = 0.7 })
+		end
+	)
 end
 
 local function split_into_three(window, pane)
-	apply_single_pane_layout(window, pane, "Leader+3 は単一ペインのタブでのみ左 1 + 右上下 2 の 3 分割をします", function(target)
-		local right = target:split({ direction = "Right", size = 0.5 })
-		right:split({ direction = "Bottom", size = 0.5 })
-	end)
+	apply_single_pane_layout(
+		window,
+		pane,
+		"Leader+3 は単一ペインのタブでのみ左 1 + 右上下 2 の 3 分割をします",
+		function(target)
+			local right = target:split({ direction = "Right", size = 0.5 })
+			right:split({ direction = "Bottom", size = 0.5 })
+		end
+	)
 end
 
 local function split_into_four(window, pane)
-	apply_single_pane_layout(window, pane, "Leader+4 は単一ペインのタブでのみ 2x2 分割します", function(target)
-		local right = target:split({ direction = "Right", size = 0.5 })
-		target:split({ direction = "Bottom", size = 0.5 })
-		right:split({ direction = "Bottom", size = 0.5 })
-	end)
+	apply_single_pane_layout(
+		window,
+		pane,
+		"Leader+4 は単一ペインのタブでのみ 2x2 分割します",
+		function(target)
+			local right = target:split({ direction = "Right", size = 0.5 })
+			target:split({ direction = "Bottom", size = 0.5 })
+			right:split({ direction = "Bottom", size = 0.5 })
+		end
+	)
 end
 
 local function split_top_main(window, pane)
-	apply_single_pane_layout(window, pane, "Leader+5 は単一ペインのタブでのみ上下 70:30 分割します", function(target)
-		target:split({ direction = "Bottom", size = 0.3 })
-	end)
+	apply_single_pane_layout(
+		window,
+		pane,
+		"Leader+5 は単一ペインのタブでのみ上下 70:30 分割します",
+		function(target)
+			target:split({ direction = "Bottom", size = 0.3 })
+		end
+	)
 end
 
 local function split_bottom_main(window, pane)
-	apply_single_pane_layout(window, pane, "Leader+6 は単一ペインのタブでのみ上下 30:70 分割します", function(target)
-		target:split({ direction = "Bottom", size = 0.7 })
-	end)
+	apply_single_pane_layout(
+		window,
+		pane,
+		"Leader+6 は単一ペインのタブでのみ上下 30:70 分割します",
+		function(target)
+			target:split({ direction = "Bottom", size = 0.7 })
+		end
+	)
 end
 
 local function split_into_three_columns(window, pane)
-	apply_single_pane_layout(window, pane, "Leader+7 は単一ペインのタブでのみ縦 3 分割します", function(target)
-		target:split({ direction = "Right", size = 1 / 3 })
-		target:split({ direction = "Right", size = 0.5 })
-	end)
+	apply_single_pane_layout(
+		window,
+		pane,
+		"Leader+7 は単一ペインのタブでのみ縦 3 分割します",
+		function(target)
+			target:split({ direction = "Right", size = 1 / 3 })
+			target:split({ direction = "Right", size = 0.5 })
+		end
+	)
 end
 
 local function split_into_three_rows(window, pane)
-	apply_single_pane_layout(window, pane, "Leader+8 は単一ペインのタブでのみ横 3 分割します", function(target)
-		target:split({ direction = "Bottom", size = 1 / 3 })
-		target:split({ direction = "Bottom", size = 0.5 })
-	end)
+	apply_single_pane_layout(
+		window,
+		pane,
+		"Leader+8 は単一ペインのタブでのみ横 3 分割します",
+		function(target)
+			target:split({ direction = "Bottom", size = 1 / 3 })
+			target:split({ direction = "Bottom", size = 0.5 })
+		end
+	)
 end
 
 local function split_left_main_with_right_stack(window, pane)
-	apply_single_pane_layout(window, pane, "Leader+9 は単一ペインのタブでのみ左大 + 右上下の 3 分割をします", function(target)
-		local right = target:split({ direction = "Right", size = 1 / 3 })
-		right:split({ direction = "Bottom", size = 0.5 })
-	end)
+	apply_single_pane_layout(
+		window,
+		pane,
+		"Leader+9 は単一ペインのタブでのみ左大 + 右上下の 3 分割をします",
+		function(target)
+			local right = target:split({ direction = "Right", size = 1 / 3 })
+			right:split({ direction = "Bottom", size = 0.5 })
+		end
+	)
 end
 
 local function split_top_main_with_bottom_columns(window, pane)
-	apply_single_pane_layout(window, pane, "Leader+0 は単一ペインのタブでのみ上大 + 下左右の 3 分割をします", function(target)
-		local bottom = target:split({ direction = "Bottom", size = 1 / 3 })
-		bottom:split({ direction = "Right", size = 0.5 })
-	end)
+	apply_single_pane_layout(
+		window,
+		pane,
+		"Leader+0 は単一ペインのタブでのみ上大 + 下左右の 3 分割をします",
+		function(target)
+			local bottom = target:split({ direction = "Bottom", size = 1 / 3 })
+			bottom:split({ direction = "Right", size = 0.5 })
+		end
+	)
 end
 
 local config = {
@@ -112,7 +157,7 @@ local config = {
 
 	-- Font
 	font = wezterm.font({
-		family = "UDEV Gothic 35NF",
+		family = "UDEV Gothic 35",
 		-- family = 'UDEV Gothic 35', weight = 'Bold',
 		-- family = 'Hack Nerd Font Mono', weight = 'Bold',
 	}),
