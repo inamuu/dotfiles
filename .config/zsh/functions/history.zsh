@@ -38,4 +38,4 @@ function fzf-history-selection() {
 }
 
 zle -N fzf-history-selection
-bindkey '^X^R' fzf-history-selection
+bindkey '^R' fzf-history-selection
