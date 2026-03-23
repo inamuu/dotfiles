@@ -1,12 +1,23 @@
 {
   "hooks": {
+    "Notification": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"👀 確認が必要です！操作を承認してください\" with title \"🤖 Claude Code\" subtitle \"⏳ 入力待ち\" sound name \"Blow\"'"
+          }
+        ]
+      }
+    ],
     "PermissionRequest": [
       {
         "matcher": "*",
         "hooks": [
           {
             "type": "command",
-            "command": "osascript -e 'display notification \"確認が必要です\" with title \"Claude Code\" sound name \"Blow\"'"
+            "command": "osascript -e 'display notification \"🔐 権限の許可が必要です！確認をお願いします\" with title \"🤖 Claude Code\" subtitle \"⚠️ Permission Request\" sound name \"Blow\"'"
           }
         ]
       }
@@ -17,7 +28,18 @@
         "hooks": [
           {
             "type": "command",
-            "command": "osascript -e 'display notification \"処理が完了しました\" with title \"Claude Code\" sound name \"Glass\"'"
+            "command": "osascript -e 'display notification \"✅ タスクが完了しました！結果を確認してください\" with title \"🤖 Claude Code\" subtitle \"🎉 Complete!\" sound name \"Glass\"'"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.command' | { read -r cmd; if printf '%s' \"$cmd\" | grep -qE '^aws\\s'; then if printf '%s' \"$cmd\" | grep -qEi '\\b(update|delete|remove|create|put|modify|terminate|stop|start|reboot|run-task|run-instances|invoke|enable|disable|attach|detach|register|deregister|associate|disassociate|revoke|restore|import|export|copy|move|sync|send)\\b'; then printf '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"hooksにより: AWS書き込み系コマンドはブロックされています\"}}'; fi; fi; }"
           }
         ]
       }
@@ -54,7 +76,8 @@
       "Bash(git commit:*)",
       "Bash(swift run:*)",
       "Bash(npm run dist:*)",
-      "Bash(osascript -e:*)"
+      "Bash(osascript -e:*)",
+      "Bash(aws:*)"
     ],
     "deny": [
       "Bash(sudo:*)",
@@ -96,7 +119,6 @@
       "Bash(kubectl set:*)",
       "Bash(kubectl annotate:*)",
       "Bash(kubectl label:*)",
-      "Bash(aws:*)",
       "Bash(chmod:*)",
       "Bash(chown:*)",
       "Bash(chgrp:*)",
