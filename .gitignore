@@ -80,6 +80,12 @@ terraform.tfstate.*.backup
 .claude/tasks/
 .claude/todos/
 
+# 非公開スキルの実体をまとめて除外
+.claude/skills/private-skills/
+
+# シンボリックリンク自体も除外（リンク先が人によって異なるため）
+.claude/skills/jm*
+
 # Config store (auto-generated)
 .config/configstore/
 
