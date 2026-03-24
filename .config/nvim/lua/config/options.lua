@@ -1,4 +1,5 @@
 vim.opt.swapfile = false
+vim.opt.spell = false
 
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
@@ -40,9 +41,25 @@ local function set_ui_highlights()
 		fg = "#B8AECF",
 		bg = "#241D31",
 	})
+
+	-- Markdownのアンダーライン・赤色表示を修正
+	vim.api.nvim_set_hl(0, "@markup.underline", { underline = false })
+	vim.api.nvim_set_hl(0, "@markup.raw", { fg = "#F1FA8C", bg = "none" })
+	vim.api.nvim_set_hl(0, "@markup.raw.block", { fg = "#F1FA8C", bg = "none" })
+	vim.api.nvim_set_hl(0, "@markup.link", { fg = "#8BE9FD", underline = false })
+	vim.api.nvim_set_hl(0, "@markup.link.url", { fg = "#8BE9FD", underline = false })
+	vim.api.nvim_set_hl(0, "@markup.link.label", { fg = "#8BE9FD", underline = false })
+	vim.api.nvim_set_hl(0, "markdownError", { fg = "none", bg = "none" })
 end
 
 set_ui_highlights()
 vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = set_ui_highlights,
+})
+
+-- LazyVimがMarkdownでspellを有効にするのを無効化
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function()
+		vim.opt_local.spell = false
+	end,
 })
