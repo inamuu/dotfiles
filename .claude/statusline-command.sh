@@ -4,16 +4,26 @@
 input=$(cat)
 
 # ── ANSI colors (24-bit) ──────────────────────────────────────────────────────
-C_RESET="\033[0m"
+RST="\033[0m"
+DIM="\033[2m"
+BOLD="\033[1m"
+
+# palette
+C_CYAN="\033[38;2;86;182;194m"      # #56B6C2
+C_PURPLE="\033[38;2;198;120;221m"    # #C678DD
+C_BLUE="\033[38;2;97;175;239m"      # #61AFEF
+C_ORANGE="\033[38;2;209;154;102m"   # #D19A66
+C_GREY="\033[38;2;92;99;112m"       # #5C6370
+C_DARK="\033[38;2;55;62;72m"        # #373E48
+
 # usage-level colors
 color_for_pct() {
   local pct=$1
   if   [ "$pct" -ge 80 ]; then printf "\033[38;2;224;108;117m"   # red   #E06C75
   elif [ "$pct" -ge 50 ]; then printf "\033[38;2;229;192;123m"   # yellow #E5C07B
-  else                          printf "\033[38;2;151;201;195m"   # green  #97C9C3
+  else                          printf "\033[38;2;152;195;121m"   # green  #98C379
   fi
 }
-C_SEP="\033[38;2;74;88;92m"   # grey #4A585C
 
 # ── Extract fields from stdin JSON ───────────────────────────────────────────
 cwd=$(echo "$input" | jq -r '.workspace.current_dir // .cwd // empty')
@@ -50,64 +60,30 @@ diff_str=""
 if [ -n "$cwd" ] && git -C "$cwd" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   git_branch=$(git -C "$cwd" --no-optional-locks symbolic-ref --short HEAD 2>/dev/null \
                || git -C "$cwd" --no-optional-locks rev-parse --short HEAD 2>/dev/null)
-  # Lines added/deleted vs HEAD (index + working tree combined)
   diff_nums=$(git -C "$cwd" --no-optional-locks diff --numstat HEAD 2>/dev/null \
               | awk '{a+=$1; d+=$2} END{printf "+%d/-%d", a, d}')
   [ -n "$diff_nums" ] && diff_str="$diff_nums"
 fi
 
-# ── Rate limit cache / fetch ──────────────────────────────────────────────────
-CACHE_FILE="/tmp/claude-usage-cache.json"
-CACHE_TTL=360
+# ── Parse rate-limit from stdin JSON (official statusline fields) ─────────────
+fh_pct=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // 0' | cut -d. -f1)
+sd_pct=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // 0' | cut -d. -f1)
+fh_reset_epoch=$(echo "$input" | jq -r '.rate_limits.five_hour.resets_at // empty')
+sd_reset_epoch=$(echo "$input" | jq -r '.rate_limits.seven_day.resets_at // empty')
 
-fetch_usage() {
-  # Retrieve OAuth token from macOS Keychain
-  local token
-  token=$(security find-generic-password -s "Claude Code-credentials" -w 2>/dev/null \
-          | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('oauthToken',''))" 2>/dev/null \
-          || true)
-  [ -z "$token" ] && return 1
-
-  curl -sf -m 10 \
-    -H "Authorization: Bearer ${token}" \
-    -H "anthropic-version: 2023-06-01" \
-    "https://api.anthropic.com/api/oauth/usage" > "$CACHE_FILE" 2>/dev/null
-}
-
-usage_json=""
-if [ -f "$CACHE_FILE" ]; then
-  now=$(date +%s)
-  mtime=$(stat -f %m "$CACHE_FILE" 2>/dev/null || echo 0)
-  age=$(( now - mtime ))
-  if [ "$age" -lt "$CACHE_TTL" ]; then
-    usage_json=$(cat "$CACHE_FILE")
-  fi
-fi
-
-if [ -z "$usage_json" ]; then
-  fetch_usage && usage_json=$(cat "$CACHE_FILE" 2>/dev/null) || true
-fi
-
-# ── Parse rate-limit utilization ─────────────────────────────────────────────
-fh_pct=0
-sd_pct=0
-fh_reset_epoch=""
-sd_reset_epoch=""
-
-if [ -n "$usage_json" ]; then
-  fh_pct=$(echo "$usage_json" | jq -r '.five_hour.utilization // 0' | awk '{printf "%d", $1*100}')
-  sd_pct=$(echo "$usage_json" | jq -r '.seven_day.utilization // 0' | awk '{printf "%d", $1*100}')
-  fh_reset_epoch=$(echo "$usage_json" | jq -r '.five_hour.reset_at // empty' 2>/dev/null || true)
-  sd_reset_epoch=$(echo "$usage_json" | jq -r '.seven_day.reset_at // empty' 2>/dev/null || true)
-fi
-
-# ── Progress bar (10 segments) ────────────────────────────────────────────────
+# ── Colored progress bar (20 segments) ───────────────────────────────────────
 progress_bar() {
   local pct=$1
-  local filled=$(( pct / 10 ))
+  local color=$2
+  local width=20
+  local filled=$(( pct * width / 100 ))
   local bar=""
-  for i in $(seq 1 10); do
-    if [ "$i" -le "$filled" ]; then bar="${bar}▰"; else bar="${bar}▱"; fi
+  for i in $(seq 1 $width); do
+    if [ "$i" -le "$filled" ]; then
+      bar="${bar}${color}━${RST}"
+    else
+      bar="${bar}${C_DARK}─${RST}"
+    fi
   done
   echo "$bar"
 }
@@ -115,10 +91,9 @@ progress_bar() {
 # ── Reset time formatting (Asia/Tokyo) ───────────────────────────────────────
 format_reset_time() {
   local epoch=$1
-  local fmt=$2   # "time" → "4pm"  |  "datetime" → "Mar 6 at 1pm"
+  local fmt=$2
   if [ -z "$epoch" ] || [ "$epoch" = "null" ]; then echo ""; return; fi
 
-  # epoch may be ISO8601 string or unix timestamp
   local ts
   if echo "$epoch" | grep -qE '^[0-9]+$'; then
     ts=$epoch
@@ -130,9 +105,9 @@ format_reset_time() {
   [ -z "$ts" ] && return
 
   if [ "$fmt" = "time" ]; then
-    TZ="Asia/Tokyo" date -j -r "$ts" "+%-I%p" 2>/dev/null | tr 'A-Z' 'a-z' || true
+    LC_ALL=en_US.UTF-8 TZ="Asia/Tokyo" date -j -r "$ts" "+%-I%p" 2>/dev/null | tr 'A-Z' 'a-z' || true
   else
-    TZ="Asia/Tokyo" date -j -r "$ts" "+%b %-d at %-I%p" 2>/dev/null | sed 's/AM/am/;s/PM/pm/' || true
+    LC_ALL=en_US.UTF-8 TZ="Asia/Tokyo" date -j -r "$ts" "+%b %-d at %-I%p" 2>/dev/null | tr 'A-Z' 'a-z' || true
   fi
 }
 
@@ -140,26 +115,24 @@ fh_reset_label=$(format_reset_time "$fh_reset_epoch" "time")
 sd_reset_label=$(format_reset_time "$sd_reset_epoch" "datetime")
 
 # ── Assemble lines ────────────────────────────────────────────────────────────
-SEP="${C_SEP} │ ${C_RESET}"
+SEP=" ${C_GREY}·${RST} "
 
-# Line 1: model │ ctx% │ diff │ branch
-line1=""
-model_c="$(color_for_pct 0)🤖 ${model_label}${C_RESET}"
-ctx_c="$(color_for_pct "$used_int")📊 ${ctx_str}${C_RESET}"
-line1="${model_c}${SEP}${ctx_c}"
-[ -n "$diff_str" ]    && line1="${line1}${SEP}$(color_for_pct 0)✏️  ${diff_str}${C_RESET}"
-[ -n "$git_branch" ]  && line1="${line1}${SEP}$(color_for_pct 0)🔀 ${git_branch}${C_RESET}"
+# Line 1: model · ctx% · diff · branch
+line1="${C_PURPLE}${BOLD}${model_label}${RST}"
+line1="${line1}${SEP}${C_GREY}ctx${RST} $(color_for_pct "$used_int")${ctx_str}${RST}"
+[ -n "$diff_str" ] && line1="${line1}${SEP}${C_GREY}diff${RST} ${C_ORANGE}${diff_str}${RST}"
+[ -n "$git_branch" ] && line1="${line1}${SEP}${C_GREY}on${RST} ${C_CYAN}${git_branch}${RST}"
 
 # Line 2: 5h rate limit
-fh_bar=$(progress_bar "$fh_pct")
 fh_color=$(color_for_pct "$fh_pct")
-line2="${fh_color}⏱ 5h  ${fh_bar}  ${fh_pct}%${C_RESET}"
-[ -n "$fh_reset_label" ] && line2="${line2}  Resets ${fh_reset_label} (Asia/Tokyo)"
+fh_bar=$(progress_bar "$fh_pct" "$fh_color")
+line2="${C_GREY}5h${RST} ${fh_bar} ${fh_color}${fh_pct}%${RST}"
+[ -n "$fh_reset_label" ] && line2="${line2} ${DIM}reset ${fh_reset_label}${RST}"
 
 # Line 3: 7d rate limit
-sd_bar=$(progress_bar "$sd_pct")
 sd_color=$(color_for_pct "$sd_pct")
-line3="${sd_color}📅 7d  ${sd_bar}  ${sd_pct}%${C_RESET}"
-[ -n "$sd_reset_label" ] && line3="${line3}  Resets ${sd_reset_label} (Asia/Tokyo)"
+sd_bar=$(progress_bar "$sd_pct" "$sd_color")
+line3="${C_GREY}7d${RST} ${sd_bar} ${sd_color}${sd_pct}%${RST}"
+[ -n "$sd_reset_label" ] && line3="${line3} ${DIM}reset ${sd_reset_label}${RST}"
 
 printf "%b\n%b\n%b\n" "$line1" "$line2" "$line3"
