@@ -166,6 +166,9 @@ local config = {
 	-- ime
 	use_ime = true,
 
+	-- Allow terminal apps such as Neovim to receive Cmd/Super modified keys.
+	enable_kitty_keyboard = true,
+
 	-- Cursor
 	default_cursor_style = "BlinkingBlock",
 	cursor_blink_rate = 700,
