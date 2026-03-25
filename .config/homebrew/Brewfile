@@ -116,7 +116,6 @@ brew_list = [
   "tflint",
   "tftui",
   "inamuu/tap/overix",
-  "inamuu/tap/ssm-local-script",
   "inamuu/tap/tfz",
   "inamuu/tap/ssmx",
   "inamuu/tap/vigilo",
