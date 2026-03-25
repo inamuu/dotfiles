@@ -50,13 +50,20 @@ abbr -qq -S -f 'tffa=terraform state list | fzf --multi --preview "terraform sta
 gwtadd() {
   local name=${1:?usage: gwta <name> [base]}
   local base=${2:-HEAD}
-  git worktree add -b "${name}" "../${name}" "${base}"
+  local repo_name=${${PWD:A:t}}
+  git worktree add -b "${name}" "../${repo_name}_${name}" "${base}"
 }
 
 gwtremove() {
   local target=${1:-$(git worktree list --porcelain | awk '/^worktree /{print $2}' | tail -n +2 | fzf)}
   [[ -n "${target}" ]] || return 0
   git worktree remove "${target}"
+}
+
+gwtcd() {
+  local target=${1:-$(git worktree list --porcelain | awk '/^worktree /{print $2}' | fzf)}
+  [[ -n "${target}" ]] || return 0
+  cd "${target}"
 }
 
 abbr -qq -S -f 'g=git'
@@ -72,6 +79,7 @@ abbr -qq -S -f 'ghrv=gh repo view -w'
 abbr -qq -S -f 'gcmm=git commit -m "%ABBR_CURSOR%"'
 abbr -qq -S -f 'gbrd=git branch | fzf | xargs git branch -d '
 abbr -qq -S -f 'gwta=gwtadd'
+abbr -qq -S -f 'gwtc=gwtcd'
 abbr -qq -S -f 'gwtr=gwtremove'
 abbr -qq -S -f 'gcmb=git add . && git commit -m "backup at $(date +%Y%m%d%H%M)" && git push'
 abbr -qq -S -f 'tt=echo "%ABBR_CURSOR%"'
