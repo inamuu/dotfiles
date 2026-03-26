@@ -2,12 +2,10 @@
 .DS_Store
 
 ### Vim
-.vim/bundle/
-.vim/.netrwhist
-.vim/colors
-.vim/pack
 .vscode/settings.json
 .config/vim/.netrwhist
+.config/vim/legacy/
+.config/vim/pack/
 
 ### Docker
 docker-compose.override.yml
@@ -121,4 +119,3 @@ tftui.plan
 
 # Swift
 .config/swiftpm/
-
