@@ -179,7 +179,7 @@ local config = {
 	color_scheme = "Dracula (Gogh)",
 
 	colors = {
-		split = "#bdab8f",
+		split = "#FFD166",
 	},
 
 	-- KeyBindings
@@ -451,8 +451,8 @@ local config = {
 
 	-- Pane
 	inactive_pane_hsb = {
-		saturation = 0.8,
-		brightness = 0.8,
+		saturation = 0.55,
+		brightness = 0.45,
 	},
 }
 
@@ -525,6 +525,7 @@ end)
 wezterm.on("update-status", function(window, pane)
 	local workspace = window:active_workspace()
 	local overrides = window:get_config_overrides() or {}
+	local mux_window = window:mux_window()
 
 	-- leaderがアクティブになった瞬間だけIMEをOFFに寄せる
 	local leader_active = false
@@ -572,13 +573,36 @@ wezterm.on("update-status", function(window, pane)
 		where = get_repo_name(cwd_path)
 	end
 
+	local pane_label = tostring(pane:pane_id())
+	if mux_window then
+		local active_tab = mux_window:active_tab()
+		if active_tab then
+			local panes = active_tab:panes_with_info()
+			for index, pane_info in ipairs(panes) do
+				if pane_info.pane:pane_id() == pane:pane_id() then
+					pane_label = string.format("%d/%d", index, #panes)
+					break
+				end
+			end
+		end
+	end
+
 	local status = wezterm.format({
+		{ Background = { Color = "#FFD166" } },
+		{ Foreground = { Color = "#1F1300" } },
+		{ Attribute = { Intensity = "Bold" } },
+		{ Text = " ACTIVE " },
+		{ Background = { Color = "#3B3052" } },
 		{ Foreground = { Color = "#8BE9FD" } },
+		{ Attribute = { Intensity = "Bold" } },
 		{ Text = " " .. (leader_active and "LDR " or "") .. workspace .. " " },
+		{ Background = { Color = "#241D31" } },
 		{ Foreground = { Color = "#F1FA8C" } },
 		{ Text = (where ~= "" and (" " .. where .. " ") or "") },
+		{ Background = { Color = "#1B2333" } },
 		{ Foreground = { Color = "#50FA7B" } },
-		{ Text = " pane:" .. tostring(pane:pane_id()) .. " " },
+		{ Attribute = { Intensity = "Bold" } },
+		{ Text = " pane " .. pane_label .. " " },
 	})
 	window:set_right_status(status)
 end)
