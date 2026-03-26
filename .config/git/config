@@ -46,8 +46,9 @@
   rebase = merges
   ff     = only # pullを行った際fast-forward でマージできる状況の場合は merge を、そうでなければ fetch のみ行う
   prune  = true # 追跡ブランチを自動削除
+
 [filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
