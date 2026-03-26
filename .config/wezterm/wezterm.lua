@@ -162,6 +162,7 @@ local config = {
 		-- family = 'Hack Nerd Font Mono', weight = 'Bold',
 	}),
 	font_size = 17.0,
+	pane_select_font_size = 56,
 
 	-- ime
 	use_ime = true,
@@ -198,9 +199,9 @@ local config = {
 			key = "o",
 			mods = "LEADER",
 			action = act.PaneSelect({
-				alphabet = "1234567890abcdefghijklmnopqrstuvwxyz",
+				alphabet = "1234567890",
 				mode = "Activate",
-				show_pane_ids = true,
+				show_pane_ids = false,
 			}),
 		},
 
