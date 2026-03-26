@@ -130,7 +130,7 @@ export NODENV_SHELL=zsh
 
 ### ESC Timeout
 # http://lazy-dog.hatenablog.com/entry/2015/12/24/001648
-KEYTIMEOUT=0
+KEYTIMEOUT=1
 
 ### google cloud
 export PATH="$HOME/google-cloud-sdk/bin:$PATH"
