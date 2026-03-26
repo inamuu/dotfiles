@@ -4,7 +4,6 @@
 ### Vim
 .vscode/settings.json
 .config/vim/.netrwhist
-.config/vim/legacy/
 .config/vim/pack/
 
 ### Docker
