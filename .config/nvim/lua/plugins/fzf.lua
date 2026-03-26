@@ -7,7 +7,8 @@ return {
 		-- grepの設定を更新
 		opts.grep = opts.grep or {}
 		-- デフォルトで隠しファイルも検索対象にする
-		opts.grep.rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --hidden --glob '!.git/' --glob '!node_modules/' -e"
+		opts.grep.rg_opts =
+			"--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --hidden --glob '!.git/' --glob '!node_modules/' --glob '!.terraform/' -e"
 
 		-- アクションも保持
 		opts.grep.actions = opts.grep.actions or {}
