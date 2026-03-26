@@ -66,6 +66,18 @@ gwtcd() {
   cd "${target}"
 }
 
+gswitch() {
+  if [[ $# -gt 0 ]]; then
+    git switch "$@"
+    return
+  fi
+
+  local branch
+  branch=$(git branch --format='%(refname:short)' | fzf)
+  [[ -n "${branch}" ]] || return 0
+  git switch "${branch}"
+}
+
 abbr -qq -S -f 'g=git'
 abbr -qq -S -f 'gad=git add .'
 abbr -qq -S -f 'gaa=git add -A'
@@ -78,6 +90,7 @@ abbr -qq -S -f 'ghpv=gh pr view -w'
 abbr -qq -S -f 'ghrv=gh repo view -w'
 abbr -qq -S -f 'gcmm=git commit -m "%ABBR_CURSOR%"'
 abbr -qq -S -f 'gbrd=git branch | fzf | xargs git branch -d '
+abbr -qq -S -f 'gsw=gswitch'
 abbr -qq -S -f 'gwta=gwtadd'
 abbr -qq -S -f 'gwtc=gwtcd'
 abbr -qq -S -f 'gwtr=gwtremove'
