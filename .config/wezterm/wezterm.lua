@@ -212,6 +212,22 @@ local config = {
 		{ key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
 		{ key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
 		{ key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+		-- Resize mode
+		{
+			key = "r",
+			mods = "LEADER",
+			action = act.ActivateKeyTable({
+				name = "resize_pane",
+				one_shot = false,
+				timeout_milliseconds = 2000,
+				until_unknown = true,
+			}),
+		},
+		-- Resize pane
+		{ key = "H", mods = "LEADER", action = act.AdjustPaneSize({ "Left", 5 }) },
+		{ key = "J", mods = "LEADER", action = act.AdjustPaneSize({ "Down", 5 }) },
+		{ key = "K", mods = "LEADER", action = act.AdjustPaneSize({ "Up", 5 }) },
+		{ key = "L", mods = "LEADER", action = act.AdjustPaneSize({ "Right", 5 }) },
 		-- Layout presets
 		{ key = "1", mods = "LEADER", action = wezterm.action_callback(split_left_main) },
 		{ key = "2", mods = "LEADER", action = wezterm.action_callback(split_right_main) },
@@ -407,6 +423,14 @@ local config = {
 
 	-- SearchMode
 	key_tables = {
+		resize_pane = {
+			{ key = "h", mods = "NONE", action = act.AdjustPaneSize({ "Left", 5 }) },
+			{ key = "j", mods = "NONE", action = act.AdjustPaneSize({ "Down", 5 }) },
+			{ key = "k", mods = "NONE", action = act.AdjustPaneSize({ "Up", 5 }) },
+			{ key = "l", mods = "NONE", action = act.AdjustPaneSize({ "Right", 5 }) },
+			{ key = "Escape", mods = "NONE", action = act.PopKeyTable },
+			{ key = "Enter", mods = "NONE", action = act.PopKeyTable },
+		},
 		search_mode = {
 			{ key = "Enter", mods = "NONE", action = act.CopyMode("PriorMatch") },
 			{
@@ -527,6 +551,7 @@ wezterm.on("update-status", function(window, pane)
 	local workspace = window:active_workspace()
 	local overrides = window:get_config_overrides() or {}
 	local mux_window = window:mux_window()
+	local active_key_table = window:active_key_table()
 
 	-- leaderがアクティブになった瞬間だけIMEをOFFに寄せる
 	local leader_active = false
@@ -596,7 +621,7 @@ wezterm.on("update-status", function(window, pane)
 		{ Background = { Color = "#3B3052" } },
 		{ Foreground = { Color = "#8BE9FD" } },
 		{ Attribute = { Intensity = "Bold" } },
-		{ Text = " " .. (leader_active and "LDR " or "") .. workspace .. " " },
+		{ Text = " " .. (leader_active and "LDR " or "") .. (active_key_table == "resize_pane" and "RSZ " or "") .. workspace .. " " },
 		{ Background = { Color = "#241D31" } },
 		{ Foreground = { Color = "#F1FA8C" } },
 		{ Text = (where ~= "" and (" " .. where .. " ") or "") },
