@@ -1,56 +1,37 @@
-"$schema" = 'https://starship.rs/config-schema.json'
+"$schema" = "https://starship.rs/config-schema.json"
+
+palette = "neon_luxe"
+add_newline = false
+scan_timeout = 20
+command_timeout = 900
+continuation_prompt = "[∙ ](fg:muted)"
 
 format = """
-[](color_1)\
-$os\
-$username\
-[](fg:color_1 bg:color_2)\
-$directory\
-[](fg:color_2 bg:color_3)\
-$git_branch\
-$git_status\
-$line_break$character"""
+$os$username$hostname$directory$git_branch$git_status$git_state
+$character"""
 
-#[](fg:color_2 bg:color_bg3)\
-#$docker_context\
-#$conda\
-#$pixi\
-#[](fg:color_bg3 bg:color_bg1)\
-#$time\
+right_format = """
+$docker_context$terraform$golang$nodejs$python$rust$php$ruby$status$cmd_duration"""
 
-palette = 'blue_ocean'
-
-[palettes.blue_ocean]
-color_fg0 = '#fbf1c7'
-color_bg1 = '#3c3836'
-color_bg3 = '#665c54'
-color_1 = '#0e1a40'
-color_2 = '#1d2a54'
-color_3 = '#545454'
-color_4 = '#7e7e7e'
-color_5 = '#bdab8f'
-
-#color_1 = '#458588'
-#color_aqua = '#02a7dd'
-#color_5 = '#9eff00'
-#color_orange = '#662FC1'
-#color_1 = '#662FC1'
-#color_4 = '#ff0054'
-#color_2 = '#ffd60a'
-#color_3 = '#ff277f'
-#color_cream = '#eee8df'
-#color_2 = '#e2d2b4'
-#color_ocean = '#2c365a'
-#color_burg = '#7a2038'
-#color_teal = '#0a4f54'
-#color_3 = '#a6824a'
-#color_grey = '#30373e'
-#color_terra = '#A067DA'
-
+[palettes.neon_luxe]
+shadow = "#05030B"
+chrome = "#1B1030"
+panel = "#23133D"
+panel_alt = "#322053"
+violet = "#8A5CFF"
+hot = "#FF4FA3"
+cyan = "#22D3EE"
+sky = "#59C3FF"
+gold = "#FFD166"
+orange = "#FF8A00"
+lime = "#A7F432"
+fg = "#F9F4FF"
+muted = "#B9ACD0"
 
 [os]
 disabled = false
-style = "bg:color_1 fg:color_fg0"
+style = "fg:shadow bg:violet bold"
+format = "[](fg:violet)[$symbol ]($style)"
 
 [os.symbols]
 Windows = "󰍲"
@@ -58,8 +39,7 @@ Ubuntu = "󰕈"
 SUSE = ""
 Raspbian = "󰐿"
 Mint = "󰣭"
-#Macos = "󰀵"
-Macos = "🎸"
+Macos = ""
 Manjaro = ""
 Linux = "󰌽"
 Gentoo = "󰣨"
@@ -79,14 +59,23 @@ Pop = ""
 
 [username]
 show_always = true
-style_user = "bg:color_1 fg:color_fg0"
-style_root = "bg:color_1 fg:color_fg0"
-format = '[ inamuu ]($style)'
+style_user = "fg:shadow bg:violet bold"
+style_root = "fg:shadow bg:violet bold"
+format = "[  inamuu ]($style)[](fg:violet) "
+
+[hostname]
+ssh_only = true
+ssh_symbol = "󰣀 "
+style = "fg:fg bg:panel bold"
+format = "[](fg:panel)[ $ssh_symbol$hostname ]($style)[](fg:panel) "
+trim_at = ".local"
 
 [directory]
-style = "fg:color_fg0 bg:color_2"
-format = "[ $path ]($style)"
-truncation_length = 3
+style = "fg:shadow bg:gold bold"
+read_only = " 󰌾"
+read_only_style = "fg:shadow bg:gold bold"
+format = "[](fg:gold)[  $path$read_only ]($style)[](fg:gold) "
+truncation_length = 4
 truncation_symbol = "…/"
 
 [directory.substitutions]
@@ -95,72 +84,103 @@ truncation_symbol = "…/"
 "Music" = "󰝚 "
 "Pictures" = " "
 "Developer" = "󰲋 "
+"ghq" = "󰏖 "
 
 [git_branch]
 symbol = ""
-style = "bg:color_3"
-format = '[[ $symbol $branch](fg:color_fg0 bg:color_3)]($style)'
+style = "fg:shadow bg:hot bold"
+format = "[](fg:hot)[ $symbol $branch ]($style)[](fg:hot) "
 
 [git_status]
-style = "bg:color_3"
-format = '[[ $all_status$ahead_behind ](fg:color_fg0 bg:color_3)[ ](fg:color_3 bg:none)]($style)'
+style = "fg:shadow bg:cyan bold"
+format = "([](fg:cyan)[ $all_status$ahead_behind ]($style)[](fg:cyan) )"
+conflicted = " =${count}"
+ahead = " ⇡${count}"
+behind = " ⇣${count}"
+diverged = " ⇕⇡${ahead_count}⇣${behind_count}"
+untracked = " ?${count}"
+stashed = " *${count}"
+modified = " !${count}"
+staged = " +${count}"
+renamed = " »${count}"
+deleted = " ✘${count}"
 
-[nodejs]
-symbol = "✳️"
-style = "bg:color_5"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_5)]($style)'
+[git_state]
+style = "fg:shadow bg:orange bold"
+format = "([](fg:orange)[ $state( $progress_current/$progress_total) ]($style)[](fg:orange) )"
+rebase = "REBASE"
+merge = "MERGE"
+revert = "REVERT"
+cherry_pick = "PICK"
+bisect = "BISECT"
+am = "AM"
+am_or_rebase = "AM/REBASE"
 
-[rust]
-symbol = ""
-style = "bg:color_5"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_5)]($style)'
+[docker_context]
+disabled = false
+symbol = ""
+style = "fg:shadow bg:sky bold"
+format = "[](fg:sky)[ $symbol $context ]($style)[](fg:sky) "
 
-[ruby]
-symbol = "💎"
-style = "bg:color_5"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_5)]($style)'
+[terraform]
+disabled = false
+symbol = "󱁢"
+style = "fg:shadow bg:violet bold"
+format = "[](fg:violet)[ $symbol $version ]($style)[](fg:violet) "
 
 [golang]
 symbol = ""
-style = "bg:color_5"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_5)]($style)'
+style = "fg:shadow bg:sky bold"
+format = "[](fg:sky)[ $symbol $version ]($style)[](fg:sky) "
 
-[php]
-symbol = ""
-style = "bg:color_5"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_5)]($style)'
+[nodejs]
+symbol = ""
+style = "fg:shadow bg:lime bold"
+format = "[](fg:lime)[ $symbol $version ]($style)[](fg:lime) "
 
 [python]
 symbol = ""
-style = "bg:color_5"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_5)]($style)'
+style = "fg:shadow bg:cyan bold"
+format = "[](fg:cyan)[ $symbol $version ]($style)[](fg:cyan) "
 
-[terraform]
-disabled = true
-symbol = "🚀"
-style = "bg:color_5"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_5)]($style)'
+[rust]
+symbol = ""
+style = "fg:shadow bg:orange bold"
+format = "[](fg:orange)[ $symbol $version ]($style)[](fg:orange) "
 
-[docker_context]
-disabled = true
-symbol = ""
-style = "bg:color_bg3"
-format = '[[ $symbol( $context) ](fg:color_fg0 bg:color_bg3)]($style)'
+[php]
+symbol = ""
+style = "fg:shadow bg:violet bold"
+format = "[](fg:violet)[ $symbol $version ]($style)[](fg:violet) "
+
+[ruby]
+symbol = ""
+style = "fg:shadow bg:hot bold"
+format = "[](fg:hot)[ $symbol $version ]($style)[](fg:hot) "
+
+[status]
+disabled = false
+style = "fg:shadow bg:orange bold"
+format = "[](fg:orange)[ ✘ $status ]($style)[](fg:orange) "
+map_symbol = true
+
+[cmd_duration]
+min_time = 800
+show_milliseconds = false
+style = "fg:gold bg:chrome bold"
+format = "[](fg:chrome)[ 󰔛 $duration ]($style)[](fg:chrome) "
 
 [time]
-disabled = true
-time_format = "%R"
-style = "bg:color_bg1"
-format = '[[  $time ](fg:color_fg0 bg:color_bg1)]($style)'
-
-[line_break]
 disabled = false
+time_format = "%H:%M"
+style = "fg:fg bg:panel bold"
+format = "[](fg:panel)[  $time ]($style)[](fg:panel)"
 
 [character]
 disabled = false
-success_symbol = '[\$](bold fg:color_5)'
-error_symbol = '[\$](bold fg:color_4)'
-vimcmd_symbol = '[](bold fg:color_5)'
-vimcmd_replace_one_symbol = '[](bold fg:color_1)'
-vimcmd_replace_symbol = '[](bold fg:color_1)'
-vimcmd_visual_symbol = '[](bold fg:color_2)'
+success_symbol = "[❯](bold fg:hot)"
+error_symbol = "[❯](bold fg:orange)"
+vimcmd_symbol = "[❮](bold fg:cyan)"
+vimcmd_replace_one_symbol = "[❮](bold fg:gold)"
+vimcmd_replace_symbol = "[❮](bold fg:gold)"
+vimcmd_visual_symbol = "[❮](bold fg:violet)"
