@@ -180,12 +180,16 @@ local config = {
 		-- family = 'UDEV Gothic 35', weight = 'Bold',
 		-- family = 'Hack Nerd Font Mono', weight = 'Bold',
 	}),
-	font_size = 16.5,
-	line_height = 1.06,
-	pane_select_font_size = 56,
+		font_size = 16.5,
+		line_height = 1.06,
+		pane_select_font_size = 56,
+		command_palette_bg_color = "#170C29",
+		command_palette_fg_color = palette.fg,
+		command_palette_font_size = 19.0,
+		command_palette_rows = 16,
 
-	-- ime
-	use_ime = true,
+		-- ime
+		use_ime = true,
 
 	-- Allow terminal apps such as Neovim to receive Cmd/Super modified keys.
 	enable_kitty_keyboard = true,
@@ -431,11 +435,18 @@ local config = {
 					)
 				end
 			end),
-		},
-		-- 直前のコマンドと出力をコピー
-		{
-			key = "x",
-			mods = "LEADER",
+			},
+			{
+				key = "g",
+				mods = "LEADER",
+				action = wezterm.action_callback(function(window, pane)
+					launch_ghq_project_workspace(window, pane)
+				end),
+			},
+			-- 直前のコマンドと出力をコピー
+			{
+				key = "x",
+				mods = "LEADER",
 			action = wezterm.action_callback(function(window, pane)
 				-- コピーモードに入る
 				window:perform_action(act.ActivateCopyMode, pane)
@@ -665,6 +676,233 @@ local function get_repo_name(cwd_path)
 	return cwd_path:match("([^/]+)/?$") or cwd_path
 end
 
+local function trim(value)
+	if not value then
+		return ""
+	end
+
+	return (value:gsub("^%s+", ""):gsub("%s+$", ""))
+end
+
+local function split_lines(value)
+	local lines = {}
+	for line in (value or ""):gmatch("[^\r\n]+") do
+		local item = trim(line)
+		if item ~= "" then
+			table.insert(lines, item)
+		end
+	end
+	return lines
+end
+
+local function workspace_exists(name)
+	for _, workspace in ipairs(wezterm.mux.get_workspace_names()) do
+		if workspace == name then
+			return true
+		end
+	end
+
+	return false
+end
+
+local function workspace_mux_window(name)
+	for _, mux_window in ipairs(wezterm.mux.all_windows()) do
+		if mux_window:get_workspace() == name then
+			return mux_window
+		end
+	end
+
+	return nil
+end
+
+local function notify_error(window, message, detail)
+	local body = message
+	if detail and detail ~= "" then
+		body = body .. ": " .. detail
+	end
+	window:toast_notification("WezTerm", body, nil, 4000)
+end
+
+local function login_shell_path()
+	return os.getenv("SHELL") or "/bin/zsh"
+end
+
+local function run_login_shell_command(command)
+	return wezterm.run_child_process({ login_shell_path(), "-ilc", command })
+end
+
+local function list_ghq_projects(window)
+	local ok_root, root_stdout, root_stderr = run_login_shell_command("ghq root")
+	if not ok_root then
+		notify_error(window, "ghq root に失敗しました", trim(root_stderr))
+		return nil, nil
+	end
+
+	local ghq_root = trim(root_stdout)
+	if ghq_root == "" then
+		notify_error(window, "ghq root の結果が空です", trim(root_stderr))
+		return nil, nil
+	end
+
+	local ok_list, list_stdout, list_stderr = run_login_shell_command("ghq list")
+	if not ok_list then
+		notify_error(window, "ghq list に失敗しました", trim(list_stderr))
+		return nil, nil
+	end
+
+	local projects = split_lines(list_stdout)
+	if #projects == 0 then
+		notify_error(window, "ghq 管理下のリポジトリが見つかりません", trim(list_stderr))
+		return nil, nil
+	end
+
+	return ghq_root, projects
+end
+
+local function format_project_choice(repo)
+	local repo_name = repo:match("([^/]+)$") or repo
+	return wezterm.format({
+		{ Foreground = { Color = palette.gold } },
+		{ Attribute = { Intensity = "Bold" } },
+		{ Text = "◆ " .. repo_name },
+		{ Foreground = { Color = palette.fg_dim } },
+		{ Attribute = { Intensity = "Normal" } },
+		{ Text = "   " .. repo },
+	})
+end
+
+local function apply_project_workspace_layout(window, workspace_name, repo_path, attempt, open_nvim)
+	attempt = attempt or 1
+
+	local mux_window = workspace_mux_window(workspace_name)
+	if not mux_window then
+		if attempt >= 20 then
+			notify_error(window, "workspace の生成待ちでタイムアウトしました", workspace_name)
+			return
+		end
+		wezterm.time.call_after(0.1, function()
+			apply_project_workspace_layout(window, workspace_name, repo_path, attempt + 1, open_nvim)
+		end)
+		return
+	end
+
+	local tab = mux_window:active_tab()
+	if not tab then
+		if attempt >= 20 then
+			notify_error(window, "workspace にタブが作成されませんでした", workspace_name)
+			return
+		end
+		wezterm.time.call_after(0.1, function()
+			apply_project_workspace_layout(window, workspace_name, repo_path, attempt + 1, open_nvim)
+		end)
+		return
+	end
+
+	local panes = tab:panes_with_info()
+	if #panes == 0 then
+		if attempt >= 20 then
+			notify_error(window, "workspace に pane が作成されませんでした", workspace_name)
+			return
+		end
+		wezterm.time.call_after(0.1, function()
+			apply_project_workspace_layout(window, workspace_name, repo_path, attempt + 1, open_nvim)
+		end)
+		return
+	end
+
+	if #panes > 1 then
+		return
+	end
+
+	local top = tab:active_pane() or panes[1].pane
+	if not top then
+		notify_error(window, "workspace の pane を取得できませんでした", workspace_name)
+		return
+	end
+
+	local bottom = top:split({
+		direction = "Bottom",
+		size = 0.2,
+		cwd = repo_path,
+	})
+	bottom:split({
+		direction = "Right",
+		size = 0.5,
+		cwd = repo_path,
+	})
+	top:activate()
+	tab:set_title(get_repo_name(repo_path))
+
+	if open_nvim then
+		wezterm.time.call_after(0.05, function()
+			top:send_text("exec nvim\n")
+		end)
+	end
+end
+
+local function launch_ghq_project_workspace(window, pane)
+	window:toast_notification("WezTerm", "Loading GHQ projects...", nil, 1200)
+
+	local ghq_root, projects = list_ghq_projects(window)
+	if not ghq_root or not projects then
+		return
+	end
+
+	local choices = {}
+	for _, repo in ipairs(projects) do
+		table.insert(choices, {
+			id = repo,
+			label = format_project_choice(repo),
+		})
+	end
+
+	window:perform_action(
+		act.InputSelector({
+			title = wezterm.format({
+				{ Foreground = { Color = palette.hot_pink } },
+				{ Attribute = { Intensity = "Bold" } },
+				{ Text = "  GHQ Projects " },
+				{ Foreground = { Color = palette.fg_dim } },
+				{ Attribute = { Intensity = "Normal" } },
+				{ Text = " (" .. #projects .. " repos)" },
+			}),
+			choices = choices,
+			fuzzy = true,
+			fuzzy_description = wezterm.format({
+				{ Foreground = { Color = palette.fg_dim } },
+				{ Text = "Type to filter • Enter opens workspace • Esc cancels" },
+			}),
+			action = wezterm.action_callback(function(win, p, id)
+				if not id then
+					return
+				end
+
+				local workspace_name = id
+				local repo_path = ghq_root .. "/" .. id
+				local existed = workspace_exists(workspace_name)
+
+					win:perform_action(
+						act.SwitchToWorkspace({
+							name = workspace_name,
+							spawn = {
+								cwd = repo_path,
+								args = { login_shell_path(), "-il" },
+							},
+						}),
+						p
+					)
+
+					if not existed then
+						wezterm.time.call_after(0.15, function()
+							apply_project_workspace_layout(win, workspace_name, repo_path, 1, true)
+						end)
+					end
+				end),
+		}),
+		pane
+	)
+end
+
 local function tab_label(tab_info)
 	local title = tab_info.tab_title
 	if title and #title > 0 then
@@ -681,6 +919,18 @@ local function tab_label(tab_info)
 
 	return tab_info.active_pane.title
 end
+
+wezterm.on("augment-command-palette", function(window, pane)
+	return {
+		{
+			brief = "Open GHQ Project Workspace",
+			doc = "Select a ghq repository, switch to its workspace, and bootstrap a 4:1 project layout with Neovim on top.",
+			action = wezterm.action_callback(function(win, p)
+				launch_ghq_project_workspace(win, p)
+			end),
+		},
+	}
+end)
 
 -- Set window title to workspace name
 wezterm.on("format-window-title", function(tab, pane, tabs, panes, config)
