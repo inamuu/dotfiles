@@ -15,7 +15,49 @@ return {
           },
         },
         view = {
-          width = 30,
+          width = 34,
+          preserve_window_proportions = true,
+          signcolumn = "yes",
+        },
+        renderer = {
+          root_folder_label = false,
+          group_empty = true,
+          highlight_git = true,
+          highlight_opened_files = "all",
+          indent_markers = {
+            enable = true,
+            inline_arrows = true,
+            icons = {
+              corner = "└",
+              edge = "│",
+              item = "│",
+              bottom = "─",
+              none = " ",
+            },
+          },
+          icons = {
+            glyphs = {
+              folder = {
+                arrow_closed = "▸",
+                arrow_open = "▾",
+                default = "",
+                open = "",
+                empty = "",
+                empty_open = "",
+                symlink = "",
+                symlink_open = "",
+              },
+              git = {
+                unstaged = "✗",
+                staged = "✓",
+                unmerged = "",
+                renamed = "➜",
+                untracked = "★",
+                deleted = "",
+                ignored = "◌",
+              },
+            },
+          },
         },
       })
     end,

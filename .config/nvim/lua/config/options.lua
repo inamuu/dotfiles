@@ -1,5 +1,8 @@
 vim.opt.swapfile = false
 vim.opt.spell = false
+vim.opt.termguicolors = true
+vim.opt.pumblend = 10
+vim.opt.winblend = 8
 
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
@@ -20,111 +23,154 @@ vim.opt.fillchars:append({
 	verthoriz = "╋",
 })
 
+local p = require("config.palette")
+
 local function set_ui_highlights()
 	vim.api.nvim_set_hl(0, "ActiveWindowNormal", {
-		bg = "#241B33",
+		bg = p.bg_alt,
 	})
 	vim.api.nvim_set_hl(0, "ActiveWindowSignColumn", {
-		bg = "#241B33",
+		bg = p.bg_alt,
 	})
 	vim.api.nvim_set_hl(0, "ActiveWindowEndOfBuffer", {
-		fg = "#241B33",
-		bg = "#241B33",
+		fg = p.bg_alt,
+		bg = p.bg_alt,
 	})
 	vim.api.nvim_set_hl(0, "InactiveWindowNormal", {
-		bg = "#130F1C",
-		fg = "#A89FBC",
+		bg = p.bg_dark,
+		fg = p.fg_muted,
 	})
 	vim.api.nvim_set_hl(0, "InactiveWindowSignColumn", {
-		bg = "#130F1C",
+		bg = p.bg_dark,
 	})
 	vim.api.nvim_set_hl(0, "InactiveWindowEndOfBuffer", {
-		fg = "#130F1C",
-		bg = "#130F1C",
+		fg = p.bg_dark,
+		bg = p.bg_dark,
 	})
 	vim.api.nvim_set_hl(0, "InactiveWindowSeparator", {
-		fg = "#5B4C74",
+		fg = p.panel_alt,
 		bold = true,
 	})
 	vim.api.nvim_set_hl(0, "WinSeparator", {
-		fg = "#BD93F9",
+		fg = p.border,
 		bold = true,
 	})
 	vim.api.nvim_set_hl(0, "LeaderActiveWindow", {
-		bg = "#5A3E1B",
-		fg = "#FFF4D6",
+		bg = "#4A2A10",
+		fg = p.fg,
 	})
 	vim.api.nvim_set_hl(0, "LeaderActiveWindowNC", {
 		bg = "none",
 	})
 	vim.api.nvim_set_hl(0, "CursorLine", {
-		bg = "#2A2138",
+		bg = p.panel,
 	})
 	vim.api.nvim_set_hl(0, "InactiveCursorLine", {
-		bg = "#191322",
+		bg = p.bg_sidebar,
 	})
 	vim.api.nvim_set_hl(0, "LeaderActiveCursorLine", {
-		bg = "#7A5426",
-		fg = "#FFF4D6",
+		bg = "#6A3914",
+		fg = p.fg,
 		bold = true,
 	})
 	vim.api.nvim_set_hl(0, "CursorLineNr", {
-		fg = "#BD93F9",
+		fg = p.magenta,
 		bold = true,
 	})
 	vim.api.nvim_set_hl(0, "InactiveCursorLineNr", {
-		fg = "#6D6482",
+		fg = p.comment,
 	})
 	vim.api.nvim_set_hl(0, "LeaderActiveCursorLineNr", {
-		fg = "#FFD166",
+		fg = p.yellow,
 		bold = true,
 	})
 	vim.api.nvim_set_hl(0, "ActiveWindowStatusLine", {
-		fg = "#1F1300",
-		bg = "#FFB86C",
+		fg = p.bg_dark,
+		bg = p.magenta,
 		bold = true,
 	})
 	vim.api.nvim_set_hl(0, "LeaderActiveStatusLine", {
-		fg = "#1F1300",
-		bg = "#FFD166",
+		fg = p.bg_dark,
+		bg = p.yellow,
 		bold = true,
 	})
 	vim.api.nvim_set_hl(0, "LeaderActiveWinSeparator", {
-		fg = "#FFD166",
+		fg = p.yellow,
 		bold = true,
 	})
 	vim.api.nvim_set_hl(0, "StatusLine", {
-		fg = "#F8F8F2",
-		bg = "#3B3052",
+		fg = p.fg,
+		bg = p.panel,
 		bold = true,
 	})
 	vim.api.nvim_set_hl(0, "StatusLineNC", {
-		fg = "#B8AECF",
-		bg = "#241D31",
+		fg = p.fg_muted,
+		bg = p.bg_alt,
 	})
 	vim.api.nvim_set_hl(0, "NvimTreeNormal", {
-		bg = "#241B33",
+		bg = p.bg_alt,
 	})
 	vim.api.nvim_set_hl(0, "NvimTreeNormalNC", {
-		bg = "#130F1C",
-		fg = "#A89FBC",
+		bg = p.bg_dark,
+		fg = p.fg_muted,
 	})
 	vim.api.nvim_set_hl(0, "NvimTreeEndOfBuffer", {
-		fg = "#241B33",
-		bg = "#241B33",
+		fg = p.bg_alt,
+		bg = p.bg_alt,
 	})
 	vim.api.nvim_set_hl(0, "NvimTreeEndOfBufferNC", {
-		fg = "#130F1C",
-		bg = "#130F1C",
+		fg = p.bg_dark,
+		bg = p.bg_dark,
+	})
+	vim.api.nvim_set_hl(0, "NvimTreeCursorLine", {
+		bg = p.panel,
+	})
+	vim.api.nvim_set_hl(0, "NvimTreeWinSeparator", {
+		fg = p.border,
+		bg = p.bg_dark,
+	})
+	vim.api.nvim_set_hl(0, "FloatBorder", {
+		fg = p.border,
+		bg = p.bg_float,
+	})
+	vim.api.nvim_set_hl(0, "NormalFloat", {
+		bg = p.bg_float,
+	})
+	vim.api.nvim_set_hl(0, "FloatTitle", {
+		fg = p.yellow,
+		bg = p.bg_float,
+		bold = true,
+	})
+	vim.api.nvim_set_hl(0, "Pmenu", {
+		bg = p.bg_float,
+		fg = p.fg,
+	})
+	vim.api.nvim_set_hl(0, "PmenuSel", {
+		bg = p.panel_alt,
+		fg = p.fg,
+		bold = true,
+	})
+	vim.api.nvim_set_hl(0, "Visual", {
+		bg = p.selection,
+	})
+	vim.api.nvim_set_hl(0, "Search", {
+		fg = p.bg_dark,
+		bg = p.yellow,
+		bold = true,
+	})
+	vim.api.nvim_set_hl(0, "IncSearch", {
+		fg = p.bg_dark,
+		bg = p.orange,
+		bold = true,
 	})
 
 	-- Markdownのアンダーライン・赤色表示を修正
 	vim.api.nvim_set_hl(0, "@markup.underline", { underline = false })
-	vim.api.nvim_set_hl(0, "@markup.raw", { fg = "#F1FA8C", bg = "none" })
-	vim.api.nvim_set_hl(0, "@markup.raw.block", { fg = "#F1FA8C", bg = "none" })
-	vim.api.nvim_set_hl(0, "@markup.link", { fg = "#8BE9FD", underline = false })
-	vim.api.nvim_set_hl(0, "@markup.link.url", { fg = "#8BE9FD", underline = false })
-	vim.api.nvim_set_hl(0, "@markup.link.label", { fg = "#8BE9FD", underline = false })
+	vim.api.nvim_set_hl(0, "@markup.raw", { fg = p.yellow, bg = "none" })
+	vim.api.nvim_set_hl(0, "@markup.raw.block", { fg = p.yellow, bg = "none" })
+	vim.api.nvim_set_hl(0, "@markup.link", { fg = p.cyan, underline = false })
+	vim.api.nvim_set_hl(0, "@markup.link.url", { fg = p.cyan, underline = false })
+	vim.api.nvim_set_hl(0, "@markup.link.label", { fg = p.cyan, underline = false })
 	vim.api.nvim_set_hl(0, "markdownError", { fg = "none", bg = "none" })
 end
 
