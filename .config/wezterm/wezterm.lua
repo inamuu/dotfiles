@@ -5,6 +5,25 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 local act = wezterm.action
+local palette = {
+	shadow = "#05030B",
+	bg = "#09061A",
+	bg_alt = "#140B24",
+	chrome = "#1B1030",
+	chrome_dim = "#11081D",
+	panel = "#23133D",
+	panel_alt = "#322053",
+	violet = "#8A5CFF",
+	hot_pink = "#FF4FA3",
+	cyan = "#22D3EE",
+	gold = "#FFD166",
+	orange = "#FF8A00",
+	lime = "#A7F432",
+	fg = "#F9F4FF",
+	fg_muted = "#D9CFF0",
+	fg_dim = "#9A8DB8",
+	selection = "#45306C",
+}
 
 local function active_tab_if_single_pane(window, message)
 	local mux_window = window:mux_window()
@@ -161,7 +180,8 @@ local config = {
 		-- family = 'UDEV Gothic 35', weight = 'Bold',
 		-- family = 'Hack Nerd Font Mono', weight = 'Bold',
 	}),
-	font_size = 17.0,
+	font_size = 16.5,
+	line_height = 1.06,
 	pane_select_font_size = 56,
 
 	-- ime
@@ -171,16 +191,48 @@ local config = {
 	enable_kitty_keyboard = true,
 
 	-- Cursor
-	default_cursor_style = "BlinkingBlock",
-	cursor_blink_rate = 700,
+	default_cursor_style = "BlinkingBar",
+	cursor_blink_rate = 450,
 
 	-- Color Scheme: https://wezfurlong.org/wezterm/colorschemes/index.html
-	-- color_scheme = 'Dracula (Official)',
-	-- color_scheme = 'darkmoss (base16)',
-	color_scheme = "Dracula (Gogh)",
+	color_scheme = "Night Owl (Gogh)",
 
 	colors = {
-		split = "#FFD166",
+		foreground = palette.fg,
+		background = palette.shadow,
+		cursor_bg = palette.gold,
+		cursor_fg = palette.shadow,
+		cursor_border = palette.cyan,
+		selection_bg = palette.selection,
+		selection_fg = palette.fg,
+		scrollbar_thumb = palette.violet,
+		compose_cursor = palette.orange,
+		split = palette.hot_pink,
+		tab_bar = {
+			background = palette.chrome_dim,
+			active_tab = {
+				bg_color = palette.hot_pink,
+				fg_color = palette.shadow,
+				intensity = "Bold",
+			},
+			inactive_tab = {
+				bg_color = palette.panel,
+				fg_color = palette.fg_dim,
+			},
+			inactive_tab_hover = {
+				bg_color = palette.panel_alt,
+				fg_color = palette.fg,
+			},
+			new_tab = {
+				bg_color = palette.chrome_dim,
+				fg_color = palette.cyan,
+			},
+			new_tab_hover = {
+				bg_color = palette.panel_alt,
+				fg_color = palette.gold,
+				italic = true,
+			},
+		},
 	},
 
 	-- KeyBindings
@@ -453,20 +505,93 @@ local config = {
 	},
 
 	-- Window
-	window_background_opacity = 1.0,
-	-- TUI が塗る背景（lazytree など）にも透過を効かせる
-	text_background_opacity = 0.5,
-	window_background_image = "/usr/local/pictures/wallpaper4.png",
-	window_background_image_hsb = {
-		brightness = 0.05,
-		hue = 0.8,
-		saturation = 0.8,
+	animation_fps = 120,
+	max_fps = 120,
+	background = {
+		{
+			source = {
+				Gradient = {
+					colors = { "#0A1024", "#2D1B69", "#A12670", "#FF7A18" },
+					orientation = { Linear = { angle = -45.0 } },
+					interpolation = "Basis",
+					blend = "Rgb",
+				},
+			},
+			width = "100%",
+			height = "100%",
+			opacity = 1.0,
+		},
+		{
+			source = {
+				Gradient = {
+					colors = { "#0D0B2A", "#102A43", "#05D9E8" },
+					orientation = {
+						Radial = { cx = 0.82, cy = -0.15, radius = 1.05 },
+					},
+					interpolation = "Basis",
+					blend = "Rgb",
+				},
+			},
+			width = "100%",
+			height = "100%",
+			opacity = 0.18,
+		},
+		{
+			source = { File = "/usr/local/pictures/wallpaper4.png" },
+			width = "Cover",
+			height = "Cover",
+			opacity = 0.20,
+			hsb = {
+				hue = 1.0,
+				saturation = 1.25,
+				brightness = 0.16,
+			},
+			attachment = { Parallax = 0.05 },
+		},
+		{
+			source = { Color = palette.shadow },
+			width = "100%",
+			height = "100%",
+			opacity = 0.45,
+		},
+	},
+	-- TUI が塗る背景（lazytree など）も少し透かす
+	text_background_opacity = 0.88,
+	window_padding = {
+		left = 16,
+		right = 12,
+		top = 12,
+		bottom = 8,
+	},
+	window_frame = {
+		font = wezterm.font({ family = "Roboto", weight = "Bold" }),
+		font_size = 12.0,
+		active_titlebar_bg = palette.chrome_dim,
+		inactive_titlebar_bg = palette.bg_alt,
+		active_titlebar_fg = palette.fg,
+		inactive_titlebar_fg = palette.fg_dim,
+		active_titlebar_border_bottom = palette.violet,
+		inactive_titlebar_border_bottom = palette.chrome,
+		button_fg = palette.fg_muted,
+		button_bg = palette.chrome_dim,
+		button_hover_fg = palette.shadow,
+		button_hover_bg = palette.gold,
+		border_left_width = "0.35cell",
+		border_right_width = "0.35cell",
+		border_bottom_height = "0.25cell",
+		border_top_height = "0.25cell",
+		border_left_color = palette.violet,
+		border_right_color = palette.hot_pink,
+		border_bottom_color = palette.orange,
+		border_top_color = palette.cyan,
 	},
 
 	-- Tab bar
 	window_decorations = "RESIZE",
-	use_fancy_tab_bar = true,
+	use_fancy_tab_bar = false,
 	show_new_tab_button_in_tab_bar = false,
+	show_tab_index_in_tab_bar = false,
+	tab_max_width = 32,
 
 	-- Scroll
 	enable_scroll_bar = true,
@@ -476,8 +601,8 @@ local config = {
 
 	-- Pane
 	inactive_pane_hsb = {
-		saturation = 0.55,
-		brightness = 0.45,
+		saturation = 0.75,
+		brightness = 0.30,
 	},
 }
 
@@ -540,6 +665,23 @@ local function get_repo_name(cwd_path)
 	return cwd_path:match("([^/]+)/?$") or cwd_path
 end
 
+local function tab_label(tab_info)
+	local title = tab_info.tab_title
+	if title and #title > 0 then
+		return title
+	end
+
+	local cwd_uri = tab_info.active_pane.current_working_dir
+	if cwd_uri then
+		local repo = get_repo_name(cwd_uri.file_path)
+		if repo ~= "" then
+			return repo
+		end
+	end
+
+	return tab_info.active_pane.title
+end
+
 -- Set window title to workspace name
 wezterm.on("format-window-title", function(tab, pane, tabs, panes, config)
 	local workspace = wezterm.mux.get_active_workspace()
@@ -570,7 +712,7 @@ wezterm.on("update-status", function(window, pane)
 
 	-- defaultワークスペースはDraculaのまま
 	if workspace == "default" then
-		overrides.color_scheme = "Dracula (Gogh)"
+		overrides.color_scheme = "Night Owl (Gogh)"
 	else
 		-- ワークスペース名のハッシュ値で色を決定
 		local hash = 0
@@ -579,8 +721,8 @@ wezterm.on("update-status", function(window, pane)
 		end
 
 		local color_schemes = {
+			"Dracula (Official)",
 			"Tokyo Night",
-			"Gruvbox Dark (Gogh)",
 			"Monokai (dark) (terminal.sexy)",
 			"Night Owl (Gogh)",
 		}
@@ -590,6 +732,16 @@ wezterm.on("update-status", function(window, pane)
 	end
 
 	window:set_config_overrides(overrides)
+	window:set_left_status(wezterm.format({
+		{ Background = { Color = palette.hot_pink } },
+		{ Foreground = { Color = palette.shadow } },
+		{ Attribute = { Intensity = "Bold" } },
+		{ Text = " ✦ NEON " },
+		{ Background = { Color = palette.gold } },
+		{ Foreground = { Color = palette.shadow } },
+		{ Attribute = { Intensity = "Bold" } },
+		{ Text = " SPARK " },
+	}))
 
 	-- アクティブpaneの「今どこ？」が分かるように、workspace + cwd + pane id を出す
 	local cwd_uri = pane:get_current_working_dir()
@@ -613,20 +765,30 @@ wezterm.on("update-status", function(window, pane)
 		end
 	end
 
+	local context_label = where ~= "" and where or pane:get_title()
+	local leader_label = leader_active and " LDR " or " RUN "
+	local leader_bg = leader_active and palette.orange or palette.panel_alt
+	local mode_label = active_key_table == "resize_pane" and " RSZ " or " NAV "
+	local mode_bg = active_key_table == "resize_pane" and palette.cyan or palette.violet
+
 	local status = wezterm.format({
-		{ Background = { Color = "#FFD166" } },
-		{ Foreground = { Color = "#1F1300" } },
+		{ Background = { Color = leader_bg } },
+		{ Foreground = { Color = palette.shadow } },
 		{ Attribute = { Intensity = "Bold" } },
-		{ Text = " ACTIVE " },
-		{ Background = { Color = "#3B3052" } },
-		{ Foreground = { Color = "#8BE9FD" } },
+		{ Text = leader_label },
+		{ Background = { Color = mode_bg } },
+		{ Foreground = { Color = palette.shadow } },
 		{ Attribute = { Intensity = "Bold" } },
-		{ Text = " " .. (leader_active and "LDR " or "") .. (active_key_table == "resize_pane" and "RSZ " or "") .. workspace .. " " },
-		{ Background = { Color = "#241D31" } },
-		{ Foreground = { Color = "#F1FA8C" } },
-		{ Text = (where ~= "" and (" " .. where .. " ") or "") },
-		{ Background = { Color = "#1B2333" } },
-		{ Foreground = { Color = "#50FA7B" } },
+		{ Text = mode_label },
+		{ Background = { Color = palette.chrome } },
+		{ Foreground = { Color = palette.fg } },
+		{ Attribute = { Intensity = "Bold" } },
+		{ Text = " " .. workspace .. " " },
+		{ Background = { Color = palette.bg_alt } },
+		{ Foreground = { Color = palette.gold } },
+		{ Text = " " .. wezterm.truncate_right(context_label, 24) .. " " },
+		{ Background = { Color = palette.hot_pink } },
+		{ Foreground = { Color = palette.shadow } },
 		{ Attribute = { Intensity = "Bold" } },
 		{ Text = " pane " .. pane_label .. " " },
 	})
@@ -638,25 +800,29 @@ local LEFT_DIVIDER = wezterm.nerdfonts.ple_upper_left_triangle
 local RIGHT_DIVIDER = wezterm.nerdfonts.ple_lower_right_triangle
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-	local background = "#7e7e7e"
-	local foreground = "#FFFFFF"
-	local edge_background = "none"
+	local background = palette.panel
+	local foreground = palette.fg_dim
+	local edge_background = palette.chrome_dim
+	local accent = "•"
 
 	if tab.is_active then
-		background = "#0e1a40"
-		foreground = "#FFFFFF"
+		background = palette.hot_pink
+		foreground = palette.shadow
+		accent = "✦"
+	elseif hover then
+		background = palette.violet
+		foreground = palette.fg
+		accent = "◆"
 	end
 
 	local edge_foreground = background
 
-	-- リポジトリ名またはカレントディレクトリ名を取得
-	local cwd_uri = tab.active_pane.current_working_dir
-	local name = ""
-	if cwd_uri then
-		name = get_repo_name(cwd_uri.file_path)
-	end
-
-	local title = "   " .. wezterm.truncate_right(name, max_width - 1) .. "   "
+	local title = string.format(
+		" %s %d %s ",
+		accent,
+		tab.tab_index + 1,
+		wezterm.truncate_right(tab_label(tab), math.max(max_width - 8, 6))
+	)
 	return {
 		{ Background = { Color = edge_background } },
 		{ Foreground = { Color = edge_foreground } },
