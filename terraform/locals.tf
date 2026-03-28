@@ -8,7 +8,8 @@ locals {
     ".gitignore",
     ".sleep",
     ".wakeup",
-    ".gitignore"
+    ".gitignore",
+    ".nvimlog"
   ]
 
   # 除外ファイルを除外したファイル一覧

@@ -1,4 +1,4 @@
-### Mac
+nvimlo Mac
 .DS_Store
 
 ### Vim
@@ -25,6 +25,7 @@ terraform.tfstate.*.backup
 .codex/*.sqlite
 .codex/.codex-global-state.json
 .codex/auth.json
+.codex/archived_sessions
 .codex/cache/
 .codex/config.toml
 .codex/history.*
@@ -40,6 +41,7 @@ terraform.tfstate.*.backup
 .codex/sqlite/
 .codex/state_*
 .codex/tmp/
+.codex/.tmp/
 .codex/vendor_imports/
 .codex/version.json
 

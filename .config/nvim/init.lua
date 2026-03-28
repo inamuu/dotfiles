@@ -17,8 +17,15 @@ vim.opt.number = true
 
 -- 設定ファイルリロードのショートカット
 vim.keymap.set("n", "<leader>r", function()
+  for name in pairs(package.loaded) do
+    if name:match("^config%.") then
+      package.loaded[name] = nil
+    end
+  end
   vim.cmd("source ~/.config/nvim/init.lua")
-  vim.cmd("LspRestart")
+  if vim.fn.exists(":LspRestart") == 2 then
+    pcall(vim.cmd, "LspRestart")
+  end
   print("設定とLSPを再起動しました")
 end, { desc = "設定ファイルをリロードしてLSPを再起動" })
 
