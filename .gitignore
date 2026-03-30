@@ -67,8 +67,7 @@ terraform.tfstate.*.backup
 .claude/mcp-needs-auth-cache.json
 .claude/paste-cache/
 .claude/plans/
-.claude/plugins/blocklist.json
-.claude/plugins/installed_plugins.json
+.claude/plugins/
 .claude/projects/
 .claude/remote-settings.json
 .claude/session-env/
