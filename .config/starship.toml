@@ -10,8 +10,8 @@ format = """
 $os$username$hostname$directory$git_branch$git_status$git_state
 $character"""
 
-right_format = """
-$docker_context$terraform$golang$nodejs$python$rust$php$ruby$status$cmd_duration"""
+#right_format = """
+#$docker_context$terraform$golang$nodejs$python$rust$php$ruby$status$cmd_duration"""
 
 [palettes.neon_luxe]
 shadow = "#05030B"
