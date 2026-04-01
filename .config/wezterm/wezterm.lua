@@ -170,6 +170,91 @@ local function split_top_main_with_bottom_columns(window, pane)
 	)
 end
 
+local function flash_copy_status(window, pane)
+	window:set_right_status("📋 Copied!")
+	wezterm.time.call_after(3, function()
+		window:emit("update-status", window, pane)
+	end)
+end
+
+local function show_mode_toast(window, title, message, timeout)
+	window:toast_notification("WezTerm", title .. ": " .. message, nil, timeout or 2500)
+end
+
+local function enter_copy_mode(window, pane)
+	show_mode_toast(window, "COPY", "selection mode", 1800)
+	window:perform_action(act.ActivateCopyMode, pane)
+end
+
+local function enter_quick_select(window, pane)
+	show_mode_toast(window, "SELECT", "quick select mode", 1800)
+	window:perform_action(act.QuickSelect, pane)
+end
+
+local function copy_previous_command_and_output(window, pane)
+	window:perform_action(act.ActivateCopyMode, pane)
+	window:perform_action(act.CopyMode({ MoveBackwardZoneOfType = "Input" }), pane)
+	window:perform_action(act.CopyMode({ SetSelectionMode = "Cell" }), pane)
+	window:perform_action(act.CopyMode({ MoveForwardZoneOfType = "Prompt" }), pane)
+	window:perform_action(act.CopyMode("MoveUp"), pane)
+	window:perform_action(act.CopyMode("MoveToEndOfLineContent"), pane)
+
+	-- Let copy mode commit the selection before copying it to the clipboard.
+	wezterm.time.call_after(0.05, function()
+		window:perform_action(
+			act.Multiple({
+				{ CopyTo = "ClipboardAndPrimarySelection" },
+				{ CopyMode = "Close" },
+				{ ScrollToBottom = {} },
+			}),
+			pane
+		)
+		flash_copy_status(window, pane)
+	end)
+end
+
+local function toggle_zoom_with_notice(window, pane)
+	window:perform_action(act.TogglePaneZoomState, pane)
+	wezterm.time.call_after(0.05, function()
+		local message = "pane restored"
+		local mux_window = window:mux_window()
+		if mux_window then
+			local active_tab = mux_window:active_tab()
+			if active_tab then
+				for _, pane_info in ipairs(active_tab:panes_with_info()) do
+					if pane_info.pane:pane_id() == pane:pane_id() then
+						if pane_info.is_zoomed then
+							message = "pane maximized"
+						end
+						break
+					end
+				end
+			end
+		end
+		show_mode_toast(window, "ZOOM", message, 2200)
+	end)
+end
+
+local function enter_resize_mode(window, pane)
+	show_mode_toast(window, "RESIZE", "hjkl to resize", 1800)
+	window:perform_action(
+		act.ActivateKeyTable({
+			name = "resize_pane",
+			one_shot = false,
+			timeout_milliseconds = 2000,
+			until_unknown = true,
+		}),
+		pane
+	)
+end
+
+local function push_status_segment(segments, bg, fg, text)
+	table.insert(segments, { Background = { Color = bg } })
+	table.insert(segments, { Foreground = { Color = fg } })
+	table.insert(segments, { Attribute = { Intensity = "Bold" } })
+	table.insert(segments, { Text = text })
+end
+
 local config = {
 	-- auto reloadd
 	automatically_reload_config = true,
@@ -180,16 +265,16 @@ local config = {
 		-- family = 'UDEV Gothic 35', weight = 'Bold',
 		-- family = 'Hack Nerd Font Mono', weight = 'Bold',
 	}),
-		font_size = 16.5,
-		line_height = 1.06,
-		pane_select_font_size = 56,
-		command_palette_bg_color = "#170C29",
-		command_palette_fg_color = palette.fg,
-		command_palette_font_size = 19.0,
-		command_palette_rows = 16,
+	font_size = 16.5,
+	line_height = 1.06,
+	pane_select_font_size = 56,
+	command_palette_bg_color = "#170C29",
+	command_palette_fg_color = palette.fg,
+	command_palette_font_size = 19.0,
+	command_palette_rows = 16,
 
-		-- ime
-		use_ime = true,
+	-- ime
+	use_ime = true,
 
 	-- Allow terminal apps such as Neovim to receive Cmd/Super modified keys.
 	enable_kitty_keyboard = true,
@@ -262,28 +347,23 @@ local config = {
 		},
 
 		-- Enable copy mode
-		{ key = "v", mods = "LEADER", action = act.ActivateCopyMode },
+		{ key = "v", mods = "LEADER", action = wezterm.action_callback(enter_copy_mode) },
+		-- Resize pane directly, then keep resizing with h/j/k/l
+		{ key = "h", mods = "LEADER", action = act.Multiple({ act.AdjustPaneSize({ "Left", 5 }), act.ActivateKeyTable({ name = "resize_pane", one_shot = false, timeout_milliseconds = 2000, until_unknown = true }) }) },
+		{ key = "j", mods = "LEADER", action = act.Multiple({ act.AdjustPaneSize({ "Down", 5 }), act.ActivateKeyTable({ name = "resize_pane", one_shot = false, timeout_milliseconds = 2000, until_unknown = true }) }) },
+		{ key = "k", mods = "LEADER", action = act.Multiple({ act.AdjustPaneSize({ "Up", 5 }), act.ActivateKeyTable({ name = "resize_pane", one_shot = false, timeout_milliseconds = 2000, until_unknown = true }) }) },
+		{ key = "l", mods = "LEADER", action = act.Multiple({ act.AdjustPaneSize({ "Right", 5 }), act.ActivateKeyTable({ name = "resize_pane", one_shot = false, timeout_milliseconds = 2000, until_unknown = true }) }) },
 		-- Move pane
-		{ key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
-		{ key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
-		{ key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
-		{ key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+		{ key = "H", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
+		{ key = "J", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
+		{ key = "K", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
+		{ key = "L", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
 		-- Resize mode
 		{
 			key = "r",
 			mods = "LEADER",
-			action = act.ActivateKeyTable({
-				name = "resize_pane",
-				one_shot = false,
-				timeout_milliseconds = 2000,
-				until_unknown = true,
-			}),
+			action = wezterm.action_callback(enter_resize_mode),
 		},
-		-- Resize pane
-		{ key = "H", mods = "LEADER", action = act.AdjustPaneSize({ "Left", 5 }) },
-		{ key = "J", mods = "LEADER", action = act.AdjustPaneSize({ "Down", 5 }) },
-		{ key = "K", mods = "LEADER", action = act.AdjustPaneSize({ "Up", 5 }) },
-		{ key = "L", mods = "LEADER", action = act.AdjustPaneSize({ "Right", 5 }) },
 		-- Layout presets
 		{ key = "1", mods = "LEADER", action = wezterm.action_callback(split_left_main) },
 		{ key = "2", mods = "LEADER", action = wezterm.action_callback(split_right_main) },
@@ -296,11 +376,11 @@ local config = {
 		{ key = "9", mods = "LEADER", action = wezterm.action_callback(split_left_main_with_right_stack) },
 		{ key = "0", mods = "LEADER", action = wezterm.action_callback(split_top_main_with_bottom_columns) },
 		-- Pane zoom
-		{ key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
+		{ key = "z", mods = "LEADER", action = wezterm.action_callback(toggle_zoom_with_notice) },
 		-- Current pane close
 		{ key = "w", mods = "LEADER", action = wezterm.action.CloseCurrentPane({ confirm = true }) },
 		-- Quick select mode
-		{ key = "Space", mods = "LEADER", action = act.QuickSelect },
+		{ key = "Space", mods = "LEADER", action = wezterm.action_callback(enter_quick_select) },
 		-- Others
 		{ key = "Enter", mods = "SHIFT", action = act.SendString("\n") },
 
@@ -435,52 +515,19 @@ local config = {
 					)
 				end
 			end),
-			},
-			{
-				key = "g",
-				mods = "LEADER",
-				action = wezterm.action_callback(function(window, pane)
-					launch_ghq_project_workspace(window, pane)
-				end),
-			},
-			-- 直前のコマンドと出力をコピー
-			{
-				key = "x",
-				mods = "LEADER",
+		},
+		{
+			key = "g",
+			mods = "LEADER",
 			action = wezterm.action_callback(function(window, pane)
-				-- コピーモードに入る
-				window:perform_action(act.ActivateCopyMode, pane)
-
-				-- 直前のInputゾーン（最後のコマンド）に移動
-				window:perform_action(act.CopyMode({ MoveBackwardZoneOfType = "Input" }), pane)
-
-				-- セル選択モードを開始
-				window:perform_action(act.CopyMode({ SetSelectionMode = "Cell" }), pane)
-
-				-- 次のPromptゾーンまで選択（コマンドと出力を含む）
-				window:perform_action(act.CopyMode({ MoveForwardZoneOfType = "Prompt" }), pane)
-
-				-- 1行上に移動して行末へ（現在のプロンプト行を除外）
-				window:perform_action(act.CopyMode("MoveUp"), pane)
-				window:perform_action(act.CopyMode("MoveToEndOfLineContent"), pane)
-
-				-- クリップボードにコピー
-				window:perform_action(
-					act.Multiple({
-						{ CopyTo = "ClipboardAndPrimarySelection" },
-						{ Multiple = { "ScrollToBottom", { CopyMode = "Close" } } },
-					}),
-					pane
-				)
-
-				-- ステータスバーに一時的なステータスを表示
-				window:set_right_status("📋 Copied!")
-				-- 3秒後に通常のステータスに戻す
-				wezterm.time.call_after(3, function()
-					-- update-statusイベントを再トリガーして通常のステータスに戻す
-					window:emit("update-status", window, pane)
-				end)
+				launch_ghq_project_workspace(window, pane)
 			end),
+		},
+		-- 直前のコマンドと出力をコピー
+		{
+			key = "x",
+			mods = "LEADER",
+			action = wezterm.action_callback(copy_previous_command_and_output),
 		},
 	},
 
@@ -598,8 +645,12 @@ local config = {
 	},
 
 	-- Tab bar
+	enable_tab_bar = true,
+	hide_tab_bar_if_only_one_tab = false,
 	window_decorations = "RESIZE",
+	status_update_interval = 250,
 	use_fancy_tab_bar = false,
+	show_tabs_in_tab_bar = true,
 	show_new_tab_button_in_tab_bar = false,
 	show_tab_index_in_tab_bar = false,
 	tab_max_width = 32,
@@ -881,23 +932,23 @@ local function launch_ghq_project_workspace(window, pane)
 				local repo_path = ghq_root .. "/" .. id
 				local existed = workspace_exists(workspace_name)
 
-					win:perform_action(
-						act.SwitchToWorkspace({
-							name = workspace_name,
-							spawn = {
-								cwd = repo_path,
-								args = { login_shell_path(), "-il" },
-							},
-						}),
-						p
-					)
+				win:perform_action(
+					act.SwitchToWorkspace({
+						name = workspace_name,
+						spawn = {
+							cwd = repo_path,
+							args = { login_shell_path(), "-il" },
+						},
+					}),
+					p
+				)
 
-					if not existed then
-						wezterm.time.call_after(0.15, function()
-							apply_project_workspace_layout(win, workspace_name, repo_path, 1, true)
-						end)
-					end
-				end),
+				if not existed then
+					wezterm.time.call_after(0.15, function()
+						apply_project_workspace_layout(win, workspace_name, repo_path, 1, true)
+					end)
+				end
+			end),
 		}),
 		pane
 	)
@@ -924,7 +975,7 @@ wezterm.on("augment-command-palette", function(window, pane)
 	return {
 		{
 			brief = "Open GHQ Project Workspace",
-			doc = "Select a ghq repository, switch to its workspace, and bootstrap a 4:1 project layout with Neovim on top.",
+			doc = "Select a ghq repository",
 			action = wezterm.action_callback(function(win, p)
 				launch_ghq_project_workspace(win, p)
 			end),
@@ -935,15 +986,17 @@ end)
 -- Set window title to workspace name
 wezterm.on("format-window-title", function(tab, pane, tabs, panes, config)
 	local workspace = wezterm.mux.get_active_workspace()
-	return workspace
+	local prefix = tab.active_pane.is_zoomed and "[ZOOM] " or ""
+	return prefix .. workspace
 end)
 
 -- Change color scheme based on workspace
-wezterm.on("update-status", function(window, pane)
+local function render_status(window, pane)
 	local workspace = window:active_workspace()
 	local overrides = window:get_config_overrides() or {}
 	local mux_window = window:mux_window()
 	local active_key_table = window:active_key_table()
+	local zoomed = false
 
 	-- leaderがアクティブになった瞬間だけIMEをOFFに寄せる
 	local leader_active = false
@@ -980,18 +1033,7 @@ wezterm.on("update-status", function(window, pane)
 		local scheme_index = (hash % #color_schemes) + 1
 		overrides.color_scheme = color_schemes[scheme_index]
 	end
-
 	window:set_config_overrides(overrides)
-	window:set_left_status(wezterm.format({
-		{ Background = { Color = palette.hot_pink } },
-		{ Foreground = { Color = palette.shadow } },
-		{ Attribute = { Intensity = "Bold" } },
-		{ Text = " ✦ NEON " },
-		{ Background = { Color = palette.gold } },
-		{ Foreground = { Color = palette.shadow } },
-		{ Attribute = { Intensity = "Bold" } },
-		{ Text = " SPARK " },
-	}))
 
 	-- アクティブpaneの「今どこ？」が分かるように、workspace + cwd + pane id を出す
 	local cwd_uri = pane:get_current_working_dir()
@@ -1009,6 +1051,7 @@ wezterm.on("update-status", function(window, pane)
 			for index, pane_info in ipairs(panes) do
 				if pane_info.pane:pane_id() == pane:pane_id() then
 					pane_label = string.format("%d/%d", index, #panes)
+					zoomed = pane_info.is_zoomed or false
 					break
 				end
 			end
@@ -1016,34 +1059,50 @@ wezterm.on("update-status", function(window, pane)
 	end
 
 	local context_label = where ~= "" and where or pane:get_title()
-	local leader_label = leader_active and " LDR " or " RUN "
-	local leader_bg = leader_active and palette.orange or palette.panel_alt
-	local mode_label = active_key_table == "resize_pane" and " RSZ " or " NAV "
-	local mode_bg = active_key_table == "resize_pane" and palette.cyan or palette.violet
+	local mode_name = "NORMAL"
+	local mode_bg = palette.panel_alt
+
+	if active_key_table == "copy_mode" then
+		mode_name = "COPY"
+		mode_bg = palette.gold
+	elseif active_key_table == "search_mode" then
+		mode_name = "SEARCH"
+		mode_bg = palette.cyan
+	elseif active_key_table == "resize_pane" then
+		mode_name = "RESIZE"
+		mode_bg = palette.violet
+	elseif active_key_table and active_key_table ~= "" then
+		mode_name = string.upper(active_key_table)
+		mode_bg = palette.violet
+	end
+
+	local left_status = {}
+	push_status_segment(left_status, palette.hot_pink, palette.shadow, " MODE ")
+	if leader_active then
+		push_status_segment(left_status, palette.orange, palette.shadow, " LEADER ")
+	end
+	push_status_segment(left_status, mode_bg, palette.shadow, " " .. mode_name .. " ")
+	if zoomed then
+		push_status_segment(left_status, palette.lime, palette.shadow, " ZOOM ")
+	end
+	push_status_segment(left_status, palette.chrome, palette.fg, " " .. workspace .. " ")
+
+	window:set_left_status(wezterm.format(left_status))
 
 	local status = wezterm.format({
-		{ Background = { Color = leader_bg } },
-		{ Foreground = { Color = palette.shadow } },
-		{ Attribute = { Intensity = "Bold" } },
-		{ Text = leader_label },
-		{ Background = { Color = mode_bg } },
-		{ Foreground = { Color = palette.shadow } },
-		{ Attribute = { Intensity = "Bold" } },
-		{ Text = mode_label },
 		{ Background = { Color = palette.chrome } },
 		{ Foreground = { Color = palette.fg } },
 		{ Attribute = { Intensity = "Bold" } },
-		{ Text = " " .. workspace .. " " },
+		{ Text = " pane " .. pane_label .. " " },
 		{ Background = { Color = palette.bg_alt } },
 		{ Foreground = { Color = palette.gold } },
 		{ Text = " " .. wezterm.truncate_right(context_label, 24) .. " " },
-		{ Background = { Color = palette.hot_pink } },
-		{ Foreground = { Color = palette.shadow } },
-		{ Attribute = { Intensity = "Bold" } },
-		{ Text = " pane " .. pane_label .. " " },
 	})
 	window:set_right_status(status)
-end)
+end
+
+wezterm.on("update-status", render_status)
+wezterm.on("update-right-status", render_status)
 
 -- Tab style
 local LEFT_DIVIDER = wezterm.nerdfonts.ple_upper_left_triangle
@@ -1054,6 +1113,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	local foreground = palette.fg_dim
 	local edge_background = palette.chrome_dim
 	local accent = "•"
+	local badge = ""
 
 	if tab.is_active then
 		background = palette.hot_pink
@@ -1066,11 +1126,15 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	end
 
 	local edge_foreground = background
+	if tab.active_pane.is_zoomed then
+		badge = "[ZOOM] "
+	end
 
 	local title = string.format(
-		" %s %d %s ",
+		" %s %d %s%s ",
 		accent,
 		tab.tab_index + 1,
+		badge,
 		wezterm.truncate_right(tab_label(tab), math.max(max_width - 8, 6))
 	)
 	return {
