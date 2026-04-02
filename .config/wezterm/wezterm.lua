@@ -348,22 +348,22 @@ local config = {
 
 		-- Enable copy mode
 		{ key = "v", mods = "LEADER", action = wezterm.action_callback(enter_copy_mode) },
-		-- Resize pane directly, then keep resizing with h/j/k/l
-		{ key = "h", mods = "LEADER", action = act.Multiple({ act.AdjustPaneSize({ "Left", 5 }), act.ActivateKeyTable({ name = "resize_pane", one_shot = false, timeout_milliseconds = 2000, until_unknown = true }) }) },
-		{ key = "j", mods = "LEADER", action = act.Multiple({ act.AdjustPaneSize({ "Down", 5 }), act.ActivateKeyTable({ name = "resize_pane", one_shot = false, timeout_milliseconds = 2000, until_unknown = true }) }) },
-		{ key = "k", mods = "LEADER", action = act.Multiple({ act.AdjustPaneSize({ "Up", 5 }), act.ActivateKeyTable({ name = "resize_pane", one_shot = false, timeout_milliseconds = 2000, until_unknown = true }) }) },
-		{ key = "l", mods = "LEADER", action = act.Multiple({ act.AdjustPaneSize({ "Right", 5 }), act.ActivateKeyTable({ name = "resize_pane", one_shot = false, timeout_milliseconds = 2000, until_unknown = true }) }) },
 		-- Move pane
-		{ key = "H", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
-		{ key = "J", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
-		{ key = "K", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
-		{ key = "L", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+		{ key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
+		{ key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
+		{ key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
+		{ key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
 		-- Resize mode
 		{
 			key = "r",
 			mods = "LEADER",
 			action = wezterm.action_callback(enter_resize_mode),
 		},
+		-- Single-step resize
+		{ key = "H", mods = "LEADER", action = act.AdjustPaneSize({ "Left", 5 }) },
+		{ key = "J", mods = "LEADER", action = act.AdjustPaneSize({ "Down", 5 }) },
+		{ key = "K", mods = "LEADER", action = act.AdjustPaneSize({ "Up", 5 }) },
+		{ key = "L", mods = "LEADER", action = act.AdjustPaneSize({ "Right", 5 }) },
 		-- Layout presets
 		{ key = "1", mods = "LEADER", action = wezterm.action_callback(split_left_main) },
 		{ key = "2", mods = "LEADER", action = wezterm.action_callback(split_right_main) },
