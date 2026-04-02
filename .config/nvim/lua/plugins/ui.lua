@@ -98,6 +98,20 @@ return {
 		"nvim-lualine/lualine.nvim",
 		opts = function(_, opts)
 			local icons = LazyVim.config.icons
+			local root_dir_component = vim.tbl_extend("force", LazyVim.lualine.root_dir({ icon = "󰉋 " }), {
+				color = { bg = p.bg_alt, fg = p.yellow, gui = "bold" },
+				separator = { left = "", right = "" },
+			})
+			local pretty_path_component = {
+				LazyVim.lualine.pretty_path({ length = 4, modified_hl = "Directory", directory_hl = "Comment" }),
+				color = { bg = p.panel_alt, fg = p.fg, gui = "bold" },
+				separator = { left = "", right = "" },
+			}
+			local inactive_pretty_path_component = {
+				LazyVim.lualine.pretty_path({ length = 2 }),
+				color = { bg = p.bg_dark, fg = p.comment },
+				separator = { left = "", right = "" },
+			}
 
 			opts.options = {
 				theme = {
@@ -176,16 +190,8 @@ return {
 					},
 				},
 				lualine_c = {
-					{
-						LazyVim.lualine.root_dir({ icon = "󰉋 " }),
-						color = { bg = p.bg_alt, fg = p.yellow, gui = "bold" },
-						separator = { left = "", right = "" },
-					},
-					{
-						LazyVim.lualine.pretty_path({ length = 4, modified_hl = "Directory", directory_hl = "Comment" }),
-						color = { bg = p.panel_alt, fg = p.fg, gui = "bold" },
-						separator = { left = "", right = "" },
-					},
+					root_dir_component,
+					pretty_path_component,
 				},
 				lualine_x = {
 					{
@@ -197,16 +203,6 @@ return {
 							hint = icons.diagnostics.Hint,
 						},
 						color = { bg = p.bg_sidebar, fg = p.fg, gui = "bold" },
-						separator = { left = "", right = "" },
-					},
-					{
-						function()
-							return require("noice").api.status.command.get()
-						end,
-						cond = function()
-							return package.loaded["noice"] and require("noice").api.status.command.has()
-						end,
-						color = { bg = p.bg_sidebar, fg = p.magenta, gui = "bold" },
 						separator = { left = "", right = "" },
 					},
 				},
@@ -238,11 +234,7 @@ return {
 				lualine_a = {},
 				lualine_b = {},
 				lualine_c = {
-					{
-						LazyVim.lualine.pretty_path({ length = 2 }),
-						color = { bg = p.bg_dark, fg = p.comment },
-						separator = { left = "", right = "" },
-					},
+					inactive_pretty_path_component,
 				},
 				lualine_x = {},
 				lualine_y = {},
@@ -256,6 +248,24 @@ return {
 			}
 
 			opts.extensions = { "neo-tree", "nvim-tree", "lazy", "fzf" }
+		end,
+	},
+	{
+		"folke/noice.nvim",
+		opts = function(_, opts)
+			opts.cmdline = vim.tbl_deep_extend("force", opts.cmdline or {}, {
+				format = {
+					search_down = { icon = "", view = "cmdline_popup" },
+					search_up = { icon = "", view = "cmdline_popup" },
+				},
+			})
+			opts.views = vim.tbl_deep_extend("force", opts.views or {}, {
+				cmdline_popup = {
+					win_options = {
+						winblend = 0,
+					},
+				},
+			})
 		end,
 	},
 }

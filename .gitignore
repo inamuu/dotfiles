@@ -121,3 +121,6 @@ tftui.plan
 
 # Swift
 .config/swiftpm/
+
+# htop
+.config/htop/
