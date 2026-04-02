@@ -5,6 +5,7 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 local act = wezterm.action
+local launch_ghq_project_workspace
 local palette = {
 	shadow = "#05030B",
 	bg = "#09061A",
@@ -871,14 +872,9 @@ local function apply_project_workspace_layout(window, workspace_name, repo_path,
 		return
 	end
 
-	local bottom = top:split({
+	top:split({
 		direction = "Bottom",
 		size = 0.2,
-		cwd = repo_path,
-	})
-	bottom:split({
-		direction = "Right",
-		size = 0.5,
 		cwd = repo_path,
 	})
 	top:activate()
@@ -891,7 +887,7 @@ local function apply_project_workspace_layout(window, workspace_name, repo_path,
 	end
 end
 
-local function launch_ghq_project_workspace(window, pane)
+function launch_ghq_project_workspace(window, pane)
 	window:toast_notification("WezTerm", "Loading GHQ projects...", nil, 1200)
 
 	local ghq_root, projects = list_ghq_projects(window)
