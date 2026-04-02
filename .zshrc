@@ -120,11 +120,11 @@ export TF_LOG_PATH=$XDG_CONFIG_HOME/terraform/logs/$(date +%Y/%m/%d)/terraform.$
 
 ### AWS CLI
 # aws-cli補完を有効化
-if [ $commands[aws] ]; then
-  autoload bashcompinit && bashcompinit
-  autoload -Uz compinit && compinit
-  complete -C aws_completer aws
-fi
+#if [ $commands[aws] ]; then
+#  autoload bashcompinit && bashcompinit
+#  autoload -Uz compinit && compinit
+#  complete -C aws_completer aws
+#fi
 
 # colorize kubectl diff
 export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
