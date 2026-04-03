@@ -27,7 +27,7 @@ alias cxn='codex -a never'
 
 ### Terraform
 alias tf='terraform'
-alias tfa='terraform apply'
+alias tfa='terraform apply -backup=-'
 alias tff='terraform fmt'
 alias tfi='terraform init'
 alias tfp='terraform plan'
