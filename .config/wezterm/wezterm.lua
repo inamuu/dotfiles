@@ -171,15 +171,12 @@ local function split_top_main_with_bottom_columns(window, pane)
 	)
 end
 
-local function flash_copy_status(window, pane)
-	window:set_right_status("📋 Copied!")
-	wezterm.time.call_after(3, function()
-		window:emit("update-status", window, pane)
-	end)
-end
-
 local function show_mode_toast(window, title, message, timeout)
 	window:toast_notification("WezTerm", title .. ": " .. message, nil, timeout or 2500)
+end
+
+local function flash_copy_status(window, pane)
+	show_mode_toast(window, "COPY", "copied to clipboard", 1800)
 end
 
 local function enter_copy_mode(window, pane)
@@ -249,11 +246,25 @@ local function enter_resize_mode(window, pane)
 	)
 end
 
-local function push_status_segment(segments, bg, fg, text)
-	table.insert(segments, { Background = { Color = bg } })
-	table.insert(segments, { Foreground = { Color = fg } })
-	table.insert(segments, { Attribute = { Intensity = "Bold" } })
-	table.insert(segments, { Text = text })
+local function color_scheme_for_workspace(workspace)
+	if workspace == "default" then
+		return "Night Owl (Gogh)"
+	end
+
+	local hash = 0
+	for i = 1, #workspace do
+		hash = hash + string.byte(workspace, i)
+	end
+
+	local color_schemes = {
+		"Dracula (Official)",
+		"Tokyo Night",
+		"Monokai (dark) (terminal.sexy)",
+		"Night Owl (Gogh)",
+	}
+
+	local scheme_index = (hash % #color_schemes) + 1
+	return color_schemes[scheme_index]
 end
 
 local config = {
@@ -649,7 +660,6 @@ local config = {
 	enable_tab_bar = true,
 	hide_tab_bar_if_only_one_tab = false,
 	window_decorations = "RESIZE",
-	status_update_interval = 250,
 	use_fancy_tab_bar = false,
 	show_tabs_in_tab_bar = true,
 	show_new_tab_button_in_tab_bar = false,
@@ -990,9 +1000,6 @@ end)
 local function render_status(window, pane)
 	local workspace = window:active_workspace()
 	local overrides = window:get_config_overrides() or {}
-	local mux_window = window:mux_window()
-	local active_key_table = window:active_key_table()
-	local zoomed = false
 
 	-- leaderがアクティブになった瞬間だけIMEをOFFに寄せる
 	local leader_active = false
@@ -1009,92 +1016,11 @@ local function render_status(window, pane)
 		wezterm.GLOBAL.__leader_active_by_window[win_id] = false
 	end
 
-	-- defaultワークスペースはDraculaのまま
-	if workspace == "default" then
-		overrides.color_scheme = "Night Owl (Gogh)"
-	else
-		-- ワークスペース名のハッシュ値で色を決定
-		local hash = 0
-		for i = 1, #workspace do
-			hash = hash + string.byte(workspace, i)
-		end
-
-		local color_schemes = {
-			"Dracula (Official)",
-			"Tokyo Night",
-			"Monokai (dark) (terminal.sexy)",
-			"Night Owl (Gogh)",
-		}
-
-		local scheme_index = (hash % #color_schemes) + 1
-		overrides.color_scheme = color_schemes[scheme_index]
+	local desired_scheme = color_scheme_for_workspace(workspace)
+	if overrides.color_scheme ~= desired_scheme then
+		overrides.color_scheme = desired_scheme
+		window:set_config_overrides(overrides)
 	end
-	window:set_config_overrides(overrides)
-
-	-- アクティブpaneの「今どこ？」が分かるように、workspace + cwd + pane id を出す
-	local cwd_uri = pane:get_current_working_dir()
-	local cwd_path = cwd_uri and cwd_uri.file_path or nil
-	local where = ""
-	if cwd_path then
-		where = get_repo_name(cwd_path)
-	end
-
-	local pane_label = tostring(pane:pane_id())
-	if mux_window then
-		local active_tab = mux_window:active_tab()
-		if active_tab then
-			local panes = active_tab:panes_with_info()
-			for index, pane_info in ipairs(panes) do
-				if pane_info.pane:pane_id() == pane:pane_id() then
-					pane_label = string.format("%d/%d", index, #panes)
-					zoomed = pane_info.is_zoomed or false
-					break
-				end
-			end
-		end
-	end
-
-	local context_label = where ~= "" and where or pane:get_title()
-	local mode_name = "NORMAL"
-	local mode_bg = palette.panel_alt
-
-	if active_key_table == "copy_mode" then
-		mode_name = "COPY"
-		mode_bg = palette.gold
-	elseif active_key_table == "search_mode" then
-		mode_name = "SEARCH"
-		mode_bg = palette.cyan
-	elseif active_key_table == "resize_pane" then
-		mode_name = "RESIZE"
-		mode_bg = palette.violet
-	elseif active_key_table and active_key_table ~= "" then
-		mode_name = string.upper(active_key_table)
-		mode_bg = palette.violet
-	end
-
-	local left_status = {}
-	push_status_segment(left_status, palette.hot_pink, palette.shadow, " MODE ")
-	if leader_active then
-		push_status_segment(left_status, palette.orange, palette.shadow, " LEADER ")
-	end
-	push_status_segment(left_status, mode_bg, palette.shadow, " " .. mode_name .. " ")
-	if zoomed then
-		push_status_segment(left_status, palette.lime, palette.shadow, " ZOOM ")
-	end
-	push_status_segment(left_status, palette.chrome, palette.fg, " " .. workspace .. " ")
-
-	window:set_left_status(wezterm.format(left_status))
-
-	local status = wezterm.format({
-		{ Background = { Color = palette.chrome } },
-		{ Foreground = { Color = palette.fg } },
-		{ Attribute = { Intensity = "Bold" } },
-		{ Text = " pane " .. pane_label .. " " },
-		{ Background = { Color = palette.bg_alt } },
-		{ Foreground = { Color = palette.gold } },
-		{ Text = " " .. wezterm.truncate_right(context_label, 24) .. " " },
-	})
-	window:set_right_status(status)
 end
 
 wezterm.on("update-status", render_status)

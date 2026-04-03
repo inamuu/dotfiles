@@ -8,6 +8,7 @@ vim.opt.guifont = "UDEV Gothic 35"
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
+vim.g.lazyvim_picker = "telescope"
 
 require("config.options")
 require("config.lazy")

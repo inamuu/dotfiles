@@ -13,7 +13,10 @@
 
 ## ファイル操作・検索
 - `<leader><leader>` ファイル検索
-- `<leader>sg` Grep
+- `<leader>sg` 現在階層を Grep
+- `<leader>sG` プロジェクトルートを Grep
+- Grep 中の `Alt-h` hidden ファイルの検索を切り替え
+- Grep 中の `Alt-i` ignore 対象ファイルの検索を切り替え
 - `<leader>w` 現在ファイルを保存
 - `<leader>W` 開いているファイルをすべて保存
 

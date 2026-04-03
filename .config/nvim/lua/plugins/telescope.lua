@@ -1,22 +1,34 @@
 return {
 	"nvim-telescope/telescope.nvim",
 	keys = {
-		-- LazyVimのデフォルトキーマップを上書き
 		{
 			"<leader>sg",
 			function()
-				require("telescope.builtin").live_grep({
-					additional_args = function()
-						return { "--hidden", "--glob", "!.git/", "--glob", "!node_modules/" }
-					end,
-				})
+				require("config.grep").live_grep_cwd()
 			end,
-			desc = "Grep (隠しファイル含む)",
+			desc = "Grep (現在階層)",
+		},
+		{
+			"<leader>sG",
+			function()
+				require("config.grep").live_grep_root()
+			end,
+			desc = "Grep (プロジェクトルート)",
 		},
 	},
 	opts = function(_, opts)
-		-- デフォルト設定も一応設定しておく
 		opts.defaults = opts.defaults or {}
+		opts.defaults.layout_strategy = "horizontal"
+		opts.defaults.sorting_strategy = "ascending"
+		opts.defaults.layout_config = vim.tbl_deep_extend("force", opts.defaults.layout_config or {}, {
+			horizontal = {
+				prompt_position = "top",
+				preview_width = 0.55,
+			},
+			vertical = {
+				prompt_position = "top",
+			},
+		})
 		opts.defaults.vimgrep_arguments = {
 			"rg",
 			"--color=never",
@@ -25,11 +37,6 @@ return {
 			"--line-number",
 			"--column",
 			"--smart-case",
-			"--hidden",
-			"--glob",
-			"!.git/",
-			"--glob",
-			"!node_modules/",
 		}
 
 		return opts
