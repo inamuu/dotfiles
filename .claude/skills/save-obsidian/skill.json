@@ -1,0 +1,9 @@
+{
+  "name": "save-obsidian",
+  "description": "調査結果やレポートをObsidian Vaultに保存する",
+  "version": "1.0.0",
+  "command": {
+    "type": "prompt",
+    "path": "prompt.md"
+  }
+}

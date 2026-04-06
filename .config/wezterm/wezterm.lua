@@ -541,6 +541,41 @@ local config = {
 			mods = "LEADER",
 			action = wezterm.action_callback(copy_previous_command_and_output),
 		},
+		{
+			key = "n",
+			mods = "LEADER",
+			action = act.PromptInputLine({
+				description = wezterm.format({
+					{ Foreground = { Color = palette.gold } },
+					{ Attribute = { Intensity = "Bold" } },
+					{ Text = " Sticky Note " },
+					{ Foreground = { Color = palette.fg_dim } },
+					{ Attribute = { Intensity = "Normal" } },
+					{ Text = "  note>  Enter to save, empty to clear" },
+				}),
+				action = wezterm.action_callback(function(window, pane, line)
+					if line == nil then
+						return
+					end
+
+					local note = trim(line)
+					set_pane_user_var(window, pane, "WEZTERM_NOTE", note)
+					if note == "" then
+						show_mode_toast(window, "NOTE", "cleared", 1800)
+					else
+						show_mode_toast(window, "NOTE", note, 2200)
+					end
+				end),
+			}),
+		},
+		{
+			key = "N",
+			mods = "LEADER|SHIFT",
+			action = wezterm.action_callback(function(window, pane)
+				set_pane_user_var(window, pane, "WEZTERM_NOTE", "")
+				show_mode_toast(window, "NOTE", "cleared", 1800)
+			end),
+		},
 	},
 
 	-- SearchMode
@@ -664,7 +699,7 @@ local config = {
 	show_tabs_in_tab_bar = true,
 	show_new_tab_button_in_tab_bar = false,
 	show_tab_index_in_tab_bar = false,
-	tab_max_width = 32,
+	tab_max_width = 24,
 
 	-- Scroll
 	enable_scroll_bar = true,
@@ -746,6 +781,33 @@ local function trim(value)
 	return (value:gsub("^%s+", ""):gsub("%s+$", ""))
 end
 
+local function base64_encode(value)
+	local alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+	local input = value or ""
+	local bytes = { string.byte(input, 1, #input) }
+	local chunks = {}
+
+	for index = 1, #bytes, 3 do
+		local a = bytes[index] or 0
+		local b = bytes[index + 1] or 0
+		local c = bytes[index + 2] or 0
+		local packed = a * 65536 + b * 256 + c
+		local pad = math.max(0, index + 2 - #bytes)
+
+		local first = math.floor(packed / 262144) % 64 + 1
+		local second = math.floor(packed / 4096) % 64 + 1
+		local third = math.floor(packed / 64) % 64 + 1
+		local fourth = packed % 64 + 1
+
+		table.insert(chunks, alphabet:sub(first, first))
+		table.insert(chunks, alphabet:sub(second, second))
+		table.insert(chunks, pad >= 2 and "=" or alphabet:sub(third, third))
+		table.insert(chunks, pad >= 1 and "=" or alphabet:sub(fourth, fourth))
+	end
+
+	return table.concat(chunks)
+end
+
 local function split_lines(value)
 	local lines = {}
 	for line in (value or ""):gmatch("[^\r\n]+") do
@@ -783,6 +845,69 @@ local function notify_error(window, message, detail)
 		body = body .. ": " .. detail
 	end
 	window:toast_notification("WezTerm", body, nil, 4000)
+end
+
+local function set_pane_user_var(window, pane, name, value)
+	local ok, err = pcall(function()
+		pane:inject_output(
+			string.format("\x1b]1337;SetUserVar=%s=%s\x07", name, base64_encode(value or ""))
+		)
+	end)
+
+	if not ok then
+		notify_error(window, "pane user var を設定できませんでした", tostring(err))
+	end
+end
+
+local function status_note_for_pane(pane)
+	local user_vars = pane:get_user_vars() or {}
+	local note = trim(user_vars.WEZTERM_NOTE)
+	if note ~= "" then
+		return note, true
+	end
+
+	local program = trim(user_vars.WEZTERM_PROG)
+	if program ~= "" then
+		return program, false
+	end
+
+	return "", false
+end
+
+local function status_note_for_pane_info(pane_info)
+	local user_vars = (pane_info and pane_info.user_vars) or {}
+	local note = trim(user_vars.WEZTERM_NOTE)
+	if note ~= "" then
+		return note, true
+	end
+
+	local program = trim(user_vars.WEZTERM_PROG)
+	if program ~= "" then
+		return program, false
+	end
+
+	return "", false
+end
+
+local function render_note_status(window, pane)
+	local text, is_sticky = status_note_for_pane(pane)
+	if text == "" then
+		window:set_right_status("")
+		return
+	end
+
+	local accent = is_sticky and palette.gold or palette.cyan
+	local label = is_sticky and "NOTE" or "RUN"
+	window:set_right_status(wezterm.format({
+		{ Background = { Color = palette.chrome_dim } },
+		{ Foreground = { Color = accent } },
+		{ Attribute = { Intensity = "Bold" } },
+		{ Text = " " .. label .. " " },
+		{ Background = { Color = palette.panel_alt } },
+		{ Foreground = { Color = palette.fg } },
+		{ Attribute = { Intensity = "Normal" } },
+		{ Text = " " .. wezterm.truncate_right(text, 72) .. " " },
+	}))
 end
 
 local function login_shell_path()
@@ -993,6 +1118,10 @@ end)
 wezterm.on("format-window-title", function(tab, pane, tabs, panes, config)
 	local workspace = wezterm.mux.get_active_workspace()
 	local prefix = tab.active_pane.is_zoomed and "[ZOOM] " or ""
+	local note, is_sticky = status_note_for_pane(pane)
+	if is_sticky and note ~= "" then
+		return prefix .. workspace .. " | NOTE: " .. wezterm.truncate_right(note, 36)
+	end
 	return prefix .. workspace
 end)
 
@@ -1021,10 +1150,17 @@ local function render_status(window, pane)
 		overrides.color_scheme = desired_scheme
 		window:set_config_overrides(overrides)
 	end
+
+	render_note_status(window, pane)
 end
 
 wezterm.on("update-status", render_status)
 wezterm.on("update-right-status", render_status)
+wezterm.on("user-var-changed", function(window, pane, name, value)
+	if name == "WEZTERM_NOTE" or name == "WEZTERM_PROG" then
+		render_note_status(window, pane)
+	end
+end)
 
 -- Tab style
 local LEFT_DIVIDER = wezterm.nerdfonts.ple_upper_left_triangle
@@ -1048,8 +1184,12 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	end
 
 	local edge_foreground = background
+	local note, is_sticky = status_note_for_pane_info(tab.active_pane)
 	if tab.active_pane.is_zoomed then
 		badge = "[ZOOM] "
+	end
+	if is_sticky and note ~= "" then
+		badge = badge .. "[" .. wezterm.truncate_right(note, 14) .. "] "
 	end
 
 	local title = string.format(
@@ -1057,7 +1197,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 		accent,
 		tab.tab_index + 1,
 		badge,
-		wezterm.truncate_right(tab_label(tab), math.max(max_width - 8, 6))
+		wezterm.truncate_right(tab_label(tab), math.max(max_width - 14, 6))
 	)
 	return {
 		{ Background = { Color = edge_background } },

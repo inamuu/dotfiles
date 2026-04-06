@@ -1,0 +1,9 @@
+{
+  "name": "sync-skills",
+  "description": "Claude Code と Codex のローカル skills を相互同期する。「skillsを同期して」と言われたときに使う",
+  "version": "1.0.0",
+  "command": {
+    "type": "prompt",
+    "path": "prompt.md"
+  }
+}
