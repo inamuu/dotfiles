@@ -1,6 +1,6 @@
 {
   "name": "save-acta",
-  "description": "会話のまとめをActaファイルに保存する",
+  "description": "Save the current conversation/work summary into the user's Acta daily markdown file under $HOME/ghq/github.com/inamuu/data/Acta using an <!-- acta:comment --> block. Use when the user asks to save, record, or summarize-and-store notes in Acta.",
   "version": "1.0.0",
   "command": {
     "type": "prompt",
