@@ -1,6 +1,6 @@
 {
   "name": "save-obsidian",
-  "description": "調査結果やレポートをObsidian Vaultに保存する",
+  "description": "調査結果やレポートをObsidian Vaultに保存する。「worksへ保存して」→Works Vault、「privateへ保存して」→Private Vaultのraw/に保存",
   "version": "1.0.0",
   "command": {
     "type": "prompt",
