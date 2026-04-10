@@ -98,6 +98,7 @@ brew_list = [
   "pinentry-mac",
   "pipx",
   "pkg-config",
+  "presenterm",
   "putty",
   "pwgen",
   "pygments",
