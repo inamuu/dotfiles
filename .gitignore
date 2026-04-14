@@ -76,6 +76,7 @@ terraform.tfstate.*.backup
 .claude/settings.json
 .claude/shell-snapshots/
 .claude/statsig/
+.claude/stats-cache.json
 .claude/tasks/
 .claude/telemetry/
 .claude/todos/
