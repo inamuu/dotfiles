@@ -44,6 +44,8 @@ terraform.tfstate.*.backup
 .codex/.tmp/
 .codex/vendor_imports/
 .codex/version.json
+.codex/installation_id
+.codex/ambient-suggestions/
 
 ### .config - Sensitive files
 
