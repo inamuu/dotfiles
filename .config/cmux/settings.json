@@ -119,6 +119,20 @@
   //     ]
   //   },
 
+  "shortcuts": {
+    "bindings": {
+      "toggleTerminalCopyMode": ["ctrl+o", "v"],
+      "focusLeft": ["ctrl+o", "h"],
+      "focusDown": ["ctrl+o", "j"],
+      "focusUp": ["ctrl+o", "k"],
+      "focusRight": ["ctrl+o", "l"],
+      "closeTab": ["ctrl+o", "w"],
+      "toggleSplitZoom": ["ctrl+o", "z"],
+      "splitDown": ["ctrl+o", "-"],
+      "splitRight": ["ctrl+o", "shift+\\"]
+    }
+  },
+
   //   "shortcuts" : {
   //     "bindings" : {
   //       "browserBack" : "cmd+[",
