@@ -49,6 +49,8 @@ terraform.tfstate.*.backup
 .codex/*.bak
 .codex/plugins/cache/
 
+.codex/skills/organize-manga-archives
+
 ### .config - Sensitive files
 
 # GCP credentials
