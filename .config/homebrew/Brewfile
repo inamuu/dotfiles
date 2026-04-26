@@ -120,6 +120,7 @@ brew_list = [
   "inamuu/tap/tfz",
   "inamuu/tap/ssmx",
   "inamuu/tap/vigilo",
+  "inamuu/tap/ghdesk",
   "tig",
   "tmux",
   "tree",
