@@ -83,7 +83,6 @@
       "Bash(swift run:*)",
       "Bash(npm run dist:*)",
       "Bash(osascript -e:*)",
-      "Bash(aws:*)"
     ],
     "deny": [
       "Bash(sudo:*)",
