@@ -21,7 +21,9 @@
 - 日本時間（`Asia/Tokyo`）で日付を計算する
 - **実装ヒント**:
   - 今日: `TZ=Asia/Tokyo date '+%Y-%m-%d'`
-  - N日前: `TZ=Asia/Tokyo date -v-Nd '+%Y-%m-%d'` (macOS)
+  - N日前 (GNU date / gdate): `TZ=Asia/Tokyo date -d "N days ago" '+%Y-%m-%d'`
+  - N日前 (BSD date / macOS 標準): `TZ=Asia/Tokyo date -v-Nd '+%Y-%m-%d'`
+  - **注意**: ユーザーの環境では `date` が `gdate` (GNU date) にエイリアスされている場合があるため、`-v` オプションは使えない。`gdate` または `date -d "N days ago"` を使用する。ワンライナー例: `for i in 0 1 2 3 4; do TZ=Asia/Tokyo date -d "$i days ago" '+%Y-%m-%d'; done`
 
 ### 2. ファイルの読み込み
 - 対象期間の各日付に対応するファイル（例: `2026-02-22.md`, `2026-02-23.md`, ...）を読み込む
