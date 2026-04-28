@@ -20,6 +20,10 @@ terraform.tfstate.*.backup
 .terraform.tfstate.lock
 .terraform.tfstate.lock.info
 
+### Devin
+
+.config/devin/config.json
+
 ### Codex
 
 .codex/*.sqlite
