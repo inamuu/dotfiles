@@ -82,7 +82,7 @@
       "Bash(git branch:*)",
       "Bash(swift run:*)",
       "Bash(npm run dist:*)",
-      "Bash(osascript -e:*)",
+      "Bash(osascript -e:*)"
     ],
     "deny": [
       "Bash(sudo:*)",
