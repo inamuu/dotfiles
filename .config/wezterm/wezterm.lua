@@ -275,7 +275,7 @@ local config = {
 
 	-- Font
 	font = wezterm.font({
-		family = "UDEV Gothic 35",
+		family = "UDEV Gothic 35NF",
 		-- family = 'UDEV Gothic 35', weight = 'Bold',
 		-- family = 'Hack Nerd Font Mono', weight = 'Bold',
 	}),
@@ -609,7 +609,7 @@ local config = {
 			opacity = 0.18,
 		},
 		{
-			source = { File = "/usr/local/pictures/wallpaper1.jpg" },
+			source = { File = "/usr/local/pictures/wallpaper.jpg" },
 			width = "Cover",
 			height = "Cover",
 			opacity = 0.20,
@@ -624,7 +624,7 @@ local config = {
 			source = { Color = palette.shadow },
 			width = "100%",
 			height = "100%",
-			opacity = 0.45,
+			opacity = 0.7,
 		},
 	},
 	-- TUI が塗る背景（lazytree など）も少し透かす

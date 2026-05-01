@@ -94,16 +94,17 @@ format = "[](fg:hot)[ $symbol $branch ]($style)[](fg:hot) "
 [git_status]
 style = "fg:shadow bg:cyan bold"
 format = "([](fg:cyan)[ $all_status$ahead_behind ]($style)[](fg:cyan) )"
-conflicted = " =${count}"
-ahead = " ⇡${count}"
-behind = " ⇣${count}"
-diverged = " ⇕⇡${ahead_count}⇣${behind_count}"
-untracked = " ?${count}"
-stashed = " *${count}"
-modified = " !${count}"
-staged = " +${count}"
-renamed = " »${count}"
-deleted = " ✘${count}"
+# 記号だけを表示（件数は出さない）。Nerd Font 前提のアイコン。
+conflicted = " "    # コンフリクト
+ahead = "󰅈 "     # ローカルが進んでいる
+behind = "󰅕 "    # ローカルが遅れている
+diverged = "󰮛 "  # 分岐（上下両方）
+untracked = "󰋼 " # 未追跡ファイル
+stashed = " "       # stash あり（旧 *17 の正体）
+modified = "󰐊 "  # 変更あり（unstaged）
+staged = " "        # ステージ済み
+renamed = "󰑕 "   # リネーム
+deleted = " "       # 削除
 
 [git_state]
 style = "fg:shadow bg:orange bold"

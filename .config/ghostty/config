@@ -12,7 +12,8 @@ font-codepoint-map = U+3400-U+4DBF=UDEV Gothic 35
 font-codepoint-map = U+FE30-U+FE4F=UDEV Gothic 35
 
 # Theme
-theme = Dracula
+theme = calm-blue
+#theme = Dracula
 #theme = lucario-default
 
 
