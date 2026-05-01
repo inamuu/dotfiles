@@ -6,24 +6,26 @@ local config = wezterm.config_builder()
 
 local act = wezterm.action
 local launch_ghq_project_workspace
+-- 青～エメラルド系で統一したカームパレット。
+-- 変数名は旧名を踏襲（violet / hot_pink / gold / orange / lime）しつつ値だけ青系に差し替え。
 local palette = {
-	shadow = "#05030B",
-	bg = "#09061A",
-	bg_alt = "#140B24",
-	chrome = "#1B1030",
-	chrome_dim = "#11081D",
-	panel = "#23133D",
-	panel_alt = "#322053",
-	violet = "#8A5CFF",
-	hot_pink = "#FF4FA3",
-	cyan = "#22D3EE",
-	gold = "#FFD166",
-	orange = "#FF8A00",
-	lime = "#A7F432",
-	fg = "#F9F4FF",
-	fg_muted = "#D9CFF0",
-	fg_dim = "#9A8DB8",
-	selection = "#45306C",
+	shadow = "#0A1A2A",      -- ダークネイビー
+	bg = "#0D2033",          -- 背景（やや明るめ）
+	bg_alt = "#15293F",      -- 非アクティブ背景
+	chrome = "#1C344C",      -- クローム
+	chrome_dim = "#14283C",  -- クローム（暗）
+	panel = "#234A6B",       -- パネル
+	panel_alt = "#2E5E85",   -- パネル（明）
+	violet = "#6FA8DC",      -- 明るめのブルー（旧バイオレット）
+	hot_pink = "#4FD1C5",    -- エメラルドティール（旧ピンク）
+	cyan = "#4A9FD6",        -- やや濃いめのブルー
+	gold = "#A8D8F0",        -- パステルブルー（旧ゴールド）
+	orange = "#5FA3D6",      -- 中間のブルー（旧オレンジ）
+	lime = "#5EDCB5",        -- 明るめエメラルド（旧ライム）
+	fg = "#F0F7FC",
+	fg_muted = "#C3D4E6",
+	fg_dim = "#8CA3BC",
+	selection = "#2E5E85",   -- 選択範囲：落ち着いたブルー
 }
 
 local function active_tab_if_single_pane(window, message)
@@ -280,7 +282,7 @@ local config = {
 	font_size = 16.5,
 	line_height = 1.06,
 	pane_select_font_size = 56,
-	command_palette_bg_color = "#170C29",
+	command_palette_bg_color = palette.chrome_dim,
 	command_palette_fg_color = palette.fg,
 	command_palette_font_size = 19.0,
 	command_palette_rows = 16,
@@ -607,7 +609,7 @@ local config = {
 			opacity = 0.18,
 		},
 		{
-			source = { File = "/usr/local/pictures/wallpaper4.png" },
+			source = { File = "/usr/local/pictures/wallpaper1.jpg" },
 			width = "Cover",
 			height = "Cover",
 			opacity = 0.20,
@@ -650,10 +652,10 @@ local config = {
 		border_right_width = "0.35cell",
 		border_bottom_height = "0.25cell",
 		border_top_height = "0.25cell",
-		border_left_color = palette.violet,
-		border_right_color = palette.hot_pink,
-		border_bottom_color = palette.orange,
-		border_top_color = palette.cyan,
+		border_left_color = palette.violet,     -- #6FA8DC 明るいブルー
+		border_right_color = palette.hot_pink,  -- #4FD1C5 エメラルドティール
+		border_bottom_color = palette.cyan,     -- #4A9FD6 ディープブルー
+		border_top_color = palette.gold,        -- #A8D8F0 パステルブルー
 	},
 
 	-- Tab bar

@@ -14,19 +14,19 @@ $character"""
 #$docker_context$terraform$golang$nodejs$python$rust$php$ruby$status$cmd_duration"""
 
 [palettes.neon_luxe]
-shadow = "#05030B"
-chrome = "#1B1030"
-panel = "#23133D"
-panel_alt = "#322053"
-violet = "#8A5CFF"
-hot = "#FF4FA3"
-cyan = "#22D3EE"
-sky = "#59C3FF"
-gold = "#FFD166"
-orange = "#FF8A00"
-lime = "#A7F432"
-fg = "#F9F4FF"
-muted = "#B9ACD0"
+shadow = "#0A1A2A"
+chrome = "#1C344C"
+panel = "#234A6B"
+panel_alt = "#2E5E85"
+violet = "#6FA8DC"  # 明るめの青
+hot = "#4FD1C5"     # 明るめのエメラルドティール
+cyan = "#4A9FD6"    # 少し濃めのブルー（git_status用）
+sky = "#6EB8E8"     # 明るいスカイブルー
+gold = "#A8D8F0"    # パステルブルー（ディレクトリ用アクセント）
+orange = "#5FA3D6"  # 中間のブルー
+lime = "#5EDCB5"    # 明るめエメラルドグリーン
+fg = "#F0F7FC"
+muted = "#A8BCCF"
 
 [os]
 disabled = false
