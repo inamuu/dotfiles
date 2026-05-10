@@ -52,8 +52,11 @@ terraform.tfstate.*.backup
 .codex/ambient-suggestions/
 .codex/*.bak
 .codex/plugins/cache/
+.codex/generated_images/
 
 .codex/skills/organize-manga-archives
+.codex/browser/
+.codex/computer-use/
 
 ### .config - Sensitive files
 
