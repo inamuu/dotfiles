@@ -104,6 +104,7 @@ terraform.tfstate.*.backup
 
 # Raycast (extensions and AI settings)
 .config/raycast/
+.config/raycast-x/
 
 # Terraform logs
 .config/terraform/logs/
