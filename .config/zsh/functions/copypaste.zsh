@@ -4,5 +4,5 @@ copypaste () {
 }
 
 zle -N copypaste
-bindkey '^X' copypaste
+bindkey '^Y' copypaste
 
