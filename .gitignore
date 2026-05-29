@@ -67,6 +67,7 @@ terraform.tfstate.*.backup
 
 # Claude Code settings
 .claude/.last-cleanup
+.claude/.last-update-result.json
 .claude/backups/
 .claude/bash-command-log.txt
 .claude/cache/
