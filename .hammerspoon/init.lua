@@ -39,6 +39,8 @@ local APPS = {
 local HOTKEY_SPECS = {
   -- Layout modal (prefix key)
   { mods = { "ctrl", "cmd", }, key = ";", pattern = "__layout_modal__" },
+  -- Chrome Profile modal
+  { mods = { "ctrl", "cmd", }, key = "p", pattern = "__profile_modal__" },
   -- Utilities
   { mods = { "ctrl", "cmd", }, key = "r", pattern = "__reload__" },
 }
@@ -442,6 +444,122 @@ end
 
 local LAYOUT_MODAL = buildLayoutModal()
 
+-- Chrome profiles configuration
+local CHROME_PROFILES = {
+  { key = "w", dir = "Default",          name = "work",           menu = "default" },
+  { key = "p", dir = "Profile 1",        name = "private",        menu = "private" },
+  { key = "g", dir = "Profile 3",        name = "profile_green",  menu = "profile_green" },
+  { key = "b", dir = "Profile 4",        name = "profile_banana", menu = "profile_banana" },
+  { key = "r", dir = "Profile 5",        name = "profile_red",    menu = "profile_red" },
+}
+
+-- Switch or Focus Google Chrome profile
+local function switchToChromeProfile(p)
+  -- 1. Check if Google Chrome is running
+  local chrome = hs.application.get("com.google.Chrome")
+  if not chrome then
+    -- Not running, just launch it
+    hs.task.new("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", nil, {"--profile-directory=" .. p.dir}):start()
+    return
+  end
+
+  -- 2. If running, try to switch/focus via menu bar using AppleScript
+  local script = string.format([[
+    tell application "Google Chrome" to activate
+    tell application "System Events"
+        tell process "Google Chrome"
+            set menuBarItem to missing value
+            try
+                set menuBarItem to menu bar item "プロファイル" of menu bar 1
+            on error
+                try
+                    set menuBarItem to menu bar item "Profiles" of menu bar 1
+                end try
+            end try
+            if menuBarItem is not missing value then
+                set targetItem to missing value
+                repeat with mi in menu items of menu 1 of menuBarItem
+                    set miName to name of mi
+                    if miName is not missing value and miName contains "%s" then
+                        set targetItem to mi
+                        exit repeat
+                    end if
+                end repeat
+                if targetItem is not missing value then
+                    perform action "AXPress" of targetItem
+                    return "ok"
+                else
+                    return "not_found"
+                end if
+            else
+                return "menu_not_found"
+            end if
+        end tell
+    end tell
+  ]], p.menu)
+
+  local ok, result = hs.osascript.applescript(script)
+  if ok and result == "ok" then
+    return
+  end
+
+  -- 3. Fallback if AppleScript failed
+  hs.task.new("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", nil, {"--profile-directory=" .. p.dir}):start()
+end
+
+-- Chrome Profile selector modal
+local function buildChromeProfileModal()
+  local modal = hs.hotkey.modal.new()
+  local helpAlertSeconds = 8
+  local lastAlertID = nil
+
+  local function closeModalAlert()
+    if lastAlertID then
+      hs.alert.closeSpecific(lastAlertID)
+      lastAlertID = nil
+    end
+  end
+
+  local function showModalAlert(text, seconds)
+    closeModalAlert()
+    lastAlertID = hs.alert.show(text, hs.alert.defaultStyle, targetScreen(), seconds)
+  end
+
+  local function helpText()
+    local lines = {
+      "Chrome Profile Selector",
+      "----------------------"
+    }
+    for _, p in ipairs(CHROME_PROFILES) do
+      table.insert(lines, string.format("%s: %s (%s)", p.key:upper(), p.name, p.dir))
+    end
+    table.insert(lines, "Cancel: Esc")
+    return table.concat(lines, "\n")
+  end
+
+  function modal:entered()
+    showModalAlert(helpText(), helpAlertSeconds)
+  end
+
+  function modal:exited()
+    closeModalAlert()
+  end
+
+  modal:bind({}, "escape", function() modal:exit() end)
+
+  for _, p in ipairs(CHROME_PROFILES) do
+    modal:bind({}, p.key, function()
+      closeModalAlert()
+      switchToChromeProfile(p)
+      modal:exit()
+    end)
+  end
+
+  return modal
+end
+
+local PROFILE_MODAL = buildChromeProfileModal()
+
 -- Menu bar (resident)
 local menubar = hs.menubar.new()
 if menubar then
@@ -472,6 +590,10 @@ for _, spec in ipairs(HOTKEY_SPECS) do
   elseif spec.pattern == "__layout_modal__" then
     hs.hotkey.bind(spec.mods, spec.key, function()
       LAYOUT_MODAL:enter()
+    end)
+  elseif spec.pattern == "__profile_modal__" then
+    hs.hotkey.bind(spec.mods, spec.key, function()
+      PROFILE_MODAL:enter()
     end)
   else
     hs.hotkey.bind(spec.mods, spec.key, function()
