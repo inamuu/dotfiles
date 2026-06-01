@@ -84,6 +84,7 @@ terraform.tfstate.*.backup
 .claude/policy-limits.json
 .claude/projects/
 .claude/remote-settings.json
+.claude/security/
 .claude/session-env/
 .claude/sessions/
 .claude/settings.json
