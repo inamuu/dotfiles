@@ -95,6 +95,9 @@ terraform.tfstate.*.backup
 .claude/telemetry/
 .claude/todos/
 
+### antigravity
+.antigravitycli/
+
 # 非公開スキルの実体をまとめて除外
 .claude/skills/private-skills/
 
