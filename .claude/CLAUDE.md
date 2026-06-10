@@ -13,6 +13,11 @@
 
 - grepではなく、高速なのでrg(ribgrep)を使用して
 
+## Repositories
+
+- ローカルリポジトリはすべて ghq 管理（root: `~/ghq`）
+- リポジトリを探すときは find や mdfind ではなく `ghq list -p <名前>` を使うこと
+
 ## Permissions
 
 - allow / deny ルールを追加・変更する場合は `~/.config/claude/settings.local.json` の `permissions.allow` / `permissions.deny` を編集すること
