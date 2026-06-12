@@ -1,0 +1,23 @@
+{
+  "trustedtaps": [
+    "fluxcd/tap",
+    "inamuu/tap"
+  ],
+  "trustedcasks": [
+    "goreleaser/tap/goreleaser",
+    "manaflow-ai/cmux/cmux",
+    "terraform-linters/tap/tflint"
+  ],
+  "trustedformulae": [
+    "daipeihust/tap/im-select",
+    "dotenvx/brew/dotenvx",
+    "felixkratz/formulae/borders",
+    "fujiwara/tap/lambroll",
+    "future-architect/tap/tftarget",
+    "go-task/tap/go-task",
+    "hashicorp/tap/packer",
+    "idoavrah/homebrew/tftui",
+    "inamuu/openssl@1.1/openssl@1.1",
+    "olets/tap/zsh-abbr@6"
+  ]
+}

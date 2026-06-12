@@ -13,9 +13,6 @@ tap_list = [
   "fujiwara/tap",
   "future-architect/tap",
   "hashicorp/tap",
-  "nikitabobko/tap",
-  "sanemat/font",
-  "idoavrah/homebrew",
   "inamuu/tap"
 ]
 
@@ -40,6 +37,7 @@ brew_list = [
   "bitwarden-cli",
   "blueutil",
   "borders",
+  "homebrew/brew-vulns/brew-vulns",
   "bzip2",
   "circleci",
   "cli53",
@@ -114,7 +112,6 @@ brew_list = [
   "telnet",
   "terraform-ls",
   "terraformer",
-  "tflint",
   "tftui",
   "inamuu/tap/overix",
   "inamuu/tap/tfz",
@@ -141,8 +138,6 @@ for i in brew_list
 end
 
 ### Install fonts
-#cask "font-ricty-diminished"
-#brew "sanemat/font/ricty"
 #cask "font-udev-gothic"
 #cask "font-udev-gothic-nf"
 
@@ -187,7 +182,6 @@ if OS.mac?
     "karabiner-elements",
     "session-manager-plugin",
     "the-unarchiver",
-    #"aerospace",
     #"alacritty",
     #"docker",
     #"iterm2",
