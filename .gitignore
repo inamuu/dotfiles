@@ -34,6 +34,8 @@ terraform.tfstate.*.backup
 .codex/auth.json
 .codex/browser/
 .codex/cache/
+.codex/chrome-native-hosts-v2.json
+.codex/chrome-native-hosts.json
 .codex/computer-use/
 .codex/config.toml
 .codex/generated_images/
@@ -41,8 +43,11 @@ terraform.tfstate.*.backup
 .codex/installation_id
 .codex/log/*
 .codex/logs*
+.codex/memories_1.sqlite-shm
+.codex/memories_1.sqlite-wal
 .codex/models_cache.json
 .codex/plugins/cache/
+.codex/process_manager/
 .codex/rules
 .codex/session*
 .codex/sessions/*
