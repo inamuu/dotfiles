@@ -143,6 +143,8 @@ if [ -f "${HOME}/google-cloud-sdk/completion.zsh.inc" ]; then . "${HOME}/google-
 
 ### GitHub
 export GPG_TTY=$(tty)
+# mise が GitHub API のレート制限に当たらないようトークンを渡す
+export GITHUB_API_TOKEN="$(gh auth token 2>/dev/null)"
 
 ### mise
 eval "$(mise activate zsh)"
