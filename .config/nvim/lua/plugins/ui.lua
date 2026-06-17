@@ -1,8 +1,22 @@
 local p = require("config.palette")
 
-local function segment(bg, fg)
-	return { bg = bg, fg = fg or p.bg_dark, gui = "bold" }
-end
+-- starship.toml の neon_luxe パレットと同じ値・役割で揃える（ステータスライン用）。
+-- bufferline / colorscheme には影響させず、lualine の色の使い方だけ starship に合わせる。
+local wz = {
+	shadow = "#0A1A2A",
+	chrome = "#1C344C",
+	panel = "#234A6B",
+	panel_alt = "#2E5E85",
+	violet = "#6FA8DC", -- os / username
+	hot = "#4FD1C5", -- git_branch / character(success)
+	cyan = "#4A9FD6", -- git_status
+	sky = "#6EB8E8",
+	gold = "#A8D8F0", -- directory
+	orange = "#5FA3D6", -- git_state / character(error)
+	lime = "#5EDCB5",
+	fg = "#F0F7FC",
+	muted = "#A8BCCF",
+}
 
 return {
 	{
@@ -97,157 +111,81 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		opts = function(_, opts)
-			local icons = LazyVim.config.icons
-			local root_dir_component = vim.tbl_extend("force", LazyVim.lualine.root_dir({ icon = "󰉋 " }), {
-				color = { bg = p.bg_alt, fg = p.yellow, gui = "bold" },
-				separator = { left = "", right = "" },
-			})
-			local pretty_path_component = {
-				LazyVim.lualine.pretty_path({ length = 4, modified_hl = "Directory", directory_hl = "Comment" }),
-				color = { bg = p.panel_alt, fg = p.fg, gui = "bold" },
-				separator = { left = "", right = "" },
-			}
-			local inactive_pretty_path_component = {
-				LazyVim.lualine.pretty_path({ length = 2 }),
-				color = { bg = p.bg_dark, fg = p.comment },
-				separator = { left = "", right = "" },
-			}
+				local icons = LazyVim.config.icons
 
-			opts.options = {
-				theme = {
-					normal = {
-						a = segment(p.magenta),
-						b = segment(p.cyan),
-						c = { bg = "NONE", fg = p.fg },
-					},
-					insert = {
-						a = segment(p.cyan),
-						b = segment(p.blue),
-						c = { bg = "NONE", fg = p.fg },
-					},
-					visual = {
-						a = segment(p.yellow),
-						b = segment(p.magenta),
-						c = { bg = "NONE", fg = p.fg },
-					},
-					replace = {
-						a = segment(p.orange),
-						b = segment(p.red),
-						c = { bg = "NONE", fg = p.fg },
-					},
-					command = {
-						a = segment(p.green),
-						b = segment(p.cyan),
-						c = { bg = "NONE", fg = p.fg },
-					},
-					inactive = {
-						a = { bg = p.bg_dark, fg = p.comment },
-						b = { bg = p.bg_dark, fg = p.comment },
-						c = { bg = "NONE", fg = p.comment },
-					},
-				},
-				globalstatus = vim.o.laststatus == 3,
-				disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard" } },
-				component_separators = "",
-				section_separators = "",
-			}
+				-- モードごとのアクセント色（starship の character の配色に対応）
+				local mode_color = {
+					n = wz.hot, -- success
+					i = wz.hot,
+					v = wz.violet, -- visual
+					V = wz.violet,
+					[""] = wz.violet,
+					c = wz.lime,
+					R = wz.gold, -- replace
+					t = wz.lime,
+				}
 
-			opts.sections = {
-				lualine_a = {
-					{
-						"mode",
-						icon = "",
-						separator = { left = "", right = "" },
-						padding = { left = 1, right = 1 },
+				opts.options = {
+					theme = {
+						normal = { c = { bg = "NONE", fg = wz.muted } },
+						inactive = { c = { bg = "NONE", fg = wz.muted } },
 					},
-				},
-				lualine_b = {
-					{
-						"branch",
-						icon = "",
-						color = segment(p.cyan),
-						separator = { left = "", right = "" },
-					},
-					{
-						"diff",
-						symbols = {
-							added = icons.git.added,
-							modified = icons.git.modified,
-							removed = icons.git.removed,
+					globalstatus = vim.o.laststatus == 3,
+					disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard" } },
+					component_separators = "",
+					section_separators = "",
+				}
+
+				opts.sections = {
+					lualine_a = {
+						{
+							"mode",
+							icon = "",
+							color = function()
+								return { bg = mode_color[vim.fn.mode()] or wz.hot, fg = wz.shadow, gui = "bold" }
+							end,
+							padding = { left = 1, right = 1 },
 						},
-						source = function()
-							local gitsigns = vim.b.gitsigns_status_dict
-							if gitsigns then
-								return {
-									added = gitsigns.added,
-									modified = gitsigns.changed,
-									removed = gitsigns.removed,
-								}
-							end
-						end,
-						color = { bg = p.panel, fg = p.fg, gui = "bold" },
-						separator = { left = "", right = "" },
 					},
-				},
-				lualine_c = {
-					root_dir_component,
-					pretty_path_component,
-				},
-				lualine_x = {
-					{
-						"diagnostics",
-						symbols = {
-							error = icons.diagnostics.Error,
-							warn = icons.diagnostics.Warn,
-							info = icons.diagnostics.Info,
-							hint = icons.diagnostics.Hint,
+					lualine_b = {
+						{ "branch", icon = "", color = { fg = wz.hot } },
+					},
+					lualine_c = {
+						{
+							LazyVim.lualine.pretty_path({ length = 3, modified_hl = "Directory", directory_hl = "Comment" }),
+							color = { fg = wz.gold },
 						},
-						color = { bg = p.bg_sidebar, fg = p.fg, gui = "bold" },
-						separator = { left = "", right = "" },
 					},
-				},
-				lualine_y = {
-					{
-						"filetype",
-						icon_only = false,
-						colored = true,
-						color = { bg = p.green, fg = p.bg_dark, gui = "bold" },
-						separator = { left = "", right = "" },
+					lualine_x = {
+						{
+							"diagnostics",
+							symbols = {
+								error = icons.diagnostics.Error,
+								warn = icons.diagnostics.Warn,
+								info = icons.diagnostics.Info,
+								hint = icons.diagnostics.Hint,
+							},
+						},
+						{ "filetype", icon_only = false, color = { fg = wz.muted } },
 					},
-					{
-						"progress",
-						color = { bg = p.bg_alt, fg = p.fg, gui = "bold" },
-						separator = { left = "", right = "" },
+					lualine_y = {},
+					lualine_z = {
+						{ "location", color = { fg = wz.cyan } },
 					},
-				},
-				lualine_z = {
-					{
-						"location",
-						color = { bg = p.orange, fg = p.bg_dark, gui = "bold" },
-						separator = { left = "", right = "" },
-						padding = { left = 1, right = 1 },
-					},
-				},
-			}
+				}
 
-			opts.inactive_sections = {
-				lualine_a = {},
-				lualine_b = {},
-				lualine_c = {
-					inactive_pretty_path_component,
-				},
-				lualine_x = {},
-				lualine_y = {},
-				lualine_z = {
-					{
-						"location",
-						color = { bg = p.bg_dark, fg = p.comment },
-						separator = { left = "", right = "" },
+				opts.inactive_sections = {
+					lualine_a = {},
+					lualine_b = {},
+					lualine_c = {
+						{ LazyVim.lualine.pretty_path({ length = 2 }), color = { fg = wz.muted } },
 					},
-				},
-			}
+					lualine_x = {},
+					lualine_y = {},
+					lualine_z = {},
+				}
 
-			opts.extensions = { "neo-tree", "nvim-tree", "lazy", "fzf" }
+				opts.extensions = { "neo-tree", "nvim-tree", "lazy", "fzf" }
 		end,
 	},
 	{
