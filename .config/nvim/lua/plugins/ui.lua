@@ -111,24 +111,37 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		opts = function(_, opts)
-				local icons = LazyVim.config.icons
+			local icons = LazyVim.config.icons
 
-				-- モードごとのアクセント色（starship の character の配色に対応）
-				local mode_color = {
-					n = wz.hot, -- success
-					i = wz.hot,
-					v = wz.violet, -- visual
-					V = wz.violet,
-					[""] = wz.violet,
-					c = wz.lime,
-					R = wz.gold, -- replace
-					t = wz.lime,
+			-- モードごとのアクセント色（starship の character の配色に対応）
+			local mode_color = {
+				n = wz.hot, -- success
+				i = wz.hot,
+				v = wz.violet, -- visual
+				V = wz.violet,
+				["\22"] = wz.violet, -- visual block
+				c = wz.lime,
+				R = wz.gold, -- replace
+				t = wz.lime,
+			}
+
+			local function mode_theme(accent)
+				return {
+					a = { bg = accent, fg = wz.shadow, gui = "bold" },
+					b = { bg = "NONE", fg = accent },
+					c = { bg = "NONE", fg = wz.muted },
 				}
+			end
 
-				opts.options = {
+			opts.options = {
 					theme = {
-						normal = { c = { bg = "NONE", fg = wz.muted } },
-						inactive = { c = { bg = "NONE", fg = wz.muted } },
+						normal = mode_theme(wz.hot),
+						insert = mode_theme(wz.hot),
+						visual = mode_theme(wz.violet),
+						replace = mode_theme(wz.gold),
+						command = mode_theme(wz.lime),
+						terminal = mode_theme(wz.lime),
+						inactive = mode_theme(wz.muted),
 					},
 					globalstatus = vim.o.laststatus == 3,
 					disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard" } },
