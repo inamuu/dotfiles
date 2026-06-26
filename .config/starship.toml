@@ -1,6 +1,6 @@
 "$schema" = "https://starship.rs/config-schema.json"
 
-palette = "neon_luxe"
+palette = "dracula"
 add_newline = false
 scan_timeout = 20
 command_timeout = 900
@@ -12,6 +12,22 @@ $character"""
 
 #right_format = """
 #$docker_context$terraform$golang$nodejs$python$rust$php$ruby$status$cmd_duration"""
+
+[palettes.dracula]
+# Dracula 系（公式より彩度を上げた濃いめトーン）
+shadow = "#1a1b26"     # 明るいセグメント上の文字色として使用（より暗く）
+chrome = "#383a59"     # 暗めパネル
+panel = "#383a59"      # 暗めパネル
+panel_alt = "#565f89"  # comment 寄り
+violet = "#a45ff5"     # purple（濃いめ）
+hot = "#ff4fb0"        # pink（濃いめ）
+cyan = "#3ad6f0"       # cyan（濃いめ）
+sky = "#3a9ef0"        # blue（docker/golang）
+gold = "#ffd23f"       # yellow（濃いめ・ディレクトリ）
+orange = "#ff9233"     # orange（濃いめ）
+lime = "#2fe06a"       # green（濃いめ）
+fg = "#f8f8f2"         # foreground
+muted = "#565f89"      # comment
 
 [palettes.neon_luxe]
 shadow = "#0A1A2A"
@@ -31,7 +47,7 @@ muted = "#A8BCCF"
 [os]
 disabled = false
 style = "fg:shadow bg:violet bold"
-format = "[](fg:violet)[$symbol ]($style)"
+format = "[](fg:violet)[$symbol ]($style)"
 
 [os.symbols]
 Windows = "󰍲"
@@ -61,20 +77,20 @@ Pop = ""
 show_always = true
 style_user = "fg:shadow bg:violet bold"
 style_root = "fg:shadow bg:violet bold"
-format = "[  inamuu ]($style)[](fg:violet) "
+format = "[  inamuu ]($style)[](fg:violet) "
 
 [hostname]
 ssh_only = true
 ssh_symbol = "󰣀 "
 style = "fg:fg bg:panel bold"
-format = "[](fg:panel)[ $ssh_symbol$hostname ]($style)[](fg:panel) "
+format = "[](fg:panel)[ $ssh_symbol$hostname ]($style)[](fg:panel) "
 trim_at = ".local"
 
 [directory]
 style = "fg:shadow bg:gold bold"
 read_only = " 󰌾"
 read_only_style = "fg:shadow bg:gold bold"
-format = "[](fg:gold)[  $path$read_only ]($style)[](fg:gold) "
+format = "[](fg:gold)[  $path$read_only ]($style)[](fg:gold) "
 truncation_length = 4
 truncation_symbol = "…/"
 
@@ -89,11 +105,11 @@ truncation_symbol = "…/"
 [git_branch]
 symbol = ""
 style = "fg:shadow bg:hot bold"
-format = "[](fg:hot)[ $symbol $branch ]($style)[](fg:hot) "
+format = "[](fg:hot)[ $symbol $branch ]($style)[](fg:hot) "
 
 [git_status]
 style = "fg:shadow bg:cyan bold"
-format = "([](fg:cyan)[ $all_status$ahead_behind ]($style)[](fg:cyan) )"
+format = "([](fg:cyan)[ $all_status$ahead_behind ]($style)[](fg:cyan) )"
 # 記号だけを表示（件数は出さない）。Nerd Font 前提のアイコン。
 conflicted = " "    # コンフリクト
 ahead = "󰅈 "     # ローカルが進んでいる
@@ -108,7 +124,7 @@ deleted = " "       # 削除
 
 [git_state]
 style = "fg:shadow bg:orange bold"
-format = "([](fg:orange)[ $state( $progress_current/$progress_total) ]($style)[](fg:orange) )"
+format = "([](fg:orange)[ $state( $progress_current/$progress_total) ]($style)[](fg:orange) )"
 rebase = "REBASE"
 merge = "MERGE"
 revert = "REVERT"
@@ -121,61 +137,61 @@ am_or_rebase = "AM/REBASE"
 disabled = false
 symbol = ""
 style = "fg:shadow bg:sky bold"
-format = "[](fg:sky)[ $symbol $context ]($style)[](fg:sky) "
+format = "[](fg:sky)[ $symbol $context ]($style)[](fg:sky) "
 
 [terraform]
 disabled = false
 symbol = "󱁢"
 style = "fg:shadow bg:violet bold"
-format = "[](fg:violet)[ $symbol $version ]($style)[](fg:violet) "
+format = "[](fg:violet)[ $symbol $version ]($style)[](fg:violet) "
 
 [golang]
 symbol = ""
 style = "fg:shadow bg:sky bold"
-format = "[](fg:sky)[ $symbol $version ]($style)[](fg:sky) "
+format = "[](fg:sky)[ $symbol $version ]($style)[](fg:sky) "
 
 [nodejs]
 symbol = ""
 style = "fg:shadow bg:lime bold"
-format = "[](fg:lime)[ $symbol $version ]($style)[](fg:lime) "
+format = "[](fg:lime)[ $symbol $version ]($style)[](fg:lime) "
 
 [python]
 symbol = ""
 style = "fg:shadow bg:cyan bold"
-format = "[](fg:cyan)[ $symbol $version ]($style)[](fg:cyan) "
+format = "[](fg:cyan)[ $symbol $version ]($style)[](fg:cyan) "
 
 [rust]
 symbol = ""
 style = "fg:shadow bg:orange bold"
-format = "[](fg:orange)[ $symbol $version ]($style)[](fg:orange) "
+format = "[](fg:orange)[ $symbol $version ]($style)[](fg:orange) "
 
 [php]
 symbol = ""
 style = "fg:shadow bg:violet bold"
-format = "[](fg:violet)[ $symbol $version ]($style)[](fg:violet) "
+format = "[](fg:violet)[ $symbol $version ]($style)[](fg:violet) "
 
 [ruby]
 symbol = ""
 style = "fg:shadow bg:hot bold"
-format = "[](fg:hot)[ $symbol $version ]($style)[](fg:hot) "
+format = "[](fg:hot)[ $symbol $version ]($style)[](fg:hot) "
 
 [status]
 disabled = false
 style = "fg:shadow bg:orange bold"
-format = "[](fg:orange)[ ✘ $status ]($style)[](fg:orange) "
+format = "[](fg:orange)[ ✘ $status ]($style)[](fg:orange) "
 map_symbol = true
 
 [cmd_duration]
 min_time = 800
 show_milliseconds = false
 style = "fg:gold bg:chrome bold"
-format = "[](fg:chrome)[ 󰔛 $duration ]($style)[](fg:chrome) "
+format = "[](fg:chrome)[ 󰔛 $duration ]($style)[](fg:chrome) "
 
 [time]
 disabled = false
 time_format = "%H:%M"
 style = "fg:fg bg:panel bold"
-format = "[](fg:panel)[  $time ]($style)[](fg:panel)"
+format = "[](fg:panel)[  $time ]($style)[](fg:panel)"
 
 [character]
 disabled = false
