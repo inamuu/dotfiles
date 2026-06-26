@@ -7,6 +7,7 @@ cask_args appdir: "/Applications"
 ### Tap list
 tap_list = [
   "FelixKratz/formulae",
+  "d-kuro/tap",
   "dotenvx/brew",
   "fluxcd/tap",
   "fluxcd/tap",
@@ -42,6 +43,7 @@ brew_list = [
   "cli53",
   "colordiff",
   "coreutils",
+  "d-kuro/tap/gwq",
   "direnv",
   "dotenvx/brew/dotenvx",
   "easy-rsa",
