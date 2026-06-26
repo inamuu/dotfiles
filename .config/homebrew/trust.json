@@ -1,5 +1,6 @@
 {
   "trustedtaps": [
+    "d-kuro/tap",
     "fluxcd/tap",
     "inamuu/tap"
   ],
@@ -9,6 +10,7 @@
     "terraform-linters/tap/tflint"
   ],
   "trustedformulae": [
+    "d-kuro/tap/gwq",
     "daipeihust/tap/im-select",
     "dotenvx/brew/dotenvx",
     "felixkratz/formulae/borders",

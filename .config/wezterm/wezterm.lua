@@ -28,6 +28,34 @@ local palette = {
 	selection = "#2E5E85",   -- 選択範囲：落ち着いたブルー
 }
 
+-- Workspace名はギターのモデル名（番号プレフィックス付き）を順番に自動採番
+local WORKSPACE_NAMES = {
+	"01.Stratocaster",
+	"02.Telecaster",
+	"03.Jaguar",
+	"04.Jazzmaster",
+	"05.Mustang",
+	"06.LesPaul",
+	"07.SG",
+	"08.Explorer",
+	"09.Firebird",
+	"10.FlyingV",
+}
+
+-- 既存workspaceに使われていない最初のギター名を返す（全部埋まっていればnil）
+local function next_workspace_name()
+	local existing = {}
+	for _, n in ipairs(wezterm.mux.get_workspace_names()) do
+		existing[n] = true
+	end
+	for _, n in ipairs(WORKSPACE_NAMES) do
+		if not existing[n] then
+			return n
+		end
+	end
+	return nil
+end
+
 local function active_tab_if_single_pane(window, message)
 	local mux_window = window:mux_window()
 	if not mux_window then
@@ -273,6 +301,9 @@ local config = {
 	-- auto reloadd
 	automatically_reload_config = true,
 
+	-- 起動時のworkspaceもギター名にする
+	default_workspace = "01.Stratocaster",
+
 	-- Font
 	font = wezterm.font({
 		family = "UDEV Gothic 35NF",
@@ -476,27 +507,11 @@ local config = {
 									return
 								end
 								if id == "__new__" then
-									-- 新規作成モード
-									win:perform_action(
-										act.PromptInputLine({
-											description = wezterm.format({
-												{ Foreground = { Color = "#50FA7B" } },
-												{ Text = "✨ " },
-												{ Foreground = { Color = "#BD93F9" } },
-												{ Attribute = { Intensity = "Bold" } },
-												{ Text = "New Workspace Name" },
-												{ Foreground = { Color = "#6272A4" } },
-												{ Attribute = { Intensity = "Normal" } },
-												{ Text = "  │  Enter a unique name" },
-											}),
-											action = wezterm.action_callback(function(w, pa, line)
-												if line and line ~= "" then
-													w:perform_action(act.SwitchToWorkspace({ name = line }), pa)
-												end
-											end),
-										}),
-										p
-									)
+									-- 入力なしで次のギター名を自動採番して作成
+									local name = next_workspace_name()
+									if name then
+										win:perform_action(act.SwitchToWorkspace({ name = name }), p)
+									end
 								elseif id ~= "__separator__" then
 									-- 既存workspaceを選択
 									win:perform_action(act.SwitchToWorkspace({ name = id }), p)
@@ -506,27 +521,11 @@ local config = {
 						pane
 					)
 				else
-					-- 既存workspaceがない場合：直接作成
-					window:perform_action(
-						act.PromptInputLine({
-							description = wezterm.format({
-								{ Foreground = { Color = "#50FA7B" } },
-								{ Text = "✨ " },
-								{ Foreground = { Color = "#BD93F9" } },
-								{ Attribute = { Intensity = "Bold" } },
-								{ Text = "New Workspace Name" },
-								{ Foreground = { Color = "#6272A4" } },
-								{ Attribute = { Intensity = "Normal" } },
-								{ Text = "  │  Enter a unique name" },
-							}),
-							action = wezterm.action_callback(function(win, p, line)
-								if line and line ~= "" then
-									win:perform_action(act.SwitchToWorkspace({ name = line }), p)
-								end
-							end),
-						}),
-						pane
-					)
+					-- 既存workspaceがない場合：次のギター名を自動採番して作成
+					local name = next_workspace_name()
+					if name then
+						window:perform_action(act.SwitchToWorkspace({ name = name }), pane)
+					end
 				end
 			end),
 		},
@@ -1003,26 +1002,22 @@ local function render_status(window, pane)
 	local workspace = window:active_workspace()
 	local overrides = window:get_config_overrides() or {}
 
-	-- leaderがアクティブになった瞬間だけIMEをOFFに寄せる
-	local leader_active = false
-	if window.leader_is_active then
-		leader_active = window:leader_is_active()
-	end
-	wezterm.GLOBAL.__leader_active_by_window = wezterm.GLOBAL.__leader_active_by_window or {}
-	local win_id = window:window_id()
-	local prev_leader_active = wezterm.GLOBAL.__leader_active_by_window[win_id] or false
-	if leader_active and not prev_leader_active then
-		wezterm.GLOBAL.__leader_active_by_window[win_id] = true
-		macos_ime_off()
-	elseif (not leader_active) and prev_leader_active then
-		wezterm.GLOBAL.__leader_active_by_window[win_id] = false
-	end
-
 	local desired_scheme = color_scheme_for_workspace(workspace)
 	if overrides.color_scheme ~= desired_scheme then
 		overrides.color_scheme = desired_scheme
 		window:set_config_overrides(overrides)
 	end
+
+	-- 右端に workspace 一覧を表示（[ ]が現在のworkspace）
+	local names = wezterm.mux.get_workspace_names()
+	local elems = {}
+	for _, name in ipairs(names) do
+		local is_cur = (name == workspace)
+		table.insert(elems, { Foreground = { Color = is_cur and palette.hot_pink or palette.fg_dim } })
+		table.insert(elems, { Attribute = { Intensity = is_cur and "Bold" or "Normal" } })
+		table.insert(elems, { Text = is_cur and (" [" .. name .. "] ") or ("  " .. name .. "  ") })
+	end
+	window:set_right_status(wezterm.format(elems))
 end
 
 wezterm.on("update-status", render_status)
