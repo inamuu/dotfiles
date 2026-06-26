@@ -86,7 +86,7 @@ brew_list = [
   "minikube",
   "mise",
   "mysql",
-  "mysql@8.0",
+  "mysql-client@8.4",
   "nmap",
   "nvim",
   "olets/tap/zsh-abbr@6",
