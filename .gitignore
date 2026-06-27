@@ -43,10 +43,10 @@ terraform.tfstate.*.backup
 .codex/installation_id
 .codex/log/*
 .codex/logs*
-.codex/memories_1.sqlite-shm
-.codex/memories_1.sqlite-wal
+.codex/memories_1.sqlite-*
+.codex/memories*
 .codex/models_cache.json
-.codex/plugins/cache/
+.codex/plugins/
 .codex/process_manager/
 .codex/rules
 .codex/session*
