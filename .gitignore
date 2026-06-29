@@ -70,6 +70,9 @@ terraform.tfstate.*.backup
 .config/gh/hosts.yml
 .config/gh/config.yml
 
+# Git PCごとのローカル設定（signingkey, gpg.program など）
+.config/git/config.local
+
 # Claude Code settings
 .claude/.last-cleanup
 .claude/.last-update-result.json

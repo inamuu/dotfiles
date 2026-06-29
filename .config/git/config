@@ -52,3 +52,11 @@
   required = true
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
+[commit]
+  gpgsign = true
+[tag]
+  gpgsign = true
+
+# PCごとの設定（signingkey, gpg.program など）。config.local は gitignore 済み
+[include]
+  path = config.local
