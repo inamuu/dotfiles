@@ -1,6 +1,8 @@
 vim.opt.swapfile = false
 vim.opt.spell = false
 vim.opt.termguicolors = true
+-- LazyVimデフォルトのconceallevel=2でmarkdownの```等が隠れるのを無効化
+vim.opt.conceallevel = 0
 vim.opt.pumblend = 10
 vim.opt.winblend = 8
 

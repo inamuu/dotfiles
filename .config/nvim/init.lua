@@ -10,7 +10,10 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.g.lazyvim_picker = "telescope"
 
-require("config.options")
+-- config.options はLazyVimが正しい順序（LazyVimデフォルト→ユーザー）で
+-- 読み込むため、ここで手動requireしない。
+-- 手動requireするとキャッシュされ、後勝ちのLazyVimデフォルトで上書きされ、
+-- conceallevel等のユーザー設定が効かなくなる
 require("config.lazy")
 require("config.keymaps").setup()
 
