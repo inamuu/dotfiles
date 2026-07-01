@@ -6,26 +6,26 @@ local config = wezterm.config_builder()
 
 local act = wezterm.action
 local launch_ghq_project_workspace
--- 青～エメラルド系で統一したカームパレット。
--- 変数名は旧名を踏襲（violet / hot_pink / gold / orange / lime）しつつ値だけ青系に差し替え。
+-- Molokaiテーマ系のパステルカラーパレット。
+-- 変数名は旧名を踏襲（violet / hot_pink / gold / orange / lime）しつつ値をMolokai配色（淡め）に差し替え。
 local palette = {
-	shadow = "#0A1A2A",      -- ダークネイビー
-	bg = "#0D2033",          -- 背景（やや明るめ）
-	bg_alt = "#15293F",      -- 非アクティブ背景
-	chrome = "#1C344C",      -- クローム
-	chrome_dim = "#14283C",  -- クローム（暗）
-	panel = "#234A6B",       -- パネル
-	panel_alt = "#2E5E85",   -- パネル（明）
-	violet = "#6FA8DC",      -- 明るめのブルー（旧バイオレット）
-	hot_pink = "#4FD1C5",    -- エメラルドティール（旧ピンク）
-	cyan = "#4A9FD6",        -- やや濃いめのブルー
-	gold = "#A8D8F0",        -- パステルブルー（旧ゴールド）
-	orange = "#5FA3D6",      -- 中間のブルー（旧オレンジ）
-	lime = "#5EDCB5",        -- 明るめエメラルド（旧ライム）
-	fg = "#F0F7FC",
-	fg_muted = "#C3D4E6",
-	fg_dim = "#8CA3BC",
-	selection = "#2E5E85",   -- 選択範囲：落ち着いたブルー
+	shadow = "#1B1D1E",      -- Molokai背景
+	bg = "#232526",          -- 背景（やや明るめ）
+	bg_alt = "#2D2E2E",      -- 非アクティブ背景
+	chrome = "#3E3D32",      -- クローム
+	chrome_dim = "#272822",  -- クローム（暗）
+	panel = "#3E3D32",       -- パネル
+	panel_alt = "#49483E",   -- パネル（明）
+	violet = "#C6A6FF",      -- パステルパープル（旧バイオレット）
+	hot_pink = "#FF9AC1",    -- パステルピンク（旧ピンク）
+	cyan = "#9FE8F5",        -- パステルシアン
+	gold = "#F0E6A8",        -- パステルイエロー（旧ゴールド）
+	orange = "#FFC895",      -- パステルオレンジ
+	lime = "#C3E8A0",        -- パステルグリーン（旧ライム）
+	fg = "#F8F8F2",
+	fg_muted = "#CFCFC2",
+	fg_dim = "#8A8877",
+	selection = "#49483E",   -- 選択範囲
 }
 
 -- Workspace名はギターのモデル名（番号プレフィックス付き）を順番に自動採番
@@ -278,7 +278,7 @@ end
 
 local function color_scheme_for_workspace(workspace)
 	if workspace == "default" then
-		return "Night Owl (Gogh)"
+		return "Monokai (dark) (terminal.sexy)"
 	end
 
 	local hash = 0
@@ -329,7 +329,7 @@ local config = {
 	cursor_blink_rate = 450,
 
 	-- Color Scheme: https://wezfurlong.org/wezterm/colorschemes/index.html
-	color_scheme = "Night Owl (Gogh)",
+	color_scheme = "Monokai (dark) (terminal.sexy)",
 
 	colors = {
 		foreground = palette.fg,
@@ -582,7 +582,7 @@ local config = {
 		{
 			source = {
 				Gradient = {
-					colors = { "#0A1024", "#2D1B69", "#A12670", "#FF7A18" },
+					colors = { "#1B1D1E", "#3E3D32", "#FF9AC1", "#FFC895" },
 					orientation = { Linear = { angle = -45.0 } },
 					interpolation = "Basis",
 					blend = "Rgb",
@@ -595,7 +595,7 @@ local config = {
 		{
 			source = {
 				Gradient = {
-					colors = { "#0D0B2A", "#102A43", "#05D9E8" },
+					colors = { "#272822", "#3E3D32", "#9FE8F5" },
 					orientation = {
 						Radial = { cx = 0.82, cy = -0.15, radius = 1.05 },
 					},

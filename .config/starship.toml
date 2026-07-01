@@ -1,6 +1,6 @@
 "$schema" = "https://starship.rs/config-schema.json"
 
-palette = "dracula"
+palette = "molokai"
 add_newline = false
 scan_timeout = 20
 command_timeout = 900
@@ -28,6 +28,21 @@ orange = "#ff9233"     # orange（濃いめ）
 lime = "#2fe06a"       # green（濃いめ）
 fg = "#f8f8f2"         # foreground
 muted = "#565f89"      # comment
+
+[palettes.molokai]
+shadow = "#1B1D1E"
+chrome = "#3E3D32"
+panel = "#3E3D32"
+panel_alt = "#49483E"
+violet = "#C6A6FF"  # パステルパープル
+hot = "#FF9AC1"     # パステルピンク
+cyan = "#9FE8F5"    # パステルシアン
+sky = "#A8D8F0"     # パステルブルー
+gold = "#F0E6A8"    # パステルイエロー
+orange = "#FFC895"  # パステルオレンジ
+lime = "#C3E8A0"    # パステルグリーン
+fg = "#F8F8F2"
+muted = "#8A8877"
 
 [palettes.neon_luxe]
 shadow = "#0A1A2A"
