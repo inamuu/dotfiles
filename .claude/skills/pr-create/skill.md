@@ -1,6 +1,6 @@
 # GitHub PR Create (Draft)
 
-`gh pr create -d` を使用して Draft Pull Request を作成するスキルです。
+`gh pr create -d` を使用して Draft 状態の Pull Request を作成するスキルです。
 
 ## 手順
 
