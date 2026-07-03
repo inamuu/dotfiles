@@ -159,3 +159,11 @@ eval "$(starship init zsh)"
 
 # Kiro CLI post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
+
+### herdr
+# ターミナル起動時にherdrへ接続する
+# herdr内のペイン・VSCode/Kiro等のIDE内ターミナルでは起動しない
+# herdrをやめる場合はこのifブロックをコメントアウトすればOK
+if [[ -o interactive && -z "$HERDR_PANE_ID" && "$TERM_PROGRAM" != "vscode" && "$TERM_PROGRAM" != "kiro" ]] && command -v herdr >/dev/null; then
+  herdr
+fi

@@ -154,3 +154,9 @@ tftui.plan
 
 # htop
 .config/htop/
+
+# herdr
+.config/herdr/*.sock
+.config/herdr/*.log
+.config/herdr/session.json
+

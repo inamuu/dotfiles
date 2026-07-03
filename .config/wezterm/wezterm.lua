@@ -370,178 +370,178 @@ local config = {
 	},
 
 	-- KeyBindings
-	leader = { key = "o", mods = "CTRL", timeout_milliseconds = 2000 },
+-- 	leader = { key = "o", mods = "CTRL", timeout_milliseconds = 2000 },
 
 	-- Split pane
 	keys = {
-		{ key = "|", mods = "LEADER|SHIFT", action = act.SplitHorizontal },
-		{ key = "-", mods = "LEADER", action = act.SplitVertical },
-
-		-- Show pane labels overlay (press Leader then "o")
-		-- Note: WezTerm cannot trigger an action on "leader press only"; it always needs the next key.
-		-- PaneSelect exits automatically when you type the label; expanding the alphabet reduces cases
-		-- where you need to type 2 characters (and the overlay appears to "stick").
-		{
-			key = "o",
-			mods = "LEADER",
-			action = act.PaneSelect({
-				alphabet = "1234567890",
-				mode = "Activate",
-				show_pane_ids = false,
-			}),
-		},
-
-		-- Enable copy mode
-		{ key = "v", mods = "LEADER", action = wezterm.action_callback(enter_copy_mode) },
-		-- Move pane
-		{ key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
-		{ key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
-		{ key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
-		{ key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
-		-- Resize mode
-		{
-			key = "r",
-			mods = "LEADER",
-			action = wezterm.action_callback(enter_resize_mode),
-		},
-		-- Single-step resize
-		{ key = "H", mods = "LEADER", action = act.AdjustPaneSize({ "Left", 5 }) },
-		{ key = "J", mods = "LEADER", action = act.AdjustPaneSize({ "Down", 5 }) },
-		{ key = "K", mods = "LEADER", action = act.AdjustPaneSize({ "Up", 5 }) },
-		{ key = "L", mods = "LEADER", action = act.AdjustPaneSize({ "Right", 5 }) },
-		-- Layout presets
-		{ key = "1", mods = "LEADER", action = wezterm.action_callback(split_left_main) },
-		{ key = "2", mods = "LEADER", action = wezterm.action_callback(split_right_main) },
-		{ key = "3", mods = "LEADER", action = wezterm.action_callback(split_into_three) },
-		{ key = "4", mods = "LEADER", action = wezterm.action_callback(split_into_four) },
-		{ key = "5", mods = "LEADER", action = wezterm.action_callback(split_top_main) },
-		{ key = "6", mods = "LEADER", action = wezterm.action_callback(split_bottom_main) },
-		{ key = "7", mods = "LEADER", action = wezterm.action_callback(split_into_three_columns) },
-		{ key = "8", mods = "LEADER", action = wezterm.action_callback(split_into_three_rows) },
-		{ key = "9", mods = "LEADER", action = wezterm.action_callback(split_left_main_with_right_stack) },
-		{ key = "0", mods = "LEADER", action = wezterm.action_callback(split_top_main_with_bottom_columns) },
-		-- Pane zoom
-		{ key = "z", mods = "LEADER", action = wezterm.action_callback(toggle_zoom_with_notice) },
-		-- Current pane close
-		{ key = "w", mods = "LEADER", action = wezterm.action.CloseCurrentPane({ confirm = true }) },
-		-- Quick select mode
-		{ key = "Space", mods = "LEADER", action = wezterm.action_callback(enter_quick_select) },
+-- 		{ key = "|", mods = "LEADER|SHIFT", action = act.SplitHorizontal },
+-- 		{ key = "-", mods = "LEADER", action = act.SplitVertical },
+-- 
+-- 		-- Show pane labels overlay (press Leader then "o")
+-- 		-- Note: WezTerm cannot trigger an action on "leader press only"; it always needs the next key.
+-- 		-- PaneSelect exits automatically when you type the label; expanding the alphabet reduces cases
+-- 		-- where you need to type 2 characters (and the overlay appears to "stick").
+-- 		{
+-- 			key = "o",
+-- 			mods = "LEADER",
+-- 			action = act.PaneSelect({
+-- 				alphabet = "1234567890",
+-- 				mode = "Activate",
+-- 				show_pane_ids = false,
+-- 			}),
+-- 		},
+-- 
+-- 		-- Enable copy mode
+-- 		{ key = "v", mods = "LEADER", action = wezterm.action_callback(enter_copy_mode) },
+-- 		-- Move pane
+-- 		{ key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
+-- 		{ key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
+-- 		{ key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
+-- 		{ key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+-- 		-- Resize mode
+-- 		{
+-- 			key = "r",
+-- 			mods = "LEADER",
+-- 			action = wezterm.action_callback(enter_resize_mode),
+-- 		},
+-- 		-- Single-step resize
+-- 		{ key = "H", mods = "LEADER", action = act.AdjustPaneSize({ "Left", 5 }) },
+-- 		{ key = "J", mods = "LEADER", action = act.AdjustPaneSize({ "Down", 5 }) },
+-- 		{ key = "K", mods = "LEADER", action = act.AdjustPaneSize({ "Up", 5 }) },
+-- 		{ key = "L", mods = "LEADER", action = act.AdjustPaneSize({ "Right", 5 }) },
+-- 		-- Layout presets
+-- 		{ key = "1", mods = "LEADER", action = wezterm.action_callback(split_left_main) },
+-- 		{ key = "2", mods = "LEADER", action = wezterm.action_callback(split_right_main) },
+-- 		{ key = "3", mods = "LEADER", action = wezterm.action_callback(split_into_three) },
+-- 		{ key = "4", mods = "LEADER", action = wezterm.action_callback(split_into_four) },
+-- 		{ key = "5", mods = "LEADER", action = wezterm.action_callback(split_top_main) },
+-- 		{ key = "6", mods = "LEADER", action = wezterm.action_callback(split_bottom_main) },
+-- 		{ key = "7", mods = "LEADER", action = wezterm.action_callback(split_into_three_columns) },
+-- 		{ key = "8", mods = "LEADER", action = wezterm.action_callback(split_into_three_rows) },
+-- 		{ key = "9", mods = "LEADER", action = wezterm.action_callback(split_left_main_with_right_stack) },
+-- 		{ key = "0", mods = "LEADER", action = wezterm.action_callback(split_top_main_with_bottom_columns) },
+-- 		-- Pane zoom
+-- 		{ key = "z", mods = "LEADER", action = wezterm.action_callback(toggle_zoom_with_notice) },
+-- 		-- Current pane close
+-- 		{ key = "w", mods = "LEADER", action = wezterm.action.CloseCurrentPane({ confirm = true }) },
+-- 		-- Quick select mode
+-- 		{ key = "Space", mods = "LEADER", action = wezterm.action_callback(enter_quick_select) },
 		-- Others
 		{ key = "Enter", mods = "SHIFT", action = act.SendString("\n") },
 
-		-- Workspace: 選択と作成を統合（モダンデザイン）
-		{
-			key = "s",
-			mods = "LEADER",
-			action = wezterm.action_callback(function(window, pane)
-				local mux = wezterm.mux
-				local workspaces = mux.get_workspace_names()
-				local current_workspace = window:active_workspace()
-
-				if #workspaces > 0 then
-					-- 既存のworkspaceがある場合：fuzzy選択 + 新規作成オプション
-					local choices = {}
-
-					-- Workspace一覧を作成
-					for idx, name in ipairs(workspaces) do
-						local is_current = (name == current_workspace)
-						local icon = is_current and "●" or "○"
-						local status = is_current and " (current)" or ""
-
-						table.insert(choices, {
-							id = name,
-							label = wezterm.format({
-								{ Foreground = { Color = "#8BE9FD" } }, -- Cyan
-								{ Text = icon .. " " },
-								{ Foreground = { Color = "#F8F8F2" } }, -- White
-								{ Attribute = { Intensity = is_current and "Bold" or "Normal" } },
-								{ Text = name },
-								{ Foreground = { Color = "#6272A4" } }, -- Comment gray
-								{ Attribute = { Intensity = "Normal" } },
-								{ Text = status },
-							}),
-						})
-					end
-
-					-- セパレーター
-					table.insert(choices, {
-						id = "__separator__",
-						label = wezterm.format({
-							{ Foreground = { Color = "#44475A" } },
-							{
-								Text = "─────────────────────────────────",
-							},
-						}),
-					})
-
-					-- 新規作成オプション
-					table.insert(choices, {
-						id = "__new__",
-						label = wezterm.format({
-							{ Foreground = { Color = "#50FA7B" } }, -- Green
-							{ Text = "✨ " },
-							{ Foreground = { Color = "#F8F8F2" } },
-							{ Attribute = { Intensity = "Bold" } },
-							{ Text = "Create New Workspace" },
-						}),
-					})
-
-					window:perform_action(
-						act.InputSelector({
-							title = wezterm.format({
-								{ Foreground = { Color = "#BD93F9" } }, -- Purple
-								{ Attribute = { Intensity = "Bold" } },
-								{ Text = "  Workspaces " },
-								{ Foreground = { Color = "#6272A4" } },
-								{ Attribute = { Intensity = "Normal" } },
-								{ Text = " (" .. #workspaces .. " active)" },
-							}),
-							choices = choices,
-							fuzzy = true,
-							fuzzy_description = wezterm.format({
-								{ Foreground = { Color = "#6272A4" } },
-								{ Text = "Type to filter • ↑↓ Navigate • Enter Select • Esc Cancel" },
-							}),
-							action = wezterm.action_callback(function(win, p, id, label)
-								if not id then
-									return
-								end
-								if id == "__new__" then
-									-- 入力なしで次のギター名を自動採番して作成
-									local name = next_workspace_name()
-									if name then
-										win:perform_action(act.SwitchToWorkspace({ name = name }), p)
-									end
-								elseif id ~= "__separator__" then
-									-- 既存workspaceを選択
-									win:perform_action(act.SwitchToWorkspace({ name = id }), p)
-								end
-							end),
-						}),
-						pane
-					)
-				else
-					-- 既存workspaceがない場合：次のギター名を自動採番して作成
-					local name = next_workspace_name()
-					if name then
-						window:perform_action(act.SwitchToWorkspace({ name = name }), pane)
-					end
-				end
-			end),
-		},
-		{
-			key = "g",
-			mods = "LEADER",
-			action = wezterm.action_callback(function(window, pane)
-				launch_ghq_project_workspace(window, pane)
-			end),
-		},
-		-- 直前のコマンドと出力をコピー
-		{
-			key = "x",
-			mods = "LEADER",
-			action = wezterm.action_callback(copy_previous_command_and_output),
-		},
+-- 		-- Workspace: 選択と作成を統合（モダンデザイン）
+-- 		{
+-- 			key = "s",
+-- 			mods = "LEADER",
+-- 			action = wezterm.action_callback(function(window, pane)
+-- 				local mux = wezterm.mux
+-- 				local workspaces = mux.get_workspace_names()
+-- 				local current_workspace = window:active_workspace()
+-- 
+-- 				if #workspaces > 0 then
+-- 					-- 既存のworkspaceがある場合：fuzzy選択 + 新規作成オプション
+-- 					local choices = {}
+-- 
+-- 					-- Workspace一覧を作成
+-- 					for idx, name in ipairs(workspaces) do
+-- 						local is_current = (name == current_workspace)
+-- 						local icon = is_current and "●" or "○"
+-- 						local status = is_current and " (current)" or ""
+-- 
+-- 						table.insert(choices, {
+-- 							id = name,
+-- 							label = wezterm.format({
+-- 								{ Foreground = { Color = "#8BE9FD" } }, -- Cyan
+-- 								{ Text = icon .. " " },
+-- 								{ Foreground = { Color = "#F8F8F2" } }, -- White
+-- 								{ Attribute = { Intensity = is_current and "Bold" or "Normal" } },
+-- 								{ Text = name },
+-- 								{ Foreground = { Color = "#6272A4" } }, -- Comment gray
+-- 								{ Attribute = { Intensity = "Normal" } },
+-- 								{ Text = status },
+-- 							}),
+-- 						})
+-- 					end
+-- 
+-- 					-- セパレーター
+-- 					table.insert(choices, {
+-- 						id = "__separator__",
+-- 						label = wezterm.format({
+-- 							{ Foreground = { Color = "#44475A" } },
+-- 							{
+-- 								Text = "─────────────────────────────────",
+-- 							},
+-- 						}),
+-- 					})
+-- 
+-- 					-- 新規作成オプション
+-- 					table.insert(choices, {
+-- 						id = "__new__",
+-- 						label = wezterm.format({
+-- 							{ Foreground = { Color = "#50FA7B" } }, -- Green
+-- 							{ Text = "✨ " },
+-- 							{ Foreground = { Color = "#F8F8F2" } },
+-- 							{ Attribute = { Intensity = "Bold" } },
+-- 							{ Text = "Create New Workspace" },
+-- 						}),
+-- 					})
+-- 
+-- 					window:perform_action(
+-- 						act.InputSelector({
+-- 							title = wezterm.format({
+-- 								{ Foreground = { Color = "#BD93F9" } }, -- Purple
+-- 								{ Attribute = { Intensity = "Bold" } },
+-- 								{ Text = "  Workspaces " },
+-- 								{ Foreground = { Color = "#6272A4" } },
+-- 								{ Attribute = { Intensity = "Normal" } },
+-- 								{ Text = " (" .. #workspaces .. " active)" },
+-- 							}),
+-- 							choices = choices,
+-- 							fuzzy = true,
+-- 							fuzzy_description = wezterm.format({
+-- 								{ Foreground = { Color = "#6272A4" } },
+-- 								{ Text = "Type to filter • ↑↓ Navigate • Enter Select • Esc Cancel" },
+-- 							}),
+-- 							action = wezterm.action_callback(function(win, p, id, label)
+-- 								if not id then
+-- 									return
+-- 								end
+-- 								if id == "__new__" then
+-- 									-- 入力なしで次のギター名を自動採番して作成
+-- 									local name = next_workspace_name()
+-- 									if name then
+-- 										win:perform_action(act.SwitchToWorkspace({ name = name }), p)
+-- 									end
+-- 								elseif id ~= "__separator__" then
+-- 									-- 既存workspaceを選択
+-- 									win:perform_action(act.SwitchToWorkspace({ name = id }), p)
+-- 								end
+-- 							end),
+-- 						}),
+-- 						pane
+-- 					)
+-- 				else
+-- 					-- 既存workspaceがない場合：次のギター名を自動採番して作成
+-- 					local name = next_workspace_name()
+-- 					if name then
+-- 						window:perform_action(act.SwitchToWorkspace({ name = name }), pane)
+-- 					end
+-- 				end
+-- 			end),
+-- 		},
+-- 		{
+-- 			key = "g",
+-- 			mods = "LEADER",
+-- 			action = wezterm.action_callback(function(window, pane)
+-- 				launch_ghq_project_workspace(window, pane)
+-- 			end),
+-- 		},
+-- 		-- 直前のコマンドと出力をコピー
+-- 		{
+-- 			key = "x",
+-- 			mods = "LEADER",
+-- 			action = wezterm.action_callback(copy_previous_command_and_output),
+-- 		},
 	},
 
 	-- SearchMode

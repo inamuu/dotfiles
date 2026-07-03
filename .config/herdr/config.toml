@@ -1,0 +1,17 @@
+[keys]
+prefix = "ctrl+o"
+
+# vim風: prefix+v でコピーモード開始（デフォルトの prefix+[ を置き換え）
+copy_mode = "prefix+v"
+
+# prefix+v をコピーモードに譲るため、縦分割は prefix+| のみ
+split_vertical = ["prefix+|"]
+
+# スクロールバック全体を $EDITOR (nvim) で開く
+edit_scrollback = "prefix+e"
+
+# 直前のペインと行き来（デフォルト未割り当て）
+last_pane = "prefix+;"
+
+[worktrees]
+directory = "~/worktrees"
