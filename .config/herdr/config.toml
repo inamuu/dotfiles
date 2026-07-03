@@ -13,5 +13,19 @@ edit_scrollback = "prefix+e"
 # 直前のペインと行き来（デフォルト未割り当て）
 last_pane = "prefix+;"
 
+# vim風: navigate mode (prefix+w) 内で j/k でも選択移動できるようにする
+navigate_workspace_up = ["k", "up"]
+navigate_workspace_down = ["j", "down"]
+
+# workspaceを即切り替え（デフォルト未割り当て。copy_modeをvに移したので [ が空いた）
+previous_workspace = "prefix+["
+next_workspace = "prefix+]"
+
 [worktrees]
 directory = "~/worktrees"
+
+# エージェントのdone/入力待ちをmacOSの通知センターに出す
+# 3秒その状態が続いたときだけ通知（瞬間的な状態変化を無視）
+[ui.toast]
+delivery = "system"
+delay_seconds = 3
