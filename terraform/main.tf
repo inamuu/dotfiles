@@ -1,9 +1,3 @@
-resource "local_file" "test_copy_dotfiles" {
-  content         = file("${path.module}/.terraform-version")
-  filename        = "/tmp/.terraform-version"
-  file_permission = "0644"
-}
-
 resource "terraform_data" "brew_bundle" {
   provisioner "local-exec" {
     command = "brew bundle --file ../.config/homebrew/Brewfile"
