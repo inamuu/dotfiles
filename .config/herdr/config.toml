@@ -29,3 +29,7 @@ directory = "~/worktrees"
 [ui.toast]
 delivery = "system"
 delay_seconds = 3
+
+[theme]
+name = "dracula"
+auto_switch = false
