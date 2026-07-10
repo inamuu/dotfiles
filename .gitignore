@@ -23,6 +23,7 @@ terraform.tfstate.*.backup
 ### Devin
 
 .config/devin/config.json
+.config/devin/*.sh
 
 ### Codex
 .codex/*.bak
@@ -160,6 +161,8 @@ tftui.plan
 .config/herdr/*.sock
 .config/herdr/*.log
 .config/herdr/session.json
+.config/herdr/release-notes.json
+
 
 .config/cagent/
 
