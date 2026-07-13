@@ -25,6 +25,9 @@ terraform.tfstate.*.backup
 .config/devin/config.json
 .config/devin/*.sh
 
+### CircleCI
+.config/circleci/
+
 ### Codex
 .codex/*.bak
 .codex/*.sqlite
