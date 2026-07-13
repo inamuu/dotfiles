@@ -5,6 +5,7 @@
     "inamuu/tap"
   ],
   "trustedcasks": [
+    "circleci-public/circleci/circleci@next",
     "goreleaser/tap/goreleaser",
     "manaflow-ai/cmux/cmux",
     "terraform-linters/tap/tflint"
