@@ -322,7 +322,9 @@ local config = {
 	use_ime = true,
 
 	-- Allow terminal apps such as Neovim to receive Cmd/Super modified keys.
-	enable_kitty_keyboard = true,
+	-- herdr 0.7.3 が kitty keyboard の ESC リリースシーケンスを誤処理して
+	-- nvim で ESC が効かなくなるため無効化 (ogulcancelik/herdr#1266)
+	enable_kitty_keyboard = false,
 
 	-- Cursor
 	default_cursor_style = "BlinkingBar",
