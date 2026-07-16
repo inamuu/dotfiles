@@ -18,6 +18,7 @@
   sw   = switch
   swc  = switch -c
   wt   = "!f() { repo=$(basename \"$(git rev-parse --show-toplevel)\"); path=\"$HOME/worktrees/$repo/$1\"; if git show-ref --verify --quiet \"refs/heads/$1\"; then git worktree add \"$path\" \"$1\"; else git worktree add -b \"$1\" \"$path\"; fi; }; f"
+	ac = !GIT_EDITOR=true git commit
 
 [core]
   pager        = ""
@@ -25,6 +26,7 @@
   quotepath    = false
   whitespace   = cr-at-eol
   excludesfile = ~/.gitignore
+	hooksPath = /Users/kazuma.inamura/.git-hooks
 
 [credential]
   helper = osxkeychain
