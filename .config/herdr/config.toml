@@ -21,7 +21,6 @@ navigate_workspace_down = ["j", "down"]
 # workspaceを即切り替え（デフォルト未割り当て。copy_modeをvに移したので [ が空いた）
 previous_workspace = "prefix+["
 next_workspace = "prefix+]"
-
 [worktrees]
 directory = "~/worktrees"
 
