@@ -1,0 +1,40 @@
+[tasks.brew]
+description = "Brewfile のパッケージを同期"
+run = "brew bundle --file .config/homebrew/Brewfile"
+
+[tasks.link]
+description = "dotfiles と .config/.claude を ~ にリンク"
+run = '''
+exclude=".DS_Store .gitignore .sleep .wakeup .nvimlog"
+for f in .*; do
+  [ -f "$f" ] || continue
+  case " $exclude " in *" $f "*) continue ;; esac
+  ln -sfn "$PWD/$f" "$HOME/$f"
+done
+for d in .config .claude; do
+  [ -e "$HOME/$d" ] || ln -sn "$PWD/$d" "$HOME/$d"
+done
+'''
+
+[tasks.defaults]
+description = "macOS の defaults を適用"
+run = '''
+defaults write com.apple.dock orientation -string left
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock expose-group-apps -bool true
+defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder AppleShowAllFiles -bool true
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
+defaults write com.apple.screencapture location -string ~/Downloads
+defaults write -g InitialKeyRepeat -int 12
+defaults write -g KeyRepeat -int 1
+defaults write -g com.apple.mouse.scaling -int 2
+defaults write -g com.apple.trackpad.scaling -int 5
+defaults write -g ApplePressAndHoldEnabled -bool false
+killall Dock Finder || true
+'''
+
+[tasks.setup]
+description = "dotfiles 一式のセットアップ"
+depends = ["brew", "link", "defaults"]
