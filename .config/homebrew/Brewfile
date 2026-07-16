@@ -37,7 +37,6 @@ brew_list = [
   "bitwarden-cli",
   "blueutil",
   "borders",
-  "homebrew/brew-vulns/brew-vulns",
   "bzip2",
   "cli53",
   "colordiff",
