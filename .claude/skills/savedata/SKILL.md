@@ -10,7 +10,7 @@ description: 現在のClaude Codeセッションの内容をMarkdownにまとめ
 ## 保存先
 
 ```
-${HOME}/Documents/Claude/Summarize/yyyy/mm/
+${HOME}/ghq/github.com/inamuu/data/Acta/posts/yyyy/mm/
 ```
 
 - `yyyy` / `mm` は保存日の年・月（例: `2026/07/`）
