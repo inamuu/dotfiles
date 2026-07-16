@@ -55,7 +55,7 @@ gwtadd() {
   local base=${2:-HEAD}
   local repo_name=${${PWD:A:t}}
 
-  git worktree add -b "${name}" "../${repo_name}_${name}" "${base}"
+  git worktree add -b "${name}" "${HOME}/worktrees/${repo_name}_${name}" "${base}"
 }
 
 gwtremove() {
