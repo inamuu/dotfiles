@@ -1,0 +1,55 @@
+#!/bin/bash
+# git commit 時に ollama でコミットメッセージを自動生成するフック
+# 無効化したいときは環境変数 NO_AI_COMMIT=1 を付けて git commit する
+
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+
+MODEL="${AI_COMMIT_MODEL:-gemma4:e2b}"
+
+# -m / merge / squash などで既にメッセージがある場合はスキップ
+[ -n "$COMMIT_SOURCE" ] && exit 0
+
+# 明示的に無効化された場合はスキップ
+[ -n "$NO_AI_COMMIT" ] && exit 0
+
+# ollama が無い・起動していない場合は静かにスキップ（コミット自体は妨げない）
+command -v ollama >/dev/null 2>&1 || exit 0
+
+DIFF=$(git diff --cached --no-color | head -c 8000)
+[ -z "$DIFF" ] && exit 0
+
+echo "AI コミットメッセージを生成中 (${MODEL})..." >&2
+
+MSG=$(ollama run --think=false "$MODEL" "以下の git diff から日本語のコミットメッセージを1行生成してください。
+
+ルール:
+- 「何を」「どうした」が具体的に分かるように書く（対象のツール名・ファイル名・バージョン番号などを含める）
+- 設定ファイルの変更では、追加・変更された設定キー名や値（core.hooksPath, alias.ac など）をそのまま含める。「設定を追加」のような言い換えは禁止
+- 変更が複数ある場合は主要なものをすべて列挙する。一部だけ取り上げて他を省略しない
+- 文体は体言止め（〜を追加 / 〜を修正 / 〜を更新）。「〜しました」「〜する」は禁止
+- 日本語のみ。英語や英訳の併記は禁止
+- 前置き・説明・引用符は不要。コミットメッセージ1行だけを出力する
+- 長さは30文字程度に抑える
+
+良い例:
+- core.hooksPath と alias.ac を gitconfig に追加
+- wezterm.lua のフォント設定を wezterm.font_with_fallback に変
+
+悪い例:
+- バージョンを更新しました。 (曖昧・文末が「ました」)
+- エディタ設定を追加 (キー名がなく曖昧)
+- Update python version (英語)
+
+git diff:
+$DIFF" 2>/dev/null)
+
+# 生成に失敗したら何もしない
+[ -z "$MSG" ] && exit 0
+
+# 端末制御コードと thinking 出力を除去し、折り返し改行を連結して1行にまとめる
+MSG=$(printf '%s' "$MSG" |
+  LC_ALL=C sed -e $'s/\x1b\\[[0-9;?]*[a-zA-Z]//g' -e 's/[[:cntrl:]]//g' |
+  sed -e '/^Thinking\.\.\./d' -e '/done thinking/d' |
+  tr '\n' ' ' | sed -e 's/  */ /g' -e 's/^ //' -e 's/ $//')
+printf '%s\n%s' "$MSG" "$(cat "$COMMIT_MSG_FILE")" >"$COMMIT_MSG_FILE"
