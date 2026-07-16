@@ -305,10 +305,11 @@ local config = {
 	default_workspace = "01.Stratocaster",
 
 	-- Font
-	font = wezterm.font({
-		family = "UDEV Gothic 35NF",
-		-- family = 'UDEV Gothic 35', weight = 'Bold',
-		-- family = 'Hack Nerd Font Mono', weight = 'Bold',
+	font = wezterm.font_with_fallback({
+		"UDEV Gothic 35NF",
+		"Hack Nerd Font Mono",
+		"Symbols Nerd Font Mono",
+		"Noto Color Emoji",
 	}),
 	font_size = 16.5,
 	line_height = 1.06,
