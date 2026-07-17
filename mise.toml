@@ -11,7 +11,7 @@ for f in .*; do
   case " $exclude " in *" $f "*) continue ;; esac
   ln -sfn "$PWD/$f" "$HOME/$f"
 done
-for d in .config .claude; do
+for d in .config .claude .git-hooks .hammer-spoon; do
   [ -e "$HOME/$d" ] || ln -sn "$PWD/$d" "$HOME/$d"
 done
 '''
