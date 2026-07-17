@@ -5,7 +5,7 @@
 COMMIT_MSG_FILE=$1
 COMMIT_SOURCE=$2
 
-MODEL="${AI_COMMIT_MODEL:-gemma4:e2b}"
+MODEL="${AI_COMMIT_MODEL:-gemma4:e4b}"
 
 # -m / merge / squash などで既にメッセージがある場合はスキップ
 [ -n "$COMMIT_SOURCE" ] && exit 0
