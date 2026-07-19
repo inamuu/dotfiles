@@ -3,7 +3,7 @@ description = "Brewfile のパッケージを同期"
 run = "brew bundle --file .config/homebrew/Brewfile"
 
 [tasks.link]
-description = "dotfiles と .config/.claude を ~ にリンク"
+description = "dotfiles と設定ディレクトリを ~ にリンク"
 run = '''
 exclude=".DS_Store .gitignore .sleep .wakeup .nvimlog"
 for f in .*; do
@@ -11,9 +11,14 @@ for f in .*; do
   case " $exclude " in *" $f "*) continue ;; esac
   ln -sfn "$PWD/$f" "$HOME/$f"
 done
-for d in .config .claude .git-hooks .hammer-spoon; do
+for d in .config .claude .git-hooks; do
   [ -e "$HOME/$d" ] || ln -sn "$PWD/$d" "$HOME/$d"
 done
+if [ -L "$HOME/.hammerspoon" ]; then
+  ln -sfn "$PWD/.config/hammerspoon" "$HOME/.hammerspoon"
+elif [ ! -e "$HOME/.hammerspoon" ]; then
+  ln -sn "$PWD/.config/hammerspoon" "$HOME/.hammerspoon"
+fi
 '''
 
 [tasks.defaults]
