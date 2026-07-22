@@ -4,6 +4,17 @@
 
 ## 手順
 
+### 0. worktree とブランチの作成
+
+PR 用の作業は必ず worktree を切って行う（メインの作業ツリーでは作業しない）:
+
+- ブランチ名は `feature/<issue番号>-<PRの内容を表す英語名>` とする（例: `feature/12345-add-ftp-params`）
+- worktree は `~/worktrees/` 配下に作成する。ディレクトリ名は `<リポジトリ名>-<ブランチ名>`（ブランチ名の `/` は `-` に置換）
+
+```bash
+git worktree add ~/worktrees/<リポジトリ名>-feature-<issue番号>-<名前> -b feature/<issue番号>-<名前> origin/<デフォルトブランチ>
+```
+
 ### 1. 変更差分の確認
 
 以下のコマンドで現在のブランチの変更内容を把握する:
