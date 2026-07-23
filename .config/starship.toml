@@ -121,6 +121,8 @@ truncation_symbol = "…/"
 symbol = ""
 style = "fg:shadow bg:hot bold"
 format = "[](fg:hot)[ $symbol $branch ]($style)[](fg:hot)"
+truncation_length = 24
+truncation_symbol = "…"
 
 [git_status]
 style = "fg:shadow bg:cyan bold"
