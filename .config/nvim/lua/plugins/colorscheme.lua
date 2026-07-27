@@ -2,7 +2,7 @@ local p = require("config.palette")
 
 return {
 	{ "ellisonleao/gruvbox.nvim" },
-	{ "Mofiqul/dracula.nvim" },
+	{ "Mofiqul/dracula.nvim", lazy = false, priority = 1000 },
 	{
 		"folke/tokyonight.nvim",
 		opts = {
@@ -90,7 +90,7 @@ return {
 	{
 		"LazyVim/LazyVim",
 		opts = {
-			colorscheme = "tokyonight",
+			colorscheme = "dracula",
 			show_end_of_buffer = true,
 		},
 	},
