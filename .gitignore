@@ -32,6 +32,8 @@ terraform.tfstate.*.backup
 .codex/*.bak
 .codex/*.sqlite
 .codex/.codex-global-state.json
+.codex/..codex-global-state*
+.codex/.sandbox_migration
 .codex/.tmp/
 .codex/ambient-suggestions/
 .codex/archived_sessions
