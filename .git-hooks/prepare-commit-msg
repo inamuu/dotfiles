@@ -61,5 +61,3 @@ MSG=$(jq -n --arg model "$MODEL" --arg prompt "$PROMPT" \
 MSG=$(printf '%s' "$MSG" |
   tr '\n' ' ' | sed -e 's/  */ /g' -e 's/^ //' -e 's/ $//')
 printf '%s\n%s' "$MSG" "$(cat "$COMMIT_MSG_FILE")" >"$COMMIT_MSG_FILE"
-
-git push -u origin
