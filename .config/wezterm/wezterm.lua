@@ -26,6 +26,7 @@ local palette = {
 	fg_muted = "#CFCFC2",
 	fg_dim = "#8A8877",
 	selection = "#49483E",   -- 選択範囲
+	cursor = "#FF2E88",      -- カーソル専用（パレット外のビビッドピンク）
 }
 
 -- Workspace名はギターのモデル名（番号プレフィックス付き）を順番に自動採番
@@ -328,8 +329,11 @@ local config = {
 	enable_kitty_keyboard = false,
 
 	-- Cursor
+	-- パレットは全てパステルなので、カーソルだけはパレット外のビビッド色を使う。
+	-- fast-syntax-highlighting のシアン/イエロー系に埋もれて位置が分からなくなるのを防ぐ。
 	default_cursor_style = "BlinkingBar",
 	cursor_blink_rate = 450,
+	cursor_thickness = 3,
 
 	-- Color Scheme: https://wezfurlong.org/wezterm/colorschemes/index.html
 	color_scheme = "Monokai (dark) (terminal.sexy)",
@@ -337,9 +341,9 @@ local config = {
 	colors = {
 		foreground = palette.fg,
 		background = palette.shadow,
-		cursor_bg = palette.gold,
+		cursor_bg = palette.cursor,
 		cursor_fg = palette.shadow,
-		cursor_border = palette.cyan,
+		cursor_border = palette.cursor,
 		selection_bg = palette.selection,
 		selection_fg = palette.fg,
 		scrollbar_thumb = palette.violet,

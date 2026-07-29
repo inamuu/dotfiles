@@ -73,6 +73,10 @@ export WORDCHARS=""
 ### not like emacs keybind in terminal
 bindkey -e
 
+### 貼り付けた領域の反転表示(zshデフォルトの paste:standout)を無効化
+### 背景が白くなってシンタックスハイライトやカーソルが見えなくなるため
+zle_highlight=('paste:none')
+
 export LANG=ja_JP.UTF-8
 setopt print_eight_bit
 setopt auto_cd
