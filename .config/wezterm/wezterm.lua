@@ -583,8 +583,10 @@ local config = {
 	},
 
 	-- Window
-	animation_fps = 120,
-	max_fps = 120,
+	-- 120fps は描画コストが 60fps の2倍かかり、Claude Code など高頻度に
+	-- 再描画する TUI で wezterm-gui の CPU 使用率が跳ね上がるため 60 に抑える。
+	animation_fps = 60,
+	max_fps = 60,
 	background = {
 		{
 			source = {
@@ -624,7 +626,8 @@ local config = {
 				saturation = 1.25,
 				brightness = 0.16,
 			},
-			attachment = { Parallax = 0.05 },
+			-- Parallax はスクロールごとに背景画像の再合成が走り描画負荷が非常に高い。
+			-- attachment = { Parallax = 0.05 },
 		},
 		{
 			source = { Color = palette.shadow },
@@ -681,9 +684,10 @@ local config = {
 	scrollback_lines = 30000,
 
 	-- Pane
+	-- 非アクティブペインの HSB 変換は毎フレーム色変換が走るため無効化（1.0 = 変換なし）
 	inactive_pane_hsb = {
-		saturation = 0.75,
-		brightness = 0.30,
+		saturation = 1.0,
+		brightness = 1.0,
 	},
 }
 
