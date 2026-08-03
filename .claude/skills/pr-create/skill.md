@@ -48,8 +48,9 @@ git log --oneline $(git merge-base HEAD main)..HEAD
 ~~~bash
 gh pr create -d --title "タイトル" --body "$(cat <<'EOF'
 ## 概要
+issues: <issue の URL>
+
 - 何のための変更か / 何を追加・変更するかを端的に箇条書き
-- 関連 issue があれば先頭に `issue: <URL>` を載せる
 
 ## 詳細
 - 「何のための PR か」と「結果どうなるか」を数行で説明する
@@ -85,6 +86,7 @@ openコマンドを使ってブラウザで表示する。
 ## 注意
 
 - PR 本文・タイトル・セクション見出しはすべて日本語で記載する（`概要` / `詳細` / `Terraform Plan` / `アーキテクチャ`）
+- 参照 issue は `## 概要` の直下に `issues: <issue の URL>` の形式で記載する。複数ある場合は URL をカンマ区切りで並べる。issue が存在しない場合はユーザーに確認する
 - Terraform plan はユーザーに実行確認してから行う
 - mermaid 図は構成変更がある場合のみ追加する（不要な場合は省略）
 - Summary セクションは必須、Detail / Terraform Plan / Architecture セクションは該当する場合のみ記載
