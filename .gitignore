@@ -100,6 +100,7 @@ terraform.tfstate.*.backup
 .claude/plugins/
 .claude/policy-limits.json
 .claude/projects/
+.claude/remote-settings-consent.json
 .claude/remote-settings.json
 .claude/security/
 .claude/session-env/
@@ -108,8 +109,8 @@ terraform.tfstate.*.backup
 .claude/shell-snapshots/
 .claude/stats-cache.json
 .claude/statsig/
-.claude/teams/
 .claude/tasks/
+.claude/teams/
 .claude/telemetry/
 .claude/todos/
 
