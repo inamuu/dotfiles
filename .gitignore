@@ -31,12 +31,13 @@ terraform.tfstate.*.backup
 ### Codex
 .codex/*.bak
 .codex/*.sqlite
-.codex/.codex-global-state.json
 .codex/..codex-global-state*
+.codex/.codex-global-state.json
 .codex/.sandbox_migration
 .codex/.tmp/
 .codex/ambient-suggestions/
 .codex/archived_sessions
+.codex/attachments/
 .codex/auth.json
 .codex/browser/
 .codex/cache/
@@ -44,13 +45,15 @@ terraform.tfstate.*.backup
 .codex/chrome-native-hosts.json
 .codex/computer-use/
 .codex/config.toml
+.codex/db-backups/
 .codex/generated_images/
+.codex/goals_1.sqlite-*
 .codex/history.*
 .codex/installation_id
 .codex/log/*
 .codex/logs*
-.codex/memories_1.sqlite-*
 .codex/memories*
+.codex/memories_1.sqlite-*
 .codex/models_cache.json
 .codex/plugins/
 .codex/process_manager/
@@ -63,12 +66,11 @@ terraform.tfstate.*.backup
 .codex/skills/organize-manga-archives
 .codex/sqlite/
 .codex/state_*
+.codex/thread-writer-locks/
 .codex/tmp/
+.codex/transcription-history.jsonl
 .codex/vendor_imports/
 .codex/version.json
-.codex/db-backups/
-.codex/goals_1.sqlite-*
-.codex/attachments/
 
 ### .config - Sensitive files
 
