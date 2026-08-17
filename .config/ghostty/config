@@ -1,6 +1,11 @@
 # Font
 font-family = UDEV Gothic 35NF
-font-size = 17
+font-family = Hack Nerd Font Mono
+font-family = Symbols Nerd Font Mono
+font-family = Noto Color Emoji
+font-size = 16.5
+# wezterm の line_height = 1.06 相当
+adjust-cell-height = 6%
 
 # Japanese font fallback (Hiragana, Katakana, CJK)
 font-codepoint-map = U+3000-U+30FF=UDEV Gothic 35
@@ -12,36 +17,59 @@ font-codepoint-map = U+3400-U+4DBF=UDEV Gothic 35
 font-codepoint-map = U+FE30-U+FE4F=UDEV Gothic 35
 
 # Theme
-theme = calm-blue
+theme = molokai-pastel
+#theme = calm-blue
 #theme = Dracula
 #theme = lucario-default
 
+# Background image (wezterm の background レイヤー相当。グラデーションは非対応)
+background-image = /usr/local/pictures/wallpaper.jpg
+background-image-fit = cover
+background-image-position = center
+background-image-opacity = 0.2
 
-# Cursor
-cursor-style = block
+# Cursor (wezterm: BlinkingBar)
+cursor-style = bar
 cursor-style-blink = true
 
 # IME
 macos-option-as-alt = false
 
+# Window
+# タイトル先頭のおばけをギターに変更（title は固定表示になる）
+title = 🎸
+window-padding-x = 16,12
+window-padding-y = 12,8
+macos-titlebar-style = tabs
+
+# Split
+# 非アクティブ split を暗くしない (wezterm: inactive_pane_hsb 1.0)
+unfocused-split-opacity = 1
+
 # Scrollback
-scrollback-limit = 30000
+# ghostty の scrollback-limit は「バイト数」指定（wezterm の 30000 行相当として 32MB）
+scrollback-limit = 33554432
 
 # cmux keybindings (Leader: Ctrl+o)
 
-# Split
-keybind = ctrl+o>shift+backslash=new_split:right
-keybind = ctrl+o>minus=new_split:down
-
-# Pane navigation (hjkl)
-keybind = ctrl+o>h=goto_split:left
-keybind = ctrl+o>j=goto_split:down
-keybind = ctrl+o>k=goto_split:up
-keybind = ctrl+o>l=goto_split:right
+# Split / Pane navigation
+# herdr (prefix: ctrl+o) の分割・ペイン移動とキーが被るため無効化。
+# 分割は herdr 側に任せる。
+#keybind = ctrl+o>shift+backslash=new_split:right
+#keybind = ctrl+o>minus=new_split:down
+#keybind = ctrl+o>h=goto_split:left
+#keybind = ctrl+o>j=goto_split:down
+#keybind = ctrl+o>k=goto_split:up
+#keybind = ctrl+o>l=goto_split:right
 
 # Copy / Paste
 keybind = ctrl+o>y=copy_to_clipboard
 keybind = ctrl+o>p=paste_from_clipboard
 
-# Visual mode (select all - ghostty does not support modal copy mode)
-keybind = ctrl+o>v=select_all
+# Visual mode
+# herdr の copy_mode = "prefix+v" と衝突するため無効化。
+# コピーモード（および内部の hjkl 移動）は herdr 側に任せる。
+#keybind = ctrl+o>v=select_all
+
+# Others (wezterm: SHIFT+Enter で改行を送る)
+keybind = shift+enter=text:\n

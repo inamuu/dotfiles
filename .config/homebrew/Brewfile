@@ -152,14 +152,16 @@ cask_list = [
   "codex",
   "font-udev-gothic",
   "gcloud-cli",
+  "ghostty",
   "gitify",
   "kiro-cli",
   "obsidian",
   "rar",
   "raycast",
   "slack",
-  "visual-studio-code",
-  "wezterm"
+  "visual-studio-code"
+  # ghostty に移行したため無効化
+  #"wezterm"
 ]
 
 for i in cask_list
