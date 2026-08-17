@@ -35,6 +35,10 @@ cursor-style-blink = true
 # IME
 macos-option-as-alt = false
 
+# Link
+# URL を cmd+クリックでブラウザで開く（ghostty のデフォルト有効を明示）
+link-url = true
+
 # Window
 # タイトル先頭のおばけをギターに変更（title は固定表示になる）
 title = 🎸
