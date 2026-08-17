@@ -10,6 +10,7 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^com\\.github\\.wez\\.wezterm$",
                                             "^com\\.googlecode\\.iterm2$"
                                         ],
