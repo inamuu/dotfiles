@@ -73,3 +73,7 @@ keybind = ctrl+o>p=paste_from_clipboard
 
 # Others (wezterm: SHIFT+Enter で改行を送る)
 keybind = shift+enter=text:\n
+
+# ghostty のデフォルト cmd+enter = toggle_fullscreen を解除し、
+# キーをそのままターミナル（herdr / Claude Code）へ渡す
+keybind = cmd+enter=unbind
