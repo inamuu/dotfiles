@@ -4,8 +4,10 @@ palette = "molokai"
 add_newline = false
 scan_timeout = 20
 command_timeout = 900
-continuation_prompt = "[∙ ](fg:muted)"
+continuation_prompt = "[.. ](fg:muted)"
 
+# コピー&ペースト時に文字化けしないよう、Nerd Font のアイコン（私用領域）と
+# powerline の区切り記号は使わず、ASCII のみで構成する。
 format = """
 $os$username$hostname$directory$git_branch$git_status$git_state
 $character"""
@@ -61,93 +63,83 @@ muted = "#A8BCCF"
 
 [os]
 disabled = false
-style = "fg:shadow bg:violet bold"
-format = "[](fg:violet)[$symbol ]($style)"
+style = "fg:violet bold"
+format = "[$symbol]($style)"
 
 [os.symbols]
-Windows = "󰍲"
-Ubuntu = "󰕈"
-SUSE = ""
-Raspbian = "󰐿"
-Mint = "󰣭"
-Macos = ""
-Manjaro = ""
-Linux = "󰌽"
-Gentoo = "󰣨"
-Fedora = "󰣛"
-Alpine = ""
-Amazon = ""
-Android = ""
-AOSC = ""
-Arch = "󰣇"
-Artix = "󰣇"
-EndeavourOS = ""
-CentOS = ""
-Debian = "󰣚"
-Redhat = "󱄛"
-RedHatEnterprise = "󱄛"
-Pop = ""
+Windows = "win"
+Ubuntu = "ubuntu"
+SUSE = "suse"
+Raspbian = "raspbian"
+Mint = "mint"
+Macos = "mac"
+Manjaro = "manjaro"
+Linux = "linux"
+Gentoo = "gentoo"
+Fedora = "fedora"
+Alpine = "alpine"
+Amazon = "amazon"
+Android = "android"
+AOSC = "aosc"
+Arch = "arch"
+Artix = "artix"
+EndeavourOS = "endeavour"
+CentOS = "centos"
+Debian = "debian"
+Redhat = "rhel"
+RedHatEnterprise = "rhel"
+Pop = "pop"
 
 [username]
 show_always = true
-style_user = "fg:shadow bg:violet bold"
-style_root = "fg:shadow bg:violet bold"
-format = "[  inamuu ]($style)[](fg:violet)"
+style_user = "fg:violet bold"
+style_root = "fg:orange bold"
+format = "[:inamuu]($style) "
 
 [hostname]
 ssh_only = true
-ssh_symbol = "󰣀 "
-style = "fg:fg bg:panel bold"
-format = "[](fg:panel)[ $ssh_symbol$hostname ]($style)[](fg:panel)"
+ssh_symbol = ""
+style = "fg:fg bold"
+format = "[at $hostname]($style) "
 trim_at = ".local"
 
 [directory]
-style = "fg:shadow bg:gold bold"
-read_only = " 󰌾"
-read_only_style = "fg:shadow bg:gold bold"
-format = "[](fg:gold)[  $path$read_only ]($style)[](fg:gold)"
+style = "fg:gold bold"
+read_only = " [RO]"
+read_only_style = "fg:orange bold"
+format = "[in $path]($style)[$read_only]($read_only_style) "
 truncation_length = 4
-truncation_symbol = "…/"
-
-[directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = "󰝚 "
-"Pictures" = " "
-"Developer" = "󰲋 "
-"ghq" = "󰏖 "
+truncation_symbol = ".../"
 
 [git_branch]
-symbol = ""
-style = "fg:shadow bg:hot bold"
-format = "[](fg:hot)[ $symbol $branch ]($style)[](fg:hot)"
+symbol = ""
+style = "fg:hot bold"
+format = "[on $branch]($style) "
 truncation_length = 24
-truncation_symbol = "…"
+truncation_symbol = "..."
 
 [git_status]
-style = "fg:shadow bg:cyan bold"
-format = "([](fg:cyan)[ $all_status$ahead_behind]($style)[](fg:cyan))"
-# 記号だけを表示（件数は出さない）。Nerd Font 前提のアイコン。
-# 各記号は末尾にスペースを持つ（記号同士の区切り用）。そのため format 側では
-# 末尾スペースを付けない。付けるとセグメント末尾がスペース2個になる。
-conflicted = " "    # コンフリクト
-ahead = "󰅈 "     # ローカルが進んでいる
-behind = "󰅕 "    # ローカルが遅れている
-diverged = "󰮛 "  # 分岐（上下両方）
-untracked = "󰋼 " # 未追跡ファイル
+style = "fg:cyan bold"
+format = "([\\[$all_status$ahead_behind\\]]($style) )"
+# 記号だけを表示（件数は出さない）。ASCII のみを使用し、コピー時に化けないようにする。
+conflicted = "="   # コンフリクト
+ahead = "^"        # ローカルが進んでいる
+behind = "v"       # ローカルが遅れている
+diverged = "^v"    # 分岐（上下両方）
+untracked = "?"    # 未追跡ファイル
 # stash はリポジトリ全体で共有され worktree ごとに分かれないため、
 # クリーンな worktree でもこのアイコンだけのセグメントが常に描画されてしまう。
 # 空にすれば all_status が空になり、format の (...) が崩れてセグメント自体が消える。
 # stash の有無は git stash list で確認する。
-stashed = ""        # 非表示
-modified = "󰐊 "  # 変更あり（unstaged）
-staged = " "        # ステージ済み
-renamed = "󰑕 "   # リネーム
-deleted = " "       # 削除
+stashed = ""       # 非表示
+modified = "!"     # 変更あり（unstaged）
+staged = "+"       # ステージ済み
+renamed = "r"      # リネーム
+deleted = "x"      # 削除
 
 [git_state]
-style = "fg:shadow bg:orange bold"
-format = "([](fg:orange)[ $state( $progress_current/$progress_total) ]($style)[](fg:orange))"
+style = "fg:orange bold"
+format = "([$state( $progress_current/$progress_total)]($style) )"
 rebase = "REBASE"
 merge = "MERGE"
 revert = "REVERT"
@@ -158,69 +150,69 @@ am_or_rebase = "AM/REBASE"
 
 [docker_context]
 disabled = false
-symbol = ""
-style = "fg:shadow bg:sky bold"
-format = "[](fg:sky)[ $symbol $context ]($style)[](fg:sky)"
+symbol = ""
+style = "fg:sky bold"
+format = "[docker:$context]($style) "
 
 [terraform]
 disabled = false
-symbol = "󱁢"
-style = "fg:shadow bg:violet bold"
-format = "[](fg:violet)[ $symbol $version ]($style)[](fg:violet)"
+symbol = ""
+style = "fg:violet bold"
+format = "[tf:$version]($style) "
 
 [golang]
-symbol = ""
-style = "fg:shadow bg:sky bold"
-format = "[](fg:sky)[ $symbol $version ]($style)[](fg:sky)"
+symbol = ""
+style = "fg:sky bold"
+format = "[go:$version]($style) "
 
 [nodejs]
-symbol = ""
-style = "fg:shadow bg:lime bold"
-format = "[](fg:lime)[ $symbol $version ]($style)[](fg:lime)"
+symbol = ""
+style = "fg:lime bold"
+format = "[node:$version]($style) "
 
 [python]
-symbol = ""
-style = "fg:shadow bg:cyan bold"
-format = "[](fg:cyan)[ $symbol $version ]($style)[](fg:cyan)"
+symbol = ""
+style = "fg:cyan bold"
+format = "[py:$version]($style) "
 
 [rust]
-symbol = ""
-style = "fg:shadow bg:orange bold"
-format = "[](fg:orange)[ $symbol $version ]($style)[](fg:orange)"
+symbol = ""
+style = "fg:orange bold"
+format = "[rust:$version]($style) "
 
 [php]
-symbol = ""
-style = "fg:shadow bg:violet bold"
-format = "[](fg:violet)[ $symbol $version ]($style)[](fg:violet)"
+symbol = ""
+style = "fg:violet bold"
+format = "[php:$version]($style) "
 
 [ruby]
-symbol = ""
-style = "fg:shadow bg:hot bold"
-format = "[](fg:hot)[ $symbol $version ]($style)[](fg:hot)"
+symbol = ""
+style = "fg:hot bold"
+format = "[ruby:$version]($style) "
 
 [status]
 disabled = false
-style = "fg:shadow bg:orange bold"
-format = "[](fg:orange)[ ✘ $status ]($style)[](fg:orange)"
+style = "fg:orange bold"
+format = "[x $status]($style) "
 map_symbol = true
 
 [cmd_duration]
 min_time = 800
 show_milliseconds = false
-style = "fg:gold bg:chrome bold"
-format = "[](fg:chrome)[ 󰔛 $duration ]($style)[](fg:chrome)"
+style = "fg:gold bold"
+format = "[took $duration]($style) "
 
 [time]
 disabled = false
 time_format = "%H:%M"
-style = "fg:fg bg:panel bold"
-format = "[](fg:panel)[  $time ]($style)[](fg:panel)"
+style = "fg:muted bold"
+format = "[$time]($style) "
 
 [character]
 disabled = false
-success_symbol = "[❯](bold fg:hot)"
-error_symbol = "[❯](bold fg:orange)"
-vimcmd_symbol = "[❮](bold fg:cyan)"
-vimcmd_replace_one_symbol = "[❮](bold fg:gold)"
-vimcmd_replace_symbol = "[❮](bold fg:gold)"
-vimcmd_visual_symbol = "[❮](bold fg:violet)"
+success_symbol = "[>](bold fg:hot)"
+error_symbol = "[>](bold fg:orange)"
+vimcmd_symbol = "[<](bold fg:cyan)"
+vimcmd_replace_one_symbol = "[<](bold fg:gold)"
+vimcmd_replace_symbol = "[<](bold fg:gold)"
+vimcmd_visual_symbol = "[<](bold fg:violet)"
