@@ -22,9 +22,36 @@ navigate_workspace_down = ["j", "down"]
 previous_workspace = "prefix+["
 next_workspace = "prefix+]"
 
+# 左サイドバーの番号で workspace / agent へ直接移動
+switch_workspace = "prefix+shift+1..9"
+focus_agent = "prefix+alt+1..9"
 
 [worktrees]
 directory = "~/worktrees"
+
+# 左サイドバーは長いブランチ名を読みやすくし、要対応のagentを上に並べる
+[ui]
+sidebar_width = 34
+sidebar_min_width = 26
+sidebar_max_width = 52
+agent_panel_sort = "priority"
+status_indicators = "symbols"
+
+# 状態、agent種別、現在の作業タイトルを2行で把握できるようにする
+[ui.sidebar.agents]
+row_gap = 0
+rows = [
+  ["state_icon", "state_text", "agent"],
+  ["terminal_title_stripped", "workspace"],
+]
+
+# workspace名の下にブランチとGit状態を表示
+[ui.sidebar.spaces]
+row_gap = 0
+rows = [
+  ["state_icon", "workspace"],
+  ["branch", "git_status"],
+]
 
 # エージェントのdone/入力待ちをmacOSの通知センターに出す
 # 3秒その状態が続いたときだけ通知（瞬間的な状態変化を無視）
