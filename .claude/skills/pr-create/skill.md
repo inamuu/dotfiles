@@ -4,10 +4,12 @@
 
 ## 手順
 
-### 0. worktree とブランチの作成
+### 0. worktree とブランチの作成（必須）
 
-- PR 用の作業は必ず worktree を作成して行う。
-- メインのブランチでは作業しない。
+- PR 用の作業は**必ず** worktree を作成して行う。worktree を作らずに PR を作成してはいけない。
+- メインのブランチ（`master` / `main`）では作業しない。
+- 既に worktree 上で作業している場合はそのまま利用してよい。判定は `git rev-parse --git-common-dir` と `--git-dir` が異なるかで行う。
+- 共通ルールは `github` スキルに従う。
 - ブランチ名は `feature/<issue番号>-<PRの内容を表す英語名>` とする（例: `feature/12345-add-ftp-params`）
 - worktree は `~/worktrees/` 配下に作成する。ディレクトリ名は `<リポジトリ名>-<ブランチ名>`（ブランチ名の `/` は `-` に置換）
 
@@ -43,10 +45,12 @@ git log --oneline $(git merge-base HEAD main)..HEAD
 
 `gh pr create -d` でドラフト PR を作成する。タイトルは70文字以内。
 
+作成時は**必ず** `--assignee @me` を付けて自分をアサインする。
+
 本文は以下のフォーマットで HEREDOC を使用する:
 
 ~~~bash
-gh pr create -d --title "タイトル" --body "$(cat <<'EOF'
+gh pr create -d --assignee @me --title "タイトル" --body "$(cat <<'EOF'
 ## 概要
 issues: <issue の URL>
 
@@ -87,6 +91,8 @@ openコマンドを使ってブラウザで表示する。
 
 - PR 本文・タイトル・セクション見出しはすべて日本語で記載する（`概要` / `詳細` / `Terraform Plan` / `アーキテクチャ`）
 - 参照 issue は `## 概要` の直下に `issues: <issue の URL>` の形式で記載する。複数ある場合は URL をカンマ区切りで並べる。issue が存在しない場合はユーザーに確認する
+- 作業は必ず worktree 上で行う（手順 0 参照）
+- PR には必ず `--assignee @me` で自分をアサインする。オプションが使えなかった場合は `gh pr edit <PR番号> --add-assignee @me` でアサインし直す
 - Terraform plan はユーザーに実行確認してから行う
 - mermaid 図は構成変更がある場合のみ追加する（不要な場合は省略）
 - Summary セクションは必須、Detail / Terraform Plan / Architecture セクションは該当する場合のみ記載
