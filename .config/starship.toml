@@ -115,8 +115,6 @@ truncation_symbol = ""
 symbol = ""
 style = "fg:hot bold"
 format = "[$branch]($style) "
-truncation_length = 24
-truncation_symbol = "..."
 
 [git_status]
 style = "fg:cyan bold"
