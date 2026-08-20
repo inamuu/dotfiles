@@ -9,7 +9,7 @@ continuation_prompt = "[.. ](fg:muted)"
 # コピー&ペースト時に文字化けしないよう、Nerd Font のアイコン（私用領域）と
 # powerline の区切り記号は使わず、ASCII のみで構成する。
 format = """
-$os$username$hostname$directory$git_branch$git_status$git_state
+$username$directory$git_branch$git_status$git_state
 $character"""
 
 #right_format = """
@@ -94,7 +94,7 @@ Pop = "pop"
 show_always = true
 style_user = "fg:violet bold"
 style_root = "fg:orange bold"
-format = "[:inamuu]($style) "
+format = "[inamuu]($style) "
 
 [hostname]
 ssh_only = true
@@ -107,14 +107,14 @@ trim_at = ".local"
 style = "fg:gold bold"
 read_only = " [RO]"
 read_only_style = "fg:orange bold"
-format = "[in $path]($style)[$read_only]($read_only_style) "
-truncation_length = 4
-truncation_symbol = ".../"
+format = "[$path]($style)[$read_only]($read_only_style) "
+truncation_length = 1
+truncation_symbol = ""
 
 [git_branch]
 symbol = ""
 style = "fg:hot bold"
-format = "[on $branch]($style) "
+format = "[$branch]($style) "
 truncation_length = 24
 truncation_symbol = "..."
 

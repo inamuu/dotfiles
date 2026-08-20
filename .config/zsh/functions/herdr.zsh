@@ -8,8 +8,8 @@ herdr_lastout () {
   local pane="${1:-${HERDR_PANE_ID:-$(herdr pane list | jq -r '.result.panes[] | select(.focused) | .pane_id')}}"
   [[ -z "$pane" ]] && { print -u2 "herdr_lastout: 対象ペインが見つかりません"; return 1 }
 
-  # プロンプト行の判定（starship: "mac:inamuu in ..."）
-  local prompt_re="${HERDR_PROMPT_RE:-^[[:alnum:]_.-]+:[[:alnum:]_.-]+ in }"
+  # プロンプト行の判定（starship: "inamuu dotfiles master"）
+  local prompt_re="${HERDR_PROMPT_RE:-^inamuu }"
 
   herdr pane read "$pane" --source recent-unwrapped --lines "${HERDR_READ_LINES:-3000}" \
   | awk -v re="$prompt_re" '
