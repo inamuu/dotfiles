@@ -173,3 +173,6 @@ tftui.plan
 
 .config/cagent/
 
+# release-notes
+.config/nota/config.toml
+
