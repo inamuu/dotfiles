@@ -37,3 +37,6 @@ gui:
 
     defaultFgColor:
       - "#F8F8F2"
+
+worktree:
+  defaultPath: "~/worktrees"
