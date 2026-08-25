@@ -78,3 +78,10 @@ endif
 
 """ .txt files as markdown for syntax highlighting
 autocmd BufNewFile,BufRead *.txt setfiletype markdown
+
+""" Markdown Preview (previm + open-browser.vim)
+""" プラグインは .config/vim/pack/plugins/start/ に配置（git管理外）
+let g:previm_open_browser_from_vim = 1
+let g:previm_enable_realtime = 1
+let g:previm_disable_default_css = 0
+autocmd FileType markdown nnoremap <buffer> <Leader>p :PrevimOpen<CR>
