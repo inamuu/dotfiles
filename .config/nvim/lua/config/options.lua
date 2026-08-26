@@ -6,10 +6,12 @@ vim.opt.conceallevel = 0
 vim.opt.pumblend = 10
 vim.opt.winblend = 8
 
+-- 折りたたみは自動では閉じない（ファイルを開いた時点で全展開）
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
-vim.opt.foldlevel = 0
-vim.opt.foldlevelstart = 0
+vim.opt.foldenable = false
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
 
 --- yankしたら自動でClipboard連携
 vim.opt.clipboard = "unnamedplus"
