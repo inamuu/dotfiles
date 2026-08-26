@@ -16,6 +16,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 ### Neovim
 export NVIM_LOG_FILE=/dev/null
+export EDITOR=nvim
 
 ### XDG history/cache
 export HISTFILE="$XDG_STATE_HOME/zsh/history"
