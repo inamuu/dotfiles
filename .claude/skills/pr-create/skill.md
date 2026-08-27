@@ -48,6 +48,7 @@ git log --oneline $(git merge-base HEAD main)..HEAD
 作成時は**必ず** `--assignee @me` を付けて自分をアサインする。
 
 本文は以下のフォーマットで HEREDOC を使用する:
+とにかく長くならないこと、人間が読むことも想定する
 
 ~~~bash
 gh pr create -d --assignee @me --title "タイトル" --body "$(cat <<'EOF'
