@@ -29,6 +29,7 @@ color_for_pct() {
 cwd=$(echo "$input" | jq -r '.workspace.current_dir // .cwd // empty')
 model_id=$(echo "$input" | jq -r '.model.id // empty')
 used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
+session_id=$(echo "$input" | jq -r '.session_id // empty')
 
 # Map model ID → short display name
 case "$model_id" in
@@ -75,7 +76,7 @@ sd_reset_epoch=$(echo "$input" | jq -r '.rate_limits.seven_day.resets_at // empt
 progress_bar() {
   local pct=$1
   local color=$2
-  local width=20
+  local width=10
   local filled=$(( pct * width / 100 ))
   local bar=""
   for i in $(seq 1 $width); do
@@ -114,25 +115,34 @@ format_reset_time() {
 fh_reset_label=$(format_reset_time "$fh_reset_epoch" "time")
 sd_reset_label=$(format_reset_time "$sd_reset_epoch" "datetime")
 
+# ── このセッションの現状（agy が3行に要約したもの） ───────────────────────────
+transcript_path=$(echo "$input" | jq -r '.transcript_path // empty')
+state_block=$(python3 "$HOME/.claude/hooks/session-state.py" render "$session_id" "$transcript_path" 2>/dev/null)
+
 # ── Assemble lines ────────────────────────────────────────────────────────────
 SEP=" ${C_GREY}·${RST} "
 
-# Line 1: model · ctx% · diff · branch
-line1="${C_PURPLE}${BOLD}${model_label}${RST}"
-line1="${line1}${SEP}${C_GREY}ctx${RST} $(color_for_pct "$used_int")${ctx_str}${RST}"
+# ── cwd 表示用に短縮 (ghq 配下は owner/repo 以降だけ) ─────────────────────────
+cwd_disp="${cwd/#$HOME/\~}"
+case "$cwd_disp" in
+  "~/ghq/"*) cwd_disp="${cwd_disp#\~/ghq/}"; cwd_disp="${cwd_disp#*/}" ;;
+esac
+
+# Line 1: cwd · model · ctx% · diff · branch
+line1="${C_BLUE}${BOLD}${cwd_disp}${RST}"
+line1="${line1}${SEP}${C_PURPLE}${BOLD}${model_label}${RST}"
+[ -n "$ctx_str" ] && line1="${line1}${SEP}${C_GREY}ctx${RST} $(color_for_pct "$used_int")${ctx_str}${RST}"
 [ -n "$diff_str" ] && line1="${line1}${SEP}${C_GREY}diff${RST} ${C_ORANGE}${diff_str}${RST}"
 [ -n "$git_branch" ] && line1="${line1}${SEP}${C_GREY}on${RST} ${C_CYAN}${git_branch}${RST}"
 
-# Line 2: 5h rate limit
+# Line 2: rate limits (5h / 7d を1行に圧縮)
 fh_color=$(color_for_pct "$fh_pct")
-fh_bar=$(progress_bar "$fh_pct" "$fh_color")
-line2="${C_GREY}5h${RST} ${fh_bar} ${fh_color}${fh_pct}%${RST}"
-[ -n "$fh_reset_label" ] && line2="${line2} ${DIM}reset ${fh_reset_label}${RST}"
-
-# Line 3: 7d rate limit
 sd_color=$(color_for_pct "$sd_pct")
-sd_bar=$(progress_bar "$sd_pct" "$sd_color")
-line3="${C_GREY}7d${RST} ${sd_bar} ${sd_color}${sd_pct}%${RST}"
-[ -n "$sd_reset_label" ] && line3="${line3} ${DIM}reset ${sd_reset_label}${RST}"
+line2="${C_GREY}5h${RST} $(progress_bar "$fh_pct" "$fh_color") ${fh_color}${fh_pct}%${RST}"
+[ -n "$fh_reset_label" ] && line2="${line2} ${DIM}${fh_reset_label}${RST}"
+line2="${line2}${SEP}${C_GREY}7d${RST} $(progress_bar "$sd_pct" "$sd_color") ${sd_color}${sd_pct}%${RST}"
+[ -n "$sd_reset_label" ] && line2="${line2} ${DIM}${sd_reset_label}${RST}"
 
-printf "%b\n%b\n%b\n" "$line1" "$line2" "$line3"
+# Line 3-5: このセッションの状態（目的 / 進捗 / 次に）
+printf "%b\n%b\n" "$line1" "$line2"
+[ -n "$state_block" ] && printf "%s\n" "$state_block"
