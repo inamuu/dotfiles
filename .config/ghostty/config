@@ -38,6 +38,11 @@ macos-option-as-alt = false
 # Link
 # URL を cmd+クリックでブラウザで開く（ghostty のデフォルト有効を明示）
 link-url = true
+# herdr / Claude Code などマウスレポートを有効にするアプリ内でも
+# shift 併用のマウスイベントは常に ghostty が処理する（アプリ側の
+# XTSHIFTESCAPE による上書きも禁止）。
+# → pane 内の URL は cmd+shift+クリックで確実にブラウザで開ける。
+mouse-shift-capture = never
 
 # Window
 # タイトル先頭のおばけをギターに変更（title は固定表示になる）
