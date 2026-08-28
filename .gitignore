@@ -110,6 +110,7 @@ terraform.tfstate.*.backup
 .claude/settings.json
 .claude/shell-snapshots/
 .claude/stats-cache.json
+.claude/state/
 .claude/statsig/
 .claude/tasks/
 .claude/teams/
