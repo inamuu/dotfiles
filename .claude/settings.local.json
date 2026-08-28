@@ -29,6 +29,11 @@
           {
             "type": "command",
             "command": "osascript -e 'display notification \"✅ タスクが完了しました！結果を確認してください\" with title \"🤖 Claude Code\" subtitle \"🎉 Complete!\" sound name \"Glass\"'"
+          },
+          {
+            "type": "command",
+            "command": "bash \"$HOME/.claude/hooks/session-state-hook.sh\" stop",
+            "timeout": 10
           }
         ]
       }
