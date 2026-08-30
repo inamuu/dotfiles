@@ -1,4 +1,4 @@
-nvimlo Mac
+### local Mac
 .DS_Store
 
 ### Vim
@@ -12,16 +12,14 @@ docker-compose.override.yml
 ### LLM
 
 ### Terraform
-
 .terraform
-terraform.tfstate
-terraform.tfstate.backup
-terraform.tfstate.*.backup
 .terraform.tfstate.lock
 .terraform.tfstate.lock.info
+terraform.tfstate
+terraform.tfstate.*.backup
+terraform.tfstate.backup
 
 ### Devin
-
 .config/devin/config.json
 .config/devin/*.sh
 
@@ -110,8 +108,8 @@ terraform.tfstate.*.backup
 .claude/sessions/
 .claude/settings.json
 .claude/shell-snapshots/
-.claude/stats-cache.json
 .claude/state/
+.claude/stats-cache.json
 .claude/statsig/
 .claude/tasks/
 .claude/teams/
@@ -148,9 +146,9 @@ tftui.plan
 .config/karabiner/automatic_backups/
 
 # Packer
-.config/packer/plugins/
 .config/packer/checkpoint_cache
 .config/packer/checkpoint_signature
+.config/packer/plugins/
 
 # anyenv
 .config/anyenv/anyenv-install
@@ -168,12 +166,11 @@ tftui.plan
 .config/htop/
 
 # herdr
-.config/herdr/*.sock
-.config/herdr/*.log
-.config/herdr/session.json
-.config/herdr/release-notes.json
-
 .config/cagent/
+.config/herdr/*.log
+.config/herdr/*.sock
+.config/herdr/release-notes.json
+.config/herdr/session.json
 
 # release-notes
 .config/nota/config.toml
