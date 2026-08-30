@@ -57,6 +57,7 @@ terraform.tfstate.*.backup
 .codex/models_cache.json
 .codex/plugins/
 .codex/process_manager/
+.codex/queue*
 .codex/rules
 .codex/session*
 .codex/sessions/*
