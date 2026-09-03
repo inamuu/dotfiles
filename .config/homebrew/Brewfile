@@ -29,13 +29,11 @@ brew_list = [
   "anyenv",
   "argo",
   "aws-sam-cli",
-  "aws-vault",
   "awscli",
   "awslogs",
   "bash-language-server",
   "bat",
   "bitwarden-cli",
-  "blueutil",
   "borders",
   "bzip2",
   "cli53",
@@ -110,14 +108,12 @@ brew_list = [
   "stern",
   "telnet",
   "terraform-ls",
-  "terraformer",
   "inamuu/tap/overix",
   "inamuu/tap/tfz",
   "inamuu/tap/ssmx",
   "inamuu/tap/vigilo",
   "inamuu/tap/ghdesk",
   "tig",
-  "tmux",
   "tree",
   "uv",
   "watch",
@@ -154,14 +150,11 @@ cask_list = [
   "gcloud-cli",
   "ghostty",
   "gitify",
-  "kiro-cli",
   "obsidian",
   "rar",
   "raycast",
   "slack",
   "visual-studio-code"
-  # ghostty に移行したため無効化
-  #"wezterm"
 ]
 
 for i in cask_list
@@ -197,7 +190,6 @@ end
 ### Install desktop apps only private and macOS
 if ENV['PCENV'] == 'private' and OS.mac?
   cask "vnc-viewer"
-  cask "rambox"
 end
 
 ### Alacritty theme
