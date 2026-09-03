@@ -32,7 +32,9 @@ alias c='clear'
 
 ### hub
 # alias g='cd $(ghq root)/$(ghq list | peco)'
-alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'### 通知関数
+alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
+
+### 通知関数
 noti () {
   osascript -e "display dialog \"${1:-処理が完了しました!}\" buttons {\"OK\"} default button \"OK\""
 }

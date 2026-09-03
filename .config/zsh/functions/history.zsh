@@ -1,8 +1,3 @@
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-HIST_STAMPS="yyyy/mm/dd"
-
 # http://mollifier.hatenablog.com/entry/20090728/p1
 zshaddhistory() {
     local line=${1%%$'\n'} #コマンドライン全体から改行を除去したもの

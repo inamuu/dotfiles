@@ -37,8 +37,8 @@ for file in ${HOME}/.config/zsh/functions/*.zsh(N);do
   [[ ${file:t} == abbr.zsh ]] && continue
   source "$file"
 done
-
-source ${HOME}/.config/zsh/wezterm/wezterm.sh
+# OrbStack
+[[ -f ~/.orbstack/shell/init.zsh ]] && source ~/.orbstack/shell/init.zsh 2>/dev/null
 
 # シンタックスハイライト有効化
 source /opt/homebrew/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
@@ -52,21 +52,6 @@ typeset -g ABBR_EXPANSION_CURSOR_MARKER='%ABBR_CURSOR%'
 source /opt/homebrew/opt/zsh-abbr@6/share/zsh-abbr@6/zsh-abbr.zsh
 source ${HOME}/.config/zsh/functions/abbr.zsh
 
-# Uncomment the following line to use case-sensitive completion.
-CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
 
 ### 区切り文字: default "*?_-.[]~&;!#$%^(){}<>"
 export WORDCHARS=""
@@ -99,7 +84,6 @@ export HOMEBREW_BUNDLE_FILE="${HOME}/.config/homebrew/Brewfile"
 
 ### direnv
 [ $commands[direnv] ] && eval "$(direnv hook zsh)"
-PS1="${CUSTOM_PS1:-default PS1}: "
 
 export LESS='-i -M -R'
 
@@ -134,17 +118,9 @@ export TF_LOG_PATH=$XDG_CONFIG_HOME/terraform/logs/$(date +%Y/%m/%d)/terraform.$
 # colorize kubectl diff
 export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
 
-### Node
-export NODENV_SHELL=zsh
-
 ### ESC Timeout
 # http://lazy-dog.hatenablog.com/entry/2015/12/24/001648
 KEYTIMEOUT=1
-
-### google cloud
-export PATH="$HOME/google-cloud-sdk/bin:$PATH"
-if [ -f "${HOME}/google-cloud-sdk/path.zsh.inc" ]; then . "${HOME}/google-cloud-sdk/path.zsh.inc" ; fi
-if [ -f "${HOME}/google-cloud-sdk/completion.zsh.inc" ]; then . "${HOME}/google-cloud-sdk/completion.zsh.inc" ; fi
 
 ### GitHub
 export GPG_TTY=$(tty)

@@ -127,6 +127,7 @@ terraform.tfstate.backup
 
 # Config store (auto-generated)
 .config/configstore/
+.config/zsh-abbr/
 
 # Raycast (extensions and AI settings)
 .config/raycast/
