@@ -26,6 +26,19 @@ next_workspace = "prefix+]"
 switch_workspace = "prefix+shift+1..9"
 focus_agent = "prefix+alt+1..9"
 
+# prefix+o を tmux の display-panes 風に使うため、デフォルトの
+# open_notification_target (prefix+o) は prefix+shift+o へ退避
+open_notification_target = "prefix+shift+o"
+
+# tmux の display-panes (prefix+q) 相当: ペイン番号を表示し、数字で移動
+[[keys.command]]
+key = "prefix+o"
+type = "popup"
+command = "/usr/bin/python3 ~/.config/herdr/bin/display-panes.py"
+description = "display panes (number jump)"
+width = 34
+height = 4
+
 [worktrees]
 directory = "~/worktrees"
 
