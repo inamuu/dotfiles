@@ -108,6 +108,7 @@ export TF_LOG=ERROR
 export TF_LOG_PATH=$XDG_CONFIG_HOME/terraform/logs/$(date +%Y/%m/%d)/terraform.$(date +%Y%m%d%H%M%S).log
 
 ### AWS CLI
+export AWS_PAGER=""
 # aws-cli補完を有効化
 #if [ $commands[aws] ]; then
 #  autoload bashcompinit && bashcompinit
