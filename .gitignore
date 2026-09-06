@@ -176,3 +176,5 @@ tftui.plan
 # release-notes
 .config/nota/config.toml
 
+# Others
+.config/raycast.v1-backup/
