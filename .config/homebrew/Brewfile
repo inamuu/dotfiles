@@ -104,6 +104,7 @@ brew_list = [
   "s3cmd",
   "saml2aws",
   "shellcheck",
+  "sqlpage",
   "starship",
   "stern",
   "telnet",
