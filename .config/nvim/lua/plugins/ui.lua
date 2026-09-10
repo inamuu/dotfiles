@@ -1,21 +1,18 @@
 local p = require("config.palette")
 
--- starship.toml の neon_luxe パレットと同じ値・役割で揃える（ステータスライン用）。
--- bufferline / colorscheme には影響させず、lualine の色の使い方だけ starship に合わせる。
+-- ステータスラインの色は config/palette.lua に揃える（bufferline と同じ配色）。
+-- 背景は常に p.panel の単色にし、文字色はパレットのアクセントを使う。
 local wz = {
-	shadow = "#0A1A2A",
-	chrome = "#1C344C",
-	panel = "#234A6B",
-	panel_alt = "#2E5E85",
-	violet = "#6FA8DC", -- os / username
-	hot = "#4FD1C5", -- git_branch / character(success)
-	cyan = "#4A9FD6", -- git_status
-	sky = "#6EB8E8",
-	gold = "#A8D8F0", -- directory
-	orange = "#5FA3D6", -- git_state / character(error)
-	lime = "#5EDCB5",
-	fg = "#F0F7FC",
-	muted = "#A8BCCF",
+	shadow = p.bg_dark,
+	panel = p.panel,
+	panel_nc = p.bg_alt,
+	violet = p.blue, -- visual
+	hot = p.magenta, -- normal / insert / git branch
+	cyan = p.cyan, -- location
+	gold = p.yellow, -- replace / path
+	lime = p.green, -- command / terminal
+	fg = p.fg,
+	muted = p.fg_muted,
 }
 
 return {
@@ -128,8 +125,8 @@ return {
 			local function mode_theme(accent)
 				return {
 					a = { bg = accent, fg = wz.shadow, gui = "bold" },
-					b = { bg = "NONE", fg = accent },
-					c = { bg = "NONE", fg = wz.muted },
+					b = { bg = wz.panel, fg = accent },
+					c = { bg = wz.panel, fg = wz.muted },
 				}
 			end
 
@@ -141,7 +138,11 @@ return {
 						replace = mode_theme(wz.gold),
 						command = mode_theme(wz.lime),
 						terminal = mode_theme(wz.lime),
-						inactive = mode_theme(wz.muted),
+						inactive = {
+							a = { bg = wz.panel_nc, fg = wz.muted },
+							b = { bg = wz.panel_nc, fg = wz.muted },
+							c = { bg = wz.panel_nc, fg = wz.muted },
+						},
 					},
 					globalstatus = vim.o.laststatus == 3,
 					disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard" } },

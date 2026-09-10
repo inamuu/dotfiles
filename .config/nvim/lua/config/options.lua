@@ -88,14 +88,15 @@ local function set_ui_highlights()
 		fg = p.yellow,
 		bold = true,
 	})
+	-- ステータスラインは lualine 側で配色するため、背景は常に p.panel に固定する
 	vim.api.nvim_set_hl(0, "ActiveWindowStatusLine", {
-		fg = p.bg_dark,
-		bg = p.magenta,
+		fg = p.fg,
+		bg = p.panel,
 		bold = true,
 	})
 	vim.api.nvim_set_hl(0, "LeaderActiveStatusLine", {
-		fg = p.bg_dark,
-		bg = p.yellow,
+		fg = p.fg,
+		bg = p.panel,
 		bold = true,
 	})
 	vim.api.nvim_set_hl(0, "LeaderActiveWinSeparator", {
