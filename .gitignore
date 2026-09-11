@@ -116,6 +116,9 @@ terraform.tfstate.backup
 .claude/telemetry/
 .claude/todos/
 
+.claude/skills/slack-todo-post
+
+
 ### antigravity
 .antigravitycli/
 
