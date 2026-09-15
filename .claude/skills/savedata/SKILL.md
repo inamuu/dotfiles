@@ -31,7 +31,25 @@ ${HOME}/ghq/github.com/inamuu/data/Acta/posts/yyyy/mm/dd/yyyy-mm-dd.md
 
 2. 保存先の日ディレクトリを `mkdir -p` で作成し、デイリーファイルの有無を確認する
 3. 会話全体を振り返り、下記フォーマットの acta:comment ブロックをデイリーファイル末尾に追記する（新規作成時は `# yyyy-mm-dd` 見出しの後に置く）
-4. 保存後、保存先のフルパスをユーザーに報告する
+4. 保存したファイルを commit & push する（下記「commit & push」参照）
+5. 保存後、保存先のフルパスと push 結果をユーザーに報告する
+
+## commit & push
+
+保存後は必ずデータリポジトリ（`${HOME}/ghq/github.com/inamuu/data`）で commit & push する。
+このリポジトリは個人のバックアップ用途で、main ブランチへ直接コミットする運用のため、ブランチは切らない。
+
+```bash
+cd "${HOME}/ghq/github.com/inamuu/data"
+git add Acta/posts/yyyy/mm/dd/yyyy-mm-dd.md
+git commit -m "backup"
+git push origin main
+```
+
+- `git add` は今回保存したデイリーファイルのみを明示して行う（`git add -A` は使わない）
+- コミットメッセージは既存運用に合わせて `backup` とする
+- 追記した内容にシークレットが含まれていないことを commit 前に再確認する
+- push が失敗した場合（リモートが進んでいる等）は `git pull --rebase origin main` してから再度 push する。それでも失敗する場合はユーザーに報告して指示を仰ぐ
 
 ## acta:comment ブロックのフォーマット
 
