@@ -100,6 +100,7 @@ terraform.tfstate.backup
 .claude/plans/
 .claude/plugins/
 .claude/policy-limits.json
+.claude/policy-limits.json.stamp.json
 .claude/projects/
 .claude/remote-settings-consent.json
 .claude/remote-settings.json
