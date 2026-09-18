@@ -54,16 +54,26 @@ status_indicators = "symbols"
 [ui.sidebar.agents]
 row_gap = 0
 rows = [
-  ["state_icon", "state_text", "agent"],
-  ["terminal_title_stripped", "workspace"],
+  [
+    "state_icon",
+    { token = "state_text", bold = true, rules = [ { contains = "wait", fg = "#ffb86c" }, { contains = "input", fg = "#ffb86c" }, { contains = "done", fg = "#50fa7b" }, { contains = "error", fg = "#ff5555" } ] },
+    { token = "agent", fg = "#bd93f9" },
+  ],
+  [
+    { token = "terminal_title_stripped", fg = "#8be9fd" },
+    { token = "workspace", dim = true },
+  ],
 ]
 
 # workspace名の下にブランチとGit状態を表示
 [ui.sidebar.spaces]
 row_gap = 0
 rows = [
-  ["state_icon", "workspace"],
-  ["branch", "git_status"],
+  ["state_icon", { token = "workspace", bold = true }],
+  [
+    { token = "branch", fg = "#50fa7b", rules = [ { equals = "main", fg = "#ff79c6", bold = true }, { equals = "master", fg = "#ff79c6", bold = true } ] },
+    { token = "git_status", fg = "#f1fa8c", dim = true },
+  ],
 ]
 
 # エージェントのdone/入力待ちをmacOSの通知センターに出す
@@ -75,3 +85,10 @@ delay_seconds = 3
 [theme]
 name = "dracula"
 auto_switch = false
+
+# dracula をベースに、サイドバーとパネルの背景をわずかに暗くしてコントラストを付ける
+[theme.custom]
+sidebar_bg    = "#1e1f29"
+panel_bg      = "#232530"
+active_row_bg = "#3b3e52"
+selection_bg  = "#44475a"
