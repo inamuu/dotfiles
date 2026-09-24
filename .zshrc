@@ -33,6 +33,9 @@ export ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 ### zshのローカルファイル読み込み
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
+### not like emacs keybind in terminal
+bindkey -e
+
 for file in ${HOME}/.config/zsh/functions/*.zsh(N);do
   [[ ${file:t} == abbr.zsh ]] && continue
   source "$file"
@@ -55,9 +58,6 @@ source ${HOME}/.config/zsh/functions/abbr.zsh
 
 ### 区切り文字: default "*?_-.[]~&;!#$%^(){}<>"
 export WORDCHARS=""
-
-### not like emacs keybind in terminal
-bindkey -e
 
 ### 貼り付けた領域の反転表示(zshデフォルトの paste:standout)を無効化
 ### 背景が白くなってシンタックスハイライトやカーソルが見えなくなるため
