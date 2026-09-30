@@ -55,7 +55,16 @@ row_gap = 0
 rows = [
   [
     "state_icon",
-    { token = "state_text", bold = true, rules = [ { contains = "wait", fg = "#ffb86c" }, { contains = "input", fg = "#ffb86c" }, { contains = "done", fg = "#50fa7b" }, { contains = "error", fg = "#ff5555" } ] },
+    # 状態名 (idle / working / blocked / done / unknown) ごとに色分けし、
+    # 要対応の blocked と作業中の working を目立たせ、idle は沈ませる
+    { token = "state_text", bold = true, rules = [
+      { equals = "blocked", fg = "#ff5555" },
+      { equals = "working", fg = "#f1fa8c" },
+      { equals = "done", fg = "#50fa7b" },
+      { equals = "idle", fg = "#6272a4", bold = false },
+      { equals = "unknown", fg = "#6272a4", bold = false, dim = true },
+      { contains = "error", fg = "#ff5555" },
+    ] },
     { token = "agent", fg = "#bd93f9" },
   ],
   [
