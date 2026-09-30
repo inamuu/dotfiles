@@ -30,14 +30,13 @@ focus_agent = "prefix+alt+1..9"
 # open_notification_target (prefix+o) は prefix+shift+o へ退避
 open_notification_target = "prefix+shift+o"
 
-# tmux の display-panes (prefix+q) 相当: ペイン番号を表示し、数字で移動
+# tmux の display-panes (prefix+q) 相当: 各ペイン中央に大きく番号を表示し、数字で移動
+# 実体は plugins/display-panes (herdr plugin link で登録)。見た目は同ディレクトリの config.json
 [[keys.command]]
 key = "prefix+o"
-type = "popup"
-command = "/usr/bin/python3 ~/.config/herdr/bin/display-panes.py"
+type = "plugin_action"
+command = "inamuu.display-panes.show"
 description = "display panes (number jump)"
-width = 34
-height = 4
 
 [worktrees]
 directory = "~/worktrees"

@@ -1,0 +1,10 @@
+{
+  "scale": 0.6,
+  "max_rows": 30,
+  "active_color": "#ff79c6",
+  "other_color": "#bd93f9",
+  "background": "#282a36",
+  "background_box": true,
+  "active_border": "#bd93f9",
+  "other_border": "#6272a4"
+}

@@ -1,0 +1,20 @@
+id = "inamuu.display-panes"
+name = "Display Panes"
+version = "0.1.0"
+min_herdr_version = "0.9.0"
+description = "tmux の display-panes 相当。各ペイン中央に大きく番号を出し、数字キーで移動する"
+platforms = ["macos", "linux"]
+
+# キーバインドから呼ぶ入口。レイアウトを保存して picker を開く
+[[actions]]
+id = "show"
+title = "Display panes"
+contexts = ["workspace"]
+command = ["/usr/bin/python3", "display_panes.py", "open"]
+
+# 番号表示とキー入力を担当する画面。popup は枠が必ず出るので枠のない overlay にする
+[[panes]]
+id = "picker"
+title = "Display panes"
+placement = "overlay"
+command = ["/usr/bin/python3", "display_panes.py", "pick"]

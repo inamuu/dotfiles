@@ -181,3 +181,10 @@ tftui.plan
 
 # Others
 .config/raycast.v1-backup/
+
+# herdr plugin の設定・状態ディレクトリ
+.config/herdr/plugins/config/
+.config/herdr/plugins/state/
+.config/herdr/plugins.json
+.config/herdr/plugins/*/__pycache__/
+.config/herdr/plugins/*/debug.log
