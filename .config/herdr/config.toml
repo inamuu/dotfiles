@@ -94,9 +94,9 @@ delay_seconds = 3
 name = "dracula"
 auto_switch = false
 
-# dracula をベースに、サイドバーとパネルの背景をわずかに暗くしてコントラストを付ける
+# サイドバーとパネルの背景は reset で端末の背景（透過）をそのまま使う
 [theme.custom]
-sidebar_bg    = "#1e1f29"
-panel_bg      = "#232530"
+sidebar_bg    = "reset"
+panel_bg      = "reset"
 active_row_bg = "#3b3e52"
 selection_bg  = "#44475a"
