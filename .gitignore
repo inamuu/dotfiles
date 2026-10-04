@@ -29,11 +29,15 @@ terraform.tfstate.backup
 ### Codex
 .codex/*.bak
 .codex/*.sqlite
+.codex/*.sqlite-*
+.codex/.sqlite-maintenance.lock
 .codex/..codex-global-state*
 .codex/.codex-global-state.json
 .codex/.sandbox_migration
 .codex/.tmp/
 .codex/ambient-suggestions/
+.codex/app-server-control/
+.codex/app-server-daemon/
 .codex/archived_sessions
 .codex/attachments/
 .codex/auth.json
@@ -53,6 +57,7 @@ terraform.tfstate.backup
 .codex/memories*
 .codex/memories_1.sqlite-*
 .codex/models_cache.json
+.codex/packages/
 .codex/plugins/
 .codex/process_manager/
 .codex/queue*
@@ -68,6 +73,7 @@ terraform.tfstate.backup
 .codex/thread-writer-locks/
 .codex/tmp/
 .codex/transcription-history.jsonl
+.codex/tui-thread-reference-capabilities/
 .codex/vendor_imports/
 .codex/version.json
 
@@ -173,7 +179,9 @@ tftui.plan
 .config/cagent/
 .config/herdr/*.log
 .config/herdr/*.sock
+.config/herdr/herdr.sock.agent
 .config/herdr/release-notes.json
+.config/herdr/session-snapshots/
 .config/herdr/session.json
 
 # release-notes
