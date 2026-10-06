@@ -89,6 +89,8 @@ export LESS='-i -M -R'
 
 ### Terraform
 export TF_CLI_CONFIG_FILE="$XDG_CONFIG_HOME/terraform/terraformrc"
+export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
+[ ! -d "$TF_PLUGIN_CACHE_DIR" ] && mkdir -p "$TF_PLUGIN_CACHE_DIR"
 export TFLINT_CONFIG_FILE="$HOME/.config/tflint/.tflint.hcl"
 export TF_CLI_ARGS_plan="--parallelism=30"
 export TF_CLI_ARGS_apply="--parallelism=30"
