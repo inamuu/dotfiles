@@ -91,6 +91,32 @@ gwtremove() {
   git worktree remove "${target}"
 }
 
+# マージ済み PR の worktree とブランチをまとめて削除する。
+# squash/rebase マージだと -d が通らないため、gh で MERGED を確認できたら -D で消す。
+gwtdone() {
+  local target branch main_dir state
+
+  target=${1:-$(_gwt_paths | tail -n +2 | fzf)}
+  [[ -n "${target}" ]] || return 0
+  target=${target:A}
+
+  main_dir=$(_gwt_paths | head -n 1)
+  branch=$(git -C "${target}" branch --show-current) || return 1
+
+  # 削除対象の worktree 内にいる場合はメインに移動しておく。
+  [[ "${PWD:A}/" == "${target}/"* ]] && builtin cd "${main_dir}"
+
+  git -C "${main_dir}" worktree remove "${target}" || return 1
+  [[ -n "${branch}" ]] || return 0
+
+  state=$(gh pr view "${branch}" --json state -q .state 2>/dev/null)
+  if [[ "${state}" == "MERGED" ]]; then
+    git -C "${main_dir}" branch -D "${branch}"
+  else
+    git -C "${main_dir}" branch -d "${branch}"
+  fi
+}
+
 gwtcd() {
   local target
 
@@ -99,7 +125,7 @@ gwtcd() {
   builtin cd "${target}"
 }
 
-# gwtadd/gwtls/gwtcd/gwtremove をサブコマンド形式でも使えるようにしたもの。
+# gwtadd/gwtls/gwtcd/gwtremove/gwtdone をサブコマンド形式でも使えるようにしたもの。
 gwt() {
   local subcmd=${1:-}
   (( $# )) && shift
@@ -109,6 +135,7 @@ gwt() {
     ls|list|l)   gwtls "$@" ;;
     cd|c)        gwtcd "$@" ;;
     rm|remove|r) gwtremove "$@" ;;
+    done|d)      gwtdone "$@" ;;
     ""|help|-h|--help)
       cat <<'USAGE'
 usage: gwt <command> [args]
@@ -117,6 +144,7 @@ usage: gwt <command> [args]
   ls                 worktree を一覧表示する
   cd [path]          worktree に移動する（省略時は fzf で選択）
   rm [path]          worktree を削除する（省略時は fzf で選択）
+  done [path]        マージ済み PR の worktree とブランチをまとめて削除する
 USAGE
       ;;
     *)
@@ -133,6 +161,7 @@ _gwt() {
     'ls:worktree を一覧表示する'
     'cd:worktree に移動する'
     'rm:worktree を削除する'
+    'done:worktree とブランチをまとめて削除する'
   )
 
   if (( CURRENT == 2 )); then
@@ -141,7 +170,7 @@ _gwt() {
   fi
 
   case "${words[2]}" in
-    cd|c|rm|remove|r) _values 'worktree' ${(f)"$(_gwt_paths)"} ;;
+    cd|c|rm|remove|r|done|d) _values 'worktree' ${(f)"$(_gwt_paths)"} ;;
     add|a)            (( CURRENT == 4 )) && _git_branch_names ;;
   esac
 }

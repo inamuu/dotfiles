@@ -50,6 +50,7 @@ alias gwta='gwtadd'
 alias gwtc='gwtcd'
 alias gwtr='gwtremove'
 alias gwtl='gwtls'
+alias gwtd='gwtdone'
 
 ### kubectl
 alias kc='kubectl'
