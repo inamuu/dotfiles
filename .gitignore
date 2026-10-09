@@ -124,6 +124,7 @@ terraform.tfstate.backup
 .claude/teams/
 .claude/telemetry/
 .claude/todos/
+.claude/skills/.trash/
 
 ### antigravity
 .antigravitycli/
