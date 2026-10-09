@@ -1,0 +1,18 @@
+id = "inamuu.auto-rename"
+name = "Auto Rename"
+version = "0.1.0"
+min_herdr_version = "0.9.0"
+description = "ペインのタイトルや出力から作業内容を ollama で判定し、workspace 名を自動で付け直す"
+platforms = ["macos", "linux"]
+
+# エージェントが done / idle になったタイミングで判定する
+[[events]]
+on = "pane.agent_status_changed"
+command = ["/usr/bin/python3", "auto_rename.py", "event"]
+
+# 手動で今の workspace を付け直す (手動で付けた名前も上書きする)
+[[actions]]
+id = "rename"
+title = "Auto rename workspace"
+contexts = ["workspace"]
+command = ["/usr/bin/python3", "auto_rename.py", "action"]

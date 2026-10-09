@@ -1,0 +1,7 @@
+{
+  "model": "gemma4:12b",
+  "ollama_url": "http://localhost:11434/api/generate",
+  "keep_alive": "30m",
+  "min_interval": 60,
+  "output_lines": 40
+}
