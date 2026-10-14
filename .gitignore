@@ -125,6 +125,7 @@ terraform.tfstate.backup
 .claude/telemetry/
 .claude/todos/
 .claude/skills/.trash/
+.claude/remote-settings.json*
 
 ### antigravity
 .antigravitycli/

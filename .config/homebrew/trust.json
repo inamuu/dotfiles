@@ -22,6 +22,7 @@
     "hashicorp/tap/packer",
     "idoavrah/homebrew/tftui",
     "inamuu/openssl@1.1/openssl@1.1",
+    "inamuu/tap/ssmx",
     "olets/tap/zsh-abbr@6"
   ]
 }

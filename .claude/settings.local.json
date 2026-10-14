@@ -85,6 +85,7 @@
       "Bash(git status:*)",
       "Bash(git blame:*)",
       "Bash(git branch:*)",
+      "Bash(gh issue comment:*)",
       "Bash(swift run:*)",
       "Bash(npm run dist:*)",
       "Bash(osascript -e:*)",
