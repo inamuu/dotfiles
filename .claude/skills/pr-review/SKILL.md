@@ -76,6 +76,20 @@ gh pr review <PR番号> --repo <owner/repo> --comment --body-file <file>
 
 Approve する場合:
 
+body は空や「LGTM」だけにせず、**確認した内容を端的に箇条書きで記載する**（3〜5 行程度）。
+
+- 何を確認して問題なしと判断したか（参照元・CI・異常系など、手順 2 で裏取りした内容）
+- 根拠となるファイル・設定名を添える
+
+例:
+
+```markdown
+LGTM です。以下を確認しました。
+
+- 削除対象の Lambda 名はリポジトリ内から参照されていない
+- CI の `list-lambda` は既存ディレクトリを列挙するため、削除後はデプロイ対象外になる
+```
+
 ```bash
 gh pr review <PR番号> --repo <owner/repo> --approve --body-file <file>
 ```
