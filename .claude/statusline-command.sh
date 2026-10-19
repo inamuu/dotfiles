@@ -115,10 +115,6 @@ format_reset_time() {
 fh_reset_label=$(format_reset_time "$fh_reset_epoch" "time")
 sd_reset_label=$(format_reset_time "$sd_reset_epoch" "datetime")
 
-# ── このセッションの現状（agy が3行に要約したもの） ───────────────────────────
-transcript_path=$(echo "$input" | jq -r '.transcript_path // empty')
-state_block=$(python3 "$HOME/.claude/hooks/session-state.py" render "$session_id" "$transcript_path" 2>/dev/null)
-
 # ── Assemble lines ────────────────────────────────────────────────────────────
 SEP=" ${C_GREY}·${RST} "
 
@@ -143,6 +139,4 @@ line2="${C_GREY}5h${RST} $(progress_bar "$fh_pct" "$fh_color") ${fh_color}${fh_p
 line2="${line2}${SEP}${C_GREY}7d${RST} $(progress_bar "$sd_pct" "$sd_color") ${sd_color}${sd_pct}%${RST}"
 [ -n "$sd_reset_label" ] && line2="${line2} ${DIM}${sd_reset_label}${RST}"
 
-# Line 3-5: このセッションの状態（目的 / 進捗 / 次に）
 printf "%b\n%b\n" "$line1" "$line2"
-[ -n "$state_block" ] && printf "%s\n" "$state_block"
