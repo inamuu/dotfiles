@@ -84,10 +84,11 @@ rows = [
   ],
 ]
 
-# エージェントのdone/入力待ちをmacOSの通知センターに出す
+# エージェントのdone/入力待ちはherdr画面内のトーストだけに出す
+# (macOSの通知センターへは Claude Code の hook = ~/.claude/notify-command.sh が出す)
 # 3秒その状態が続いたときだけ通知（瞬間的な状態変化を無視）
 [ui.toast]
-delivery = "system"
+delivery = "herdr"
 delay_seconds = 3
 
 [theme]

@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "[ \"${HERDR_ENV:-}\" = \"1\" ] || osascript -e 'display notification \"👀 確認が必要です！操作を承認してください\" with title \"🤖 Claude Code\" subtitle \"⏳ 入力待ち\" sound name \"Blow\"'"
+            "command": "bash ~/.claude/notify-command.sh notification"
           }
         ]
       }
@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "[ \"${HERDR_ENV:-}\" = \"1\" ] || osascript -e 'display notification \"🔐 権限の許可が必要です！確認をお願いします\" with title \"🤖 Claude Code\" subtitle \"⚠️ Permission Request\" sound name \"Blow\"'"
+            "command": "bash ~/.claude/notify-command.sh permission"
           }
         ]
       }
@@ -28,7 +28,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "[ \"${HERDR_ENV:-}\" = \"1\" ] || osascript -e 'display notification \"✅ タスクが完了しました！結果を確認してください\" with title \"🤖 Claude Code\" subtitle \"🎉 Complete!\" sound name \"Glass\"'"
+            "command": "bash ~/.claude/notify-command.sh stop"
           }
         ]
       }
