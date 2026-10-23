@@ -37,6 +37,9 @@ DEFAULTS = {
     "output_lines": 40,  # エージェントのペインから読む直近の行数
 }
 TRIGGER_STATUSES = {"done", "idle"}
+REVIEW_PREFIX = "review"
+# ペインのタイトルや出力にこれが出ていたらレビュー作業とみなす
+REVIEW_PATTERN = re.compile(r"/?(pr-review|code-review|security-review)\b|\breview(ing)? (the )?(pr|pull request)", re.I)
 
 PROMPT = """You name terminal workspaces. Read the context and output ONE label.
 Rules:
@@ -44,6 +47,7 @@ Rules:
 - Describe WHAT is being worked on (e.g. sendgrid-rate-limit, opensearch-upgrade)
 - Never include issue/PR numbers or any digits-only words
 - The repository name may be shortened or omitted
+- If the work is reviewing a PR or code, start the label with "review-"
 - Output the label only, no explanation
 
 Context:
@@ -159,6 +163,13 @@ def normalize(text):
     return "-".join(words)[:30]
 
 
+def add_review_prefix(label):
+    words = [w for w in label.split("-") if w and w not in (REVIEW_PREFIX, "pr")]
+    while words and len("-".join([REVIEW_PREFIX] + words)) > 30:
+        words.pop()
+    return "-".join([REVIEW_PREFIX] + words)
+
+
 def run(ws_id, force):
     conf = load_config()
     lock = open(os.path.join(STATE_DIR, f"auto-rename-{ws_id}.lock"), "w")
@@ -182,6 +193,8 @@ def run(ws_id, force):
             return 0
 
     label = ask_ollama(conf, context)
+    if label and (label.startswith(REVIEW_PREFIX + "-") or REVIEW_PATTERN.search(context)):
+        label = add_review_prefix(label)
     state[ws_id] = {"label": label or current, "key": key, "at": time.time()}
     save_state(state)
     if label and label != current:
