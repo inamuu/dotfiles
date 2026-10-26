@@ -8,7 +8,6 @@
     "circleci-public/circleci/circleci@next",
     "go-task/tap/go-task",
     "goreleaser/tap/goreleaser",
-    "manaflow-ai/cmux/cmux",
     "terraform-linters/tap/tflint"
   ],
   "trustedformulae": [
