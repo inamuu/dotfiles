@@ -2,17 +2,14 @@
 # Kiro CLI pre block. Keep at the top of this file.
 [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
 
-### PATHを追加
-export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$HOME/ghq/github.com/inamuu/tools:$PATH
+### PATHを追加 (最初に読み込む)
+source ${HOME}/.config/zsh/path.zsh
 
 ### XDG base dirs (defaults)
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_DATA_HOME="$HOME/.local/share"
-export PATH="$HOME/.local/bin:$PATH"
 
 ### Neovim
 export NVIM_LOG_FILE=/dev/null

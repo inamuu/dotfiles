@@ -84,7 +84,6 @@ brew_list = [
   "lazygit",
   "minikube",
   "mise",
-  "mysql",
   "mysql-client@8.4",
   "nmap",
   "nvim",
@@ -116,6 +115,7 @@ brew_list = [
   "inamuu/tap/ghdesk",
   "tig",
   "tree",
+  "unar",
   "uv",
   "watch",
   "wget",
@@ -151,7 +151,6 @@ cask_list = [
   "ghostty",
   "gitify",
   "obsidian",
-  "rar",
   "raycast",
   "slack",
   "visual-studio-code"
