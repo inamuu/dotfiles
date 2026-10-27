@@ -27,6 +27,7 @@
 
 - 「ドキュメントを保存して」「記録しておいて」など、作業内容の保存・記録・ドキュメント化を頼まれたら savedata スキルを実行すること
 - 保存先を Google Drive と明示された場合のみ save-research を使う
+- 「続きは明日」「再開できるように保存して」など、セッション再開が目的の保存は savesession スキルを使う
 - ~/.claude/docs/ など独自の場所に勝手にファイルを作らないこと
 
 ## Shell commands in output
