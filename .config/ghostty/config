@@ -71,6 +71,12 @@ scrollback-limit = 33554432
 #keybind = ctrl+o>k=goto_split:up
 #keybind = ctrl+o>l=goto_split:right
 
+# ghostty デフォルトの split 作成キーも解除する。
+# 誤って押すと新しい split で herdr クライアントがもう1つ attach され、
+# 同じ画面が左右（上下）に2つ並んでしまうため。
+keybind = super+d=unbind
+keybind = super+shift+d=unbind
+
 # Copy / Paste
 keybind = ctrl+o>y=copy_to_clipboard
 keybind = ctrl+o>p=paste_from_clipboard
