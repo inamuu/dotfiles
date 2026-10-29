@@ -139,4 +139,35 @@ line2="${C_GREY}5h${RST} $(progress_bar "$fh_pct" "$fh_color") ${fh_color}${fh_p
 line2="${line2}${SEP}${C_GREY}7d${RST} $(progress_bar "$sd_pct" "$sd_color") ${sd_color}${sd_pct}%${RST}"
 [ -n "$sd_reset_label" ] && line2="${line2} ${DIM}${sd_reset_label}${RST}"
 
-printf "%b\n%b\n" "$line1" "$line2"
+# Line 3: セッションの元の依頼（最初のユーザー発言）とタイトル
+transcript=$(echo "$input" | jq -r '.transcript_path // empty')
+line3=""
+if [ -n "$transcript" ] && [ -f "$transcript" ]; then
+  cache_dir="${TMPDIR:-/tmp}/claude-statusline"
+  cache_file="${cache_dir}/${session_id}.first"
+  if [ -s "$cache_file" ]; then
+    first_prompt=$(cat "$cache_file")
+  else
+    first_prompt=$(jq -r 'select(.type=="user" and (.isMeta|not))
+      | .message.content
+      | if type=="string" then . else (map(select(.type=="text") | .text) | join(" ")) end
+      | select(length > 0 and (startswith("<")|not) and (startswith("Caveat:")|not))' \
+      "$transcript" 2>/dev/null | head -1 | jq -Rr '.[0:50]')
+    if [ -n "$first_prompt" ] && [ -n "$session_id" ]; then
+      mkdir -p "$cache_dir" && printf "%s" "$first_prompt" > "$cache_file"
+    fi
+  fi
+
+  # /rename の名前を優先し、なければ自動タイトル
+  title=$(rg -N '"type":"custom-title"' "$transcript" 2>/dev/null | tail -1 | jq -r '.customTitle // empty')
+  [ -z "$title" ] && title=$(rg -N '"type":"ai-title"' "$transcript" 2>/dev/null | tail -1 | jq -r '.aiTitle // empty')
+
+  [ -n "$first_prompt" ] && line3="${C_GREY}依頼${RST} ${first_prompt}"
+  [ -n "$title" ] && line3="${line3}${SEP}${C_CYAN}${title}${RST}"
+fi
+
+if [ -n "$line3" ]; then
+  printf "%b\n%b\n%b\n" "$line1" "$line2" "$line3"
+else
+  printf "%b\n%b\n" "$line1" "$line2"
+fi
