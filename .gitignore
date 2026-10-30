@@ -220,3 +220,5 @@ tftui.plan
 !.config/herdr-app/mods/my-*/
 .config/herdr-app/mods/my-*/jsconfig.json
 .config/herdr-app/mods/my-*/*.d.ts
+# 自分で用意した画像 (著作物を含む) は公開リポジトリに入れない
+.config/herdr-app/mods/my-*/private/
