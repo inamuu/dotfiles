@@ -1,0 +1,170 @@
+{
+  "id": "root",
+  "type": "column",
+  "theme": "my-tiling",
+  "preview": "layouts/my-tiling.svg",
+  "font": "UDEV Gothic 35JPDOC",
+  "ui_font": "UDEV Gothic 35JPDOC",
+  "titlebar": "none",
+  "traffic_lights": [
+    14,
+    12
+  ],
+  "background": "canvas",
+  "terminal_padding": [
+    8,
+    6
+  ],
+  "children": [
+    {
+      "id": "body",
+      "type": "row",
+      "divider": {
+        "width": 1,
+        "color": "#2f2742"
+      },
+      "children": [
+        {
+          "id": "sidebar",
+          "type": "column",
+          "size": {
+            "px": 260
+          },
+          "min": 120,
+          "max": 480,
+          "divider": {
+            "width": 1,
+            "color": "#2f2742"
+          },
+          "children": [
+            {
+              "id": "spaces",
+              "type": "block",
+              "content": {
+                "mod": "my-tiling",
+                "props": {
+                  "role": "tree"
+                }
+              },
+              "size": {
+                "weight": 3
+              },
+              "min": 90
+            },
+            {
+              "id": "agents",
+              "type": "block",
+              "content": {
+                "mod": "my-tiling",
+                "props": {
+                  "role": "agents"
+                }
+              },
+              "size": {
+                "weight": 2
+              },
+              "min": 90
+            }
+          ]
+        },
+        {
+          "id": "work",
+          "type": "column",
+          "resizable": false,
+          "children": [
+            {
+              "id": "work-body",
+              "type": "row",
+              "padding": 0,
+              "gap": 1,
+              "children": [
+                {
+                  "id": "main",
+                  "type": "block",
+                  "content": {
+                    "tab": "active",
+                    "pane": {
+                      "header": {
+                        "content": {
+                          "mod": "my-tiling",
+                          "props": {
+                            "role": "pane"
+                          }
+                        },
+                        "reveal": "always",
+                        "height": 22,
+                        "position": "top"
+                      },
+                      "background": "background",
+                      "border": {
+                        "width": 1,
+                        "color": "#2f2742"
+                      },
+                      "focus": {
+                        "width": 1,
+                        "color": "#c39bff"
+                      },
+                      "radius": 0,
+                      "gap": 1,
+                      "lone": true
+                    }
+                  }
+                },
+                {
+                  "id": "panel",
+                  "type": "column",
+                  "size": {
+                    "px": 380
+                  },
+                  "min": 280,
+                  "max": 900,
+                  "hidden": true,
+                  "border": {
+                    "width": 1,
+                    "color": "#2f2742"
+                  },
+                  "children": [
+                    {
+                      "id": "panel-body",
+                      "type": "stack",
+                      "active": "files",
+                      "children": [
+                        {
+                          "id": "files",
+                          "type": "block",
+                          "content": {
+                            "mod": "files"
+                          }
+                        },
+                        {
+                          "id": "changes",
+                          "type": "block",
+                          "content": {
+                            "mod": "changes"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bar",
+      "type": "block",
+      "content": {
+        "mod": "my-tiling",
+        "props": {
+          "role": "bar"
+        }
+      },
+      "size": {
+        "px": 24
+      }
+    }
+  ]
+}
