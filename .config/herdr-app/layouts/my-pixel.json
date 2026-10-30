@@ -1,0 +1,93 @@
+{
+  "id": "root",
+  "type": "column",
+  "theme": "my-pixel",
+  "preview": "layouts/my-pixel.svg",
+  "titlebar": "none",
+  "traffic_lights": [14, 15],
+  "background": "canvas",
+  "terminal_padding": [10, 8],
+  "children": [
+    {
+      "id": "hud",
+      "type": "block",
+      "content": { "mod": "my-pixel", "props": { "role": "hud" } },
+      "size": { "px": 44 },
+      "window_drag": true
+    },
+    {
+      "id": "body",
+      "type": "row",
+      "padding": [8, 10],
+      "gap": 10,
+      "resizable": false,
+      "children": [
+        {
+          "id": "sidebar",
+          "type": "column",
+          "size": { "px": 260 },
+          "min": 44,
+          "max": 480,
+          "gap": 6,
+          "children": [
+            {
+              "id": "spaces",
+              "type": "block",
+              "content": { "mod": "my-pixel", "props": { "role": "spaces" } },
+              "size": { "weight": 1 },
+              "min": 90
+            },
+            {
+              "id": "agents",
+              "type": "block",
+              "content": { "mod": "my-pixel", "props": { "role": "party" } },
+              "size": { "weight": 1 },
+              "min": 90
+            }
+          ]
+        },
+        {
+          "id": "work",
+          "type": "column",
+          "gap": 8,
+          "resizable": false,
+          "children": [
+            {
+              "id": "tabs",
+              "type": "block",
+              "content": { "mod": "my-pixel", "props": { "role": "tabs" } },
+              "size": { "px": 34 }
+            },
+            {
+              "id": "main",
+              "type": "block",
+              "content": {
+                "tab": "active",
+                "pane": {
+                  "header": {
+                    "content": { "mod": "my-pixel", "props": { "role": "pane" } },
+                    "reveal": "always",
+                    "height": 30,
+                    "position": "top"
+                  },
+                  "background": "background",
+                  "border": { "width": 3, "color": "#6a6a6a" },
+                  "focus": { "width": 3, "color": "#ffffff" },
+                  "radius": 8,
+                  "gap": 8,
+                  "lone": true
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ground",
+      "type": "block",
+      "content": { "mod": "my-pixel", "props": { "role": "ground" } },
+      "size": { "px": 70 }
+    }
+  ]
+}

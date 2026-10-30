@@ -211,6 +211,10 @@ tftui.plan
 !.config/herdr-app/layouts/
 .config/herdr-app/layouts/*
 !.config/herdr-app/layouts/my-*.json
+!.config/herdr-app/layouts/my-*.svg
+!.config/herdr-app/themes/
+.config/herdr-app/themes/*
+!.config/herdr-app/themes/my-*.json
 !.config/herdr-app/mods/
 .config/herdr-app/mods/*
 !.config/herdr-app/mods/my-*/

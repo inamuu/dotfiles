@@ -168,6 +168,16 @@
         }
       ],
       "resizable": false
+    },
+    {
+      "id": "b0e06f083e4cc0896dd26040ff0077586",
+      "type": "block",
+      "content": {
+        "mod": "my-pixel"
+      },
+      "size": {
+        "px": 320
+      }
     }
   ],
   "background": "canvas",
