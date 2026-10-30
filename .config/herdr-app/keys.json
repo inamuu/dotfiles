@@ -99,7 +99,8 @@
     "ctrl-o b": "layout.toggle:sidebar",
     "ctrl-o s": "app.settings",
     "ctrl-o ?": "app.help",
-    "ctrl-o shift-/": "app.help"
+    "ctrl-o shift-/": "app.help",
+    "ctrl-shift-p": "mod.open:my-prs"
   },
   "terminal": {
     "cmd-c": "terminal.copy",
