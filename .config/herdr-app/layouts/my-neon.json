@@ -1,0 +1,197 @@
+{
+  "id": "root",
+  "type": "column",
+  "theme": "my-neon",
+  "preview": "layouts/my-neon.svg",
+  "font": "UDEV Gothic 35JPDOC",
+  "ui_font": "UDEV Gothic 35JPDOC",
+  "titlebar": "none",
+  "traffic_lights": [
+    14,
+    12
+  ],
+  "background": "canvas",
+  "terminal_padding": [
+    12,
+    10
+  ],
+  "children": [
+    {
+      "id": "hud",
+      "type": "block",
+      "content": {
+        "mod": "my-neon",
+        "props": {
+          "role": "hud"
+        }
+      },
+      "size": {
+        "px": 38
+      },
+      "window_drag": true
+    },
+    {
+      "id": "body",
+      "type": "row",
+      "divider": {
+        "width": 1,
+        "color": "#22284a"
+      },
+      "children": [
+        {
+          "id": "sidebar",
+          "type": "column",
+          "size": {
+            "px": 270
+          },
+          "min": 44,
+          "max": 480,
+          "divider": {
+            "width": 1,
+            "color": "#22284a"
+          },
+          "children": [
+            {
+              "id": "spaces",
+              "type": "block",
+              "content": {
+                "mod": "my-neon",
+                "props": {
+                  "role": "spaces"
+                }
+              },
+              "size": {
+                "weight": 1
+              },
+              "min": 90
+            },
+            {
+              "id": "agents",
+              "type": "block",
+              "content": {
+                "mod": "my-neon",
+                "props": {
+                  "role": "agents"
+                }
+              },
+              "size": {
+                "weight": 1
+              },
+              "min": 90
+            }
+          ]
+        },
+        {
+          "id": "work",
+          "type": "column",
+          "resizable": false,
+          "children": [
+            {
+              "id": "tabs",
+              "type": "block",
+              "content": {
+                "mod": "my-neon",
+                "props": {
+                  "role": "tabs"
+                }
+              },
+              "size": {
+                "px": 34
+              }
+            },
+            {
+              "id": "work-body",
+              "type": "row",
+              "padding": 6,
+              "gap": 6,
+              "children": [
+                {
+                  "id": "main",
+                  "type": "block",
+                  "content": {
+                    "tab": "active",
+                    "pane": {
+                      "header": {
+                        "content": {
+                          "mod": "my-neon",
+                          "props": {
+                            "role": "pane"
+                          }
+                        },
+                        "reveal": "always",
+                        "height": 28,
+                        "position": "top"
+                      },
+                      "background": "background",
+                      "border": {
+                        "width": 1,
+                        "color": "#22284a"
+                      },
+                      "focus": {
+                        "width": 1,
+                        "color": "#00f0ff"
+                      },
+                      "radius": 0,
+                      "gap": 6,
+                      "lone": true
+                    }
+                  }
+                },
+                {
+                  "id": "panel",
+                  "type": "column",
+                  "size": {
+                    "px": 380
+                  },
+                  "min": 280,
+                  "max": 900,
+                  "hidden": true,
+                  "border": {
+                    "width": 1,
+                    "color": "#22284a"
+                  },
+                  "children": [
+                    {
+                      "id": "panel-body",
+                      "type": "stack",
+                      "active": "files",
+                      "children": [
+                        {
+                          "id": "files",
+                          "type": "block",
+                          "content": {
+                            "mod": "files"
+                          }
+                        },
+                        {
+                          "id": "changes",
+                          "type": "block",
+                          "content": {
+                            "mod": "changes"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "status",
+      "type": "block",
+      "content": {
+        "mod": "my-neon",
+        "props": {
+          "role": "status"
+        }
+      },
+      "size": {
+        "px": 24
+      }
+    }
+  ]
+}
