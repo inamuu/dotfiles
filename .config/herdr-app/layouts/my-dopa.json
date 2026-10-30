@@ -1,0 +1,93 @@
+{
+  "id": "root",
+  "type": "column",
+  "theme": "my-dopa",
+  "preview": "layouts/my-dopa.svg",
+  "titlebar": "none",
+  "traffic_lights": [14, 20],
+  "background": { "gradient": ["#2a0058", "#07000f"], "angle": 160 },
+  "terminal_padding": [10, 8],
+  "children": [
+    {
+      "id": "hud",
+      "type": "block",
+      "content": { "mod": "my-dopa", "props": { "role": "hud" } },
+      "size": { "px": 56 },
+      "window_drag": true
+    },
+    {
+      "id": "body",
+      "type": "row",
+      "padding": [10, 10],
+      "gap": 10,
+      "resizable": false,
+      "children": [
+        {
+          "id": "sidebar",
+          "type": "column",
+          "size": { "px": 270 },
+          "min": 44,
+          "max": 480,
+          "gap": 10,
+          "children": [
+            {
+              "id": "spaces",
+              "type": "block",
+              "content": { "mod": "my-dopa", "props": { "role": "spaces" } },
+              "size": { "weight": 1 },
+              "min": 90
+            },
+            {
+              "id": "agents",
+              "type": "block",
+              "content": { "mod": "my-dopa", "props": { "role": "party" } },
+              "size": { "weight": 1 },
+              "min": 90
+            }
+          ]
+        },
+        {
+          "id": "work",
+          "type": "column",
+          "gap": 10,
+          "resizable": false,
+          "children": [
+            {
+              "id": "tabs",
+              "type": "block",
+              "content": { "mod": "my-dopa", "props": { "role": "tabs" } },
+              "size": { "px": 36 }
+            },
+            {
+              "id": "main",
+              "type": "block",
+              "content": {
+                "tab": "active",
+                "pane": {
+                  "header": {
+                    "content": { "mod": "my-dopa", "props": { "role": "pane" } },
+                    "reveal": "always",
+                    "height": 34,
+                    "position": "top"
+                  },
+                  "background": "background",
+                  "border": { "width": 2, "color": "#5a2aa8" },
+                  "focus": { "width": 3, "color": "#ff2bd6" },
+                  "radius": 14,
+                  "gap": 10,
+                  "lone": true
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ticker",
+      "type": "block",
+      "content": { "mod": "my-dopa", "props": { "role": "ticker" } },
+      "size": { "px": 36 }
+    }
+  ]
+}

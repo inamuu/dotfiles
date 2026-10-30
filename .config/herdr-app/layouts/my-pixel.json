@@ -1,93 +1,171 @@
 {
-  "id": "root",
-  "type": "column",
-  "theme": "my-pixel",
-  "preview": "layouts/my-pixel.svg",
-  "titlebar": "none",
-  "traffic_lights": [14, 15],
-  "background": "canvas",
-  "terminal_padding": [10, 8],
+  "id": "rc0de5d1ed7c429bc3f55ab0dbad78b33",
+  "type": "row",
   "children": [
     {
-      "id": "hud",
-      "type": "block",
-      "content": { "mod": "my-pixel", "props": { "role": "hud" } },
-      "size": { "px": 44 },
-      "window_drag": true
-    },
-    {
-      "id": "body",
-      "type": "row",
-      "padding": [8, 10],
-      "gap": 10,
-      "resizable": false,
+      "id": "root",
+      "type": "column",
       "children": [
         {
-          "id": "sidebar",
-          "type": "column",
-          "size": { "px": 260 },
-          "min": 44,
-          "max": 480,
-          "gap": 6,
-          "children": [
-            {
-              "id": "spaces",
-              "type": "block",
-              "content": { "mod": "my-pixel", "props": { "role": "spaces" } },
-              "size": { "weight": 1 },
-              "min": 90
-            },
-            {
-              "id": "agents",
-              "type": "block",
-              "content": { "mod": "my-pixel", "props": { "role": "party" } },
-              "size": { "weight": 1 },
-              "min": 90
+          "id": "hud",
+          "type": "block",
+          "content": {
+            "mod": "my-pixel",
+            "props": {
+              "role": "hud"
             }
-          ]
+          },
+          "size": {
+            "px": 44
+          },
+          "window_drag": true
         },
         {
-          "id": "work",
-          "type": "column",
-          "gap": 8,
-          "resizable": false,
+          "id": "body",
+          "type": "row",
           "children": [
             {
-              "id": "tabs",
-              "type": "block",
-              "content": { "mod": "my-pixel", "props": { "role": "tabs" } },
-              "size": { "px": 34 }
+              "id": "sidebar",
+              "type": "column",
+              "children": [
+                {
+                  "id": "spaces",
+                  "type": "block",
+                  "content": {
+                    "mod": "my-pixel",
+                    "props": {
+                      "role": "spaces"
+                    }
+                  },
+                  "size": {
+                    "weight": 1
+                  },
+                  "min": 90
+                },
+                {
+                  "id": "agents",
+                  "type": "block",
+                  "content": {
+                    "mod": "my-pixel",
+                    "props": {
+                      "role": "party"
+                    }
+                  },
+                  "size": {
+                    "weight": 1
+                  },
+                  "min": 90
+                }
+              ],
+              "size": {
+                "px": 260
+              },
+              "min": 44,
+              "max": 480,
+              "gap": 6
             },
             {
-              "id": "main",
-              "type": "block",
-              "content": {
-                "tab": "active",
-                "pane": {
-                  "header": {
-                    "content": { "mod": "my-pixel", "props": { "role": "pane" } },
-                    "reveal": "always",
-                    "height": 30,
-                    "position": "top"
+              "id": "work",
+              "type": "column",
+              "children": [
+                {
+                  "id": "tabs",
+                  "type": "block",
+                  "content": {
+                    "mod": "my-pixel",
+                    "props": {
+                      "role": "tabs"
+                    }
                   },
-                  "background": "background",
-                  "border": { "width": 3, "color": "#6a6a6a" },
-                  "focus": { "width": 3, "color": "#ffffff" },
-                  "radius": 8,
-                  "gap": 8,
-                  "lone": true
+                  "size": {
+                    "px": 34
+                  }
+                },
+                {
+                  "id": "main",
+                  "type": "block",
+                  "content": {
+                    "tab": "active",
+                    "pane": {
+                      "header": {
+                        "content": {
+                          "mod": "my-pixel",
+                          "props": {
+                            "role": "pane"
+                          }
+                        },
+                        "reveal": "always",
+                        "height": 30,
+                        "position": "top"
+                      },
+                      "background": "background",
+                      "border": {
+                        "width": 3,
+                        "color": "#6a6a6a"
+                      },
+                      "focus": {
+                        "width": 3,
+                        "color": "#ffffff"
+                      },
+                      "radius": 8,
+                      "gap": 8,
+                      "lone": true
+                    }
+                  }
                 }
-              }
+              ],
+              "gap": 8,
+              "resizable": false
             }
-          ]
+          ],
+          "padding": [
+            8,
+            10
+          ],
+          "gap": 10,
+          "resizable": false
+        },
+        {
+          "id": "ground",
+          "type": "block",
+          "content": {
+            "mod": "my-pixel",
+            "props": {
+              "role": "ground"
+            }
+          },
+          "size": {
+            "px": 70
+          }
         }
-      ]
+      ],
+      "background": "canvas",
+      "theme": "my-pixel",
+      "terminal_padding": [
+        10,
+        8
+      ],
+      "titlebar": "none",
+      "traffic_lights": [
+        14,
+        15
+      ],
+      "preview": "layouts/my-pixel.svg"
     },
     {
-      "id": "ground",
+      "id": "b482d5c51e19bf3d4ad24baa64f783be0",
       "type": "block",
-      "content": { "mod": "my-pixel", "props": { "role": "ground" } },
-      "size": { "px": 70 }
+      "content": {
+        "mod": "my-dopa"
+      },
+      "size": {
+        "px": 320
+      }
     }
-  ]
+  ],
+  "theme": "my-pixel",
+  "divider": {
+    "width": 1,
+    "color": "border"
+  }
 }
