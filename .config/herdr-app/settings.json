@@ -1,0 +1,12 @@
+{
+  "zoom": 1,
+  "sounds": {
+    "enabled": true
+  },
+  "minimum_contrast": 1,
+  "appearance": "dark",
+  "telemetry": false,
+  "font": "UDEV Gothic 35JPDOC",
+  "font_size": 16,
+  "ui_font": "UDEV Gothic 35NFLG"
+}
