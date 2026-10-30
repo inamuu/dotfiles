@@ -207,3 +207,12 @@ tftui.plan
 .config/herdr-app/*
 !.config/herdr-app/keys.json
 !.config/herdr-app/settings.json
+# 自作レイアウトと自作 mod (my-*) のみ管理。アプリが書く型定義等は除外
+!.config/herdr-app/layouts/
+.config/herdr-app/layouts/*
+!.config/herdr-app/layouts/my-*.json
+!.config/herdr-app/mods/
+.config/herdr-app/mods/*
+!.config/herdr-app/mods/my-*/
+.config/herdr-app/mods/my-*/jsconfig.json
+.config/herdr-app/mods/my-*/*.d.ts
