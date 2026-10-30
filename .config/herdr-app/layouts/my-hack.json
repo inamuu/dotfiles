@@ -1,62 +1,81 @@
 {
   "id": "root",
   "type": "column",
-  "theme": "my-hack",
-  "preview": "layouts/my-hack.svg",
-  "titlebar": "none",
-  "traffic_lights": [14, 13],
-  "background": "canvas",
-  "terminal_padding": [8, 8],
   "children": [
     {
       "id": "hud",
       "type": "block",
-      "content": { "mod": "my-hack", "props": { "role": "hud" } },
-      "size": { "px": 38 },
+      "content": {
+        "mod": "my-hack",
+        "props": {
+          "role": "hud"
+        }
+      },
+      "size": {
+        "px": 38
+      },
       "window_drag": true
     },
     {
       "id": "body",
       "type": "row",
-      "padding": [8, 8],
-      "gap": 8,
-      "resizable": false,
       "children": [
         {
           "id": "sidebar",
           "type": "column",
-          "size": { "px": 280 },
-          "min": 44,
-          "max": 480,
-          "gap": 8,
           "children": [
             {
               "id": "spaces",
               "type": "block",
-              "content": { "mod": "my-hack", "props": { "role": "spaces" } },
-              "size": { "weight": 1 },
+              "content": {
+                "mod": "my-hack",
+                "props": {
+                  "role": "spaces"
+                }
+              },
+              "size": {
+                "weight": 1
+              },
               "min": 90
             },
             {
               "id": "agents",
               "type": "block",
-              "content": { "mod": "my-hack", "props": { "role": "party" } },
-              "size": { "weight": 1 },
+              "content": {
+                "mod": "my-hack",
+                "props": {
+                  "role": "party"
+                }
+              },
+              "size": {
+                "weight": 1
+              },
               "min": 90
             }
-          ]
+          ],
+          "size": {
+            "px": 280
+          },
+          "min": 44,
+          "max": 480,
+          "gap": 8
         },
         {
           "id": "work",
           "type": "column",
-          "gap": 8,
-          "resizable": false,
           "children": [
             {
               "id": "tabs",
               "type": "block",
-              "content": { "mod": "my-hack", "props": { "role": "tabs" } },
-              "size": { "px": 26 }
+              "content": {
+                "mod": "my-hack",
+                "props": {
+                  "role": "tabs"
+                }
+              },
+              "size": {
+                "px": 26
+              }
             },
             {
               "id": "main",
@@ -65,35 +84,80 @@
                 "tab": "active",
                 "pane": {
                   "header": {
-                    "content": { "mod": "my-hack", "props": { "role": "pane" } },
+                    "content": {
+                      "mod": "my-hack",
+                      "props": {
+                        "role": "pane"
+                      }
+                    },
                     "reveal": "always",
                     "height": 26,
                     "position": "top"
                   },
                   "background": "background",
-                  "border": { "width": 1, "color": "#0f5a26" },
-                  "focus": { "width": 1, "color": "#33ff66" },
+                  "border": {
+                    "width": 1,
+                    "color": "#0f5a26"
+                  },
+                  "focus": {
+                    "width": 1,
+                    "color": "#33ff66"
+                  },
                   "radius": 0,
                   "gap": 8,
                   "lone": true
                 }
               }
             }
-          ]
+          ],
+          "gap": 8,
+          "resizable": false
         },
         {
           "id": "matrix",
           "type": "block",
-          "content": { "mod": "my-hack", "props": { "role": "matrix" } },
-          "size": { "px": 110 }
+          "content": {
+            "mod": "my-hack",
+            "props": {
+              "role": "matrix"
+            }
+          },
+          "size": {
+            "px": 110
+          }
         }
-      ]
+      ],
+      "padding": [
+        8,
+        8
+      ],
+      "gap": 8,
+      "resizable": false
     },
     {
       "id": "log",
       "type": "block",
-      "content": { "mod": "my-hack", "props": { "role": "log" } },
-      "size": { "px": 28 }
+      "content": {
+        "mod": "my-hack",
+        "props": {
+          "role": "log"
+        }
+      },
+      "size": {
+        "px": 28
+      }
     }
-  ]
+  ],
+  "background": "canvas",
+  "theme": "my-hack",
+  "terminal_padding": [
+    8,
+    8
+  ],
+  "titlebar": "none",
+  "traffic_lights": [
+    14,
+    13
+  ],
+  "preview": "layouts/my-hack.svg"
 }
