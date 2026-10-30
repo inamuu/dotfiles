@@ -20,14 +20,20 @@ SAVEHIST=100000
 function history-all { history -E 1 }
 setopt hist_ignore_dups
 
+# 入力文字列をスペース込みのフレーズとして部分一致検索する (ex: "aws ecr")
 function fzf-history-selection() {
-    BUFFER=$(
-        fc -rl 1 \
+    local tmp=${XDG_CACHE_HOME:-$HOME/.cache}/zsh/fzf-history
+    mkdir -p ${tmp:h}
+    fc -rl 1 \
         | awk '{$1=""; sub(/^ /, ""); print}' \
         | egrep -v "^(ls|eza)( |$)" \
-        | awk '!seen[$0]++' \
-        | fzf
+        | awk '!seen[$0]++' > $tmp
+    local selected=$(
+        fzf --disabled --query "$LBUFFER" \
+            --bind "start:reload(rg -F -i --no-line-number --color=never -- {q} $tmp || true)" \
+            --bind "change:reload(rg -F -i --no-line-number --color=never -- {q} $tmp || true)"
     )
+    [[ -n $selected ]] && BUFFER=$selected
     CURSOR=$#BUFFER
     zle reset-prompt
 }
